@@ -405,19 +405,179 @@ CREATE TABLE DetallesPedidoCompra (
     CONSTRAINT FK_DetallesPedidoCompra_Pedidos FOREIGN KEY (id_pedido_compra) REFERENCES PedidosCompra(id_pedido_compra) ON DELETE CASCADE,
     CONSTRAINT FK_DetallesPedidoCompra_Variantes FOREIGN KEY (id_variante) REFERENCES VariantesProducto(id_variante)
 );
--- MÓDULO 7: LIQUIDACIONES Y FINANZAS TAPSTYLE
--- Liquidaciones (Control de pagos de TapStyle a las empresas)
-CREATE TABLE Liquidaciones (
-    id_liquidacion BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+-- MÓDULO 7: FINANZAS TAPSTYLE - MODELO HÍBRIDO (SUSCRIPCIÓN + COMISIÓN)
+
+-- Planes de Suscripción disponibles
+CREATE TABLE PlanesSuscripcion (
+    id_plan INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_plan VARCHAR(50) NOT NULL UNIQUE, -- 'Básico', 'Premium', 'Enterprise'
+    precio_mensual DECIMAL(10, 2) NOT NULL,
+    max_productos INT, -- Límite de productos por plan (NULL = ilimitado)
+    max_empleados INT, -- Límite de empleados por plan
+    comision_adicional DECIMAL(5, 2) NOT NULL DEFAULT 0, -- % comisión por ventas
+    descripcion TEXT,
+    estado BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+-- Suscripciones activas de las empresas
+CREATE TABLE SuscripcionesEmpresa (
+    id_suscripcion BIGINT AUTO_INCREMENT PRIMARY KEY,
     id_empresa INT NOT NULL,
-    fecha_liquidacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    id_plan INT NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_vencimiento DATE NOT NULL,
+    precio_acordado DECIMAL(10, 2) NOT NULL, -- Por si hay descuentos especiales
+    estado VARCHAR(20) NOT NULL DEFAULT 'Activa', -- 'Activa', 'Vencida', 'Suspendida'
+    fecha_creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    
+    CONSTRAINT FK_Suscripciones_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa),
+    CONSTRAINT FK_Suscripciones_Planes FOREIGN KEY (id_plan) REFERENCES PlanesSuscripcion(id_plan),
+    CONSTRAINT CHK_EstadoSuscripcion CHECK (estado IN ('Activa', 'Vencida', 'Suspendida'))
+);
+
+-- Facturas que TapStyle emite a las empresas (SUSCRIPCIÓN)
+CREATE TABLE FacturasSuscripcion (
+    id_factura_suscripcion BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_empresa INT NOT NULL,
+    id_suscripcion BIGINT NOT NULL,
+    numero_factura VARCHAR(20) NOT NULL UNIQUE,
     periodo_inicio DATE NOT NULL,
     periodo_fin DATE NOT NULL,
-    monto_bruto DECIMAL(10, 2) NOT NULL,
-    tasa_comision_aplicada DECIMAL(5, 2) NOT NULL,
-    monto_comision DECIMAL(10, 2) NOT NULL,
-    monto_neto_pagado DECIMAL(10, 2) NOT NULL,
-    estado VARCHAR(20) NOT NULL DEFAULT 'Pendiente', 
+    monto_suscripcion DECIMAL(10, 2) NOT NULL,
+    fecha_emision DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha_vencimiento DATE NOT NULL,
+    estado VARCHAR(20) NOT NULL DEFAULT 'Pendiente', -- 'Pendiente', 'Pagado', 'Vencido'
+    fecha_pago DATETIME,
+    metodo_pago VARCHAR(50),
     
-    CONSTRAINT FK_Liquidaciones_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa)
+    CONSTRAINT FK_FacturasSusc_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa),
+    CONSTRAINT FK_FacturasSusc_Suscripciones FOREIGN KEY (id_suscripcion) REFERENCES SuscripcionesEmpresa(id_suscripcion),
+    CONSTRAINT CHK_EstadoFacturaSusc CHECK (estado IN ('Pendiente', 'Pagado', 'Vencido'))
 );
+
+-- Facturas de comisión por ventas (COMISIÓN)
+CREATE TABLE FacturasComision (
+    id_factura_comision BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_empresa INT NOT NULL,
+    numero_factura VARCHAR(20) NOT NULL UNIQUE,
+    periodo_inicio DATE NOT NULL,
+    periodo_fin DATE NOT NULL,
+    total_ventas_periodo DECIMAL(10, 2) NOT NULL,
+    porcentaje_comision DECIMAL(5, 2) NOT NULL,
+    monto_comision DECIMAL(10, 2) NOT NULL,
+    fecha_emision DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha_vencimiento DATE NOT NULL,
+    estado VARCHAR(20) NOT NULL DEFAULT 'Pendiente', -- 'Pendiente', 'Pagado', 'Vencido'
+    fecha_pago DATETIME,
+    metodo_pago VARCHAR(50),
+    
+    CONSTRAINT FK_FacturasComision_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa),
+    CONSTRAINT CHK_EstadoFacturaComision CHECK (estado IN ('Pendiente', 'Pagado', 'Vencido'))
+);
+
+-- Pagos realizados por las empresas a TapStyle
+CREATE TABLE PagosEmpresaATapStyle (
+    id_pago BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_empresa INT NOT NULL,
+    tipo_pago VARCHAR(20) NOT NULL, -- 'Suscripcion', 'Comision'
+    id_factura_suscripcion BIGINT,
+    id_factura_comision BIGINT,
+    monto_pagado DECIMAL(10, 2) NOT NULL,
+    fecha_pago DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    metodo_pago VARCHAR(50) NOT NULL, -- 'Transferencia', 'Tarjeta', 'Efectivo'
+    referencia_pago VARCHAR(100),
+    comprobante_pago VARCHAR(255), -- Ruta del archivo del comprobante
+    
+    CONSTRAINT FK_PagosEmpresa_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa),
+    CONSTRAINT FK_PagosEmpresa_FactSusc FOREIGN KEY (id_factura_suscripcion) REFERENCES FacturasSuscripcion(id_factura_suscripcion),
+    CONSTRAINT FK_PagosEmpresa_FactComision FOREIGN KEY (id_factura_comision) REFERENCES FacturasComision(id_factura_comision),
+    CONSTRAINT CHK_TipoPago CHECK (tipo_pago IN ('Suscripcion', 'Comision')),
+    CONSTRAINT CHK_FacturaValida CHECK (
+        (tipo_pago = 'Suscripcion' AND id_factura_suscripcion IS NOT NULL AND id_factura_comision IS NULL) OR
+        (tipo_pago = 'Comision' AND id_factura_comision IS NOT NULL AND id_factura_suscripcion IS NULL)
+    )
+);
+
+-- MÓDULOS DEL SISTEMA TAPSTYLE
+CREATE TABLE ModulosSistema (
+    id_modulo INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_modulo VARCHAR(50) NOT NULL UNIQUE,
+    descripcion VARCHAR(255),
+    icono VARCHAR(50), -- Para la interfaz
+    orden_menu INT, -- Orden en el menú
+    estado BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+-- MÓDULOS INCLUIDOS EN CADA PLAN
+CREATE TABLE PlanModulos (
+    id_plan INT NOT NULL,
+    id_modulo INT NOT NULL,
+    incluido BOOLEAN NOT NULL DEFAULT TRUE,
+    PRIMARY KEY (id_plan, id_modulo),
+    CONSTRAINT FK_PlanModulos_Planes FOREIGN KEY (id_plan) REFERENCES PlanesSuscripcion(id_plan) ON DELETE CASCADE,
+    CONSTRAINT FK_PlanModulos_Modulos FOREIGN KEY (id_modulo) REFERENCES ModulosSistema(id_modulo) ON DELETE CASCADE
+);
+
+-- MÓDULOS ACTIVOS POR EMPRESA (Personalización del Super Admin)
+CREATE TABLE EmpresaModulos (
+    id_empresa INT NOT NULL,
+    id_modulo INT NOT NULL,
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
+    fecha_activacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_desactivacion DATETIME,
+    PRIMARY KEY (id_empresa, id_modulo),
+    CONSTRAINT FK_EmpresaModulos_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa) ON DELETE CASCADE,
+    CONSTRAINT FK_EmpresaModulos_Modulos FOREIGN KEY (id_modulo) REFERENCES ModulosSistema(id_modulo) ON DELETE CASCADE
+);
+
+-- DATOS INICIALES PARA MÓDULOS DEL SISTEMA
+INSERT INTO ModulosSistema (nombre_modulo, descripcion, icono, orden_menu) VALUES
+('productos_catalogo', 'Gestión de Productos y Catálogo', 'package', 1),
+('ventas_pedidos', 'Ventas y Gestión de Pedidos', 'shopping-cart', 2),
+('inventario_almacenes', 'Control de Inventario y Almacenes', 'warehouse', 3),
+('finanzas_pagos', 'Finanzas y Gestión de Pagos', 'credit-card', 4),
+('gestion_empleados', 'Gestión de Empleados', 'users', 5),
+('roles_permisos', 'Roles y Permisos', 'shield', 6),
+('reportes_analytics', 'Reportes y Analytics', 'bar-chart', 7),
+('configuracion', 'Configuración de la Tienda', 'settings', 8);
+
+-- DATOS INICIALES PARA PLANES DE SUSCRIPCIÓN
+INSERT INTO PlanesSuscripcion (nombre_plan, precio_mensual, max_productos, max_empleados, comision_adicional, descripcion) VALUES
+('Básico', 199.00, 100, 3, 2.0, 'Plan ideal para pequeñas tiendas. Incluye módulos básicos.'),
+('Premium', 399.00, 500, 10, 1.5, 'Plan para tiendas en crecimiento. Incluye módulos avanzados.'),
+('Enterprise', 799.00, NULL, NULL, 1.0, 'Plan completo para grandes empresas. Todos los módulos incluidos.');
+
+-- ASIGNACIÓN DE MÓDULOS POR PLAN
+-- Plan Básico: Solo productos, ventas e inventario
+INSERT INTO PlanModulos (id_plan, id_modulo, incluido) VALUES
+(1, 1, TRUE),  -- Productos y Catálogo
+(1, 2, TRUE),  -- Ventas y Pedidos
+(1, 3, TRUE),  -- Inventario y Almacenes
+(1, 8, TRUE),  -- Configuración
+(1, 4, FALSE), -- Finanzas (NO incluido)
+(1, 5, FALSE), -- Empleados (NO incluido)
+(1, 6, FALSE), -- Roles (NO incluido)
+(1, 7, FALSE); -- Reportes (NO incluido)
+
+-- Plan Premium: Básico + finanzas + empleados + roles
+INSERT INTO PlanModulos (id_plan, id_modulo, incluido) VALUES
+(2, 1, TRUE),  -- Productos y Catálogo
+(2, 2, TRUE),  -- Ventas y Pedidos
+(2, 3, TRUE),  -- Inventario y Almacenes
+(2, 4, TRUE),  -- Finanzas y Pagos
+(2, 5, TRUE),  -- Gestión de Empleados
+(2, 6, TRUE),  -- Roles y Permisos
+(2, 8, TRUE),  -- Configuración
+(2, 7, FALSE); -- Reportes (NO incluido)
+
+-- Plan Enterprise: Todos los módulos
+INSERT INTO PlanModulos (id_plan, id_modulo, incluido) VALUES
+(3, 1, TRUE),  -- Productos y Catálogo
+(3, 2, TRUE),  -- Ventas y Pedidos
+(3, 3, TRUE),  -- Inventario y Almacenes
+(3, 4, TRUE),  -- Finanzas y Pagos
+(3, 5, TRUE),  -- Gestión de Empleados
+(3, 6, TRUE),  -- Roles y Permisos
+(3, 7, TRUE),  -- Reportes y Analytics
+(3, 8, TRUE);  -- Configuración

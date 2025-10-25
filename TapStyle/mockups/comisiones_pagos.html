@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TapStyle - Comisiones y Pagos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; }
+        .sidebar { width: 250px; min-height: 100vh; }
+        .main-content { margin-left: 250px; }
+    </style>
+</head>
+<body class="flex">
+
+    <!-- BARRA LATERAL -->
+    <aside class="sidebar bg-gray-800 text-white p-4 flex flex-col fixed h-full z-20 hidden md:flex">
+        <!-- Logo de la Plataforma -->
+        <div class="text-center mb-8 pb-4 border-b border-gray-700">
+            <a href="index.html" class="text-2xl font-black text-red-500 tracking-widest">TAPSTYLE</a>
+            <p class="text-xs text-gray-400 mt-1">SUPER ADMIN</p>
+        </div>
+
+        <!-- Perfil del Super Admin -->
+        <div class="mb-8 text-center">
+            <div class="w-14 h-14 bg-red-600 text-white rounded-full mx-auto flex items-center justify-center text-xl font-bold mb-2 shadow-lg">SA</div>
+            <p class="font-semibold text-base">Super Administrador</p>
+            <p class="text-sm text-gray-400">Control Total</p>
+        </div>
+        
+        <nav class="flex-grow space-y-1">
+            <a href="dashboard_superadmin.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                <span>Dashboard Global</span>
+            </a>
+            <a href="gestion_empresas.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2" /></svg>
+                <span>Gestión de Empresas</span>
+            </a>
+            <a href="gestion_modulos_empresa.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M9 7h6m0 0V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2m6 0v2a2 2 0 01-2 2H9a2 2 0 01-2-2V9a2 2 0 012-2h6a2 2 0 012 2z" /></svg>
+                <span>Módulos por Empresa</span>
+            </a>
+            <a href="comisiones_pagos.html" class="flex items-center p-3 rounded-lg bg-red-600 text-white font-semibold transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                <span>Facturación y Cobranzas</span>
+            </a>
+            <a href="reportes_globales.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-8v8m-4-8v8M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4-4-4m-4 0v1a3 3 0 003 3h10a3 3 0 003-3v-1" /></svg>
+                <span>Reportes Globales</span>
+            </a>
+            <a href="configuracion_sistema.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                <span>Configuración del Sistema</span>
+            </a>
+        </nav>
+        <div class="mt-auto pt-4 border-t border-gray-700"><a href="login.html" class="text-red-400">Cerrar Sesión</a></div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="flex-1 main-content p-4 sm:p-8 w-full"> 
+        
+        <header class="bg-white p-4 rounded-xl shadow-lg mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Facturación y Cobranzas</h1>
+            <p class="text-gray-500 mt-1">Control de suscripciones y comisiones que las empresas deben pagar a TapStyle.</p>
+        </header>
+
+        <!-- MÉTRICAS FINANCIERAS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            
+            <!-- Ingresos por Suscripciones -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 uppercase">Suscripciones (Mes)</p>
+                        <p class="text-3xl font-extrabold text-gray-900 mt-1">S/ 2,395</p>
+                    </div>
+                    <div class="p-2 bg-green-100 rounded-full text-green-500">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                    </div>
+                </div>
+                <p class="text-xs text-green-600 mt-3 font-medium">5 empresas activas</p>
+            </div>
+
+            <!-- Facturas Pendientes -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-red-500">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 uppercase">Facturas Pendientes</p>
+                        <p class="text-3xl font-extrabold text-gray-900 mt-1">7</p>
+                    </div>
+                    <div class="p-2 bg-red-100 rounded-full text-red-500">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                </div>
+                <p class="text-xs text-red-600 mt-3 font-medium">S/ 1,850 por cobrar</p>
+            </div>
+
+            <!-- Comisiones por Ventas -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 uppercase">Comisiones (Mes)</p>
+                        <p class="text-3xl font-extrabold text-gray-900 mt-1">S/ 1,890</p>
+                    </div>
+                    <div class="p-2 bg-blue-100 rounded-full text-blue-500">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                    </div>
+                </div>
+                <p class="text-xs text-blue-600 mt-3 font-medium">Por ventas de empresas</p>
+            </div>
+
+            <!-- Ingresos Totales -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-indigo-500">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 uppercase">Ingresos Totales</p>
+                        <p class="text-3xl font-extrabold text-gray-900 mt-1">S/ 4,285</p>
+                    </div>
+                    <div class="p-2 bg-indigo-100 rounded-full text-indigo-500">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" /></svg>
+                    </div>
+                </div>
+                <p class="text-xs text-indigo-600 mt-3 font-medium">Suscripciones + Comisiones</p>
+            </div>
+
+        </div>
+
+        <!-- SECCIÓN 1: FACTURAS PENDIENTES DE PAGO -->
+        <div class="mb-10">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800">Facturas Pendientes de Pago</h2>
+                <div class="flex space-x-3 items-center">
+                    <select class="p-2 border border-gray-300 rounded-lg text-sm focus:ring-red-500 focus:border-red-500">
+                        <option value="">Todas las empresas</option>
+                        <option value="street-vibe">Street Vibe Co.</option>
+                        <option value="calzado-elite">Calzado Élite</option>
+                    </select>
+                    <select class="p-2 border border-gray-300 rounded-lg text-sm focus:ring-red-500 focus:border-red-500">
+                        <option value="">Todos los tipos</option>
+                        <option value="suscripcion">Suscripción</option>
+                        <option value="comision">Comisión</option>
+                    </select>
+                    <button id="btn-generar-factura" class="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition duration-150 flex items-center">
+                        <svg class="h-5 w-5 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" /></svg>
+                        Generar Factura
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabla de Facturas -->
+            <div class="bg-white rounded-xl shadow-lg overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Empresa</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">N° Factura</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Período</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Monto</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vencimiento</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Factura Suscripción 1 -->
+                        <tr class="hover:bg-red-50 transition duration-100">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">Street Vibe Co.</div>
+                                <div class="text-sm text-gray-500">Plan Premium</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Suscripción</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-mono">SUSC-2024-001</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Nov 2024</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">S/ 399.00</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 font-semibold">05/11/2024</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Vencido</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium space-x-2">
+                                <button title="Ver Factura" class="text-indigo-600 hover:text-indigo-900 p-1 rounded-full hover:bg-indigo-100 transition duration-150">
+                                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                </button>
+                                <button title="Marcar Pagado" class="text-green-600 hover:text-green-900 p-1 rounded-full hover:bg-green-100 transition duration-150">
+                                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                                </button>
+                                <button title="Suspender Empresa" class="text-red-600 hover:text-red-900 p-1 rounded-full hover:bg-red-100 transition duration-150">
+                                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        
+                        <!-- Factura Comisión 1 -->
+                        <tr class="hover:bg-yellow-50 transition duration-100">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">Calzado Élite</div>
+                                <div class="text-sm text-gray-500">Plan Básico</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">Comisión</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-mono">COM-2024-015</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Oct 16-31, 2024</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">S/ 420.00</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-yellow-600 font-semibold">15/11/2024</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">Pendiente</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium space-x-2">
+                                <button title="Ver Factura" class="text-indigo-600 hover:text-indigo-900 p-1 rounded-full hover:bg-indigo-100 transition duration-150">
+                                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                </button>
+                                <button title="Marcar Pagado" class="text-green-600 hover:text-green-900 p-1 rounded-full hover:bg-green-100 transition duration-150">
+                                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                                </button>
+                                <button title="Enviar Recordatorio" class="text-orange-600 hover:text-orange-900 p-1 rounded-full hover:bg-orange-100 transition duration-150">
+                                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Factura Suscripción 2 -->
+                        <tr class="hover:bg-yellow-50 transition duration-100">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">Fashion Trends</div>
+                                <div class="text-sm text-gray-500">Plan Básico</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Suscripción</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-mono">SUSC-2024-002</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Nov 2024</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">S/ 199.00</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">10/11/2024</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">Pendiente</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium space-x-2">
+                                <button title="Ver Factura" class="text-indigo-600 hover:text-indigo-900 p-1 rounded-full hover:bg-indigo-100 transition duration-150">
+                                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                </button>
+                                <button title="Marcar Pagado" class="text-green-600 hover:text-green-900 p-1 rounded-full hover:bg-green-100 transition duration-150">
+                                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                                </button>
+                                <button title="Enviar Recordatorio" class="text-orange-600 hover:text-orange-900 p-1 rounded-full hover:bg-orange-100 transition duration-150">
+                                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: HISTORIAL DE PAGOS RECIBIDOS -->
+        <div class="mb-10">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800">Historial de Pagos Recibidos</h2>
+                <div class="flex space-x-3 items-center">
+                    <input type="date" class="p-2 border border-gray-300 rounded-lg text-sm focus:ring-red-500 focus:border-red-500">
+                    <span class="text-gray-500">a</span>
+                    <input type="date" class="p-2 border border-gray-300 rounded-lg text-sm focus:ring-red-500 focus:border-red-500">
+                    <button class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition duration-150">
+                        Filtrar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabla de Historial -->
+            <div class="bg-white rounded-xl shadow-lg overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Empresa</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Período</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Monto Neto</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha Pago</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Liquidación Pagada 1 -->
+                        <tr class="hover:bg-green-50 transition duration-100">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">Street Vibe Co.</div>
+                                <div class="text-sm text-gray-500">Tasa: 15.0%</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Sep 16-30, 2024</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-semibold">S/ 18,700.00</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">02/10/2024</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Pagado</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium space-x-3">
+                                <button title="Ver Comprobante" class="text-indigo-600 hover:text-indigo-900 p-1 rounded-full hover:bg-indigo-100 transition duration-150">
+                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                </button>
+                                <button title="Descargar PDF" class="text-gray-600 hover:text-gray-900 p-1 rounded-full hover:bg-gray-100 transition duration-150">
+                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MODAL PARA GENERAR FACTURA -->
+    <div id="modal-generar-factura" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden" style="background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl p-8 transform transition-all duration-300 scale-95 opacity-0" id="modal-content-factura">
+            <div class="flex justify-between items-center border-b pb-4 mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Generar Nueva Factura</h3>
+                <button id="close-modal-factura" class="text-gray-400 hover:text-gray-600">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+
+            <!-- Formulario de Generar Factura -->
+            <form id="form-generar-factura" class="space-y-6">
+                
+                <!-- Tipo de Factura -->
+                <div>
+                    <label for="tipo-factura" class="block text-sm font-medium text-gray-700 mb-2">Tipo de Factura *</label>
+                    <select id="tipo-factura" name="tipo_factura" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-150">
+                        <option value="">Seleccionar tipo...</option>
+                        <option value="suscripcion">Factura de Suscripción Mensual</option>
+                        <option value="comision">Factura de Comisión por Ventas</option>
+                    </select>
+                </div>
+
+                <!-- Selección de Empresa -->
+                <div>
+                    <label for="empresa-factura" class="block text-sm font-medium text-gray-700 mb-2">Empresa *</label>
+                    <select id="empresa-factura" name="id_empresa" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-150">
+                        <option value="">Seleccionar empresa...</option>
+                        <option value="1" data-plan="Premium" data-precio="399.00" data-comision="1.5">Street Vibe Co. (Plan Premium)</option>
+                        <option value="2" data-plan="Básico" data-precio="199.00" data-comision="2.0">Calzado Élite (Plan Básico)</option>
+                        <option value="3" data-plan="Básico" data-precio="199.00" data-comision="2.0">Fashion Trends (Plan Básico)</option>
+                        <option value="4" data-plan="Enterprise" data-precio="799.00" data-comision="1.0">Mega Store (Plan Enterprise)</option>
+                    </select>
+                </div>
+
+                <!-- SECCIÓN SUSCRIPCIÓN (Solo visible cuando tipo = suscripcion) -->
+                <div id="seccion-suscripcion" class="hidden">
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <h4 class="text-lg font-semibold text-blue-800 mb-4">Factura de Suscripción Mensual</h4>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="plan-suscripcion" class="block text-sm font-medium text-gray-700 mb-2">Plan Actual</label>
+                                <input type="text" id="plan-suscripcion" readonly class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-600" placeholder="Se completará automáticamente">
+                            </div>
+                            <div>
+                                <label for="precio-plan" class="block text-sm font-medium text-gray-700 mb-2">Precio Mensual</label>
+                                <input type="number" id="precio-plan" name="monto_suscripcion" step="0.01" readonly class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 font-semibold" placeholder="S/ 0.00">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div>
+                                <label for="periodo-suscripcion" class="block text-sm font-medium text-gray-700 mb-2">Período de Facturación *</label>
+                                <select id="periodo-suscripcion" name="periodo_suscripcion" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-150">
+                                    <option value="">Seleccionar período...</option>
+                                    <option value="2024-11">Noviembre 2024</option>
+                                    <option value="2024-12">Diciembre 2024</option>
+                                    <option value="2025-01">Enero 2025</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="vencimiento-suscripcion" class="block text-sm font-medium text-gray-700 mb-2">Fecha de Vencimiento *</label>
+                                <input type="date" id="vencimiento-suscripcion" name="fecha_vencimiento_susc" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-150">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN COMISIÓN (Solo visible cuando tipo = comision) -->
+                <div id="seccion-comision" class="hidden">
+                    <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                        <h4 class="text-lg font-semibold text-purple-800 mb-4">Factura de Comisión por Ventas</h4>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="periodo-inicio-com" class="block text-sm font-medium text-gray-700 mb-2">Fecha Inicio del Período *</label>
+                                <input type="date" id="periodo-inicio-com" name="periodo_inicio" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-150">
+                            </div>
+                            <div>
+                                <label for="periodo-fin-com" class="block text-sm font-medium text-gray-700 mb-2">Fecha Fin del Período *</label>
+                                <input type="date" id="periodo-fin-com" name="periodo_fin" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-150">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                            <div>
+                                <label for="total-ventas" class="block text-sm font-medium text-gray-700 mb-2">Total Ventas del Período</label>
+                                <input type="number" id="total-ventas" name="total_ventas_periodo" step="0.01" readonly class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-600" placeholder="Se calculará automáticamente">
+                            </div>
+                            <div>
+                                <label for="porcentaje-comision" class="block text-sm font-medium text-gray-700 mb-2">% Comisión</label>
+                                <input type="number" id="porcentaje-comision" name="porcentaje_comision" step="0.01" readonly class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-600" placeholder="Según plan">
+                            </div>
+                            <div>
+                                <label for="monto-comision-calc" class="block text-sm font-medium text-gray-700 mb-2">Monto Comisión</label>
+                                <input type="number" id="monto-comision-calc" name="monto_comision" step="0.01" readonly class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-purple-50 text-purple-600 font-semibold" placeholder="Se calculará automáticamente">
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <label for="vencimiento-comision" class="block text-sm font-medium text-gray-700 mb-2">Fecha de Vencimiento *</label>
+                            <input type="date" id="vencimiento-comision" name="fecha_vencimiento_com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-150">
+                        </div>
+
+                        <!-- Botón para Calcular Comisión -->
+                        <div class="flex justify-center mt-4">
+                            <button type="button" id="btn-calcular-comision" class="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition duration-150 flex items-center">
+                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                                Calcular Comisión
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Número de Factura (Generado automáticamente) -->
+                <div>
+                    <label for="numero-factura" class="block text-sm font-medium text-gray-700 mb-2">Número de Factura</label>
+                    <input type="text" id="numero-factura" name="numero_factura" readonly class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 font-mono" placeholder="Se generará automáticamente">
+                </div>
+
+                <!-- Botones de Acción -->
+                <div class="flex justify-end space-x-3 pt-4 border-t">
+                    <button type="button" id="cancel-modal-factura" class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-150">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="px-6 py-3 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition duration-150 flex items-center">
+                        <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Generar Factura
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT PARA EL MODAL -->
+    <script>
+        // Referencias a elementos del DOM
+        const btnGenerar = document.getElementById('btn-generar-factura');
+        const modal = document.getElementById('modal-generar-factura');
+        const modalContent = document.getElementById('modal-content-factura');
+        const closeModal = document.getElementById('close-modal-factura');
+        const cancelModal = document.getElementById('cancel-modal-factura');
+        const form = document.getElementById('form-generar-factura');
+
+        // Elementos del formulario
+        const tipoFactura = document.getElementById('tipo-factura');
+        const empresaSelect = document.getElementById('empresa-factura');
+        const seccionSuscripcion = document.getElementById('seccion-suscripcion');
+        const seccionComision = document.getElementById('seccion-comision');
+        const numeroFactura = document.getElementById('numero-factura');
+
+        // Elementos suscripción
+        const planSuscripcion = document.getElementById('plan-suscripcion');
+        const precioPlan = document.getElementById('precio-plan');
+        const periodoSuscripcion = document.getElementById('periodo-suscripcion');
+
+        // Elementos comisión
+        const periodoInicioComision = document.getElementById('periodo-inicio-com');
+        const periodoFinComision = document.getElementById('periodo-fin-com');
+        const totalVentas = document.getElementById('total-ventas');
+        const porcentajeComision = document.getElementById('porcentaje-comision');
+        const montoComisionCalc = document.getElementById('monto-comision-calc');
+        const btnCalcularComision = document.getElementById('btn-calcular-comision');
+
+        // Funciones para abrir/cerrar modal
+        function openModal() {
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModalHandler() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                form.reset();
+                // Ocultar secciones
+                seccionSuscripcion.classList.add('hidden');
+                seccionComision.classList.add('hidden');
+                // Limpiar campos
+                numeroFactura.value = '';
+                planSuscripcion.value = '';
+                precioPlan.value = '';
+                totalVentas.value = '';
+                porcentajeComision.value = '';
+                montoComisionCalc.value = '';
+            }, 300);
+        }
+
+        // Event listeners
+        btnGenerar.addEventListener('click', openModal);
+        closeModal.addEventListener('click', closeModalHandler);
+        cancelModal.addEventListener('click', closeModalHandler);
+
+        // Cerrar modal al hacer clic fuera
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModalHandler();
+            }
+        });
+
+        // Mostrar/ocultar secciones según tipo de factura
+        tipoFactura.addEventListener('change', function() {
+            const tipo = this.value;
+            
+            if (tipo === 'suscripcion') {
+                seccionSuscripcion.classList.remove('hidden');
+                seccionComision.classList.add('hidden');
+                generarNumeroFactura('SUSC');
+            } else if (tipo === 'comision') {
+                seccionSuscripcion.classList.add('hidden');
+                seccionComision.classList.remove('hidden');
+                generarNumeroFactura('COM');
+            } else {
+                seccionSuscripcion.classList.add('hidden');
+                seccionComision.classList.add('hidden');
+                numeroFactura.value = '';
+            }
+        });
+
+        // Actualizar datos cuando se selecciona empresa
+        empresaSelect.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            
+            if (selectedOption.value) {
+                // Datos para suscripción
+                planSuscripcion.value = selectedOption.dataset.plan || '';
+                precioPlan.value = selectedOption.dataset.precio || '';
+                
+                // Datos para comisión
+                porcentajeComision.value = selectedOption.dataset.comision || '';
+                
+                // Limpiar cálculos previos
+                totalVentas.value = '';
+                montoComisionCalc.value = '';
+            } else {
+                planSuscripcion.value = '';
+                precioPlan.value = '';
+                porcentajeComision.value = '';
+                totalVentas.value = '';
+                montoComisionCalc.value = '';
+            }
+        });
+
+        // Generar número de factura automático
+        function generarNumeroFactura(prefijo) {
+            const año = new Date().getFullYear();
+            const numero = Math.floor(Math.random() * 999) + 1;
+            numeroFactura.value = `${prefijo}-${año}-${numero.toString().padStart(3, '0')}`;
+        }
+
+        // Calcular comisión por ventas
+        btnCalcularComision.addEventListener('click', function() {
+            if (!empresaSelect.value || !periodoInicioComision.value || !periodoFinComision.value) {
+                alert('Por favor, selecciona una empresa y el período antes de calcular.');
+                return;
+            }
+
+            // Simulación de cálculo de ventas (en producción vendría del backend)
+            const ventasSimuladas = Math.floor(Math.random() * 100000) + 20000; // Entre 20,000 y 120,000
+            const porcentaje = parseFloat(porcentajeComision.value) / 100;
+            const comision = ventasSimuladas * porcentaje;
+
+            // Actualizar campos
+            totalVentas.value = ventasSimuladas.toFixed(2);
+            montoComisionCalc.value = comision.toFixed(2);
+        });
+
+        // Manejar envío del formulario
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const tipo = tipoFactura.value;
+            const empresa = empresaSelect.options[empresaSelect.selectedIndex].text;
+            
+            if (!tipo || !empresaSelect.value) {
+                alert('Por favor, completa todos los campos obligatorios.');
+                return;
+            }
+
+            let mensaje = `Factura generada exitosamente!\n\n` +
+                         `Tipo: ${tipo === 'suscripcion' ? 'Suscripción' : 'Comisión'}\n` +
+                         `Empresa: ${empresa}\n` +
+                         `N° Factura: ${numeroFactura.value}\n`;
+
+            if (tipo === 'suscripcion') {
+                const periodo = periodoSuscripcion.options[periodoSuscripcion.selectedIndex].text;
+                mensaje += `Período: ${periodo}\n` +
+                          `Monto: S/ ${precioPlan.value}`;
+            } else if (tipo === 'comision') {
+                if (!totalVentas.value || !montoComisionCalc.value) {
+                    alert('Por favor, calcula la comisión antes de generar la factura.');
+                    return;
+                }
+                mensaje += `Período: ${periodoInicioComision.value} al ${periodoFinComision.value}\n` +
+                          `Total Ventas: S/ ${totalVentas.value}\n` +
+                          `Comisión: S/ ${montoComisionCalc.value}`;
+            }
+
+            alert(mensaje);
+            closeModalHandler();
+        });
+    </script>
+
+</body>
+</html>

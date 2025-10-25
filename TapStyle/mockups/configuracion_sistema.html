@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TapStyle - Configuración del Sistema</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; }
+        .sidebar { width: 250px; min-height: 100vh; }
+        .main-content { margin-left: 250px; }
+    </style>
+</head>
+<body class="flex">
+
+    <!-- BARRA LATERAL -->
+    <aside class="sidebar bg-gray-800 text-white p-4 flex flex-col fixed h-full z-20 hidden md:flex">
+        <!-- Logo de la Plataforma -->
+        <div class="text-center mb-8 pb-4 border-b border-gray-700">
+            <a href="index.html" class="text-2xl font-black text-red-500 tracking-widest">TAPSTYLE</a>
+            <p class="text-xs text-gray-400 mt-1">SUPER ADMIN</p>
+        </div>
+
+        <!-- Perfil del Super Admin -->
+        <div class="mb-8 text-center">
+            <div class="w-14 h-14 bg-red-600 text-white rounded-full mx-auto flex items-center justify-center text-xl font-bold mb-2 shadow-lg">SA</div>
+            <p class="font-semibold text-base">Super Administrador</p>
+            <p class="text-sm text-gray-400">Control Total</p>
+        </div>
+        
+        <nav class="flex-grow space-y-1">
+            <a href="dashboard_superadmin.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                <span>Dashboard Global</span>
+            </a>
+            <a href="gestion_empresas.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2" /></svg>
+                <span>Gestión de Empresas</span>
+            </a>
+            <a href="gestion_modulos_empresa.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M9 7h6m0 0V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2m6 0v2a2 2 0 01-2 2H9a2 2 0 01-2-2V9a2 2 0 012-2h6a2 2 0 012 2z" /></svg>
+                <span>Módulos por Empresa</span>
+            </a>
+            <a href="comisiones_pagos.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                <span>Facturación y Cobranzas</span>
+            </a>
+            <a href="reportes_globales.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-8v8m-4-8v8M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4-4-4m-4 0v1a3 3 0 003 3h10a3 3 0 003-3v-1" /></svg>
+                <span>Reportes Globales</span>
+            </a>
+            <a href="configuracion_sistema.html" class="flex items-center p-3 rounded-lg bg-red-600 text-white font-semibold transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                <span>Configuración del Sistema</span>
+            </a>
+        </nav>
+        <div class="mt-auto pt-4 border-t border-gray-700"><a href="login.html" class="text-red-400">Cerrar Sesión</a></div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="flex-1 main-content p-4 sm:p-8 w-full"> 
+        
+        <header class="bg-white p-4 rounded-xl shadow-lg mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Configuración del Sistema</h1>
+            <p class="text-gray-500 mt-1">Configuraciones generales y perfil del Super Administrador.</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            <!-- SECCIÓN 1: PERFIL DEL SUPER ADMIN -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-6 border-b border-gray-200 bg-gradient-to-r from-red-500 to-red-600">
+                    <h3 class="text-lg font-semibold text-white flex items-center">
+                        <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                        Perfil del Super Administrador
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nombre Completo</label>
+                            <input type="text" value="Carlos Rodriguez" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" value="admin@tapstyle.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Contraseña Actual</label>
+                            <input type="password" placeholder="Ingresa tu contraseña actual" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nueva Contraseña</label>
+                            <input type="password" placeholder="Nueva contraseña (opcional)" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Confirmar Nueva Contraseña</label>
+                            <input type="password" placeholder="Confirma la nueva contraseña" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                        <button type="submit" class="w-full px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-150 font-semibold">
+                            Actualizar Perfil
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 2: CONFIGURACIÓN DE LA PLATAFORMA -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-6 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-blue-600">
+                    <h3 class="text-lg font-semibold text-white flex items-center">
+                        <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z" /></svg>
+                        Configuración de la Plataforma
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nombre de la Plataforma</label>
+                            <input type="text" value="TapStyle" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email de Soporte</label>
+                            <input type="email" value="soporte@tapstyle.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Teléfono de Soporte</label>
+                            <input type="tel" value="+51 999 888 777" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Zona Horaria</label>
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                                <option value="America/Lima" selected>Lima, Perú (UTC-5)</option>
+                                <option value="America/Bogota">Bogotá, Colombia (UTC-5)</option>
+                                <option value="America/Mexico_City">Ciudad de México (UTC-6)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Moneda Base</label>
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                                <option value="PEN" selected>Soles Peruanos (S/)</option>
+                                <option value="USD">Dólares Americanos ($)</option>
+                                <option value="EUR">Euros (€)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-150 font-semibold">
+                            Guardar Configuración
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SECCIÓN 3: NOTIFICACIONES Y ALERTAS -->
+        <div class="mt-8 bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="p-6 border-b border-gray-200 bg-gradient-to-r from-green-500 to-green-600">
+                <h3 class="text-lg font-semibold text-white flex items-center">
+                    <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4.828 7l2.586 2.586a2 2 0 002.828 0L13.828 7M9 11V9a2 2 0 012-2h0a2 2 0 012 2v2.172a2 2 0 00.586 1.414L18 17H6l4.414-4.414A2 2 0 009 11z" /></svg>
+                    Notificaciones y Alertas
+                </h3>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <h4 class="font-semibold text-gray-800">Alertas por Email</h4>
+                        <div class="space-y-3">
+                            <label class="flex items-center">
+                                <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500">
+                                <span class="ml-3 text-sm text-gray-700">Nuevas empresas registradas</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500">
+                                <span class="ml-3 text-sm text-gray-700">Pagos vencidos</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500">
+                                <span class="ml-3 text-sm text-gray-700">Reporte diario de ventas</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500">
+                                <span class="ml-3 text-sm text-gray-700">Errores del sistema</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="font-semibold text-gray-800">Configuración de Reportes</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Frecuencia de Reportes</label>
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+                                    <option value="diario">Diario</option>
+                                    <option value="semanal" selected>Semanal</option>
+                                    <option value="mensual">Mensual</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Hora de Envío</label>
+                                <input type="time" value="08:00" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-gray-200">
+                    <button class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-150 font-semibold">
+                        Guardar Preferencias de Notificación
+                    </button>
+                </div>
+            </div>
+        </div>
+    <!-- JAVASCRIPT -->
+    <script>
+        // Simulación de guardado de configuraciones
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Configuración guardada exitosamente');
+            });
+        });
+
+        // Simulación de backup manual
+        document.querySelector('button:contains("Ejecutar Backup Manual")').addEventListener('click', function() {
+            alert('Backup iniciado. Se notificará cuando termine.');
+        });
+    </script>
+
+</body>
+</html>
