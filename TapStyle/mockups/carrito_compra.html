@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TapStyle - Carrito de Compra</title>
@@ -8,147 +8,82 @@
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
         body {
-        font-family: "Inter", sans-serif;
-        background-color: #f8f9fa;
-    }
-    /* Mantener el mismo estilo de modal/overlay que en 'Añadir Empresa' */
+        font-family: "Inter", sans-serif; 
+        background-color: #f8f9fa; 
+        }
         .modal {
         background-color: rgba(0, 0, 0, 0.6);
         backdrop-filter: blur(5px);
         }
     </style>
-    </head>
-    <body class="min-h-screen">
-    <!-- Header simple (consistente con otras páginas) -->
+</head>
+<body class="min-h-screen">
     <header class="bg-white shadow-md sticky top-0 z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
-            <a
-            href="index.html"
-            class="text-2xl font-extrabold text-indigo-600 tracking-wider"
-            >TapStyle</a
-            >
-            <nav class="hidden md:flex space-x-8">
-            <a
-                href="index.html"
-                class="text-gray-600 hover:text-indigo-600 transition duration-150 font-medium"
-                >Tiendas</a
-                >
-                <a
-                href="#"
-                class="text-gray-600 hover:text-indigo-600 transition duration-150 font-medium"
-                >Categorías</a
-                >
-            </nav>
-            <div class="flex items-center space-x-4">
-            <a
-                href="login.html"
-                class="hidden md:inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150"
-            >
-                Acceder
-            </a>
-            </div>
+            <a href="index.html" class="text-2xl font-extrabold text-indigo-600 tracking-wider">TapStyle</a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-indigo-600 transition duration-150 font-medium">Tiendas</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-150 font-medium">Categorías</a>
+                </nav>
+        <div class="flex items-center space-x-4">
+            <a href="login.html" class="hidden md:inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150">Acceder</a>
+        </div>
         </div>
         </div>
     </header>
-
     <main class="max-w-6xl mx-auto p-6">
         <div class="bg-white rounded-xl shadow-lg p-8">
-        <div
-            class="flex items-center justify-between border-b border-gray-200 pb-4 mb-6"
-            >
-            <div>
-            <h1 class="text-2xl font-bold text-gray-900 leading-tight">
-                Carrito de Compra
-            </h1>
-            <p class="text-sm text-gray-600 mt-1">
-                Revisa los productos antes de proceder al pago.
-            </p>
+        <div class="flex items-center justify-between border-b border-gray-200 pb-4 mb-6">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900 leading-tight">Carrito de Compra</h1>
+                <p class="text-sm text-gray-600 mt-1">Revisa los productos antes de proceder al pago.</p>
             </div>
-            <a
-                href="index.html"
-                class="text-indigo-600 hover:text-indigo-700 text-sm font-medium"
-            >
-                ← Volver a la tienda
-            </a>
-            </div>
-
-            <div class="overflow-x-auto">
+            <a href="index.html" class="text-indigo-600 hover:text-indigo-700 text-sm font-medium">← Volver a la tienda</a>
+        </div>
+        <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
             <thead>
                 <tr>
-                    <th
-                    class="px-6 py-3 bg-indigo-50 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider rounded-tl-lg"
-                    >
-                    Producto
-                    </th>
-                    <th
-                    class="px-6 py-3 bg-indigo-50 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider"
-                    >
-                    Precio
-                    </th>
-                    <th
-                    class="px-6 py-3 bg-indigo-50 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider"
-                    >
-                    Cantidad
-                    </th>
-                    <th
-                    class="px-6 py-3 bg-indigo-50 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider"
-                    >
-                    Subtotal
-                    </th>
-                    <th
-                    class="px-6 py-3 bg-indigo-50 text-center text-xs font-semibold text-indigo-600 uppercase tracking-wider rounded-tr-lg"
-                    >
-                    Acciones
-                    </th>
+                    <th class="px-6 py-3 bg-indigo-50 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider rounded-tl-lg">Producto</th>
+                    <th class="px-6 py-3 bg-indigo-50 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider">Precio</th>
+                    <th class="px-6 py-3 bg-indigo-50 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider">Cantidad</th>
+                    <th class="px-6 py-3 bg-indigo-50 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider">Subtotal</th>
+                    <th class="px-6 py-3 bg-indigo-50 text-center text-xs font-semibold text-indigo-600 uppercase tracking-wider rounded-tr-lg">Acciones</th>
                 </tr>
-                </thead>
-                <tbody id="cart-items" class="bg-white divide-y divide-gray-200">
-                <!-- renderizado dinámico -->
-                </tbody>
+            </thead>
+                <tbody id="cart-items" class="bg-white divide-y divide-gray-200"></tbody>
             </table>
+        </div>
+        <div class="mt-8 border-t border-gray-200 pt-8">
+            <div class="flex justify-between items-center">
+            <div class="text-gray-700">
+            <div class="text-sm">Total items:
+                <strong id="cart-count" class="text-gray-900">0</strong>
             </div>
-
-            <div class="mt-8 border-t border-gray-200 pt-8">
-                <div class="flex justify-between items-center">
-                <div class="text-gray-700">
-                <div class="text-sm">
-                    Total items:
-                    <strong id="cart-count" class="text-gray-900">0</strong>
-                </div>
-                <div class="mt-1 text-sm text-gray-500">
-                    Los precios incluyen IGV
-                </div>
-                </div>
+                <div class="mt-1 text-sm text-gray-500">Los precios incluyen IGV</div>
+            </div>
                 <div class="flex items-center space-x-6">
                 <div class="text-right">
-                    <div class="text-sm text-gray-500">Total a pagar</div>
-                    <div class="text-3xl font-bold text-indigo-600" id="cart-total">
-                    $0.00
-                    </div>
+                <div class="text-sm text-gray-500">Total a pagar</div>
+                <div class="text-3xl font-bold text-indigo-600" id="cart-total">$0.00</div>
                 </div>
-                <button
-                    id="go-to-pago"
-                    class="px-6 py-3 bg-indigo-600 text-white text-sm font-semibold rounded-lg shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all"
-                >
-                    Proceder al pago
-                </button>
+                <button id="go-to-pago" class="px-6 py-3 bg-indigo-600 text-white text-sm font-semibold rounded-lg shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all">Proceder al pago</button>
                 </div>
             </div>
             </div>
         </div>
-        </main>
-
-        <script>
+    </main>
+    
+    <script>
         (function () {
             const CART_KEY = "tapstyle_cart";
             function getCart() {
-            try {
-                return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-            } catch (e) {
+                try {
+                    return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+                } catch (e) {
                 return [];
-            }
+                }
             }
             function saveCart(cart) {
             localStorage.setItem(CART_KEY, JSON.stringify(cart));
@@ -157,7 +92,6 @@
             function formatCurrency(v) {
             return "$" + Number(v).toFixed(2);
             }
-
             function renderCart() {
             const cart = getCart();
             const tbody = document.getElementById("cart-items");
@@ -325,6 +259,6 @@
                 });
             });
         })();
-        </script>
-    </body>
+    </script>
+</body>
 </html>
