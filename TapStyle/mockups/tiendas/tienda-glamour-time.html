@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glamour Time - Joyería de Lujo | TapStyle</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="../css/tienda-styles.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body class="glamour-time min-h-screen flex flex-col">
+
+    <!-- Header estilo TapStyle -->
+    <header class="header">
+        <div class="header-content">
+            <!-- Logo -->
+            <div class="logo">
+                <h1>GLAMOUR TIME</h1>
+            </div>
+            
+            <!-- Menú Principal -->
+            <nav class="nav">
+                <a href="#" class="nav-link">Inicio</a>
+                <a href="#" class="nav-link">Colecciones</a>
+                <a href="#" class="nav-link">Joyas</a>
+                <a href="#" class="nav-link">Relojes</a>
+                <a href="#" class="nav-link">Bolsos</a>
+            </nav>
+
+            <!-- Acciones del Header -->
+            <div class="header-actions">
+                <button class="icon-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+                <button class="icon-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.707 15.293C4.077 15.923 4.523 17 5.414 17H17M17 17C15.895 17 15 17.895 15 19C15 20.105 15.895 21 17 21C18.105 21 19 20.105 19 19C19 17.895 18.105 17 17 17ZM9 19C9 20.105 8.105 21 7 21C5.895 21 5 20.105 5 19C5 17.895 5.895 17 7 17C8.105 17 9 17.895 9 19Z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+                <button class="btn btn-outline" id="loginBtn">Iniciar Sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">ELEGANCIA ATEMPORAL</h1>
+                <p class="hero-subtitle">Joyas, relojes y bolsos de diseñadores de alta gama</p>
+                <button class="btn hero-btn">Descubrir Colección</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <!-- Sidebar Filtros -->
+                <aside class="sidebar">
+                    <div class="filter-section">
+                        <h3>Categorías</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" checked>
+                                <span>Relojes</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Anillos</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Collares</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Bolsos</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Aretes</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Pulseras</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Precio</h3>
+                        <div class="price-range">
+                            <input type="range" min="0" max="5000" value="2500" class="range-slider">
+                            <div class="price-values">
+                                <span>$0</span>
+                                <span>$5000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Material</h3>
+                        <div class="size-options">
+                            <button class="size-option">Oro</button>
+                            <button class="size-option active">Plata</button>
+                            <button class="size-option">Acero</button>
+                            <button class="size-option">Cuero</button>
+                            <button class="size-option">Diamantes</button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Product Grid -->
+                <section class="product-grid-section">
+                    <div class="section-header">
+                        <h2>Joyas Exclusivas</h2>
+                        <div class="sort-options">
+                            <select class="sort-select">
+                                <option>Ordenar por: Destacados</option>
+                                <option>Precio: Menor a Mayor</option>
+                                <option>Precio: Mayor a Menor</option>
+                                <option>Novedades</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="product-grid">
+                        <!-- Producto 1 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge">Exclusivo</span>
+                                <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Reloj Diamante">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Reloj de Diamantes</h3>
+                                <p class="product-category">Relojes</p>
+                                <div class="product-price">$2,850.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #D4AF37;"></span>
+                                    <span class="color-option" style="background-color: #C0C0C0;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 2 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Anillo Esmeralda">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Anillo Esmeralda</h3>
+                                <p class="product-category">Anillos</p>
+                                <div class="product-price">$1,200.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #D4AF37;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 3 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge sale">-15%</span>
+                                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Bolso Cuero">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Bolso de Cuero Italiano</h3>
+                                <p class="product-category">Bolsos</p>
+                                <div class="product-price">
+                                    <span class="original-price">$800.00</span>
+                                    <span class="sale-price">$680.00</span>
+                                </div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #8B0000;"></span>
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 4 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Collar Perlas">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Collar de Perlas</h3>
+                                <p class="product-category">Collares</p>
+                                <div class="product-price">$950.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #FFFFFF; border: 1px solid #ddd;"></span>
+                                    <span class="color-option" style="background-color: #D4AF37;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 5 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Aretes Diamante">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Aretes de Diamante</h3>
+                                <p class="product-category">Aretes</p>
+                                <div class="product-price">$1,500.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #C0C0C0;"></span>
+                                    <span class="color-option" style="background-color: #D4AF37;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 6 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge">Nuevo</span>
+                                <img src="https://images.unsplash.com/photo-1549993079-7c22910a1ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Reloj Clásico">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Reloj Clásico Oro</h3>
+                                <p class="product-category">Relojes</p>
+                                <div class="product-price">$3,200.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #D4AF37;"></span>
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 7 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Anillo Compromiso">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Anillo de Compromiso</h3>
+                                <p class="product-category">Anillos</p>
+                                <div class="product-price">$4,500.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #D4AF37;"></span>
+                                    <span class="color-option" style="background-color: #C0C0C0;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 8 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge sale">-10%</span>
+                                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Bolso Noche">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Bolso de Noche</h3>
+                                <p class="product-category">Bolsos</p>
+                                <div class="product-price">
+                                    <span class="original-price">$600.00</span>
+                                    <span class="sale-price">$540.00</span>
+                                </div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #8B0000;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 9 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Collar Oro">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Collar de Oro 18k</h3>
+                                <p class="product-category">Collares</p>
+                                <div class="product-price">$2,100.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #D4AF37;"></span>
+                                    <span class="color-option" style="background-color: #FFD700;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 10 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Aretes Oro">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Aretes de Oro Rosa</h3>
+                                <p class="product-category">Aretes</p>
+                                <div class="product-price">$850.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #E6BE8A;"></span>
+                                    <span class="color-option" style="background-color: #D4AF37;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 11 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge">Limited</span>
+                                <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pulsera Diamantes">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Pulsera con Diamantes</h3>
+                                <p class="product-category">Pulseras</p>
+                                <div class="product-price">$3,800.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #C0C0C0;"></span>
+                                    <span class="color-option" style="background-color: #D4AF37;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 12 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1549993079-7c22910a1ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Reloj Deportivo">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Reloj Deportivo Lujo</h3>
+                                <p class="product-category">Relojes</p>
+                                <div class="product-price">$1,800.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #C0C0C0;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 13 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge sale">-20%</span>
+                                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Bolso Tote">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Bolso Tote Cuero</h3>
+                                <p class="product-category">Bolsos</p>
+                                <div class="product-price">
+                                    <span class="original-price">$750.00</span>
+                                    <span class="sale-price">$600.00</span>
+                                </div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #8B4513;"></span>
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 14 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Set Joyas">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Set Completo Joyas</h3>
+                                <p class="product-category">Conjuntos</p>
+                                <div class="product-price">$5,200.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #D4AF37;"></span>
+                                    <span class="color-option" style="background-color: #C0C0C0;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 15 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge">Nuevo</span>
+                                <img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Anillo Solitario">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Anillo Solitario Diamante</h3>
+                                <p class="product-category">Anillos</p>
+                                <div class="product-price">$6,500.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #C0C0C0;"></span>
+                                    <span class="color-option" style="background-color: #D4AF37;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer estilo TapStyle -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>GLAMOUR TIME</h3>
+                <p>Joyas, bolsos y relojes de diseñadores de alta gama.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Colecciones</h4>
+                <ul>
+                    <li><a href="#">Relojes Exclusivos</a></li>
+                    <li><a href="#">Joyería Fina</a></li>
+                    <li><a href="#">Bolsos de Diseñador</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Políticas</h4>
+                <ul>
+                    <li><a href="#">Certificación de Autenticidad</a></li>
+                    <li><a href="#">Garantía</a></li>
+                    <li><a href="#">Envíos Internacionales</a></li>
+                    <li><a href="#">Devoluciones</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Síguenos</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link">Instagram</a>
+                    <a href="#" class="social-link">Pinterest</a>
+                    <a href="#" class="social-link">Facebook</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Glamour Time. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            alert('Para comprar joyas exclusivas, debes iniciar sesión o registrarte');
+        });
+
+        document.querySelectorAll('.size-option').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.size-option').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
