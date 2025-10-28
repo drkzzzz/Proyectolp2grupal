@@ -1,0 +1,160 @@
+/* css/layout/_sidebar.css */
+
+.sidebar {
+    background-color: var(--color-indigo-900);
+    color: var(--color-gray-100);
+    width: var(--sidebar-width);
+    height: 100vh;
+    /* Ocupa toda la altura */
+    position: fixed;
+    /* Fijo en la pantalla */
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-md);
+    z-index: 100;
+}
+
+/* 1. Cabecera (Logo y Nombre) */
+.sidebar-header {
+    padding: var(--space-6) var(--space-4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+    /* No se encoge */
+}
+
+.sidebar-logo-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    text-decoration: none;
+}
+
+.sidebar-logo-link:hover {
+    text-decoration: none;
+    /* Evita subrayado en el logo */
+}
+
+.sidebar-logo {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-md);
+    background-color: var(--color-indigo-600);
+    color: var(--color-white);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.sidebar-store-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.sidebar-store-name {
+    font-family: var(--font-family-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-white);
+}
+
+.sidebar-store-desc {
+    font-size: 0.75rem;
+    color: var(--color-gray-300);
+}
+
+/* 2. Contenedor de Navegación (para scroll) */
+.sidebar-scroll-container {
+    flex-grow: 1;
+    /* Ocupa el espacio restante */
+    overflow-y: auto;
+    /* Permite scroll si hay muchos ítems */
+    padding: var(--space-4) 0;
+}
+
+/* 3. Grupos de Navegación */
+.sidebar-group {
+    padding: 0 var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.sidebar-group-title {
+    font-size: 0.75rem;
+    /* 12px */
+    font-weight: 600;
+    color: var(--color-indigo-300);
+    text-transform: uppercase;
+    padding: 0 var(--space-3);
+    margin-bottom: var(--space-2);
+}
+
+/* 4. Enlaces de Navegación */
+.sidebar-nav-link {
+    display: flex;
+    align-items: center;
+    padding: var(--space-3);
+    border-radius: var(--border-radius-md);
+    color: var(--color-gray-100);
+    font-weight: 500;
+    gap: var(--space-3);
+    transition: background-color 0.15s ease, color 0.15s ease;
+    margin-bottom: var(--space-1);
+}
+
+.sidebar-nav-link svg {
+    width: 1.25rem;
+    /* 20px */
+    height: 1.25rem;
+    flex-shrink: 0;
+    color: var(--color-gray-300);
+    transition: color 0.15s ease;
+}
+
+.sidebar-nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.sidebar-nav-link:hover svg {
+    color: var(--color-white);
+}
+
+/* ESTADO ACTIVO: Tu JS (layout-loader.js) debe agregar esta clase */
+.sidebar-nav-link.active {
+    background-color: var(--color-indigo-600);
+    color: var(--color-white);
+    font-weight: 600;
+    box-shadow: var(--shadow-md);
+}
+
+.sidebar-nav-link.active svg {
+    color: var(--color-white);
+}
+
+/* 5. Pie de Sidebar (Cerrar Sesión) */
+.sidebar-footer {
+    flex-shrink: 0;
+    /* No se encoge */
+    padding: var(--space-4);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-footer .sidebar-nav-link.logout {
+    justify-content: center;
+    color: var(--color-white);
+}
+
+.sidebar-footer .sidebar-nav-link.logout:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+    /* Rojo transparente */
+}
+
+.sidebar-footer .sidebar-nav-link.logout svg {
+    color: var(--color-danger);
+}

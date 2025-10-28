@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Admin TapStyle</title>
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body class="body-login">
+
+    <div class="login-container">
+        <h1>Bienvenido</h1>
+
+        <form id="login-form" novalidate>
+            <div>
+                <label for="email-input">Correo Electrónico</label>
+                <input type="email" id="email-input" required />
+            </div>
+            <div>
+                <label for="password-input">Contraseña</label>
+                <input type="password" id="password-input" required />
+            </div>
+
+            <button type="submit" id="submit-button" class="btn-primary">
+                Ingresar
+            </button>
+        </form>
+
+        <p id="login-error-msg"></p>
+    </div>
+
+    <script src="./js/lib/jquery.min.js"></script>
+    <script src="./js/global/config.js"></script>
+    <script src="./js/global/api-client.js"></script>
+    <script src="./js/global/auth.js"></script>
+
+    <script src="./js/mocks/login.js"></script>
+
+    <script src="./js/modules/login.js"></script>
+</body>
+
+</html>

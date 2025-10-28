@@ -1,30 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TapStyle - Tu Centro Comercial Digital</title>
     <!-- Carga de Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Configuración para usar la fuente Inter -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7f7f7;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/main.css">
 </head>
+
 <body class="bg-gray-50 flex flex-col min-h-screen">
     <!-- Header -->
     <header class="bg-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <a href="index.html" class="text-2xl font-extrabold text-indigo-600 tracking-wider">
-            TapStyle
+                TapStyle
             </a>
             <nav class="space-x-4">
-            <a href="index.html" class="text-gray-600 hover:text-indigo-600">Inicio</a>
-            <a href="carrito.html" class="text-gray-600 hover:text-indigo-600">Carrito</a>
+                <a href="index.html" class="text-gray-600 hover:text-indigo-600">Inicio</a>
+                <a href="carrito.html" class="text-gray-600 hover:text-indigo-600">Carrito</a>
             </nav>
         </div>
     </header>
@@ -32,90 +27,106 @@
     <main class="flex-grow">
         <section class="py-12">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                <!-- Imagen del producto -->
-                <div class="p-6 bg-gradient-to-br from-blue-50 to-white flex items-center justify-center">
-                    <img
-                    id="product-image"
-                    src="https://placehold.co/600x600/93C5FD/ffffff?text=Producto"
-                    alt="producto"
-                    class="w-full max-w-md rounded-lg object-cover shadow-md"
-                    />
-                </div>
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                <!-- Información del producto -->
-                <div class="p-8">
-                    <div class="flex items-center justify-between">
-                    <h1 id="product-name" class="text-3xl font-extrabold text-sky-900">
-                        Producto Destacado
-                    </h1>
-                    <div class="text-right">
-                        <div id="product-store" class="text-sm text-sky-600 font-medium">
-                        Vendido por:
-                        <span class="font-semibold text-sky-800">Tienda Ejemplo</span>
+                        <!-- Imagen del producto -->
+                        <div class="p-6 bg-gradient-to-br from-blue-50 to-white flex items-center justify-center">
+                            <img id="product-image" src="https://placehold.co/600x600/93C5FD/ffffff?text=Producto"
+                                alt="producto" class="w-full max-w-md rounded-lg object-cover shadow-md" />
                         </div>
-                        <div id="product-price" class="text-2xl font-extrabold text-sky-800 mt-1">
-                        $120.00
+
+                        <!-- Información del producto -->
+                        <div class="p-8">
+                            <div class="flex items-center justify-between">
+                                <h1 id="product-name" class="text-3xl font-extrabold text-sky-900">
+                                    Producto Destacado
+                                </h1>
+                                <div class="text-right">
+                                    <div id="product-store" class="text-sm text-sky-600 font-medium">
+                                        Vendido por:
+                                        <span class="font-semibold text-sky-800">Tienda Ejemplo</span>
+                                    </div>
+                                    <div id="product-price" class="text-2xl font-extrabold text-sky-800 mt-1">
+                                        $120.00
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p id="product-desc" class="mt-4 text-gray-600 leading-relaxed">
+                                Descripción breve y llamativa del producto. Materiales, corte y estilo resumidos para
+                                atraer al comprador.
+                                Esta ficha solo es visual (mockup).
+                            </p>
+
+                            <!-- Colores -->
+                            <div class="mt-6">
+                                <h4 class="text-sm font-semibold text-gray-700 mb-2">Colores disponibles</h4>
+                                <div class="flex items-center space-x-3">
+                                    <button
+                                        class="w-8 h-8 rounded-full bg-sky-600 ring-2 ring-transparent hover:ring-sky-300"
+                                        title="Azul"></button>
+                                    <button
+                                        class="w-8 h-8 rounded-full bg-gray-800 ring-2 ring-transparent hover:ring-sky-300"
+                                        title="Negro"></button>
+                                    <button
+                                        class="w-8 h-8 rounded-full bg-pink-500 ring-2 ring-transparent hover:ring-sky-300"
+                                        title="Rosa"></button>
+                                    <button
+                                        class="w-8 h-8 rounded-full bg-yellow-400 ring-2 ring-transparent hover:ring-sky-300"
+                                        title="Amarillo"></button>
+                                </div>
+                            </div>
+
+                            <!-- Tallas -->
+                            <div class="mt-6">
+                                <h4 class="text-sm font-semibold text-gray-700 mb-2">Tallas</h4>
+                                <div class="flex items-center space-x-2">
+                                    <button
+                                        class="px-3 py-1 border rounded-md text-sm text-gray-700 hover:bg-sky-50">S</button>
+                                    <button
+                                        class="px-3 py-1 border rounded-md text-sm text-gray-700 hover:bg-sky-50">M</button>
+                                    <button
+                                        class="px-3 py-1 border rounded-md text-sm text-gray-700 hover:bg-sky-50">L</button>
+                                    <button
+                                        class="px-3 py-1 border rounded-md text-sm text-gray-700 hover:bg-sky-50">XL</button>
+                                </div>
+                            </div>
+
+                            <!-- Cantidad -->
+                            <div class="mt-6 flex items-center space-x-4">
+                                <label class="text-sm text-gray-700">Cantidad</label>
+                                <input id="product-qty" type="number" min="1" value="1"
+                                    class="w-20 px-3 py-2 border rounded-md" />
+                            </div>
+
+                            <!-- Botones -->
+                            <div class="mt-8 flex items-center space-x-4">
+                                <button id="btn-add"
+                                    class="px-5 py-3 bg-sky-700 text-white rounded-lg shadow hover:bg-sky-800 transition">
+                                    Añadir al carrito
+                                </button>
+                                <a href="carrito.html"
+                                    class="px-5 py-3 bg-white border border-sky-200 text-sky-700 rounded-lg hover:bg-sky-50 transition">
+                                    Ver carrito
+                                </a>
+                                <a href="pago.html"
+                                    class="ml-auto px-5 py-3 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition">
+                                    Comprar ahora
+                                </a>
+                            </div>
+
+                            <!-- Material y Envío -->
+                            <div
+                                class="mt-8 text-base text-gray-600 leading-relaxed space-y-2 border-t border-gray-100 pt-4">
+                                <p><strong class="font-semibold text-gray-800">Material:</strong> 100% algodón premium.
+                                </p>
+                                <p><strong class="font-semibold text-gray-800">Envío:</strong> Entrega en 3–5 días
+                                    hábiles.</p>
+                            </div>
                         </div>
                     </div>
-                    </div>
-
-                    <p id="product-desc" class="mt-4 text-gray-600 leading-relaxed">
-                    Descripción breve y llamativa del producto. Materiales, corte y estilo resumidos para atraer al comprador.
-                    Esta ficha solo es visual (mockup).
-                    </p>
-
-                    <!-- Colores -->
-                    <div class="mt-6">
-                    <h4 class="text-sm font-semibold text-gray-700 mb-2">Colores disponibles</h4>
-                    <div class="flex items-center space-x-3">
-                        <button class="w-8 h-8 rounded-full bg-sky-600 ring-2 ring-transparent hover:ring-sky-300" title="Azul"></button>
-                        <button class="w-8 h-8 rounded-full bg-gray-800 ring-2 ring-transparent hover:ring-sky-300" title="Negro"></button>
-                        <button class="w-8 h-8 rounded-full bg-pink-500 ring-2 ring-transparent hover:ring-sky-300" title="Rosa"></button>
-                        <button class="w-8 h-8 rounded-full bg-yellow-400 ring-2 ring-transparent hover:ring-sky-300" title="Amarillo"></button>
-                    </div>
-                    </div>
-
-                    <!-- Tallas -->
-                    <div class="mt-6">
-                    <h4 class="text-sm font-semibold text-gray-700 mb-2">Tallas</h4>
-                    <div class="flex items-center space-x-2">
-                        <button class="px-3 py-1 border rounded-md text-sm text-gray-700 hover:bg-sky-50">S</button>
-                        <button class="px-3 py-1 border rounded-md text-sm text-gray-700 hover:bg-sky-50">M</button>
-                        <button class="px-3 py-1 border rounded-md text-sm text-gray-700 hover:bg-sky-50">L</button>
-                        <button class="px-3 py-1 border rounded-md text-sm text-gray-700 hover:bg-sky-50">XL</button>
-                    </div>
-                    </div>
-
-                    <!-- Cantidad -->
-                    <div class="mt-6 flex items-center space-x-4">
-                    <label class="text-sm text-gray-700">Cantidad</label>
-                    <input id="product-qty" type="number" min="1" value="1" class="w-20 px-3 py-2 border rounded-md" />
-                    </div>
-
-                    <!-- Botones -->
-                    <div class="mt-8 flex items-center space-x-4">
-                    <button id="btn-add" class="px-5 py-3 bg-sky-700 text-white rounded-lg shadow hover:bg-sky-800 transition">
-                        Añadir al carrito
-                    </button>
-                    <a href="carrito.html" class="px-5 py-3 bg-white border border-sky-200 text-sky-700 rounded-lg hover:bg-sky-50 transition">
-                        Ver carrito
-                    </a>
-                    <a href="pago.html" class="ml-auto px-5 py-3 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition">
-                        Comprar ahora
-                    </a>
-                    </div>
-
-                    <!-- Material y Envío -->
-                    <div class="mt-8 text-base text-gray-600 leading-relaxed space-y-2 border-t border-gray-100 pt-4">
-                    <p><strong class="font-semibold text-gray-800">Material:</strong> 100% algodón premium.</p>
-                    <p><strong class="font-semibold text-gray-800">Envío:</strong> Entrega en 3–5 días hábiles.</p>
-                    </div>
                 </div>
-                </div>
-            </div>
             </div>
         </section>
     </main>
@@ -124,120 +135,120 @@
             const CART_KEY = "tapstyle_cart";
 
             function qs(name) {
-            const url = new URL(location.href);
-            return url.searchParams.get(name);
+                const url = new URL(location.href);
+                return url.searchParams.get(name);
             }
             function safeDecode(v) {
-            try {
-                return decodeURIComponent(v);
-            } catch (e) {
-                return v || "";
-            }
+                try {
+                    return decodeURIComponent(v);
+                } catch (e) {
+                    return v || "";
+                }
             }
 
             const name =
-            safeDecode(qs("name")) ||
-            document.getElementById("product-name").textContent ||
-            "Chaqueta de Cuero Vintage";
+                safeDecode(qs("name")) ||
+                document.getElementById("product-name").textContent ||
+                "Chaqueta de Cuero Vintage";
             const priceRaw =
-            qs("price") ||
-            (document.getElementById("product-price") &&
-                document.getElementById("product-price").textContent) ||
-            "120.00";
+                qs("price") ||
+                (document.getElementById("product-price") &&
+                    document.getElementById("product-price").textContent) ||
+                "120.00";
             const price =
-            parseFloat(priceRaw.replace(/[^0-9.,]/g, "").replace(",", ".")) || 120.0;
+                parseFloat(priceRaw.replace(/[^0-9.,]/g, "").replace(",", ".")) || 120.0;
             const image =
-            qs("image") ||
-            (document.getElementById("product-image") &&
-                document.getElementById("product-image").src) ||
-            "https://placehold.co/600x600/93C5FD/ffffff?text=Producto";
+                qs("image") ||
+                (document.getElementById("product-image") &&
+                    document.getElementById("product-image").src) ||
+                "https://placehold.co/600x600/93C5FD/ffffff?text=Producto";
             const store =
-            safeDecode(qs("store")) ||
-            (document.getElementById("product-store") &&
-                document.getElementById("product-store").textContent) ||
-            "Street Vibe Co.";
+                safeDecode(qs("store")) ||
+                (document.getElementById("product-store") &&
+                    document.getElementById("product-store").textContent) ||
+                "Street Vibe Co.";
 
             document.getElementById("product-name").textContent = name;
             document.getElementById("product-price").textContent =
-            "$" + Number(price).toFixed(2);
+                "$" + Number(price).toFixed(2);
             document.getElementById("product-image").src = image;
             document.getElementById("product-store").innerHTML =
-            'Vendido por: <span class="font-semibold text-sky-800">' +
-            store +
-            "</span>";
+                'Vendido por: <span class="font-semibold text-sky-800">' +
+                store +
+                "</span>";
 
             function showToast(msg) {
-            let t = document.getElementById("toast");
-            if (!t) {
-                t = document.createElement("div");
-                t.id = "toast";
-                t.className =
-                "fixed bottom-6 right-6 bg-slate-900 text-white px-4 py-2 rounded shadow-lg opacity-0 transform translate-y-4 transition-all";
-                document.body.appendChild(t);
-            }
-            t.textContent = msg;
-            t.style.opacity = "1";
-            t.style.transform = "translateY(0)";
-            setTimeout(() => {
-                t.style.opacity = "0";
-                t.style.transform = "translateY(12px)";
-            }, 1800);
+                let t = document.getElementById("toast");
+                if (!t) {
+                    t = document.createElement("div");
+                    t.id = "toast";
+                    t.className =
+                        "fixed bottom-6 right-6 bg-slate-900 text-white px-4 py-2 rounded shadow-lg opacity-0 transform translate-y-4 transition-all";
+                    document.body.appendChild(t);
+                }
+                t.textContent = msg;
+                t.style.opacity = "1";
+                t.style.transform = "translateY(0)";
+                setTimeout(() => {
+                    t.style.opacity = "0";
+                    t.style.transform = "translateY(12px)";
+                }, 1800);
             }
 
             function getCart() {
-            try {
-                return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-            } catch (e) {
-                return [];
-            }
+                try {
+                    return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+                } catch (e) {
+                    return [];
+                }
             }
             function saveCart(cart) {
-            localStorage.setItem(CART_KEY, JSON.stringify(cart));
-            updateCartCount();
+                localStorage.setItem(CART_KEY, JSON.stringify(cart));
+                updateCartCount();
             }
             function updateCartCount() {
-            const el = document.getElementById("cart-count");
-            if (!el) return;
-            const cart = getCart();
-            const count = cart.reduce((s, i) => s + (i.qty || 0), 0);
-            el.textContent = count;
+                const el = document.getElementById("cart-count");
+                if (!el) return;
+                const cart = getCart();
+                const count = cart.reduce((s, i) => s + (i.qty || 0), 0);
+                el.textContent = count;
             }
 
             function addItem(item) {
-            const cart = getCart();
-            const existing = cart.find((c) => c.id === item.id);
-            if (existing) {
-                existing.qty = (existing.qty || 0) + (item.qty || 1);
-            } else {
-                item.qty = item.qty || 1;
-                cart.push(item);
-            }
-            saveCart(cart);
-            showToast("Producto añadido con éxito");
+                const cart = getCart();
+                const existing = cart.find((c) => c.id === item.id);
+                if (existing) {
+                    existing.qty = (existing.qty || 0) + (item.qty || 1);
+                } else {
+                    item.qty = item.qty || 1;
+                    cart.push(item);
+                }
+                saveCart(cart);
+                showToast("Producto añadido con éxito");
             }
 
             document.addEventListener("DOMContentLoaded", () => {
-            const btn = document.getElementById("btn-add");
-            if (btn) {
-                btn.addEventListener("click", (e) => {
-                e.preventDefault();
-                const qtyEl = document.getElementById("product-qty");
-                const qty = Math.max(1, parseInt(qtyEl && qtyEl.value) || 1);
-                const productName = document.getElementById("product-name").textContent.trim();
-                const productPriceText = document.getElementById("product-price").textContent || "0";
-                const productPrice =
-                    parseFloat(productPriceText.replace(/[^0-9.,]/g, "").replace(",", ".")) || price;
-                const productImage = document.getElementById("product-image").src || image;
-                const id = qs("id") || productName.replace(/\s+/g, "_").toLowerCase();
+                const btn = document.getElementById("btn-add");
+                if (btn) {
+                    btn.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        const qtyEl = document.getElementById("product-qty");
+                        const qty = Math.max(1, parseInt(qtyEl && qtyEl.value) || 1);
+                        const productName = document.getElementById("product-name").textContent.trim();
+                        const productPriceText = document.getElementById("product-price").textContent || "0";
+                        const productPrice =
+                            parseFloat(productPriceText.replace(/[^0-9.,]/g, "").replace(",", ".")) || price;
+                        const productImage = document.getElementById("product-image").src || image;
+                        const id = qs("id") || productName.replace(/\s+/g, "_").toLowerCase();
 
-                addItem({ id, name: productName, price: productPrice, image: productImage, qty });
+                        addItem({ id, name: productName, price: productPrice, image: productImage, qty });
 
-                const original = btn.textContent;
-                btn.textContent = "Añadido";
-                setTimeout(() => (btn.textContent = original), 800);
-                });
-            }
-            updateCartCount();
+                        const original = btn.textContent;
+                        btn.textContent = "Añadido";
+                        setTimeout(() => (btn.textContent = original), 800);
+                    });
+                }
+                updateCartCount();
             });
         })();
     </script>
@@ -263,8 +274,10 @@
                 <div>
                     <h4 class="font-bold text-lg mb-4 text-indigo-400">Tiendas</h4>
                     <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="#" class="hover:text-white transition duration-150">Regístrate como Vendedor</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-150">Panel de Administración</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-150">Regístrate como Vendedor</a>
+                        </li>
+                        <li><a href="#" class="hover:text-white transition duration-150">Panel de Administración</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-span-2 md:col-span-1">
@@ -272,10 +285,18 @@
                     <!-- Íconos de redes sociales (simulados) -->
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-white transition duration-150">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2v-2c0-2.04 1.25-3.16 3.06-3.16.88 0 1.76.13 2.05.2v2.33h-1.35c-1.06 0-1.28.52-1.28 1.26V15h2.5l-.4 3H14v6.8c4.56-.93 8-4.96 8-9.8V12z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2v-2c0-2.04 1.25-3.16 3.06-3.16.88 0 1.76.13 2.05.2v2.33h-1.35c-1.06 0-1.28.52-1.28 1.26V15h2.5l-.4 3H14v6.8c4.56-.93 8-4.96 8-9.8V12z" />
+                            </svg>
                         </a>
                         <a href="#" class="text-gray-400 hover:text-white transition duration-150">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C17.61 2 20 4.39 20 7.8v8.4c0 3.41-2.39 5.8-5.8 5.8H7.8C4.39 22 2 19.61 2 16.2V7.8C2 4.39 4.39 2 7.8 2zm-.22 4a.8.8 0 100 1.6.8.8 0 000-1.6zm8.82 4.4a5 5 0 11-10 0 5 5 0 0110 0zm-8 0a3 3 0 106 0 3 3 0 00-6 0z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M7.8 2h8.4C17.61 2 20 4.39 20 7.8v8.4c0 3.41-2.39 5.8-5.8 5.8H7.8C4.39 22 2 19.61 2 16.2V7.8C2 4.39 4.39 2 7.8 2zm-.22 4a.8.8 0 100 1.6.8.8 0 000-1.6zm8.82 4.4a5 5 0 11-10 0 5 5 0 0110 0zm-8 0a3 3 0 106 0 3 3 0 00-6 0z" />
+                            </svg>
                         </a>
                     </div>
                 </div>
@@ -286,4 +307,5 @@
         </div>
     </footer>
 </body>
+
 </html>

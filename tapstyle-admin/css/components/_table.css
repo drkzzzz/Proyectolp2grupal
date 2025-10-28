@@ -1,0 +1,190 @@
+/* components/_table.css
+ * Estilos para el módulo de productos alineados a los tokens en css/base/_variables.css
+ */
+
+:root {
+    /* Fallbacks para entornos que no carguen _variables.css */
+    --ts-gap: var(--space-4, 1rem);
+}
+
+.productos-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--ts-gap);
+    margin: calc(var(--space-4, 1rem)) 0;
+    width: 100%;
+}
+
+.productos-toolbar .ts-btn {
+    padding: 0.5rem 0.9rem;
+    border-radius: var(--border-radius-md, 0.375rem);
+    cursor: pointer;
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-base);
+}
+
+input#productos-search {
+    padding: 0.45rem 0.6rem;
+    border-radius: var(--border-radius-md);
+    border: var(--border-width, 1px) solid var(--border-color, #e5e7eb);
+    min-width: 260px;
+    background: var(--color-white);
+    color: var(--color-gray-900);
+}
+
+.productos-table-container {
+    margin-top: calc(var(--space-3, 0.75rem));
+}
+
+.ts-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+}
+
+.ts-table th,
+.ts-table td {
+    padding: calc(var(--space-3, 0.75rem));
+    border-bottom: var(--border-width) solid var(--color-gray-100, #f3f4f6);
+    text-align: left;
+    vertical-align: middle;
+    font-family: var(--font-family-sans);
+    color: var(--color-gray-800);
+}
+
+.ts-table thead {
+    background: var(--color-gray-50, #f9fafb);
+}
+
+.ts-table thead th {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-gray-700);
+}
+
+.td-image img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.td-actions .ts-btn {
+    margin-right: calc(var(--space-2, 0.5rem));
+}
+
+/* Align actions column to the right */
+.ts-table td.td-actions {
+    text-align: right;
+    width: 200px;
+}
+
+/* Row hover for better discoverability */
+.ts-table tbody tr:hover {
+    background: var(--color-gray-50);
+}
+
+.muted {
+    color: var(--color-gray-500);
+    font-size: var(--font-size-sm);
+}
+
+.small {
+    font-size: var(--font-size-xs);
+}
+
+/* Botones: estilos centralizados en css/components/_button.css */
+
+/* Modal overlay (utiliza z-index y sombras del design system) */
+.ts-modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(17, 24, 39, 0.45);
+    z-index: var(--z-index-modal-backdrop, 200);
+}
+
+.ts-modal {
+    background: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    width: 760px;
+    max-width: 95%;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.ts-modal-md {
+    width: 760px;
+}
+
+.ts-modal-header {
+    padding: calc(var(--space-4, 1rem));
+    border-bottom: var(--border-width) solid var(--color-gray-100);
+}
+
+.ts-modal-body {
+    padding: calc(var(--space-4, 1rem));
+}
+
+.ts-modal-footer {
+    padding: calc(var(--space-3, 0.75rem));
+    border-top: var(--border-width) solid var(--color-gray-100);
+    text-align: right;
+}
+
+.form-row {
+    margin-bottom: calc(var(--space-3, 0.75rem));
+}
+
+.form-row label {
+    display: block;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: calc(var(--space-1, 0.25rem));
+}
+
+.form-row input,
+.form-row textarea {
+    width: 100%;
+    padding: calc(var(--space-2, 0.5rem));
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius-md);
+}
+
+/* Toasts */
+.ts-toast {
+    position: fixed;
+    right: calc(var(--space-4, 1rem));
+    bottom: calc(var(--space-4, 1rem));
+    background: var(--color-gray-900);
+    color: var(--color-white);
+    padding: calc(var(--space-2, 0.5rem)) calc(var(--space-4, 1rem));
+    border-radius: var(--border-radius-md);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all var(--transition-duration, 150ms) var(--transition-timing, ease-in-out);
+    z-index: 3000;
+}
+
+.ts-toast.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.ts-toast-success {
+    background: var(--color-success);
+}
+
+.ts-toast-info {
+    background: var(--color-info);
+}
+
+.ts-toast-error {
+    background: var(--color-danger);
+}
