@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gentle Elegance - Sastrería y Vestidos | TapStyle</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="../TapStyle/mockups/css/tienda-styles.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body class="gentle-elegance min-h-screen flex flex-col">
+
+    <!-- Header estilo TapStyle -->
+    <header class="header">
+        <div class="header-content">
+            <!-- Logo -->
+            <div class="logo">
+                <h1>GENTLE ELEGANCE</h1>
+            </div>
+            
+            <!-- Menú Principal -->
+            <nav class="nav">
+                <a href="#" class="nav-link">Inicio</a>
+                <a href="#" class="nav-link">Trajes</a>
+                <a href="#" class="nav-link">Vestidos</a>
+                <a href="#" class="nav-link">Camisas</a>
+                <a href="#" class="nav-link">Accesorios</a>
+            </nav>
+
+            <!-- Acciones del Header -->
+            <div class="header-actions">
+                <button class="icon-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+                <button class="icon-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.707 15.293C4.077 15.923 4.523 17 5.414 17H17M17 17C15.895 17 15 17.895 15 19C15 20.105 15.895 21 17 21C18.105 21 19 20.105 19 19C19 17.895 18.105 17 17 17ZM9 19C9 20.105 8.105 21 7 21C5.895 21 5 20.105 5 19C5 17.895 5.895 17 7 17C8.105 17 9 17.895 9 19Z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+                <button class="btn btn-outline" id="loginBtn">Iniciar Sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">ELEGANCIA ATEMPORAL</h1>
+                <p class="hero-subtitle">Sastrería y vestidos de noche para ocasiones especiales</p>
+                <button class="btn hero-btn">Descubrir Colección</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <!-- Sidebar Filtros -->
+                <aside class="sidebar">
+                    <div class="filter-section">
+                        <h3>Categorías</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" checked>
+                                <span>Trajes</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Vestidos</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Camisas</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Accesorios</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Zapatos</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Precio</h3>
+                        <div class="price-range">
+                            <input type="range" min="0" max="1000" value="500" class="range-slider">
+                            <div class="price-values">
+                                <span>$0</span>
+                                <span>$1000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Tallas</h3>
+                        <div class="size-options">
+                            <button class="size-option">XS</button>
+                            <button class="size-option">S</button>
+                            <button class="size-option active">M</button>
+                            <button class="size-option">L</button>
+                            <button class="size-option">XL</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Color</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Negro</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Blanco</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Azul Marino</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Beige</span>
+                            </label>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Product Grid -->
+                <section class="product-grid-section">
+                    <div class="section-header">
+                        <h2>Elegancia y Estilo</h2>
+                        <div class="sort-options">
+                            <select class="sort-select">
+                                <option>Ordenar por: Destacados</option>
+                                <option>Precio: Menor a Mayor</option>
+                                <option>Precio: Mayor a Menor</option>
+                                <option>Novedades</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="product-grid">
+                        <!-- Producto 1 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge">Exclusivo</span>
+                                <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Traje Sastre Clásico">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Traje Sastre Clásico</h3>
+                                <p class="product-category">Trajes</p>
+                                <div class="product-price">$450.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #2F4F4F;"></span>
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #1E3A5F;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 2 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Vestido Noche Largo">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Vestido Noche Largo</h3>
+                                <p class="product-category">Vestidos</p>
+                                <div class="product-price">$320.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #8B0000;"></span>
+                                    <span class="color-option" style="background-color: #2F4F4F;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 3 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge sale">-15%</span>
+                                <img src="https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Camisa Oxford Elegante">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Camisa Oxford Elegante</h3>
+                                <p class="product-category">Camisas</p>
+                                <div class="product-price">
+                                    <span class="original-price">$120.00</span>
+                                    <span class="sale-price">$102.00</span>
+                                </div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #FFFFFF; border: 1px solid #ddd;"></span>
+                                    <span class="color-option" style="background-color: #F5F5DC;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 4 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1583496661160-fb5886a13d77?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Corbata Seda Italiana">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Corbata Seda Italiana</h3>
+                                <p class="product-category">Accesorios</p>
+                                <div class="product-price">$85.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #8FBC8F;"></span>
+                                    <span class="color-option" style="background-color: #D2B48C;"></span>
+                                    <span class="color-option" style="background-color: #2F4F4F;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 5 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Zapatos Oxford Cuero">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Zapatos Oxford Cuero</h3>
+                                <p class="product-category">Zapatos</p>
+                                <div class="product-price">$280.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #8B4513;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 6 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge">Nuevo</span>
+                                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Vestido Cocktail">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Vestido Cocktail</h3>
+                                <p class="product-category">Vestidos</p>
+                                <div class="product-price">$275.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #2F4F4F;"></span>
+                                    <span class="color-option" style="background-color: #8B0000;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 7 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Traje Three-Piece">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Traje Three-Piece</h3>
+                                <p class="product-category">Trajes</p>
+                                <div class="product-price">$520.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #2F4F4F;"></span>
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 8 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge sale">-20%</span>
+                                <img src="https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Camisa Lino Verano">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Camisa Lino Verano</h3>
+                                <p class="product-category">Camisas</p>
+                                <div class="product-price">
+                                    <span class="original-price">$95.00</span>
+                                    <span class="sale-price">$76.00</span>
+                                </div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #F5F5DC;"></span>
+                                    <span class="color-option" style="background-color: #FFFFFF; border: 1px solid #ddd;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 9 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1583496661160-fb5886a13d77?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Set Gemelos Plata">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Set Gemelos Plata</h3>
+                                <p class="product-category">Accesorios</p>
+                                <div class="product-price">$65.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #C0C0C0;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 10 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Zapatos Derby Elegantes">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Zapatos Derby Elegantes</h3>
+                                <p class="product-category">Zapatos</p>
+                                <div class="product-price">$240.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #8B4513;"></span>
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 11 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge">Limited</span>
+                                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Vestido Gala Lujo">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Vestido Gala Lujo</h3>
+                                <p class="product-category">Vestidos</p>
+                                <div class="product-price">$680.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #2F4F4F;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 12 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Traje Verano Lino">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Traje Verano Lino</h3>
+                                <p class="product-category">Trajes</p>
+                                <div class="product-price">$380.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #D2B48C;"></span>
+                                    <span class="color-option" style="background-color: #F5F5DC;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 13 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge sale">-10%</span>
+                                <img src="https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Camisa Popelín">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Camisa Popelín</h3>
+                                <p class="product-category">Camisas</p>
+                                <div class="product-price">
+                                    <span class="original-price">$110.00</span>
+                                    <span class="sale-price">$99.00</span>
+                                </div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #FFFFFF; border: 1px solid #ddd;"></span>
+                                    <span class="color-option" style="background-color: #F5F5DC;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 14 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1583496661160-fb5886a13d77?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cinturón Cuero Italiano">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Cinturón Cuero Italiano</h3>
+                                <p class="product-category">Accesorios</p>
+                                <div class="product-price">$75.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #8B4513;"></span>
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 15 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge">Nuevo</span>
+                                <img src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Mocasines Cuero">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Mocasines Cuero</h3>
+                                <p class="product-category">Zapatos</p>
+                                <div class="product-price">$195.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #8B4513;"></span>
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer estilo TapStyle -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>GENTLE ELEGANCE</h3>
+                <p>Sastrería y vestidos de noche para ocasiones especiales.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Colecciones</h4>
+                <ul>
+                    <li><a href="#">Trajes Formales</a></li>
+                    <li><a href="#">Vestidos de Noche</a></li>
+                    <li><a href="#">Camisas Elegantes</a></li>
+                    <li><a href="#">Accesorios Finos</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Servicios</h4>
+                <ul>
+                    <li><a href="#">Sastrería a Medida</a></li>
+                    <li><a href="#">Alteraciones</a></li>
+                    <li><a href="#">Asesoría de Estilo</a></li>
+                    <li><a href="#">Envío Premium</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Síguenos</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link">Instagram</a>
+                    <a href="#" class="social-link">Pinterest</a>
+                    <a href="#" class="social-link">Facebook</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Gentle Elegance. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            alert('Para comprar prendas elegantes, debes iniciar sesión o registrarte');
+        });
+
+        document.querySelectorAll('.size-option').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.size-option').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
