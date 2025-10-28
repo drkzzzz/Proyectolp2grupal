@@ -3,60 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TapStyle - Dashboard de Vendedor</title>
+    <title>TapStyle - Panel Vendedor</title>
+    <!-- Carga de Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="css/dashboard.css">
 </head>
-<body class="flex">
+<body class="flex bg-gray-100">
 
-    <!-- BARRA LATERAL FIJA -->
-    <aside class="sidebar bg-gray-800 text-white p-6 flex flex-col hidden md:flex">
-        
-        <!-- Logo -->
+    <!-- BARRA LATERAL (SIDEBAR) -->
+    <aside class="sidebar bg-gray-800 text-white p-6 flex flex-col fixed h-full z-20 w-64">
+        <!-- Logo de la Plataforma -->
         <div class="text-center mb-10 pb-4 border-b border-gray-700">
-            <a href="index.html" class="text-3xl font-extrabold text-green-400 tracking-wider">TapStyle</a>
-            <p class="text-xs text-gray-500 mt-1">Panel de Vendedor</p>
+            <a href="index.html" class="text-3xl font-extrabold text-indigo-400 tracking-wider">TapStyle</a>
+            <p class="text-xs text-gray-500 mt-1">Panel Vendedor</p>
         </div>
 
         <!-- Perfil del Vendedor -->
         <div class="mb-10 text-center">
-            <div class="w-16 h-16 bg-white text-green-600 rounded-full mx-auto flex items-center justify-center text-xl font-bold mb-3">ML</div>
+            <div class="w-16 h-16 bg-white text-indigo-600 rounded-full mx-auto flex items-center justify-center text-xl font-bold mb-3">ML</div>
             <p class="font-semibold text-lg">María López</p>
-            <p class="text-sm text-gray-400">Vendedor - Street Vibe Co.</p>
+            <p class="text-sm text-gray-400">Vendedor - Street Vibe Co</p>
         </div>
 
         <!-- Enlaces de Navegación -->
         <nav class="flex-grow space-y-2">
-            <a href="dashboard_vendedor.html" class="flex items-center p-3 rounded-xl bg-green-600 text-white shadow-md transition duration-150">
+            <a href="#" data-section="dashboard" class="nav-link flex items-center p-3 rounded-xl bg-indigo-600 text-white shadow-md transition duration-150">
                 <svg class="h-6 w-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
                 <span class="font-medium">Dashboard</span>
             </a>
-            <a href="#" class="flex items-center p-3 rounded-xl text-gray-300 hover:bg-gray-700 transition duration-150">
+            <a href="#" data-section="ventas-pedidos" class="nav-link flex items-center p-3 rounded-xl text-gray-300 hover:bg-gray-700 transition duration-150">
                 <svg class="h-6 w-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h.01M7 21h.01M7 17h.01M17 17h.01M17 21h.01M17 3h.01M17 7h.01M14 7h.01M14 3h.01M14 21h.01M14 17h.01M10 7h.01M10 3h.01M10 21h.01M10 17h.01M7 14h.01M3 14h.01M21 14h.01M17 14h.01M7 10h.01M3 10h.01M21 10h.01M17 10h.01M7 18h.01M3 18h.01M21 18h.01M17 18h.01M7 6h.01M3 6h.01M21 6h.01M17 6h.01M10 14h.01M14 14h.01M10 10h.01M14 10h.01M10 18h.01M14 18h.01M10 6h.01M14 6h.01"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                 </svg>
-                <span class="font-medium">Gestión de Productos</span>
-            </a>
-            <a href="#" class="flex items-center p-3 rounded-xl text-gray-300 hover:bg-gray-700 transition duration-150">
-                <svg class="h-6 w-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
-                </svg>
-                <span class="font-medium">Pedidos Asignados</span>
-            </a>
-            <a href="#" class="flex items-center p-3 rounded-xl text-gray-300 hover:bg-gray-700 transition duration-150">
-                <svg class="h-6 w-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm10-7a2 2 0 11-4 0 2 2 0 014 0z"/>
-                </svg>
-                <span class="font-medium">Mis Comisiones</span>
-            </a>
-            <a href="#" class="flex items-center p-3 rounded-xl text-gray-300 hover:bg-gray-700 transition duration-150">
-                <svg class="h-6 w-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
-                </svg>
-                <span class="font-medium">Chat con Clientes</span>
+                <span class="font-medium">Ventas y Pedidos</span>
             </a>
         </nav>
 
@@ -64,156 +44,289 @@
         <div class="mt-auto pt-6 border-t border-gray-700">
             <a href="login.html" class="flex items-center p-3 rounded-xl text-red-400 hover:bg-gray-700 transition duration-150">
                 <svg class="h-6 w-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                 </svg>
                 <span class="font-medium">Cerrar Sesión</span>
             </a>
         </div>
     </aside>
 
-    <!-- CONTENIDO PRINCIPAL CON SCROLL -->
-    <div class="main-content">
-        <div class="scrollable-content p-4 sm:p-8">
-            
-            <!-- CABECERA -->
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="flex-1 md:ml-64 p-4 sm:p-8 w-full">
+        
+        <!-- SECCIÓN DASHBOARD (Visible por defecto) -->
+        <div id="dashboard-section" class="content-section">
+            <!-- Cabecera Dashboard -->
             <header class="flex justify-between items-center bg-white p-4 rounded-xl shadow-md mb-8">
-                <h1 class="text-2xl font-bold text-gray-800">Panel de Vendedor - Street Vibe Co.</h1>
-                
-                <div class="flex items-center space-x-4">
-                    <!-- Notificaciones -->
-                    <button class="p-2 text-gray-500 hover:text-green-600 rounded-full hover:bg-green-50 transition duration-150 relative">
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-                        </svg>
-                        <span class="absolute top-1 right-1 inline-flex items-center justify-center h-2 w-2 bg-red-500 rounded-full"></span>
-                    </button>
-                </div>
+                <h1 class="text-2xl font-bold text-gray-800">Dashboard Vendedor</h1>
+                <div class="text-sm text-gray-500">Resumen general de tu negocio</div>
             </header>
 
-            <!-- TARJETAS DE MÉTRICAS -->
+            <!-- Métricas del Dashboard -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                
-                <!-- Ventas del Mes -->
+                <!-- Ventas Totales -->
                 <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500">
-                    <div class="flex items-center justify-between">
-                        <p class="text-sm font-medium text-gray-500 uppercase">Ventas (Mes)</p>
-                        <svg class="h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2v2m-3 0h6m-3-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                    </div>
-                    <p class="text-3xl font-extrabold text-gray-900 mt-1">$ 3,250.00</p>
-                    <p class="text-xs text-green-500 mt-2">+8.2% vs. mes anterior</p>
-                </div>
-
-                <!-- Comisiones -->
-                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-yellow-500">
-                    <div class="flex items-center justify-between">
-                        <p class="text-sm font-medium text-gray-500 uppercase">Comisiones</p>
-                        <svg class="h-6 w-6 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm10-7a2 2 0 11-4 0 2 2 0 014 0z"/>
-                        </svg>
-                    </div>
-                    <p class="text-3xl font-extrabold text-gray-900 mt-1">$ 487.50</p>
-                    <p class="text-xs text-yellow-500 mt-2">15% sobre ventas</p>
+                    <p class="text-sm font-medium text-gray-500 uppercase">Ventas Totales</p>
+                    <p class="text-3xl font-bold text-gray-900 mt-2">S/. 15,240</p>
+                    <p class="text-sm text-green-500 mt-2">+12% vs mes anterior</p>
                 </div>
                 
-                <!-- Pedidos Pendientes -->
+                <!-- Pedidos del Mes -->
                 <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500">
-                    <div class="flex items-center justify-between">
-                        <p class="text-sm font-medium text-gray-500 uppercase">Pedidos Activos</p>
-                        <svg class="h-6 w-6 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
-                        </svg>
-                    </div>
-                    <p class="text-3xl font-extrabold text-gray-900 mt-1">7</p>
-                    <p class="text-xs text-blue-500 mt-2">3 requieren atención</p>
+                    <p class="text-sm font-medium text-gray-500 uppercase">Pedidos del Mes</p>
+                    <p class="text-3xl font-bold text-gray-900 mt-2">156</p>
+                    <p class="text-sm text-blue-500 mt-2">+8% vs mes anterior</p>
                 </div>
-
-                <!-- Productos Gestionados -->
+                
+                <!-- Productos Activos -->
                 <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-purple-500">
-                    <div class="flex items-center justify-between">
-                        <p class="text-sm font-medium text-gray-500 uppercase">Mis Productos</p>
-                        <svg class="h-6 w-6 text-purple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
-                        </svg>
-                    </div>
-                    <p class="text-3xl font-extrabold text-gray-900 mt-1">45</p>
-                    <p class="text-xs text-purple-500 mt-2">12 en oferta especial</p>
+                    <p class="text-sm font-medium text-gray-500 uppercase">Productos Activos</p>
+                    <p class="text-3xl font-bold text-gray-900 mt-2">42</p>
+                    <p class="text-sm text-purple-500 mt-2">+5 nuevos este mes</p>
                 </div>
-
+                
+                <!-- Tasa de Conversión -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-orange-500">
+                    <p class="text-sm font-medium text-gray-500 uppercase">Tasa de Conversión</p>
+                    <p class="text-3xl font-bold text-gray-900 mt-2">3.8%</p>
+                    <p class="text-sm text-orange-500 mt-2">+0.5% vs mes anterior</p>
+                </div>
             </div>
 
-            <!-- SECCIÓN PRINCIPAL -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-                <!-- Pedidos Recientes -->
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <h2 class="text-xl font-bold text-gray-800 mb-4">Pedidos Recientes</h2>
+            <!-- Gráficos y Tablas del Dashboard -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Ventas Recientes -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Ventas Recientes</h2>
                     <div class="space-y-4">
-                        <div class="flex items-center justify-between border-b pb-3">
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                             <div>
-                                <p class="font-medium text-gray-800">#TS-4056</p>
-                                <p class="text-sm text-gray-500">Cliente: Roberto Silva • Hace 2h</p>
+                                <p class="font-medium">#TS-4001</p>
+                                <p class="text-sm text-gray-500">Ana Gómez</p>
                             </div>
-                            <span class="text-sm font-semibold bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Pendiente</span>
+                            <div class="text-right">
+                                <p class="font-medium">S/. 95.00</p>
+                                <p class="text-sm text-green-500">Completado</p>
+                            </div>
                         </div>
-                        <div class="flex items-center justify-between border-b pb-3">
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                             <div>
-                                <p class="font-medium text-gray-800">#TS-4055</p>
-                                <p class="text-sm text-gray-500">Cliente: Laura Mendoza • Hace 5h</p>
+                                <p class="font-medium">#TS-4002</p>
+                                <p class="text-sm text-gray-500">Carlos Ruiz</p>
                             </div>
-                            <span class="text-sm font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-full">Completado</span>
-                        </div>
-                        <div class="flex items-center justify-between border-b pb-3">
-                            <div>
-                                <p class="font-medium text-gray-800">#TS-4054</p>
-                                <p class="text-sm text-gray-500">Cliente: Diego Ramos • Ayer</p>
+                            <div class="text-right">
+                                <p class="font-medium">S/. 24.99</p>
+                                <p class="text-sm text-yellow-500">Pendiente</p>
                             </div>
-                            <span class="text-sm font-semibold bg-blue-100 text-blue-800 px-2 py-1 rounded-full">En camino</span>
-                        </div>
-                        <div class="pt-2 text-center">
-                            <a href="#" class="text-sm font-medium text-green-600 hover:text-green-800">Ver todos los pedidos →</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Productos Más Vendidos -->
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <h2 class="text-xl font-bold text-gray-800 mb-4">Mis Productos Destacados</h2>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Productos Más Vendidos</h2>
                     <div class="space-y-4">
-                        <div class="flex items-center space-x-4 border-b pb-3">
-                            <img src="https://placehold.co/60x60/4ADE80/000000?text=HV" alt="Hoodie Verde" class="w-12 h-12 rounded-lg object-cover">
-                            <div class="flex-1">
-                                <p class="font-medium text-gray-800">Hoodie Verde Urban</p>
-                                <p class="text-sm text-gray-500">15 ventas este mes</p>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="font-medium">Camiseta Básica</p>
+                                <p class="text-sm text-gray-500">45 ventas</p>
                             </div>
-                            <span class="text-sm font-semibold text-green-600">$ 79.00</span>
-                        </div>
-                        <div class="flex items-center space-x-4 border-b pb-3">
-                            <img src="https://placehold.co/60x60/60A5FA/000000?text=JC" alt="Jeans Clásico" class="w-12 h-12 rounded-lg object-cover">
-                            <div class="flex-1">
-                                <p class="font-medium text-gray-800">Jeans Classic Fit</p>
-                                <p class="text-sm text-gray-500">12 ventas este mes</p>
+                            <div class="text-right">
+                                <p class="font-medium text-green-500">S/. 25.00</p>
                             </div>
-                            <span class="text-sm font-semibold text-green-600">$ 65.00</span>
                         </div>
-                        <div class="flex items-center space-x-4 border-b pb-3">
-                            <img src="https://placehold.co/60x60/F59E0B/000000?text=CG" alt="Camiseta Gráfica" class="w-12 h-12 rounded-lg object-cover">
-                            <div class="flex-1">
-                                <p class="font-medium text-gray-800">Camiseta "Street Art"</p>
-                                <p class="text-sm text-gray-500">8 ventas este mes</p>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="font-medium">Jeans Clásicos</p>
+                                <p class="text-sm text-gray-500">32 ventas</p>
                             </div>
-                            <span class="text-sm font-semibold text-green-600">$ 35.00</span>
-                        </div>
-                        <div class="pt-2 text-center">
-                            <a href="#" class="text-sm font-medium text-green-600 hover:text-green-800">Gestionar productos →</a>
+                            <div class="text-right">
+                                <p class="font-medium text-green-500">S/. 89.00</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
+        <!-- SECCIÓN VENTAS Y PEDIDOS (Oculta por defecto) -->
+        <div id="ventas-pedidos-section" class="content-section hidden">
+            <!-- Cabecera Ventas y Pedidos -->
+            <header class="flex justify-between items-center bg-white p-4 rounded-xl shadow-md mb-8">
+                <h1 class="text-2xl font-bold text-gray-800">Ventas y Pedidos</h1>
+                
+                <div class="flex items-center space-x-4">
+                    <!-- Filtro de Estado -->
+                    <select class="px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-indigo-500">
+                        <option value="todos">Todos los estados</option>
+                        <option value="pendiente">Pendientes</option>
+                        <option value="en_proceso">En proceso</option>
+                        <option value="completado">Completados</option>
+                        <option value="cancelado">Cancelados</option>
+                    </select>
+                    <!-- Botón Exportar -->
+                    <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150">
+                        Exportar Datos
+                    </button>
+                </div>
+            </header>
+
+            <!-- Resumen de Pedidos -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <!-- Total de Pedidos -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500">
+                    <p class="text-sm font-medium text-gray-500 uppercase">Total Pedidos</p>
+                    <p class="text-3xl font-bold text-gray-900 mt-2">1,254</p>
+                    <p class="text-sm text-blue-500 mt-2">+8% vs mes anterior</p>
+                </div>
+                
+                <!-- Pedidos Pendientes -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-yellow-500">
+                    <p class="text-sm font-medium text-gray-500 uppercase">Pendientes</p>
+                    <p class="text-3xl font-bold text-gray-900 mt-2">45</p>
+                    <p class="text-sm text-yellow-500 mt-2">Necesitan atención</p>
+                </div>
+                
+                <!-- Pedidos Completados -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500">
+                    <p class="text-sm font-medium text-gray-500 uppercase">Completados</p>
+                    <p class="text-3xl font-bold text-gray-900 mt-2">1,180</p>
+                    <p class="text-sm text-green-500 mt-2">94% tasa de éxito</p>
+                </div>
+                
+                <!-- Pedidos Cancelados -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-red-500">
+                    <p class="text-sm font-medium text-gray-500 uppercase">Cancelados</p>
+                    <p class="text-3xl font-bold text-gray-900 mt-2">29</p>
+                    <p class="text-sm text-red-500 mt-2">2.3% tasa de cancelación</p>
+                </div>
             </div>
 
+            <!-- Tabla de Pedidos -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-lg font-semibold text-gray-800">Lista de Pedidos Recientes</h2>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID Pedido</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- Pedido 1 -->
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">#TS-4001</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Ana Gómez</div>
+                                            <div class="text-sm text-gray-500">ana.gomez@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">27 Oct, 2025</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">S/. 95.00</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        Completado
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-3">Ver</a>
+                                    <a href="#" class="text-gray-600 hover:text-gray-900">Editar</a>
+                                </td>
+                            </tr>
+                            <!-- Pedido 2 -->
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">#TS-4002</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Carlos Ruiz</div>
+                                            <div class="text-sm text-gray-500">carlos.ruiz@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">27 Oct, 2025</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">S/. 24.99</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                        Pendiente
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-3">Ver</a>
+                                    <a href="#" class="text-gray-600 hover:text-gray-900">Editar</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
+
+    <script>
+        // Función para cambiar entre secciones
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId + '-section').classList.remove('hidden');
+            
+            // Actualizar navegación activa
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('bg-indigo-600', 'text-white');
+                link.classList.add('text-gray-300', 'hover:bg-gray-700');
+            });
+            
+            // Marcar enlace activo
+            document.querySelector(`[data-section="${sectionId}"]`).classList.add('bg-indigo-600', 'text-white');
+            document.querySelector(`[data-section="${sectionId}"]`).classList.remove('text-gray-300', 'hover:bg-gray-700');
+        }
+
+        // Configurar event listeners para los enlaces de navegación
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.getAttribute('data-section');
+                    showSection(section);
+                });
+            });
+            
+            // Mostrar dashboard por defecto
+            showSection('dashboard');
+        });
+    </script>
 </body>
 </html>
