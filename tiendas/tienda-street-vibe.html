@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Street Vibe Co. - Moda Urbana | TapStyle</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="../TapStyle/mockups/css/tienda-styles.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body class="street-vibe min-h-screen flex flex-col">
+
+    <!-- Header estilo TapStyle -->
+    <header class="header">
+        <div class="header-content">
+            <!-- Logo -->
+            <div class="logo">
+                <h1>STREET VIBE CO.</h1>
+            </div>
+            
+            <!-- Menú Principal -->
+            <nav class="nav">
+                <a href="#" class="nav-link">Inicio</a>
+                <a href="#" class="nav-link">Productos</a>
+                <a href="#" class="nav-link">Categorías</a>
+                <a href="#" class="nav-link">Novedades</a>
+            </nav>
+
+            <!-- Acciones del Header -->
+            <div class="header-actions">
+                <button class="icon-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+                <button class="icon-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.707 15.293C4.077 15.923 4.523 17 5.414 17H17M17 17C15.895 17 15 17.895 15 19C15 20.105 15.895 21 17 21C18.105 21 19 20.105 19 19C19 17.895 18.105 17 17 17ZM9 19C9 20.105 8.105 21 7 21C5.895 21 5 20.105 5 19C5 17.895 5.895 17 7 17C8.105 17 9 17.895 9 19Z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+                <button class="btn btn-outline" id="loginBtn">Iniciar Sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">URBAN STYLE REINVENTED</h1>
+                <p class="hero-subtitle">Descubre las últimas tendencias en moda urbana y streetwear</p>
+                <button class="btn hero-btn">Explorar Colección</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <!-- Sidebar Filtros -->
+                <aside class="sidebar">
+                    <div class="filter-section">
+                        <h3>Categorías</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" checked>
+                                <span>Camisetas</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Sudaderas</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Pantalones</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Zapatos</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox">
+                                <span>Accesorios</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Precio</h3>
+                        <div class="price-range">
+                            <input type="range" min="0" max="200" value="100" class="range-slider">
+                            <div class="price-values">
+                                <span>$0</span>
+                                <span>$200</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Tallas</h3>
+                        <div class="size-options">
+                            <button class="size-option">S</button>
+                            <button class="size-option active">M</button>
+                            <button class="size-option">L</button>
+                            <button class="size-option">XL</button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Product Grid -->
+                <section class="product-grid-section">
+                    <div class="section-header">
+                        <h2>Productos Destacados</h2>
+                        <div class="sort-options">
+                            <select class="sort-select">
+                                <option>Ordenar por: Destacados</option>
+                                <option>Precio: Menor a Mayor</option>
+                                <option>Precio: Mayor a Menor</option>
+                                <option>Novedades</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="product-grid">
+                        <!-- Producto 1 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge">Nuevo</span>
+                                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Camiseta Urban Graphic">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Camiseta Urban Graphic</h3>
+                                <p class="product-category">Camisetas</p>
+                                <div class="product-price">$45.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #FFFFFF; border: 1px solid #ddd;"></span>
+                                    <span class="color-option" style="background-color: #FF5500;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 2 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Hoodie Street Style">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Hoodie Street Style</h3>
+                                <p class="product-category">Sudaderas</p>
+                                <div class="product-price">$89.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #666666;"></span>
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 3 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge sale">-20%</span>
+                                <img src="https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cargo Pants Urban">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Cargo Pants Urban</h3>
+                                <p class="product-category">Pantalones</p>
+                                <div class="product-price">
+                                    <span class="original-price">$120.00</span>
+                                    <span class="sale-price">$96.00</span>
+                                </div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #333333;"></span>
+                                    <span class="color-option" style="background-color: #8B4513;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 4 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Skate Shoes Pro">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Skate Shoes Pro</h3>
+                                <p class="product-category">Zapatos</p>
+                                <div class="product-price">$135.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #FFFFFF; border: 1px solid #ddd;"></span>
+                                    <span class="color-option" style="background-color: #FF5500;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 5 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Backpack Street">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Backpack Street</h3>
+                                <p class="product-category">Accesorios</p>
+                                <div class="product-price">$75.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #666666;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 6 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Beanie Logo">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Beanie Logo</h3>
+                                <p class="product-category">Accesorios</p>
+                                <div class="product-price">$32.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #FF5500;"></span>
+                                    <span class="color-option" style="background-color: #666666;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 7 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge">Nuevo</span>
+                                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Jogger Pants">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Jogger Pants</h3>
+                                <p class="product-category">Pantalones</p>
+                                <div class="product-price">$85.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #333333;"></span>
+                                    <span class="color-option" style="background-color: #8B4513;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 8 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Graphic Tee Limited">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Graphic Tee Limited</h3>
+                                <p class="product-category">Camisetas</p>
+                                <div class="product-price">$55.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #FFFFFF; border: 1px solid #ddd;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 9 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge sale">-15%</span>
+                                <img src="https://images.unsplash.com/photo-1544966503-7cc5ac882d5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Zip Hoodie">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Zip Hoodie</h3>
+                                <p class="product-category">Sudaderas</p>
+                                <div class="product-price">
+                                    <span class="original-price">$110.00</span>
+                                    <span class="sale-price">$93.50</span>
+                                </div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #666666;"></span>
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 10 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="High Top Sneakers">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">High Top Sneakers</h3>
+                                <p class="product-category">Zapatos</p>
+                                <div class="product-price">$150.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #FFFFFF; border: 1px solid #ddd;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PRODUCTOS NUEVOS AGREGADOS -->
+
+                        <!-- Producto 11 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge">Limited</span>
+                                <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Denim Jacket">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Denim Jacket Vintage</h3>
+                                <p class="product-category">Chaquetas</p>
+                                <div class="product-price">$125.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #1E3A8A;"></span>
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 12 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Crop Top">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Crop Top Graphic</h3>
+                                <p class="product-category">Camisetas</p>
+                                <div class="product-price">$38.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #FF5500;"></span>
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 13 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge sale">-25%</span>
+                                <img src="https://images.unsplash.com/photo-1544966503-7cc5ac882d5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Track Suit">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Track Suit Set</h3>
+                                <p class="product-category">Conjuntos</p>
+                                <div class="product-price">
+                                    <span class="original-price">$160.00</span>
+                                    <span class="sale-price">$120.00</span>
+                                </div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #666666;"></span>
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 14 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Bucket Hat">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Bucket Hat Logo</h3>
+                                <p class="product-category">Accesorios</p>
+                                <div class="product-price">$28.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #FF5500;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 15 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge">Nuevo</span>
+                                <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Oversized Tee">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Oversized Tee</h3>
+                                <p class="product-category">Camisetas</p>
+                                <div class="product-price">$42.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #FFFFFF; border: 1px solid #ddd;"></span>
+                                    <span class="color-option" style="background-color: #666666;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 16 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cargo Shorts">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Cargo Shorts</h3>
+                                <p class="product-category">Shorts</p>
+                                <div class="product-price">$65.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #333333;"></span>
+                                    <span class="color-option" style="background-color: #8B4513;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 17 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge">Exclusivo</span>
+                                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Windbreaker">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Windbreaker Tech</h3>
+                                <p class="product-category">Chaquetas</p>
+                                <div class="product-price">$95.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #FF5500;"></span>
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 18 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Socks Pack">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Socks Pack (3 pares)</h3>
+                                <p class="product-category">Accesorios</p>
+                                <div class="product-price">$25.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #FFFFFF; border: 1px solid #ddd;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 19 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="product-badge sale">-30%</span>
+                                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Bomber Jacket">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Bomber Jacket</h3>
+                                <p class="product-category">Chaquetas</p>
+                                <div class="product-price">
+                                    <span class="original-price">$140.00</span>
+                                    <span class="sale-price">$98.00</span>
+                                </div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #666666;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 20 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Crossbody Bag">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Crossbody Bag</h3>
+                                <p class="product-category">Accesorios</p>
+                                <div class="product-price">$55.00</div>
+                                <div class="product-colors">
+                                    <span class="color-option" style="background-color: #000000;"></span>
+                                    <span class="color-option" style="background-color: #FF5500;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer estilo TapStyle -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>STREET VIBE CO.</h3>
+                <p>Las últimas tendencias en moda urbana, skate y streetwear.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Información</h4>
+                <ul>
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Políticas</h4>
+                <ul>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Política de Envíos</a></li>
+                    <li><a href="#">Devoluciones</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Síguenos</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link">Instagram</a>
+                    <a href="#" class="social-link">Facebook</a>
+                    <a href="#" class="social-link">TikTok</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Street Vibe Co. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            alert('Para comprar, debes iniciar sesión o registrarte');
+        });
+
+        document.querySelectorAll('.size-option').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.size-option').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
