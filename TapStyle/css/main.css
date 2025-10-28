@@ -10,4 +10,10 @@
 body {
     font-family: 'Inter', sans-serif;
     background-color: #f7f7f7;
+    --color-brand: oklch(61.065% 0.17975 146.152);
+}
+
+.modal {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
 }

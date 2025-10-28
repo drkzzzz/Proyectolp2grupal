@@ -1,0 +1,23 @@
+/* css/main.css */
+
+/* 1. Importar la base (¡VARIABLES PRIMERO!) */
+@import url('./base/_variables.css');
+@import url('./base/_reset.css');
+@import url('./base/_base.css');
+
+/* 2. Importar componentes (Aún no creamos) */
+/* @import url('./components/_button.css'); */
+/* @import url('./components/_card.css'); */
+
+/* 3. Importar el layout (¡El sidebar SÍ existe!) */
+@import url('./layout/_sidebar.css');
+
+/* Comenta los que no existen para evitar errores: */
+/* @import url('./layout/_navbar.css'); */
+/* @import url('./layout/_layout.css'); */
+
+
+/* 4. Importar estilos de módulos (Aún no creamos) */
+/* @import url('./modules/_login.css'); */
+/* @import url('./modules/_dashboard.css'); */
+/* @import url('./modules/_usuarios.css'); */

@@ -1,0 +1,54 @@
+/* css/base/_base.css */
+
+/* Estilos de fuente globales */
+body {
+    font-family: var(--font-family-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: var(--color-gray-50);
+    color: var(--color-gray-900);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Estilos de encabezados */
+h1,
+h2,
+h3 {
+    font-family: var(--font-family-heading);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+/* Estilos de párrafos y enlaces */
+p {
+    margin-bottom: var(--space-4);
+}
+
+a {
+    color: var(--color-indigo-600);
+    transition: color 0.15s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Layout principal de la página */
+.main-content {
+    /* Deja espacio para el sidebar fijo */
+    margin-left: var(--sidebar-width);
+    padding: var(--space-6);
+    width: calc(100% - var(--sidebar-width));
+}
