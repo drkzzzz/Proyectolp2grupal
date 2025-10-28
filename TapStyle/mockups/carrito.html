@@ -4,259 +4,282 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TapStyle - Carrito de Compra</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="carrito.css">
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
         body {
-        font-family: "Inter", sans-serif; 
-        background-color: #f8f9fa; 
+            font-family: "Inter", sans-serif;
+            background-color: #f8f9fa;
         }
+        /* Estilos del modal (si los usas) */
         .modal {
-        background-color: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(5px);
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
         }
     </style>
 </head>
-<body class="min-h-screen">
-    <header class="bg-white shadow-md sticky top-0 z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-            <a href="index.html" class="text-2xl font-extrabold text-indigo-600 tracking-wider">TapStyle</a>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="index.html" class="text-gray-600 hover:text-indigo-600 transition duration-150 font-medium">Tiendas</a>
-                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-150 font-medium">Categorías</a>
+<body>
+    <!-- Header usa clases de carrito.css -->
+    <header class="site-header">
+        <div class="container-header">
+            <div class="site-header__inner">
+                <a href="index.html" class="site-header__logo">TapStyle</a>
+                <nav class="site-header__nav">
+                    <a href="index.html">Tiendas</a>
+                    <a href="#">Categorías</a>
                 </nav>
-        <div class="flex items-center space-x-4">
-            <a href="login.html" class="hidden md:inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150">Acceder</a>
-        </div>
-        </div>
+                <div class="site-header__actions">
+                    <a href="login.html" class="button-primary site-header__login-button">Acceder</a>
+                </div>
+            </div>
         </div>
     </header>
-    <main class="max-w-6xl mx-auto p-6">
-        <div class="bg-white rounded-xl shadow-lg p-8">
-        <div class="flex items-center justify-between border-b border-gray-200 pb-4 mb-6">
-        <div>
-            <h1 class="text-2xl font-bold text-gray-900 leading-tight">Carrito de Compra</h1>
-                <p class="text-sm text-gray-600 mt-1">Revisa los productos antes de proceder al pago.</p>
-            </div>
-            <a href="index.html" class="text-indigo-600 hover:text-indigo-700 text-sm font-medium">← Volver a la tienda</a>
-        </div>
-        <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-            <thead>
-                <tr>
-                    <th class="px-6 py-3 bg-indigo-50 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider rounded-tl-lg">Producto</th>
-                    <th class="px-6 py-3 bg-indigo-50 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider">Precio</th>
-                    <th class="px-6 py-3 bg-indigo-50 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider">Cantidad</th>
-                    <th class="px-6 py-3 bg-indigo-50 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider">Subtotal</th>
-                    <th class="px-6 py-3 bg-indigo-50 text-center text-xs font-semibold text-indigo-600 uppercase tracking-wider rounded-tr-lg">Acciones</th>
-                </tr>
-            </thead>
-                <tbody id="cart-items" class="bg-white divide-y divide-gray-200"></tbody>
-            </table>
-        </div>
-        <div class="mt-8 border-t border-gray-200 pt-8">
-            <div class="flex justify-between items-center">
-            <div class="text-gray-700">
-            <div class="text-sm">Total items:
-                <strong id="cart-count" class="text-gray-900">0</strong>
-            </div>
-                <div class="mt-1 text-sm text-gray-500">Los precios incluyen IGV</div>
-            </div>
-                <div class="flex items-center space-x-6">
-                <div class="text-right">
-                <div class="text-sm text-gray-500">Total a pagar</div>
-                <div class="text-3xl font-bold text-indigo-600" id="cart-total">$0.00</div>
+
+    <!-- Contenido principal usa clases de carrito.css -->
+    <main class="cart-container">
+        <div class="cart-card">
+            <div class="cart-header">
+                <div>
+                    <h1 class="cart-header__title">Carrito de Compra</h1>
+                    <p class="cart-header__subtitle">Revisa los productos antes de proceder al pago.</p>
                 </div>
-                <button id="go-to-pago" class="px-6 py-3 bg-indigo-600 text-white text-sm font-semibold rounded-lg shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all">Proceder al pago</button>
-                </div>
+                <a href="index.html" class="cart-header__back-link">← Volver a la tienda</a>
             </div>
+
+            <div class="cart-table-wrapper">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items" class="cart-table-body">
+                        <!-- Los items se insertan con JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cart-summary">
+                <div class="cart-summary__inner">
+                    <div class="cart-summary__details">
+                        <div class="cart-summary__count">
+                            Total items:
+                            <strong id="cart-count">0</strong>
+                        </div>
+                        <div class="cart-summary__notice">Los precios incluyen IGV</div>
+                    </div>
+                    <div class="cart-summary__checkout">
+                        <div class="cart-summary__total">
+                            <div class="cart-summary__total-label">Total a pagar</div>
+                            <div class="cart-summary__total-amount" id="cart-total">$0.00</div>
+                        </div>
+                        <button id="go-to-pago" class="cart-summary__checkout-button">Proceder al pago</button>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
-    
+
     <script>
         (function () {
             const CART_KEY = "tapstyle_cart";
+            
             function getCart() {
                 try {
                     return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
                 } catch (e) {
-                return [];
+                    return [];
                 }
             }
+            
             function saveCart(cart) {
-            localStorage.setItem(CART_KEY, JSON.stringify(cart));
-            renderCart();
+                localStorage.setItem(CART_KEY, JSON.stringify(cart));
+                renderCart();
             }
+            
             function formatCurrency(v) {
-            return "$" + Number(v).toFixed(2);
+                return "$" + Number(v).toFixed(2);
             }
+
+            // Función de notificación (reemplaza 'alert'/'confirm')
+            // (Esta es una versión simple, puedes hacerla más bonita)
+            function showToast(message) {
+                console.log("Toast:", message);
+                // Aquí podrías crear un div temporal y mostrarlo
+            }
+
+            function showCustomConfirm(message, callback) {
+                // Esto es solo un reemplazo temporal.
+                // Idealmente, crearías un modal HTML y lo mostrarías.
+                const confirmed = window.confirm(message); // Usamos confirm temporalmente
+                if (confirmed) {
+                    callback();
+                }
+            }
+
             function renderCart() {
-            const cart = getCart();
-            const tbody = document.getElementById("cart-items");
-            const totalEl = document.getElementById("cart-total");
-            const countEl = document.getElementById("cart-count");
-            tbody.innerHTML = "";
-            if (!cart.length) {
-                tbody.innerHTML = `
-                <tr>
-                <td colspan="5" class="px-6 py-12 text-center">
-                    <div class="flex flex-col items-center justify-center space-y-4">
-                    <div class="text-4xl">🛒</div>
-                    <div class="text-gray-500 text-lg font-medium">Tu carrito está vacío</div>
-                    <div class="text-gray-400 text-sm">Agrega algunos productos para empezar</div>
-                    <a href="index.html" class="mt-4 inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150">
-                        Ver productos
-                    </a>
-                    </div>
-                </td>
-                </tr>`;
-            totalEl.textContent = formatCurrency(0);
-            countEl.textContent = 0;
-            return;
-            }
-            let total = 0;
-            let count = 0;
-            cart.forEach((item) => {
-            const subtotal = (item.price || 0) * (item.qty || 1);
-            total += subtotal;
-            count += item.qty || 0;
-            const tr = document.createElement("tr");
-            tr.className = "hover:bg-gray-50 transition duration-150";
-            tr.innerHTML = `
-            <td class="px-6 py-4">
-                <div class="flex items-center space-x-4">
-                <div class="flex-shrink-0 w-20 h-20">
-                    <img src="${item.image || "https://placehold.co/80x80"}" 
-                        alt="${item.name}" 
-                        class="w-full h-full object-cover rounded-lg shadow-sm">
-                </div>
-                <div>
-                    <div class="font-medium text-gray-900">${item.name}</div>
-                    <div class="text-sm text-gray-500 mt-0.5">SKU: ${
-                    item.id
-                    }</div>
-                </div>
-                </div>
-            </td>
-            <td class="px-6 py-4">
-                <div class="text-sm font-medium text-gray-900">${formatCurrency(
-                item.price
-                )}</div>
-            </td>
-            <td class="px-6 py-4">
-                <div class="flex items-center space-x-3">
-                <button data-id="${
-                    item.id
-                }" class="qty-minus bg-gray-100 hover:bg-gray-200 rounded-lg p-1">
-                    <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
-                    </svg>
-                </button>
-                <input type="number" min="1" value="${
-                    item.qty || 1
-                }" data-id="${item.id}"
-                    class="qty-input w-16 px-2 py-1 text-center border rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
-                <button data-id="${
-                    item.id
-                }" class="qty-plus bg-gray-100 hover:bg-gray-200 rounded-lg p-1">
-                    <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                    </svg>
-                </button>
-                </div>
-            </td>
-            <td class="px-6 py-4">
-                <div class="text-sm font-medium text-gray-900">${formatCurrency(
-                subtotal
-                )}</div>
-            </td>
-            <td class="px-6 py-4 text-center">
-                <button data-id="${item.id}" 
-                        class="remove-item text-gray-400 hover:text-red-600 p-2 rounded-lg hover:bg-red-50 transition-colors duration-150">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                </svg>
-                </button>
-            </td>
-            `;
-            tbody.appendChild(tr);
-        });
-        totalEl.textContent = formatCurrency(total);
-        countEl.textContent = count;
-
-        tbody.querySelectorAll(".qty-input").forEach((input) => {
-            input.addEventListener("change", (e) => {
-            const id = e.target.dataset.id;
-            let val = parseInt(e.target.value) || 1;
-            if (val < 1) val = 1;
-            const cart = getCart();
-            const it = cart.find((x) => x.id === id);
-            if (it) {
-                it.qty = val;
-                saveCart(cart);
-                showToast("Cantidad actualizada");
-            }
-            });
-        });
-
-            tbody.querySelectorAll(".qty-minus").forEach((btn) => {
-                btn.addEventListener("click", (e) => {
-                const id = e.currentTarget.dataset.id;
-                const input = tbody.querySelector(`.qty-input[data-id="${id}"]`);
-                let val = parseInt(input.value) - 1;
-                if (val < 1) val = 1;
-                input.value = val;
                 const cart = getCart();
-                const it = cart.find((x) => x.id === id);
-                if (it) {
-                    it.qty = val;
-                    saveCart(cart);
-                    showToast("Cantidad actualizada");
-                }
-                });
-            });
-
-            tbody.querySelectorAll(".qty-plus").forEach((btn) => {
-                btn.addEventListener("click", (e) => {
-                const id = e.currentTarget.dataset.id;
-                const input = tbody.querySelector(`.qty-input[data-id="${id}"]`);
-                const val = parseInt(input.value) + 1;
-                input.value = val;
-                const cart = getCart();
-                const it = cart.find((x) => x.id === id);
-                if (it) {
-                    it.qty = val;
-                    saveCart(cart);
-                    showToast("Cantidad actualizada");
-                }
-                });
-            });
-
-            tbody.querySelectorAll(".remove-item").forEach((btn) => {
-                btn.addEventListener("click", () => {
-                if (
-                    !confirm("¿Estás seguro de que quieres eliminar este producto?")
-                )
+                const tbody = document.getElementById("cart-items");
+                const totalEl = document.getElementById("cart-total");
+                const countEl = document.getElementById("cart-count");
+                
+                tbody.innerHTML = "";
+                
+                if (!cart.length) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="5" class="cart-empty-state">
+                                <div class="cart-empty-state__inner">
+                                    <div class="cart-empty-state__icon">🛒</div>
+                                    <div class="cart-empty-state__title">Tu carrito está vacío</div>
+                                    <div class="cart-empty-state__subtitle">Agrega algunos productos para empezar</div>
+                                    <a href="index.html" class="button-primary cart-empty-state__link">
+                                        Ver productos
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>`;
+                    totalEl.textContent = formatCurrency(0);
+                    countEl.textContent = 0;
                     return;
-                const id = btn.dataset.id;
-                let cart = getCart();
-                cart = cart.filter((x) => x.id !== id);
-                saveCart(cart);
-                showToast("Producto eliminado del carrito");
+                }
+
+                let total = 0;
+                let count = 0;
+
+                cart.forEach((item) => {
+                    const subtotal = (item.price || 0) * (item.qty || 1);
+                    total += subtotal;
+                    count += item.qty || 0;
+                    
+                    const tr = document.createElement("tr");
+                    // tr.className = "hover:bg-gray-50 transition duration-150"; // La clase hover ya está en el CSS
+                    
+                    tr.innerHTML = `
+                        <td class="cart-product-cell">
+                            <div class="cart-product">
+                                <div class="cart-product__image-wrapper">
+                                    <img src="${item.image || "https://placehold.co/80x80"}" 
+                                    alt="${item.name}" 
+                                    class="cart-product__image">
+                                </div>
+                                <div>
+                                    <div class="cart-product__name">${item.name}</div>
+                                    <div class="cart-product__sku">SKU: ${item.id}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="cart-price-cell">
+                            <div class="cart-price">${formatCurrency(item.price)}</div>
+                        </td>
+                        <td class="cart-quantity-cell">
+                            <div class="cart-quantity">
+                                <button data-id="${item.id}" class="qty-minus cart-quantity__button">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                                    </svg>
+                                </button>
+                                <input type="number" min="1" value="${item.qty || 1}" data-id="${item.id}"
+                                class="qty-input cart-quantity__input">
+                                <button data-id="${item.id}" class="qty-plus cart-quantity__button">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td class="cart-subtotal-cell">
+                            <div class="cart-price">${formatCurrency(subtotal)}</div>
+                        </td>
+                        <td class="cart-actions">
+                            <button data-id="${item.id}" class="remove-item cart-actions__remove">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
                 });
-            });
+
+                totalEl.textContent = formatCurrency(total);
+                countEl.textContent = count;
+
+                // --- Event Listeners (SIN CAMBIOS, solo 'confirm') ---
+
+                tbody.querySelectorAll(".qty-input").forEach((input) => {
+                    input.addEventListener("change", (e) => {
+                        const id = e.target.dataset.id;
+                        let val = parseInt(e.target.value) || 1;
+                        if (val < 1) val = 1;
+                        const cart = getCart();
+                        const it = cart.find((x) => x.id === id);
+                        if (it) {
+                            it.qty = val;
+                            saveCart(cart);
+                            showToast("Cantidad actualizada");
+                        }
+                    });
+                });
+
+                tbody.querySelectorAll(".qty-minus").forEach((btn) => {
+                    btn.addEventListener("click", (e) => {
+                        const id = e.currentTarget.dataset.id;
+                        const input = tbody.querySelector(`.qty-input[data-id="${id}"]`);
+                        let val = parseInt(input.value) - 1;
+                        if (val < 1) val = 1;
+                        input.value = val;
+                        const cart = getCart();
+                        const it = cart.find((x) => x.id === id);
+                        if (it) {
+                            it.qty = val;
+                            saveCart(cart);
+                            showToast("Cantidad actualizada");
+                        }
+                    });
+                });
+
+                tbody.querySelectorAll(".qty-plus").forEach((btn) => {
+                    btn.addEventListener("click", (e) => {
+                        const id = e.currentTarget.dataset.id;
+                        const input = tbody.querySelector(`.qty-input[data-id="${id}"]`);
+                        const val = parseInt(input.value) + 1;
+                        input.value = val;
+                        const cart = getCart();
+                        const it = cart.find((x) => x.id === id);
+                        if (it) {
+                            it.qty = val;
+                            saveCart(cart);
+                            showToast("Cantidad actualizada");
+                        }
+                    });
+                });
+
+                tbody.querySelectorAll(".remove-item").forEach((btn) => {
+                    btn.addEventListener("click", () => {
+                        // REEMPLAZO DE CONFIRM
+                        showCustomConfirm("¿Estás seguro de que quieres eliminar este producto?", () => {
+                            const id = btn.dataset.id;
+                            let cart = getCart();
+                            cart = cart.filter((x) => x.id !== id);
+                            saveCart(cart);
+                            showToast("Producto eliminado del carrito");
+                        });
+                    });
+                });
             }
 
             document.addEventListener("DOMContentLoaded", () => {
-            renderCart();
-            document
-                .getElementById("go-to-pago")
-                .addEventListener("click", () => {
-
-                window.location.href = "pago.html";
-                });
+                renderCart();
+                document
+                    .getElementById("go-to-pago")
+                    .addEventListener("click", () => {
+                        window.location.href = "pago.html";
+                    });
             });
         })();
     </script>

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TapStyle - Pago</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="pago.css">
+
+    <!-- Estilos globales de la fuente (puedes mover esto a pago.css) -->
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
       body {
@@ -12,335 +14,303 @@
         background-color: #f8f9fa;
       }
     </style>
-  </head>
+</head>
 <body>
-  <header class="bg-white shadow-md sticky top-0 z-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <a href="index.html" class="text-2xl font-extrabold text-indigo-600 tracking-wider">
-          TapStyle
-        </a>
-        <nav class="hidden md:flex space-x-8">
-          <a
-            href="carrito_compra.html"
-            class="text-gray-600 hover:text-indigo-600 transition duration-150 font-medium"
-          >
-            ← Volver al carrito
-          </a>
-        </nav>
-        <div class="flex items-center space-x-4">
-          <a
-            href="login.html"
-            class="hidden md:inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150"
-          >
-            Acceder
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="max-w-4xl mx-auto p-6">
-    <div class="bg-white rounded-xl shadow-lg p-8">
-      <!-- Encabezado -->
-      <div class="border-b border-gray-200 pb-4 mb-6">
-        <h1 class="text-2xl font-bold text-gray-900">Finalizar compra</h1>
-        <p class="text-sm text-gray-600 mt-1">
-          Revisa tu pedido y completa el pago de forma segura.
-        </p>
-      </div>
-
-      <!-- Resumen del pedido -->
-      <div class="bg-gray-50 rounded-lg p-6 mb-6">
-        <h3 class="text-lg font-semibold text-gray-900 mb-4">Resumen del pedido</h3>
-        <div id="summary" class="divide-y divide-gray-200">
-          <!-- Los productos se insertan aquí -->
-        </div>
-
-        <div class="mt-4 pt-4 border-t border-gray-200">
-          <div class="flex justify-between items-center text-gray-600 text-sm">
-            <span>Subtotal</span>
-            <span id="subtotal">$0.00</span>
-          </div>
-          <div class="flex justify-between items-center text-gray-600 text-sm mt-2">
-            <span>IGV (18%)</span>
-            <span id="tax">$0.00</span>
-          </div>
-          <div class="flex justify-between items-center text-gray-600 text-sm mt-2">
-            <span>Envío</span>
-            <span>Gratis</span>
-          </div>
-          <div class="flex justify-between items-center font-semibold text-gray-900 text-lg mt-4 pt-4 border-t border-gray-200">
-            <span>Total a pagar</span>
-            <span id="total">$0.00</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Formulario de pago -->
-      <form id="payment-form" class="mt-8 space-y-6">
-        <!-- Información de contacto -->
-        <div class="bg-gray-50 rounded-lg p-6">
-          <h3 class="text-lg font-semibold text-gray-900 mb-4">Información de contacto</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-              <input
-                type="text"
-                required
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
-              <input
-                type="email"
-                required
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-          </div>
-        </div>
-
-        <!-- Dirección de envío -->
-        <div class="bg-gray-50 rounded-lg p-6">
-          <h3 class="text-lg font-semibold text-gray-900 mb-4">Dirección de envío</h3>
-          <div class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
-              <input
-                type="text"
-                required
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Ciudad</label>
-                <input
-                  type="text"
-                  required
-                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
-                />
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Región</label>
-                <input
-                  type="text"
-                  required
-                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
-                />
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Código postal</label>
-                <input
-                  type="text"
-                  required
-                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Método de pago -->
-        <div class="bg-gray-50 rounded-lg p-6">
-          <h3 class="text-lg font-semibold text-gray-900 mb-4">Método de pago</h3>
-          <div class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Selecciona un método</label>
-              <select
-                id="method"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
-              >
-                <option value="card">Tarjeta de Crédito/Débito</option>
-                <option value="cash">Pago en Efectivo</option>
-                <option value="transfer">Transferencia Bancaria</option>
-              </select>
-            </div>
-
-            <!-- Datos de tarjeta -->
-            <div id="card-details" class="space-y-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Número de tarjeta</label>
-                <input
-                  type="text"
-                  placeholder="1234 5678 9012 3456"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
-                />
-              </div>
-              <div class="grid grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de vencimiento</label>
-                  <input
-                    type="text"
-                    placeholder="MM/YY"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
-                  />
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">CVV</label>
-                  <input
-                    type="text"
-                    placeholder="123"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Botones -->
-        <div class="flex justify-between items-center pt-6">
-          <p class="text-sm text-gray-500">
-            Al confirmar aceptas nuestros términos y condiciones.
-          </p>
-          <div class="flex space-x-3">
-            <a
-              href="carrito_compra.html"
-              class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Volver al carrito
+    <header class="site-header">
+        <div class="container-header site-header__inner">
+            <a href="index.html" class="site-header__logo">
+                TapStyle
             </a>
-            <button
-              type="submit"
-              class="inline-flex items-center px-6 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Confirmar y pagar
-            </button>
-          </div>
+            <nav class="site-header__nav">
+                <a href="carrito.html">
+                    ← Volver al carrito
+                </a>
+            </nav>
+            <div class="site-header__actions">
+                <a href="login.html" class="button-primary site-header__login-button">
+                    Acceder
+                </a>
+            </div>
         </div>
-      </form>
-    </div>
-  </main>
+    </header>
 
-  <!-- Script funcional -->
-  <script>
-    (function () {
-      const CART_KEY = "tapstyle_cart";
-
-      function getCart() {
-        try {
-          return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-        } catch {
-          return [];
-        }
-      }
-
-      function formatCurrency(v) {
-        return "$" + Number(v).toFixed(2);
-      }
-
-      function renderSummary() {
-        const cart = getCart();
-        const summary = document.getElementById("summary");
-        const subtotalEl = document.getElementById("subtotal");
-        const taxEl = document.getElementById("tax");
-        const totalEl = document.getElementById("total");
-        const paymentForm = document.getElementById("payment-form");
-
-        summary.innerHTML = "";
-
-        if (!cart.length) {
-          summary.innerHTML = `
-            <div class="text-center py-8">
-              <div class="text-4xl mb-4">🛒</div>
-              <p class="text-gray-500 mb-4">No hay productos en el carrito.</p>
-              <a href="index.html" class="text-indigo-600 hover:text-indigo-700 font-medium">
-                Volver a la tienda →
-              </a>
+    <main class="checkout-container">
+        <div class="checkout-card">
+            <!-- Encabezado -->
+            <div class="checkout-header">
+                <h1 class="checkout-title">Finalizar compra</h1>
+                <p class="checkout-subtitle">
+                    Revisa tu pedido y completa el pago de forma segura.
+                </p>
             </div>
-          `;
-          subtotalEl.textContent = formatCurrency(0);
-          taxEl.textContent = formatCurrency(0);
-          totalEl.textContent = formatCurrency(0);
-          paymentForm.style.display = "none";
-          return;
+
+            <!-- Resumen del pedido -->
+            <div class="checkout-section">
+                <h3 class="checkout-section__title">Resumen del pedido</h3>
+                <div id="summary" class="summary-items-container">
+                    <!-- Los productos se insertan aquí -->
+                </div>
+
+                <div class="summary-totals">
+                    <div class="summary-totals__row">
+                        <span>Subtotal</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-totals__row">
+                        <span>IGV (18%)</span>
+                        <span id="tax">$0.00</span>
+                    </div>
+                    <div class="summary-totals__row">
+                        <span>Envío</span>
+                        <span>Gratis</span>
+                    </div>
+                    <div class="summary-totals__row summary-totals__row--total">
+                        <span>Total a pagar</span>
+                        <span id="total">$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulario de pago -->
+            <form id="payment-form" class="payment-form">
+                <!-- Información de contacto -->
+                <div class="checkout-section">
+                    <h3 class="checkout-section__title">Información de contacto</h3>
+                    <div class="form-grid form-grid--2-col">
+                        <div>
+                            <label class="form-label">Nombre</label>
+                            <input type="text" required class="form-input" />
+                        </div>
+                        <div>
+                            <label class="form-label">Correo electrónico</label>
+                            <input type="email" required class="form-input" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dirección de envío -->
+                <div class="checkout-section">
+                    <h3 class="checkout-section__title">Dirección de envío</h3>
+                    <div class="form-section">
+                        <div>
+                            <label class="form-label">Dirección</label>
+                            <input type="text" required class="form-input" />
+                        </div>
+                        <div class="form-grid form-grid--3-col">
+                            <div>
+                                <label class="form-label">Ciudad</label>
+                                <input type="text" required class="form-input" />
+                            </div>
+                            <div>
+                                <label class="form-label">Región</label>
+                                <input type="text" required class="form-input" />
+                            </div>
+                            <div>
+                                <label class="form-label">Código postal</label>
+                                <input type="text" required class="form-input" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Método de pago -->
+                <div class="checkout-section">
+                    <h3 class="checkout-section__title">Método de pago</h3>
+                    <div class="form-section">
+                        <div>
+                            <label class="form-label">Selecciona un método</label>
+                            <select id="method" class="form-select">
+                                <option value="card">Tarjeta de Crédito/Débito</option>
+                                <option value="cash">Pago en Efectivo</option>
+                                <option value="transfer">Transferencia Bancaria</option>
+                            </select>
+                        </div>
+
+                        <!-- Datos de tarjeta -->
+                        <div id="card-details" class="form-section">
+                            <div>
+                                <label class="form-label">Número de tarjeta</label>
+                                <input
+                                    type="text"
+                                    placeholder="1234 5678 9012 3456"
+                                    class="form-input"
+                                />
+                            </div>
+                            <div class="form-grid form-grid--2-col">
+                                <div>
+                                    <label class="form-label">Fecha de vencimiento</label>
+                                    <input
+                                        type="text"
+                                        placeholder="MM/YY"
+                                        class="form-input"
+                                    />
+                                </div>
+                                <div>
+                                    <label class="form-label">CVV</label>
+                                    <input
+                                        type="text"
+                                        placeholder="123"
+                                        class="form-input"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botones -->
+                <div class="payment-footer">
+                    <p class="payment-footer__terms">
+                        Al confirmar aceptas nuestros términos y condiciones.
+                    </p>
+                    <div class="payment-footer__buttons">
+                        <a href="carrito.html" class="button-secondary">
+                            Volver al carrito
+                        </a>
+                        <button type="submit" class="button-primary button-primary-submit">
+                            Confirmar y pagar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- 
+      SCRIPT MODIFICADO
+      Ahora usa las clases CSS semánticas en lugar de Tailwind 
+    -->
+    <script>
+      (function () {
+        const CART_KEY = "tapstyle_cart";
+
+        function getCart() {
+          try {
+            return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+          } catch {
+            return [];
+          }
         }
 
-        let subtotal = 0;
-        cart.forEach((item) => {
-          const itemSubtotal = (item.price || 0) * (item.qty || 1);
-          subtotal += itemSubtotal;
+        function formatCurrency(v) {
+          return "$" + Number(v).toFixed(2);
+        }
 
-          const div = document.createElement("div");
-          div.className = "py-4 flex items-start justify-between";
-          div.innerHTML = `
-            <div class="flex items-start flex-1">
-              <img src="${item.image || "https://placehold.co/60x60"}"
-              class="w-16 h-16 object-cover rounded-lg mr-4"
-              alt="${item.name}">
-              <div>
-                <h4 class="text-gray-900 font-medium">${item.name}</h4>
-                <div class="text-sm text-gray-500 mt-0.5">Cantidad: ${item.qty}</div>
-                <div class="text-sm text-gray-500">${formatCurrency(item.price)} c/u</div>
+        function renderSummary() {
+          const cart = getCart();
+          const summary = document.getElementById("summary");
+          const subtotalEl = document.getElementById("subtotal");
+          const taxEl = document.getElementById("tax");
+          const totalEl = document.getElementById("total");
+          const paymentForm = document.getElementById("payment-form");
+
+          summary.innerHTML = "";
+
+          if (!cart.length) {
+            // MODIFICADO: Usa clases CSS
+            summary.innerHTML = `
+              <div class="summary-empty-state">
+                <div class="summary-empty-state__icon">🛒</div>
+                <p class="summary-empty-state__text">No hay productos en el carrito.</p>
+                <a href="index.html" class="summary-empty-state__link">
+                  Volver a la tienda →
+                </a>
               </div>
-            </div>
-            <div class="font-medium text-gray-900 ml-4">
-              ${formatCurrency(itemSubtotal)}
-            </div>
-          `;
-          summary.appendChild(div);
+            `;
+            subtotalEl.textContent = formatCurrency(0);
+            taxEl.textContent = formatCurrency(0);
+            totalEl.textContent = formatCurrency(0);
+            paymentForm.style.display = "none";
+            return;
+          }
+
+          let subtotal = 0;
+          cart.forEach((item) => {
+            const itemSubtotal = (item.price || 0) * (item.qty || 1);
+            subtotal += itemSubtotal;
+
+            const div = document.createElement("div");
+            // MODIFICADO: Usa clases CSS
+            div.className = "summary-item";
+            div.innerHTML = `
+              <div class="summary-item__details">
+                <img src="${item.image || "https://placehold.co/60x60"}"
+                  class="summary-item__image"
+                  alt="${item.name}">
+                <div>
+                  <h4 class="summary-item__name">${item.name}</h4>
+                  <div class="summary-item__meta">Cantidad: ${item.qty}</div>
+                  <div class="summary-item__meta">${formatCurrency(item.price)} c/u</div>
+                </div>
+              </div>
+              <div class="summary-item__subtotal">
+                ${formatCurrency(itemSubtotal)}
+              </div>
+            `;
+            summary.appendChild(div);
+          });
+
+          const tax = subtotal * 0.18;
+          const total = subtotal + tax;
+
+          subtotalEl.textContent = formatCurrency(subtotal);
+          taxEl.textContent = formatCurrency(tax);
+          totalEl.textContent = formatCurrency(total);
+
+          paymentForm.style.display = "block";
+        }
+
+        // Mostrar u ocultar datos de tarjeta
+        document.getElementById("method").addEventListener("change", (e) => {
+          const cardDetails = document.getElementById("card-details");
+          cardDetails.style.display = e.target.value === "card" ? "block" : "none";
         });
 
-        const tax = subtotal * 0.18;
-        const total = subtotal + tax;
+        // Evento de envío del formulario
+        document.getElementById("payment-form").addEventListener("submit", (e) => {
+          e.preventDefault();
 
-        subtotalEl.textContent = formatCurrency(subtotal);
-        taxEl.textContent = formatCurrency(tax);
-        totalEl.textContent = formatCurrency(total);
-
-        paymentForm.style.display = "block";
-      }
-
-      // Mostrar u ocultar datos de tarjeta
-      document.getElementById("method").addEventListener("change", (e) => {
-        const cardDetails = document.getElementById("card-details");
-        cardDetails.style.display = e.target.value === "card" ? "block" : "none";
-      });
-
-      // Evento de envío del formulario
-      document.getElementById("payment-form").addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const submitBtn = e.target.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `
-          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-          </svg>
-          Procesando pago...
-        `;
-
-        setTimeout(() => {
-          localStorage.removeItem(CART_KEY);
-
-          const modal = document.createElement("div");
-          modal.className = "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4";
-          modal.innerHTML = `
-            <div class="bg-white rounded-lg p-6 max-w-sm w-full text-center">
-              <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
-                <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">¡Pago realizado con éxito!</h3>
-              <p class="text-sm text-gray-600 mb-4">
-                Gracias por tu compra. Te hemos enviado un correo con los detalles de tu pedido.
-              </p>
-              <button onclick="window.location.href='index.html'" class="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150">
-                Volver a la tienda
-              </button>
-            </div>
+          const submitBtn = e.target.querySelector('button[type="submit"]');
+          const originalText = submitBtn.textContent; // Quitamos el innerHTML
+          submitBtn.disabled = true;
+          
+          // MODIFICADO: Usa clases CSS para el spinner
+          submitBtn.innerHTML = `
+            <svg class="spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Procesando pago...
           `;
-          document.body.appendChild(modal);
-        }, 2000);
-      });
 
-      renderSummary();
-    })();
-  </script>
+          setTimeout(() => {
+            localStorage.removeItem(CART_KEY);
+
+            const modal = document.createElement("div");
+            // MODIFICADO: Usa clases CSS
+            modal.className = "modal-overlay";
+            modal.innerHTML = `
+              <div class="modal-content">
+                <div class="modal-icon-wrapper">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <h3 class="modal-title">¡Pago realizado con éxito!</h3>
+                <p class="modal-text">
+                  Gracias por tu compra. Te hemos enviado un correo con los detalles de tu pedido.
+                </p>
+                <button onclick="window.location.href='index.html'" class="button-primary modal-button">
+                  Volver a la tienda
+                </button>
+              </div>
+            `;
+            document.body.appendChild(modal);
+          }, 2000);
+        });
+
+        renderSummary();
+      })();
+    </script>
 </body>
+</html>

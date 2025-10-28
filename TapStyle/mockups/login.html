@@ -4,198 +4,200 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TapStyle - Acceder</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="login.css">
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
+<body>
 
-    <div class="w-full max-w-3xl mb-4 md:mb-6">
-        <a href="index.html" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition duration-150 text-sm font-medium">
-            <svg class="h-5 w-5 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div class="back-link-wrapper">
+        <a href="index.html" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Regresar a TapStyle
         </a>
     </div>
 
-    <div class="w-full max-w-3xl bg-white rounded-2xl shadow-2xl overflow-hidden md:flex">
+    <div class="login-card">
         
-        <div class="hidden md:block w-1/2 bg-indigo-600 p-12 text-white flex flex-col justify-center items-center">
-            <h2 class="text-4xl font-extrabold mb-4 tracking-wider">TapStyle</h2>
-            <p class="text-indigo-200 text-center text-lg">
+        <div class="login-promo">
+            <h2 class="login-promo__title">TapStyle</h2>
+            <p class="login-promo__text">
                 El centro comercial digital donde tu estilo encuentra su hogar.
             </p>
-            <div class="mt-10 text-base text-indigo-300 space-y-3">
-                <p class="mb-2 flex items-center">
-                    <svg class="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2v2m0-4c-1.657 0-3 .895-3 2s1.343 2 3 2v2M4 16h4m-4 0v-2.4m4 2.4v-2.4m-4 0v-2.4m4 0v-2.4m4 2.4v-2.4m-4 0v-2.4m4 0v-2.4" /></svg>
+            <div class="login-promo__features">
+                <p class="login-promo__feature">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2v2m0-4c-1.657 0-3 .895-3 2s1.343 2 3 2v2M4 16h4m-4 0v-2.4m4 2.4v-2.4m-4 0v-2.4m4 0v-2.4m4 2.4v-2.4m-4 0v-2.4m4 0v-2.4" /></svg>
                     Clientes: Accede para comprar.
                 </p>
-                <p class="flex items-center">
-                    <svg class="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                <p class="login-promo__feature">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                     Admins: Inicia sesión en tu panel.
                 </p>
             </div>
-            <svg class="mt-12 h-20 w-20 text-indigo-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="login-promo__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
         </div>
 
-        <div class="w-full md:w-1/2 p-8 sm:p-12">
+        <div class="login-form-wrapper">
             
-            <div class="text-center mb-10">
-                <h1 class="text-3xl font-bold text-gray-800">Bienvenido de Nuevo</h1>
-                <p class="text-gray-500 mt-2">Inicia sesión para continuar.</p>
+            <div class="login-header">
+                <h1 class="login-header__title">Bienvenido de Nuevo</h1>
+                <p class="login-header__subtitle">Inicia sesión para continuar.</p>
             </div>
 
-            <div class="flex border-b border-gray-200 mb-8">
-                <button id="tab-login" class="flex-1 py-3 text-lg font-semibold border-b-2 border-indigo-600 text-indigo-600 transition duration-150">
+            <div class="tabs">
+                <!-- Estado inicial: Login activo -->
+                <button id="tab-login" class="tab-button tab-button--active">
                     Acceder
                 </button>
-                <button id="tab-register" class="flex-1 py-3 text-lg font-semibold border-b-2 border-transparent text-gray-500 hover:text-indigo-600 transition duration-150">
+                <button id="tab-register" class="tab-button tab-button--inactive">
                     Registrarse
                 </button>
             </div>
 
-            <form id="form-login" class="space-y-6">
+            <!-- 
+              FORMULARIO DE LOGIN
+              Estado inicial: Visible
+            -->
+            <form id="form-login" class="form-container">
                 
-                <div id="error-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-sm" role="alert">
+                <!-- Estado inicial: Oculto -->
+                <div id="error-message" class="error-message is-hidden" role="alert">
                     Credenciales incorrectas. Intenta con: super/admin/cliente@mail.com.
                 </div>
                 
-                <div>
-                    <label for="email-login" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                <div class="form-group">
+                    <label for="email-login" class="form-label">Correo Electrónico</label>
                     <input type="email" id="email-login" name="email" required placeholder="super@tapstyle.com, admin@tienda.com, o cliente@mail.com"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
+                           class="form-input">
                 </div>
 
-                <div>
-                    <label for="password-login" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                <div class="form-group">
+                    <label for="password-login" class="form-label">Contraseña</label>
                     <input type="password" id="password-login" name="password" required placeholder="123456"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
+                           class="form-input">
                 </div>
 
-                <div class="flex items-center justify-between">
+                <div class="form-actions">
                     <div class="text-sm">
-                        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+                        <a href="#" class="form-link">
                             ¿Olvidaste tu contraseña?
                         </a>
                     </div>
                 </div>
 
-                <div>
-                    <button type="submit" 
-                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-lg text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 transform hover:scale-[1.01]">
+                <div class="form-group">
+                    <button type="submit" class="form-submit-button">
                         Iniciar Sesión
                     </button>
                 </div>
-
             </form>
 
-            <form id="form-register" class="space-y-4 hidden">
-                <!-- Nombres y Apellidos (separados según BD) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="nombres-register" class="block text-sm font-medium text-gray-700 mb-1">Nombres *</label>
+            <!-- 
+              FORMULARIO DE REGISTRO
+              Estado inicial: Oculto
+            -->
+            <form id="form-register" class="form-container form-container--register is-hidden">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombres-register" class="form-label">Nombres *</label>
                         <input type="text" id="nombres-register" name="nombres" required placeholder="Juan Carlos"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
+                               class="form-input">
                     </div>
-                    <div>
-                        <label for="apellidos-register" class="block text-sm font-medium text-gray-700 mb-1">Apellidos *</label>
+                    <div class="form-group">
+                        <label for="apellidos-register" class="form-label">Apellidos *</label>
                         <input type="text" id="apellidos-register" name="apellidos" required placeholder="Pérez García"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
+                               class="form-input">
                     </div>
                 </div>
 
-                <!-- Documento de Identidad -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="tipo-documento" class="block text-sm font-medium text-gray-700 mb-1">Tipo de Documento *</label>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tipo-documento" class="form-label">Tipo de Documento *</label>
                         <select id="tipo-documento" name="id_tipodocumento" required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
+                                class="form-select">
                             <option value="">Seleccionar...</option>
                             <option value="1">DNI</option>
                             <option value="2">Carné de Extranjería</option>
                             <option value="3">Pasaporte</option>
                         </select>
                     </div>
-                    <div>
-                        <label for="numero-documento" class="block text-sm font-medium text-gray-700 mb-1">Número de Documento *</label>
+                    <div class="form-group">
+                        <label for="numero-documento" class="form-label">Número de Documento *</label>
                         <input type="text" id="numero-documento" name="numero_documento" required placeholder="12345678"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
+                               class="form-input">
                     </div>
                 </div>
 
-                <!-- Email y Teléfono -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="email-register" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico *</label>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email-register" class="form-label">Correo *</label>
                         <input type="email" id="email-register" name="email" required placeholder="tu.correo@ejemplo.com"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
+                               class="form-input">
                     </div>
-                    <div>
-                        <label for="telefono-register" class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+                    <div class="form-group">
+                        <label for="telefono-register" class="form-label">Teléfono *</label>
                         <input type="tel" id="telefono-register" name="telefono" placeholder="+51 987 654 321"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
+                               class="form-input">
                     </div>
                 </div>
 
-                <!-- Dirección -->
-                <div>
-                    <label for="direccion-register" class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
+                <div class="form-group">
+                    <label for="direccion-register" class="form-label">Dirección *</label>
                     <input type="text" id="direccion-register" name="direccion" placeholder="Av. Principal 123, Lima"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
+                           class="form-input">
                 </div>
 
-                <!-- Contraseñas -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="password-register" class="block text-sm font-medium text-gray-700 mb-1">Contraseña *</label>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password-register" class="form-label">Contraseña *</label>
                         <input type="password" id="password-register" name="password" required placeholder="Mínimo 8 caracteres"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
+                               class="form-input">
                     </div>
-                    <div>
-                        <label for="confirm-password-register" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Contraseña *</label>
+                    <div class="form-group">
+                        <label for="confirm-password-register" class="form-label">Confirmar *</label>
                         <input type="password" id="confirm-password-register" name="confirm_password" required placeholder="Repite la contraseña"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
+                               class="form-input">
                     </div>
                 </div>
 
-                <div class="flex items-center">
+                <div class="form-checkbox-group">
                     <input id="terms" name="terms" type="checkbox" required
-                           class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                    <label for="terms" class="ml-2 block text-sm text-gray-900">
-                        Acepto los <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Términos y Condiciones</a>
-                    </label>
+                           class="form-checkbox">
+                    <label for="terms" class="form-checkbox-label">
+                        Acepto los <a href="#" class="form-link">Términos y Condiciones</a>
+                    </labe>
                 </div>
 
-                <div>
-                    <button type="submit" 
-                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-lg text-lg font-semibold text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 transition duration-150 transform hover:scale-[1.01]">
+                <div class="form-group">
+                    <button type="submit" class="form-submit-button form-submit-button--register">
                         Crear Cuenta
                     </button>
                 </div>
-
             </form>
 
-            <div class="relative mt-8">
-                <div class="absolute inset-0 flex items-center">
-                    <div class="w-full border-t border-gray-300"></div>
+            <!-- Divisor -->
+            <div class="divider">
+                <div class="divider__line-wrapper">
+                    <div class="divider__line"></div>
                 </div>
-                <div class="relative flex justify-center text-sm">
-                    <span class="px-2 bg-white text-gray-500">
+                <div class="divider__text-wrapper">
+                    <span class="divider__text">
                         O usa una red social
                     </span>
                 </div>
             </div>
 
-            <div class="mt-6 flex space-x-3">
-                <button class="flex-1 w-full flex items-center justify-center py-2 px-4 border border-gray-300 rounded-xl shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition duration-150">
-                    <img class="h-5 w-5 mr-3" src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Google">
+            <!-- Login Social -->
+            <div class="social-login-group">
+                <button class="social-login-button">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Google">
                     Google
                 </button>
-                <button class="flex-1 w-full flex items-center justify-center py-2 px-4 border border-gray-300 rounded-xl shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition duration-150">
-                    <img class="h-5 w-5 mr-3" src="https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg" alt="Facebook">
+                <button class="social-login-button">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg" alt="Facebook">
                     Facebook
                 </button>
             </div>
@@ -204,6 +206,10 @@
         
     </div>
 
+    <!-- 
+      SCRIPT MODIFICADO
+      Ahora usa las clases CSS semánticas (ej: .is-hidden)
+    -->
     <script>
         // === 1. DEFINICIÓN DE USUARIOS MOCKUP ===
         const mockUsers = [
@@ -221,22 +227,27 @@
         const errorMessage = document.getElementById('error-message');
 
         function showLogin() {
-            formLogin.classList.remove('hidden');
-            formRegister.classList.add('hidden');
-            tabLogin.classList.add('border-indigo-600', 'text-indigo-600');
-            tabLogin.classList.remove('border-transparent', 'text-gray-500');
-            tabRegister.classList.remove('border-indigo-600', 'text-indigo-600');
-            tabRegister.classList.add('border-transparent', 'text-gray-500');
-            errorMessage.classList.add('hidden'); // Ocultar errores al cambiar de pestaña
+            formLogin.classList.remove('is-hidden');
+            formRegister.classList.add('is-hidden');
+            
+            tabLogin.classList.add('tab-button--active');
+            tabLogin.classList.remove('tab-button--inactive');
+            
+            tabRegister.classList.remove('tab-button--active');
+            tabRegister.classList.add('tab-button--inactive');
+            
+            errorMessage.classList.add('is-hidden'); // Ocultar errores al cambiar
         }
 
         function showRegister() {
-            formLogin.classList.add('hidden');
-            formRegister.classList.remove('hidden');
-            tabRegister.classList.add('border-indigo-600', 'text-indigo-600');
-            tabRegister.classList.remove('border-transparent', 'text-gray-500');
-            tabLogin.classList.remove('border-indigo-600', 'text-indigo-600');
-            tabLogin.classList.add('border-transparent', 'text-gray-500');
+            formLogin.classList.add('is-hidden');
+            formRegister.classList.remove('is-hidden');
+
+            tabRegister.classList.add('tab-button--active');
+            tabRegister.classList.remove('tab-button--inactive');
+
+            tabLogin.classList.remove('tab-button--active');
+            tabLogin.classList.add('tab-button--inactive');
         }
 
         tabLogin.addEventListener('click', showLogin);
@@ -249,34 +260,32 @@
             const emailInput = document.getElementById('email-login').value;
             const passwordInput = document.getElementById('password-login').value;
             
-            // Buscar usuario en el array
             const user = mockUsers.find(
                 u => u.email === emailInput && u.password === passwordInput
             );
 
             if (user) {
-                // Éxito: Redirigir según el rol
                 console.log(`Login exitoso como ${user.role}. Redirigiendo a ${user.redirect}`);
-                errorMessage.classList.add('hidden');
-                // IMPORTANTE: Redireccionar al archivo HTML correspondiente
+                errorMessage.classList.add('is-hidden');
                 window.location.href = user.redirect; 
-
             } else {
-                // Error: Mostrar mensaje
                 console.error('Credenciales incorrectas');
-                errorMessage.classList.remove('hidden');
+                errorMessage.classList.remove('is-hidden');
             }
         });
 
-        // Simular registro (solo para no romper el flujo)
+        // Simular registro (reemplaza alert por un console.log)
         formRegister.addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Registro simulado exitoso. Por favor, inicia sesión con un usuario de prueba.');
-            showLogin(); // Volver a la pestaña de login después del registro simulado
+            console.log('Registro simulado exitoso. Por favor, inicia sesión con un usuario de prueba.');
+            // Aquí iría tu lógica de API para registrar al usuario
+            
+            // Simulación de éxito:
+            alert('¡Registro simulado exitoso! Ahora inicia sesión.');
+            showLogin(); // Volver a la pestaña de login
         });
         
-        // Inicializar mostrando el login
-        window.onload = showLogin;
+        // No necesitamos window.onload porque el estado inicial ya está en el HTML.
     </script>
 </body>
 </html>
