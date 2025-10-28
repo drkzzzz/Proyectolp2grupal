@@ -1,176 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="./css/main.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Admin TapStyle</title>
+    <link rel="stylesheet" href="css/main.css" />
 </head>
 
-<body class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
-    <div class="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden md:flex">
-        <div class="w-full p-8 sm:p-12">
-            <div class="text-center mb-10">
-                <h1 class="text-3xl font-bold text-gray-800">Bienvenido de Nuevo</h1>
-                <p class="text-gray-500 mt-2">Inicia sesión para continuar.</p>
+<body class="body-login">
+
+    <div class="login-container">
+        <h1>Bienvenido</h1>
+
+        <form id="login-form" novalidate>
+            <div>
+                <label for="email-input">Correo Electrónico</label>
+                <input type="email" id="email-input" required />
+            </div>
+            <div>
+                <label for="password-input">Contraseña</label>
+                <input type="password" id="password-input" required />
             </div>
 
-            <div class="flex border-b border-gray-200 mb-8">
-                <button id="tab-login"
-                    class="flex-1 py-3 text-lg font-semibold border-b-2 border-indigo-600 text-indigo-600 transition duration-150">
-                    Acceder
-                </button>
-                <button id="tab-register"
-                    class="flex-1 py-3 text-lg font-semibold border-b-2 border-transparent text-gray-500 hover:text-indigo-600 transition duration-150">
-                    Registrarse
-                </button>
-            </div>
+            <button type="submit" id="submit-button" class="btn-primary">
+                Ingresar
+            </button>
+        </form>
 
-            <form id="form-login" class="space-y-6">
-
-                <div id="error-message"
-                    class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-sm"
-                    role="alert">
-                    Credenciales incorrectas. Intenta con: super/admin/cliente@mail.com.
-                </div>
-
-                <div>
-                    <label for="email-login" class="block text-sm font-medium text-gray-700 mb-1">Correo
-                        Electrónico</label>
-                    <input type="email" id="email-login" name="email" required
-                        placeholder="super@tapstyle.com, admin@tienda.com, o cliente@mail.com"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
-                </div>
-
-                <div>
-                    <label for="password-login" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
-                    <input type="password" id="password-login" name="password" required placeholder="123456"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
-                </div>
-
-                <div class="flex items-center justify-between">
-                    <div class="text-sm">
-                        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-                            ¿Olvidaste tu contraseña?
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <button type="submit"
-                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-lg text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 transform hover:scale-[1.01]">
-                        Iniciar Sesión
-                    </button>
-                </div>
-
-            </form>
-
-            <form id="form-register" class="space-y-4 hidden">
-                <!-- Nombres y Apellidos (separados según BD) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="nombres-register" class="block text-sm font-medium text-gray-700 mb-1">Nombres
-                            *</label>
-                        <input type="text" id="nombres-register" name="nombres" required placeholder="Juan Carlos"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
-                    </div>
-                    <div>
-                        <label for="apellidos-register" class="block text-sm font-medium text-gray-700 mb-1">Apellidos
-                            *</label>
-                        <input type="text" id="apellidos-register" name="apellidos" required placeholder="Pérez García"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
-                    </div>
-                </div>
-
-                <!-- Documento de Identidad -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="tipo-documento" class="block text-sm font-medium text-gray-700 mb-1">Tipo de
-                            Documento *</label>
-                        <select id="tipo-documento" name="id_tipodocumento" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
-                            <option value="">Seleccionar...</option>
-                            <option value="1">DNI</option>
-                            <option value="2">Carné de Extranjería</option>
-                            <option value="3">Pasaporte</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="numero-documento" class="block text-sm font-medium text-gray-700 mb-1">Número de
-                            Documento *</label>
-                        <input type="text" id="numero-documento" name="numero_documento" required placeholder="12345678"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
-                    </div>
-                </div>
-
-                <!-- Email y Teléfono -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="email-register" class="block text-sm font-medium text-gray-700 mb-1">Correo
-                            Electrónico *</label>
-                        <input type="email" id="email-register" name="email" required
-                            placeholder="tu.correo@ejemplo.com"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
-                    </div>
-                    <div>
-                        <label for="telefono-register"
-                            class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
-                        <input type="tel" id="telefono-register" name="telefono" placeholder="+51 987 654 321"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
-                    </div>
-                </div>
-
-                <!-- Dirección -->
-                <div>
-                    <label for="direccion-register"
-                        class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
-                    <input type="text" id="direccion-register" name="direccion" placeholder="Av. Principal 123, Lima"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
-                </div>
-
-                <!-- Contraseñas -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="password-register" class="block text-sm font-medium text-gray-700 mb-1">Contraseña
-                            *</label>
-                        <input type="password" id="password-register" name="password" required
-                            placeholder="Mínimo 8 caracteres"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
-                    </div>
-                    <div>
-                        <label for="confirm-password-register"
-                            class="block text-sm font-medium text-gray-700 mb-1">Confirmar Contraseña *</label>
-                        <input type="password" id="confirm-password-register" name="confirm_password" required
-                            placeholder="Repite la contraseña"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm">
-                    </div>
-                </div>
-
-                <div class="flex items-center">
-                    <input id="terms" name="terms" type="checkbox" required
-                        class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                    <label for="terms" class="ml-2 block text-sm text-gray-900">
-                        Acepto los <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Términos y
-                            Condiciones</a>
-                    </label>
-                </div>
-
-                <div>
-                    <button type="submit"
-                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-lg text-lg font-semibold text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 transition duration-150 transform hover:scale-[1.01]">
-                        Crear Cuenta
-                    </button>
-                </div>
-
-            </form>
-
-        </div>
-
+        <p id="login-error-msg"></p>
     </div>
 
-    <script src="./js/login.js"></script>
+    <script src="./js/lib/jquery.min.js"></script>
+    <script src="./js/global/config.js"></script>
+    <script src="./js/global/api-client.js"></script>
+    <script src="./js/global/auth.js"></script>
+
+    <script src="./js/mocks/login.js"></script>
+
+    <script src="./js/modules/login.js"></script>
 </body>
 
 </html>

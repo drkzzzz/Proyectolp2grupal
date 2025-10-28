@@ -37,11 +37,22 @@ document.addEventListener("DOMContentLoaded", () => {
     )
   )
     .then(() => {
-      console.log("Todos los componentes del layout han sido cargados.");
-      // Opcional: Ejecutar una función después de que todo esté cargado.
-      // Por ejemplo, marcar como "activo" el enlace del sidebar
-      // que corresponde a la página actual.
+      console.log(
+        "Todos los componentes del layout han sido cargados (sin caché)."
+      );
       highlightCurrentSidebarLink();
+
+      // Adjuntar el evento de logout DESPUÉS de que el sidebar se ha cargado
+      const $logoutButton = $("#logout-button");
+
+      if ($logoutButton.length) {
+        $logoutButton.on("click", function (e) {
+          e.preventDefault(); // Evita que el enlace href="#" navegue
+
+          // Llama a la función de logout que ya tenemos en auth.js
+          Auth.logout();
+        });
+      }
     })
     .catch((error) => {
       console.error("Error general al cargar el layout:", error);

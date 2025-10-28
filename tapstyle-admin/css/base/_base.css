@@ -1,54 +1,78 @@
 /* css/base/_base.css */
 
-/* Estilos de fuente globales */
+html {
+    /* Establece el tamaño de fuente base para que 1rem = 16px */
+    font-size: 16px;
+}
+
 body {
     font-family: var(--font-family-sans);
-    font-size: 16px;
-    line-height: 1.5;
     background-color: var(--color-gray-50);
     color: var(--color-gray-900);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Estilos de encabezados */
+/* --- Títulos (Headings) --- */
 h1,
 h2,
-h3 {
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-family-heading);
-    font-weight: 700;
-    margin-bottom: var(--space-3);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-snug);
+    margin-bottom: var(--space-4);
+    color: var(--color-gray-900);
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: var(--font-size-3xl);
 }
 
 h2 {
-    font-size: 1.5rem;
+    font-size: var(--font-size-2xl);
 }
 
 h3 {
-    font-size: 1.25rem;
+    font-size: var(--font-size-xl);
 }
 
-/* Estilos de párrafos y enlaces */
+h4 {
+    font-size: var(--font-size-lg);
+}
+
+/* --- Párrafos y Enlaces --- */
 p {
     margin-bottom: var(--space-4);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-gray-700);
 }
 
 a {
     color: var(--color-indigo-600);
-    transition: color 0.15s ease;
+    font-weight: var(--font-weight-medium);
+    transition: color var(--transition-duration) var(--transition-timing);
 }
 
 a:hover {
+    color: var(--color-indigo-800);
     text-decoration: underline;
 }
 
-/* Layout principal de la página */
-.main-content {
-    /* Deja espacio para el sidebar fijo */
-    margin-left: var(--sidebar-width);
+/* --- Maquetación Base --- */
+main {
+    /* Contenedor principal del contenido de la página */
     padding: var(--space-6);
+}
+
+.main-content {
+    /* Wrapper que deja espacio para el sidebar */
+    margin-left: var(--sidebar-width);
     width: calc(100% - var(--sidebar-width));
+    position: relative;
+    /* Para z-index del navbar */
+    z-index: 50;
+    min-height: 100vh;
 }
