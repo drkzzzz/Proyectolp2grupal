@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TapStyle - Roles y Permisos</title>
+    <!-- Carga de Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #eef2f6;
+        }
+        .sidebar {
+            width: 280px;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body class="flex">
+
+    <!-- BARRA LATERAL (SIDEBAR) -->
+    <aside class="sidebar bg-gray-800 text-white p-6 flex flex-col fixed h-full z-20 hidden md:flex">
+        <!-- Logo de la Plataforma -->
+        <div class="text-center mb-10 pb-4 border-b border-gray-700">
+            <a href="index.html" class="text-3xl font-extrabold text-indigo-400 tracking-wider">TapStyle</a>
+            <p class="text-xs text-gray-500 mt-1">Marketplace Central</p>
+        </div>
+
+        <!-- Perfil de la Tienda -->
+        <div class="mb-10 text-center">
+            <div class="w-16 h-16 bg-white text-indigo-600 rounded-full mx-auto flex items-center justify-center text-xl font-bold mb-3">SV</div>
+            <p class="font-semibold text-lg">Street Vibe Co.</p>
+            <p class="text-sm text-gray-400">Admin de Negocio</p>
+        </div>
+
+        <!-- Enlaces de Navegación -->
+        <nav class="flex-grow space-y-2">
+            <a href="dashboard_admin_negocio.html" class="flex items-center p-3 rounded-xl text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-6 w-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                <span class="font-medium">Dashboard</span>
+            </a>
+            <a href="crud_producto.html" class="flex items-center p-3 rounded-xl text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-6 w-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h.01M7 21h.01M7 17h.01M17 17h.01M17 21h.01M17 3h.01M17 7h.01M14 7h.01M14 3h.01M14 21h.01M14 17h.01M10 7h.01M10 3h.01M10 21h.01M10 17h.01M7 14h.01M3 14h.01M21 14h.01M17 14h.01M7 10h.01M3 10h.01M21 10h.01M17 10h.01M7 18h.01M3 18h.01M21 18h.01M17 18h.01M7 6h.01M3 6h.01M21 6h.01M17 6h.01M10 14h.01M14 14h.01M10 10h.01M14 10h.01M10 18h.01M14 18h.01M10 6h.01M14 6h.01" /></svg>
+                <span class="font-medium">Productos y Catálogo</span>
+            </a>
+            <a href="ventas_pedidos.html" class="flex items-center p-3 rounded-xl text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-6 w-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+                <span class="font-medium">Ventas y Pedidos</span>
+            </a>
+            <a href="finanzas_pagos.html" class="flex items-center p-3 rounded-xl text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-6 w-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm10-7a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                <span class="font-medium">Finanzas y Pagos</span>
+            </a>
+            <a href="gestion_empleados.html" class="flex items-center p-3 rounded-xl text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-6 w-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6m-6 0v-1a6 6 0 00-9-5.197M13 14H10M4 14h.01M20 14h.01" /></svg>
+                <span class="font-medium">Gestión de Empleados</span>
+            </a>
+            <a href="roles_permisos.html" class="flex items-center p-3 rounded-xl bg-indigo-600 text-white shadow-md transition duration-150">
+                <svg class="h-6 w-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                <span class="font-medium">Roles y Permisos</span>
+            </a>
+        </nav>
+
+        <!-- Cerrar Sesión -->
+        <div class="mt-auto pt-6 border-t border-gray-700">
+            <a href="login.html" class="flex items-center p-3 rounded-xl text-red-400 hover:bg-gray-700 transition duration-150">
+                <svg class="h-6 w-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                <span class="font-medium">Cerrar Sesión</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="flex-1 md:ml-[280px] p-4 sm:p-8 w-full">
+        <!-- Cabecera -->
+        <header class="flex justify-between items-center bg-white p-4 rounded-xl shadow-md mb-8">
+            <h1 class="text-2xl font-bold text-gray-800">Roles y Permisos</h1>
+            
+            <div class="flex items-center space-x-4">
+                <!-- Botón Crear Rol -->
+                <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150 flex items-center">
+                    <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    Crear Nuevo Rol
+                </button>
+            </div>
+        </header>
+
+        <!-- Lista de Roles -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Rol: Administrador -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Administrador</h3>
+                        <span class="px-2 py-1 bg-indigo-100 text-indigo-600 rounded-full text-sm">5 usuarios</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Acceso completo a todas las funciones del sistema.</p>
+                    
+                    <!-- Lista de Permisos -->
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Gestión de usuarios y roles
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Configuración del sistema
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Reportes y análisis
+                        </div>
+                    </div>
+                    
+                    <!-- Acciones -->
+                    <div class="flex space-x-2">
+                        <button class="flex-1 px-3 py-2 bg-indigo-100 text-indigo-600 rounded hover:bg-indigo-200 transition duration-150">Editar</button>
+                        <button class="flex-1 px-3 py-2 bg-red-100 text-red-600 rounded hover:bg-red-200 transition duration-150">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rol: Vendedor -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Vendedor</h3>
+                        <span class="px-2 py-1 bg-indigo-100 text-indigo-600 rounded-full text-sm">8 usuarios</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Gestión de ventas y atención al cliente.</p>
+                    
+                    <!-- Lista de Permisos -->
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Gestión de ventas
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Atención al cliente
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="h-4 w-4 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                            Configuración del sistema
+                        </div>
+                    </div>
+                    
+                    <!-- Acciones -->
+                    <div class="flex space-x-2">
+                        <button class="flex-1 px-3 py-2 bg-indigo-100 text-indigo-600 rounded hover:bg-indigo-200 transition duration-150">Editar</button>
+                        <button class="flex-1 px-3 py-2 bg-red-100 text-red-600 rounded hover:bg-red-200 transition duration-150">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rol: Almacenero -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Almacenero</h3>
+                        <span class="px-2 py-1 bg-indigo-100 text-indigo-600 rounded-full text-sm">3 usuarios</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Control de inventario y stock.</p>
+                    
+                    <!-- Lista de Permisos -->
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Gestión de inventario
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Control de stock
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="h-4 w-4 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                            Gestión de usuarios
+                        </div>
+                    </div>
+                    
+                    <!-- Acciones -->
+                    <div class="flex space-x-2">
+                        <button class="flex-1 px-3 py-2 bg-indigo-100 text-indigo-600 rounded hover:bg-indigo-200 transition duration-150">Editar</button>
+                        <button class="flex-1 px-3 py-2 bg-red-100 text-red-600 rounded hover:bg-red-200 transition duration-150">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Matriz de Permisos -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-6 border-b border-gray-200">
+                <h2 class="text-lg font-semibold text-gray-800">Matriz de Permisos</h2>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Permiso</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Administrador</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Vendedor</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Almacenero</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Permiso 1 -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                Gestión de Usuarios
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                <svg class="h-5 w-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                <svg class="h-5 w-5 text-red-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                <svg class="h-5 w-5 text-red-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </td>
+                        </tr>
+                        <!-- Permiso 2 -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                Gestión de Ventas
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                <svg class="h-5 w-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                <svg class="h-5 w-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                <svg class="h-5 w-5 text-red-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </td>
+                        </tr>
+                        <!-- Permiso 3 -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                Control de Inventario
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                <svg class="h-5 w-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                <svg class="h-5 w-5 text-red-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                <svg class="h-5 w-5 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
