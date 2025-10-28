@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TapStyle - Caja</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex">
+    <aside class="sidebar bg-gray-800 text-white p-6 flex flex-col fixed h-full z-20 hidden md:flex overflow-y-auto" style="width: 280px;">
+        <div class="text-center mb-6 pb-4 border-b border-gray-700">
+            <a href="index.html" class="text-2xl font-extrabold text-indigo-400 tracking-wider">TapStyle</a>
+        </div>
+        <div class="mb-6 text-center">
+            <div class="w-14 h-14 bg-white text-indigo-600 rounded-full mx-auto flex items-center justify-center text-lg font-bold mb-2">SV</div>
+            <p class="font-semibold">Street Vibe Co.</p>
+            <p class="text-xs text-gray-400">Admin de Negocio</p>
+        </div>
+        <nav class="flex-grow space-y-1">
+            <a href="dashboard_admin_negocio.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                <span class="text-sm font-medium">Dashboard</span>
+            </a>
+            <div class="submenu-container">
+                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                    <div class="flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                        <span class="text-sm font-medium">Catálogo</span>
+                    </div>
+                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="submenu hidden ml-7 mt-1 space-y-1">
+                    <a href="crud_producto.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Productos</a>
+                    <a href="categorias.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Categorías</a>
+                    <a href="marcas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Marcas</a>
+                </div>
+            </div>
+            <div class="submenu-container">
+                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                    <div class="flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                        <span class="text-sm font-medium">Operaciones</span>
+                    </div>
+                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="submenu hidden ml-7 mt-1 space-y-1">
+                    <a href="compras.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Compras</a>
+                    <a href="ventas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Ventas</a>
+                    <a href="stock.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Stock</a>
+                    <a href="caja.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Caja</a>
+                </div>
+            </div>
+            <a href="finanzas_pagos.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                <span class="text-sm font-medium">Finanzas</span>
+            </a>
+            <div class="submenu-container">
+                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                    <div class="flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        <span class="text-sm font-medium">Administración</span>
+                    </div>
+                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="submenu hidden ml-7 mt-1 space-y-1">
+                    <a href="gestion_empleados.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Empleados</a>
+                    <a href="roles_permisos.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Roles y Permisos</a>
+                </div>
+            </div>
+        </nav>
+        <div class="mt-auto pt-4 border-t border-gray-700">
+            <a href="login.html" class="flex items-center p-2 rounded-lg text-red-400 hover:bg-gray-700 transition">
+                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                <span class="text-sm font-medium">Cerrar Sesión</span>
+            </a>
+        </div>
+    </aside>
+    <script>
+    const toggles = document.querySelectorAll('.submenu-toggle');
+    toggles.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            const container = this.parentElement;
+            const submenu = container.querySelector('.submenu');
+            const icon = this.querySelector('.submenu-icon');
+            document.querySelectorAll('.submenu').forEach(sm => {
+                if (sm !== submenu) {
+                    sm.classList.add('hidden');
+                    sm.parentElement.querySelector('.submenu-icon').style.transform = 'rotate(0deg)';
+                }
+            });
+            submenu.classList.toggle('hidden');
+            icon.style.transform = submenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        });
+    });
+    const currentPage = window.location.pathname.split('/').pop();
+    document.querySelectorAll('nav a').forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+            link.classList.add('bg-indigo-600', 'text-white');
+            link.classList.remove('text-gray-300', 'text-gray-400');
+            const submenu = link.closest('.submenu');
+            if (submenu) {
+                submenu.classList.remove('hidden');
+                submenu.parentElement.querySelector('.submenu-icon').style.transform = 'rotate(180deg)';
+            }
+        }
+    });
+    </script>
+    <div class="flex-1 md:ml-[280px] p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold">Manejo de Caja</h1>
+            <div class="flex gap-2">
+                <button id="btnAperturaCaja" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Abrir Caja</button>
+                <button id="btnCerrarCaja" class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Cerrar Caja</button>
+            </div>
+        </div>
+        <div class="grid grid-cols-3 gap-6 mb-6">
+            <div class="bg-white p-6 rounded-xl shadow">
+                <p class="text-sm text-gray-500">Monto Inicial</p>
+                <p class="text-2xl font-bold">S/. 500.00</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow">
+                <p class="text-sm text-gray-500">Ingresos</p>
+                <p class="text-2xl font-bold text-green-600">S/. 2,350.00</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow">
+                <p class="text-sm text-gray-500">Total en Caja</p>
+                <p class="text-2xl font-bold">S/. 2,850.00</p>
+            </div>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow">
+            <h2 class="text-xl font-bold mb-4">Movimientos de Caja</h2>
+            <table class="w-full">
+                <thead>
+                    <tr class="border-b">
+                        <th class="text-left p-2">Fecha</th>
+                        <th class="text-left p-2">Tipo</th>
+                        <th class="text-left p-2">Monto</th>
+                        <th class="text-left p-2">Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b">
+                        <td class="p-2">2024-01-15 10:30</td>
+                        <td class="p-2"><span class="text-green-600">Ingreso</span></td>
+                        <td class="p-2">S/. 150.00</td>
+                        <td class="p-2">Venta #001</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Modal Cerrar Caja -->
+    <div id="modalCierre" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-gray-800">Cierre de Caja</h2>
+                <button id="btnCerrarModalCierre" class="text-gray-500 hover:text-gray-700"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+            </div>
+            <form id="formCierre" class="p-6">
+                <div class="space-y-4">
+                    <div><label class="block text-sm font-medium mb-2">Monto Esperado *</label><input type="number" step="0.01" id="monto_esperado" required placeholder="0.00" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500"></div>
+                    <div><label class="block text-sm font-medium mb-2">Monto Final (Contado) *</label><input type="number" step="0.01" id="monto_final" required placeholder="0.00" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500"></div>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-600">Diferencia: <span id="diferencia" class="font-bold">S/. 0.00</span></p>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3 mt-6">
+                    <button type="button" id="btnCancelarCierre" class="px-6 py-2 border rounded-lg">Cancelar</button>
+                    <button type="submit" class="px-6 py-2 bg-red-600 text-white rounded-lg">Cerrar Caja</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="modalApertura" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h2 class="text-2xl font-bold">Apertura de Caja</h2>
+                <button id="btnCerrar" class="text-gray-500 hover:text-gray-700"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+            </div>
+            <form id="formApertura" class="p-6">
+                <div class="space-y-4">
+                    <div><label class="block text-sm font-medium mb-2">Caja *</label><select id="id_caja" required class="w-full px-4 py-2 border rounded-lg"><option value="">Seleccionar...</option><option value="1">Caja Principal</option></select></div>
+                    <div><label class="block text-sm font-medium mb-2">Monto Inicial *</label><input type="number" step="0.01" id="monto_inicial" required placeholder="0.00" class="w-full px-4 py-2 border rounded-lg"></div>
+                </div>
+                <div class="flex justify-end space-x-3 mt-6">
+                    <button type="button" id="btnCancelar" class="px-6 py-2 border rounded-lg">Cancelar</button>
+                    <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded-lg">Abrir Caja</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#btnAperturaCaja').click(() => $('#modalApertura').removeClass('hidden'));
+            $('#btnCerrar, #btnCancelar').click(() => { $('#modalApertura').addClass('hidden'); $('#formApertura')[0].reset(); });
+            $('#formApertura').submit(function(e) {
+                e.preventDefault();
+                const data = { id_caja: $('#id_caja').val(), id_usuario: 1, fecha_apertura: new Date().toISOString().split('T')[0], hora_apertura: new Date().toTimeString().split(' ')[0], monto_inicial: $('#monto_inicial').val() };
+                console.log('Apertura:', data);
+                alert('Caja abierta exitosamente');
+                $('#modalApertura').addClass('hidden');
+                $('#formApertura')[0].reset();
+            });
+            
+            // Modal Cerrar Caja
+            $('#btnCerrarCaja').click(() => $('#modalCierre').removeClass('hidden'));
+            $('#btnCerrarModalCierre, #btnCancelarCierre').click(() => { $('#modalCierre').addClass('hidden'); $('#formCierre')[0].reset(); });
+            
+            $('#formCierre').submit(function(e) {
+                e.preventDefault();
+                const data = {
+                    id_apertura: 1, // ID de la apertura actual
+                    fecha_cierre: new Date().toISOString().split('T')[0],
+                    hora_cierre: new Date().toTimeString().split(' ')[0],
+                    monto_final: $('#monto_final').val(),
+                    monto_esperado: $('#monto_esperado').val(),
+                    diferencia: parseFloat($('#monto_final').val() || 0) - parseFloat($('#monto_esperado').val() || 0)
+                };
+                console.log('Cierre:', data);
+                alert('Caja cerrada exitosamente');
+                $('#modalCierre').addClass('hidden');
+                $('#formCierre')[0].reset();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TapStyle - Gestión de Marcas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="flex">
+
+    <!-- SIDEBAR MEJORADO CON SUBMENÚS -->
+    <aside class="sidebar bg-gray-800 text-white p-6 flex flex-col fixed h-full z-20 hidden md:flex overflow-y-auto" style="width: 280px;">
+        <div class="text-center mb-6 pb-4 border-b border-gray-700">
+            <a href="index.html" class="text-2xl font-extrabold text-indigo-400 tracking-wider">TapStyle</a>
+        </div>
+        <div class="mb-6 text-center">
+            <div class="w-14 h-14 bg-white text-indigo-600 rounded-full mx-auto flex items-center justify-center text-lg font-bold mb-2">SV</div>
+            <p class="font-semibold">Street Vibe Co.</p>
+            <p class="text-xs text-gray-400">Admin de Negocio</p>
+        </div>
+
+        <nav class="flex-grow space-y-1">
+            <a href="dashboard_admin_negocio.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                <span class="text-sm font-medium">Dashboard</span>
+            </a>
+            <div class="submenu-container">
+                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                    <div class="flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                        <span class="text-sm font-medium">Catálogo</span>
+                    </div>
+                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="submenu hidden ml-7 mt-1 space-y-1">
+                    <a href="crud_producto.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Productos</a>
+                    <a href="categorias.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Categorías</a>
+                    <a href="marcas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Marcas</a>
+                </div>
+            </div>
+            <div class="submenu-container">
+                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                    <div class="flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                        <span class="text-sm font-medium">Operaciones</span>
+                    </div>
+                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="submenu hidden ml-7 mt-1 space-y-1">
+                    <a href="compras.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Compras</a>
+                    <a href="ventas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Ventas</a>
+                    <a href="stock.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Stock</a>
+                    <a href="caja.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Caja</a>
+                </div>
+            </div>
+            <a href="finanzas_pagos.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                <span class="text-sm font-medium">Finanzas</span>
+            </a>
+            <div class="submenu-container">
+                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                    <div class="flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        <span class="text-sm font-medium">Administración</span>
+                    </div>
+                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="submenu hidden ml-7 mt-1 space-y-1">
+                    <a href="gestion_empleados.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Empleados</a>
+                    <a href="roles_permisos.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Roles y Permisos</a>
+                </div>
+            </div>
+        </nav>
+        <div class="mt-auto pt-4 border-t border-gray-700">
+            <a href="login.html" class="flex items-center p-2 rounded-lg text-red-400 hover:bg-gray-700 transition">
+                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                <span class="text-sm font-medium">Cerrar Sesión</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="flex-1 md:ml-[280px] p-4 sm:p-8 w-full">
+        
+        <header class="flex justify-between items-center bg-white p-4 rounded-xl shadow-md mb-8">
+            <h1 class="text-2xl font-bold text-gray-800">Gestión de Marcas y Modelos</h1>
+            <button id="btnNuevaMarca" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150">
+                + Nueva Marca
+            </button>
+        </header>
+
+        <!-- Tabla de Marcas -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+            <div class="p-6 border-b">
+                <h2 class="text-xl font-bold text-gray-800">Marcas Registradas</h2>
+            </div>
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre Marca</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modelos</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Productos</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">1</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-gray-200 rounded-lg mr-3"></div>
+                                <span class="text-sm font-medium text-gray-900">Nike</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">15 modelos</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">87 productos</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <button class="text-indigo-600 hover:text-indigo-900 mr-3">Ver Modelos</button>
+                            <button class="text-blue-600 hover:text-blue-900 mr-3">Editar</button>
+                            <button class="text-red-600 hover:text-red-900">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-gray-200 rounded-lg mr-3"></div>
+                                <span class="text-sm font-medium text-gray-900">Adidas</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">12 modelos</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">65 productos</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <button class="text-indigo-600 hover:text-indigo-900 mr-3">Ver Modelos</button>
+                            <button class="text-blue-600 hover:text-blue-900 mr-3">Editar</button>
+                            <button class="text-red-600 hover:text-red-900">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">3</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-gray-200 rounded-lg mr-3"></div>
+                                <span class="text-sm font-medium text-gray-900">Puma</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">8 modelos</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">42 productos</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <button class="text-indigo-600 hover:text-indigo-900 mr-3">Ver Modelos</button>
+                            <button class="text-blue-600 hover:text-blue-900 mr-3">Editar</button>
+                            <button class="text-red-600 hover:text-red-900">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Sección de Modelos -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-gray-800">Modelos por Marca</h2>
+                <button class="btnNuevoModelo px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-150">+ Nuevo Modelo</button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="border rounded-lg p-4 hover:shadow-md transition duration-150">
+                    <div class="w-full h-32 bg-gray-200 rounded-lg mb-3"></div>
+                    <h3 class="font-bold text-gray-800">Air Max 90</h3>
+                    <p class="text-sm text-gray-500">Marca: Nike</p>
+                    <div class="mt-3 flex space-x-2">
+                        <button class="text-xs text-blue-600 hover:text-blue-800">Editar</button>
+                        <button class="text-xs text-red-600 hover:text-red-800">Eliminar</button>
+                    </div>
+                </div>
+                <div class="border rounded-lg p-4 hover:shadow-md transition duration-150">
+                    <div class="w-full h-32 bg-gray-200 rounded-lg mb-3"></div>
+                    <h3 class="font-bold text-gray-800">Superstar</h3>
+                    <p class="text-sm text-gray-500">Marca: Adidas</p>
+                    <div class="mt-3 flex space-x-2">
+                        <button class="text-xs text-blue-600 hover:text-blue-800">Editar</button>
+                        <button class="text-xs text-red-600 hover:text-red-800">Eliminar</button>
+                    </div>
+                </div>
+                <div class="border rounded-lg p-4 hover:shadow-md transition duration-150">
+                    <div class="w-full h-32 bg-gray-200 rounded-lg mb-3"></div>
+                    <h3 class="font-bold text-gray-800">Suede Classic</h3>
+                    <p class="text-sm text-gray-500">Marca: Puma</p>
+                    <div class="mt-3 flex space-x-2">
+                        <button class="text-xs text-blue-600 hover:text-blue-800">Editar</button>
+                        <button class="text-xs text-red-600 hover:text-red-800">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Botón Nuevo Modelo (agregar en la sección de modelos) -->
+    <!-- Modal Nuevo Modelo -->
+    <div id="modalNuevoModelo" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-gray-800">Nuevo Modelo</h2>
+                <button id="btnCerrarModalModelo" class="text-gray-500 hover:text-gray-700">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <form id="formNuevoModelo" class="p-6">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre Modelo *</label>
+                        <input type="text" id="nombre_modelo" name="nombre_modelo" required placeholder="Ej: Air Max 90" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Marca *</label>
+                        <select id="id_marca_modelo" name="id_marca" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+                            <option value="">Seleccionar marca...</option>
+                            <option value="1">Nike</option>
+                            <option value="2">Adidas</option>
+                            <option value="3">Puma</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">URL Imagen Principal</label>
+                        <input type="text" id="imagen_principal" name="imagen_principal" placeholder="https://..." class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3 mt-6">
+                    <button type="button" id="btnCancelarModelo" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Cancelar</button>
+                    <button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">Crear Modelo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Nueva Marca -->
+    <div id="modalNuevaMarca" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-gray-800">Nueva Marca</h2>
+                <button id="btnCerrarModal" class="text-gray-500 hover:text-gray-700">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <form id="formNuevaMarca" class="p-6">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre Marca *</label>
+                        <input type="text" id="nombre_marca" name="nombre_marca" required placeholder="Ej: Nike" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3 mt-6">
+                    <button type="button" id="btnCancelar" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Cancelar</button>
+                    <button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">Crear Marca</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#btnNuevaMarca').click(() => $('#modalNuevaMarca').removeClass('hidden'));
+            $('#btnCerrarModal, #btnCancelar').click(() => { $('#modalNuevaMarca').addClass('hidden'); $('#formNuevaMarca')[0].reset(); });
+            $('#modalNuevaMarca').click(function(e) { if (e.target === this) { $(this).addClass('hidden'); $('#formNuevaMarca')[0].reset(); } });
+            $('#formNuevaMarca').submit(function(e) {
+                e.preventDefault();
+                const formData = { id_empresa: 1, nombre_marca: $('#nombre_marca').val() };
+                console.log('Datos:', formData);
+                alert('Marca creada exitosamente');
+                $('#modalNuevaMarca').addClass('hidden');
+                $('#formNuevaMarca')[0].reset();
+            });
+            
+            // Modal Nuevo Modelo
+            $('.btnNuevoModelo').click(function() {
+                $('#modalNuevoModelo').removeClass('hidden');
+            });
+            
+            $('#btnCerrarModalModelo, #btnCancelarModelo').click(() => {
+                $('#modalNuevoModelo').addClass('hidden');
+                $('#formNuevoModelo')[0].reset();
+            });
+            
+            $('#formNuevoModelo').submit(function(e) {
+                e.preventDefault();
+                const formData = {
+                    nombre_modelo: $('#nombre_modelo').val(),
+                    id_marca: $('#id_marca_modelo').val(),
+                    imagen_principal: $('#imagen_principal').val()
+                };
+                console.log('Modelo:', formData);
+                alert('Modelo creado exitosamente');
+                $('#modalNuevoModelo').addClass('hidden');
+                $('#formNuevoModelo')[0].reset();
+            });
+        });
+        // Script para submenús
+        const toggles = document.querySelectorAll('.submenu-toggle');
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const container = this.parentElement;
+                const submenu = container.querySelector('.submenu');
+                const icon = this.querySelector('.submenu-icon');
+                document.querySelectorAll('.submenu').forEach(sm => {
+                    if (sm !== submenu) {
+                        sm.classList.add('hidden');
+                        sm.parentElement.querySelector('.submenu-icon').style.transform = 'rotate(0deg)';
+                    }
+                });
+                submenu.classList.toggle('hidden');
+                icon.style.transform = submenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+            });
+        });
+        const currentPage = window.location.pathname.split('/').pop();
+        document.querySelectorAll('nav a').forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('bg-indigo-600', 'text-white');
+                link.classList.remove('text-gray-300', 'text-gray-400');
+                const submenu = link.closest('.submenu');
+                if (submenu) {
+                    submenu.classList.remove('hidden');
+                    submenu.parentElement.querySelector('.submenu-icon').style.transform = 'rotate(180deg)';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
