@@ -1,0 +1,13 @@
+/* ===================================
+   TapStyle - Estilos Principales
+   Archivo: main.css
+   =================================== */
+
+/* Importar fuente Inter de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+/* Estilos base del body */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f7f7f7;
+}

@@ -1,0 +1,15 @@
+/* ===================================
+   TapStyle - Estilos de Login
+   Archivo: login.css
+   =================================== */
+
+/* Importar fuente Inter de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+/* Estilos específicos para la página de login */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f7f7f7;
+    /* Fondo degradado suave para hacerlo más premium */
+    background: linear-gradient(135deg, #f0f4f8 0%, #e0e7f1 100%);
+}
