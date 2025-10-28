@@ -100,8 +100,10 @@
                 renderCart();
             }
             function formatCurrency(v) {
-                return "$" + Number(v).toFixed(2);
+                return "S/ " + Number(v).toFixed(2);
             }
+
+            // --- FUNCIÓN RENDERIZADO (MODIFICADA) ---
             function renderCart() {
                 const cart = getCart();
                 const tbody = document.getElementById("cart-items");
@@ -134,64 +136,67 @@
                     count += item.qty || 0;
                     const tr = document.createElement("tr");
                     tr.className = "hover:bg-gray-50 transition duration-150";
+                    
+                    // --- PLANTILLA HTML (MODIFICADA) ---
+                    // Añadimos item.size y item.color
                     tr.innerHTML = `
-            <td class="px-6 py-4">
-                <div class="flex items-center space-x-4">
-                <div class="flex-shrink-0 w-20 h-20">
-                    <img src="${item.image || "https://placehold.co/80x80"}" 
-                        alt="${item.name}" 
-                        class="w-full h-full object-cover rounded-lg shadow-sm">
-                </div>
-                <div>
-                    <div class="font-medium text-gray-900">${item.name}</div>
-                    <div class="text-sm text-gray-500 mt-0.5">SKU: ${item.id
-                        }</div>
-                </div>
-                </div>
-            </td>
-            <td class="px-6 py-4">
-                <div class="text-sm font-medium text-gray-900">${formatCurrency(
-                            item.price
-                        )}</div>
-            </td>
-            <td class="px-6 py-4">
-                <div class="flex items-center space-x-3">
-                <button data-id="${item.id
-                        }" class="qty-minus bg-gray-100 hover:bg-gray-200 rounded-lg p-1">
-                    <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
-                    </svg>
-                </button>
-                <input type="number" min="1" value="${item.qty || 1
+                <td class="px-6 py-4">
+                    <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0 w-20 h-20">
+                        <img src="${item.image || "https://placehold.co/80x80"}" 
+                            alt="${item.name}" 
+                            class="w-full h-full object-cover rounded-lg shadow-sm">
+                    </div>
+                    <div>
+                        <div class="font-medium text-gray-900">${item.name}</div>
+                        ${item.size ? `<div class="text-sm text-gray-500 mt-0.5">Talla: <strong>${item.size}</strong></div>` : ''}
+                        ${item.color ? `<div class="text-sm text-gray-500 mt-0.5">Color: <strong>${item.color}</strong></div>` : ''}
+                        <div class="text-xs text-gray-400 mt-0.5">SKU: ${item.id}</div>
+                    </div>
+                    </div>
+                </td>
+                <td class="px-6 py-4">
+                    <div class="text-sm font-medium text-gray-900">${formatCurrency(
+                        item.price
+                    )}</div>
+                </td>
+                <td class="px-6 py-4">
+                    <div class="flex items-center space-x-3">
+                    <button data-id="${item.id}" class="qty-minus bg-gray-100 hover:bg-gray-200 rounded-lg p-1">
+                        <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                        </svg>
+                    </button>
+                    <input type="number" min="1" value="${item.qty || 1
                         }" data-id="${item.id}"
-                    class="qty-input w-16 px-2 py-1 text-center border rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
-                <button data-id="${item.id
-                        }" class="qty-plus bg-gray-100 hover:bg-gray-200 rounded-lg p-1">
-                    <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        class="qty-input w-16 px-2 py-1 text-center border rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                    <button data-id="${item.id}" class="qty-plus bg-gray-100 hover:bg-gray-200 rounded-lg p-1">
+                        <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                    </button>
+                    </div>
+                </td>
+                <td class="px-6 py-4">
+                    <div class="text-sm font-medium text-gray-900">${formatCurrency(
+                        subtotal
+                    )}</div>
+                </td>
+                <td class="px-6 py-4 text-center">
+                    <button data-id="${item.id}" 
+                            class="remove-item text-gray-400 hover:text-red-600 p-2 rounded-lg hover:bg-red-50 transition-colors duration-150">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                     </svg>
-                </button>
-                </div>
-            </td>
-            <td class="px-6 py-4">
-                <div class="text-sm font-medium text-gray-900">${formatCurrency(
-                            subtotal
-                        )}</div>
-            </td>
-            <td class="px-6 py-4 text-center">
-                <button data-id="${item.id}" 
-                        class="remove-item text-gray-400 hover:text-red-600 p-2 rounded-lg hover:bg-red-50 transition-colors duration-150">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                </svg>
-                </button>
-            </td>
-            `;
+                    </button>
+                </td>
+                `;
                     tbody.appendChild(tr);
                 });
                 totalEl.textContent = formatCurrency(total);
                 countEl.textContent = count;
-
+                
+                // --- (Resto de los listeners de botones sin cambios) ---
                 tbody.querySelectorAll(".qty-input").forEach((input) => {
                     input.addEventListener("change", (e) => {
                         const id = e.target.dataset.id;
@@ -202,7 +207,7 @@
                         if (it) {
                             it.qty = val;
                             saveCart(cart);
-                            showToast("Cantidad actualizada");
+                            // showToast("Cantidad actualizada"); // Opcional
                         }
                     });
                 });
@@ -219,7 +224,7 @@
                         if (it) {
                             it.qty = val;
                             saveCart(cart);
-                            showToast("Cantidad actualizada");
+                            // showToast("Cantidad actualizada"); // Opcional
                         }
                     });
                 });
@@ -235,7 +240,7 @@
                         if (it) {
                             it.qty = val;
                             saveCart(cart);
-                            showToast("Cantidad actualizada");
+                            // showToast("Cantidad actualizada"); // Opcional
                         }
                     });
                 });
@@ -250,7 +255,7 @@
                         let cart = getCart();
                         cart = cart.filter((x) => x.id !== id);
                         saveCart(cart);
-                        showToast("Producto eliminado del carrito");
+                        // showToast("Producto eliminado del carrito"); // Opcional
                     });
                 });
             }

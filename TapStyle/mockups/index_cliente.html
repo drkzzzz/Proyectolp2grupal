@@ -4,21 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TapStyle - Centro Comercial Digital</title>
-    <!-- Carga de Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Estilos personalizados -->
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- Barra de Navegación Mejorada para Cliente Registrado -->
     <header class="bg-white shadow-md sticky top-0 z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
                 <a href="index_cliente.html" class="text-2xl font-extrabold text-indigo-600 tracking-wider">TapStyle</a>
                 
-                <!-- Menú Principal (Desktop) -->
                 <nav class="hidden md:flex space-x-8">
                     <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-150 font-medium">Tiendas</a>
                     <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-150 font-medium">Categorías</a>
@@ -26,16 +21,13 @@
                     <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-150 font-medium">Favoritos</a>
                 </nav>
 
-                <!-- Íconos de Usuario y Carrito - Mejorados para Cliente -->
                 <div class="flex items-center space-x-4">
-                    <!-- Icono de Búsqueda -->
                     <button class="text-gray-500 hover:text-indigo-600 p-2 rounded-full hover:bg-indigo-50 transition duration-150">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </button>
                     
-                    <!-- Icono de Favoritos -->
                     <a href="#" class="text-gray-500 hover:text-indigo-600 relative p-2 rounded-full hover:bg-indigo-50 transition duration-150">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -43,15 +35,13 @@
                         <span class="absolute top-1 right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-pink-500 rounded-full">5</span>
                     </a>
                     
-                    <!-- Icono de Carrito -->
-                    <a href="#" class="text-gray-500 hover:text-indigo-600 relative p-2 rounded-full hover:bg-indigo-50 transition duration-150">
+                    <a href="carrito.html" class="text-gray-500 hover:text-indigo-600 relative p-2 rounded-full hover:bg-indigo-50 transition duration-150">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
                         <span class="absolute top-1 right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">3</span>
                     </a>
                     
-                    <!-- Perfil del Cliente con Dropdown -->
                     <div class="relative group">
                         <button class="flex items-center space-x-2 text-gray-700 hover:text-indigo-600 transition duration-150">
                             <div class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-semibold">CL</div>
@@ -61,7 +51,6 @@
                             </svg>
                         </button>
                         
-                        <!-- Dropdown Menu -->
                         <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Mi Perfil</a>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Mis Pedidos</a>
@@ -76,10 +65,8 @@
         </div>
     </header>
 
-    <!-- Contenido Principal -->
     <main class="flex-grow">
         
-        <!-- Banner de Bienvenida Personalizado -->
         <section class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col md:flex-row items-center justify-between">
@@ -100,7 +87,6 @@
             </div>
         </section>
 
-        <!-- Sección: Tus Compras Recientes -->
         <section class="py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-3xl font-bold text-gray-800 mb-8 border-b border-indigo-200 pb-2">
@@ -108,7 +94,6 @@
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     
-                    <!-- Pedido 1 -->
                     <div class="bg-white rounded-xl shadow-lg p-6">
                         <div class="flex justify-between items-start mb-4">
                             <div>
@@ -124,15 +109,12 @@
                                     <p class="font-medium text-gray-800 text-sm">Hoodie Verde Urban</p>
                                     <p class="text-xs text-gray-500">Cantidad: 1</p>
                                 </div>
-                                <span class="text-sm font-semibold text-gray-900">$79.00</span>
-                            </div>
+                                <span class="text-sm font-semibold text-gray-900">S/ 79.00</span> </div>
                         </div>
                         <div class="mt-4 pt-4 border-t border-gray-100">
-                            <p class="text-sm font-semibold text-gray-900 text-right">Total: $79.00</p>
-                        </div>
+                            <p class="text-sm font-semibold text-gray-900 text-right">Total: S/ 79.00</p> </div>
                     </div>
 
-                    <!-- Pedido 2 -->
                     <div class="bg-white rounded-xl shadow-lg p-6">
                         <div class="flex justify-between items-start mb-4">
                             <div>
@@ -148,23 +130,19 @@
                                     <p class="font-medium text-gray-800 text-sm">Jeans Classic Fit</p>
                                     <p class="text-xs text-gray-500">Cantidad: 1</p>
                                 </div>
-                                <span class="text-sm font-semibold text-gray-900">$65.00</span>
-                            </div>
+                                <span class="text-sm font-semibold text-gray-900">S/ 65.00</span> </div>
                             <div class="flex items-center space-x-3">
                                 <img src="https://placehold.co/50x50/F59E0B/000000?text=CG" alt="Camiseta" class="w-12 h-12 rounded-lg object-cover">
                                 <div class="flex-1">
                                     <p class="font-medium text-gray-800 text-sm">Camiseta Básica</p>
                                     <p class="text-xs text-gray-500">Cantidad: 2</p>
                                 </div>
-                                <span class="text-sm font-semibold text-gray-900">$70.00</span>
-                            </div>
+                                <span class="text-sm font-semibold text-gray-900">S/ 70.00</span> </div>
                         </div>
                         <div class="mt-4 pt-4 border-t border-gray-100">
-                            <p class="text-sm font-semibold text-gray-900 text-right">Total: $135.00</p>
-                        </div>
+                            <p class="text-sm font-semibold text-gray-900 text-right">Total: S/ 135.00</p> </div>
                     </div>
 
-                    <!-- Pedido 3 -->
                     <div class="bg-white rounded-xl shadow-lg p-6">
                         <div class="flex justify-between items-start mb-4">
                             <div>
@@ -180,12 +158,10 @@
                                     <p class="font-medium text-gray-800 text-sm">Reloj Deportivo</p>
                                     <p class="text-xs text-gray-500">Cantidad: 1</p>
                                 </div>
-                                <span class="text-sm font-semibold text-gray-900">$120.00</span>
-                            </div>
+                                <span class="text-sm font-semibold text-gray-900">S/ 120.00</span> </div>
                         </div>
                         <div class="mt-4 pt-4 border-t border-gray-100">
-                            <p class="text-sm font-semibold text-gray-900 text-right">Total: $120.00</p>
-                        </div>
+                            <p class="text-sm font-semibold text-gray-900 text-right">Total: S/ 120.00</p> </div>
                     </div>
 
                 </div>
@@ -198,261 +174,28 @@
             </div>
         </section>
 
-        <!-- Sección: Productos que Podrían Gustarte -->
         <section class="py-12 bg-gray-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-3xl font-bold text-gray-800 mb-8 border-b border-yellow-300 pb-2">
                     💫 Productos que Podrían Gustarte
                 </h2>
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                
+                <div id="recomendados-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                     
-                    <!-- Producto Recomendado 1 -->
-                    <a href="producto.html" class="block bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 group">
-                        <div class="relative overflow-hidden rounded-t-xl">
-                            <img src="https://placehold.co/400x500/DC2626/ffffff?text=Chaqueta+R" alt="Chaqueta Roja" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
-                            <button class="absolute top-2 right-2 p-2 bg-white bg-opacity-80 rounded-full hover:bg-red-500 hover:text-white transition duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-900 truncate">Chaqueta Roja Deportiva</h3>
-                            <p class="text-sm text-indigo-600 font-bold mt-1">$ 89.99</p>
-                            <p class="text-xs text-gray-500 mt-1">Por: Street Vibe Co.</p>
-                            <div class="flex items-center mt-2">
-                                <div class="flex text-yellow-400">
-                                    ★★★★☆
-                                </div>
-                                <span class="text-xs text-gray-500 ml-1">(128)</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Producto Recomendado 2 -->
-                    <a href="producto.html" class="block bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 group">
-                        <div class="relative overflow-hidden rounded-t-xl">
-                            <img src="https://placehold.co/400x500/059669/ffffff?text=Zapatos+V" alt="Zapatos Verde" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
-                            <button class="absolute top-2 right-2 p-2 bg-white bg-opacity-80 rounded-full hover:bg-red-500 hover:text-white transition duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-900 truncate">Zapatos Urbanos Verde</h3>
-                            <p class="text-sm text-indigo-600 font-bold mt-1">$ 120.00</p>
-                            <p class="text-xs text-gray-500 mt-1">Por: Performance Footwear</p>
-                            <div class="flex items-center mt-2">
-                                <div class="flex text-yellow-400">
-                                    ★★★★★
-                                </div>
-                                <span class="text-xs text-gray-500 ml-1">(95)</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Producto Recomendado 3 -->
-                    <a href="producto.html" class="block bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 group">
-                        <div class="relative overflow-hidden rounded-t-xl">
-                            <img src="https://placehold.co/400x500/7C3AED/ffffff?text=Gafas+L" alt="Gafas de Lujo" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
-                            <button class="absolute top-2 right-2 p-2 bg-white bg-opacity-80 rounded-full hover:bg-red-500 hover:text-white transition duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-900 truncate">Gafas de Sol Premium</h3>
-                            <p class="text-sm text-indigo-600 font-bold mt-1">$ 75.50</p>
-                            <p class="text-xs text-gray-500 mt-1">Por: Glamour Time</p>
-                            <div class="flex items-center mt-2">
-                                <div class="flex text-yellow-400">
-                                    ★★★★☆
-                                </div>
-                                <span class="text-xs text-gray-500 ml-1">(64)</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Producto Recomendado 4 -->
-                    <a href="producto.html" class="block bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 group">
-                        <div class="relative overflow-hidden rounded-t-xl">
-                            <img src="https://placehold.co/400x500/0EA5E9/ffffff?text=Camisa+A" alt="Camisa Azul" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
-                            <button class="absolute top-2 right-2 p-2 bg-white bg-opacity-80 rounded-full hover:bg-red-500 hover:text-white transition duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-900 truncate">Camisa Casual Azul</h3>
-                            <p class="text-sm text-indigo-600 font-bold mt-1">$ 45.00</p>
-                            <p class="text-xs text-gray-500 mt-1">Por: Gentle Elegance</p>
-                            <div class="flex items-center mt-2">
-                                <div class="flex text-yellow-400">
-                                    ★★★★☆
-                                </div>
-                                <span class="text-xs text-gray-500 ml-1">(42)</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Producto Recomendado 5 -->
-                    <a href="producto.html" class="hidden xl:block bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 group">
-                        <div class="relative overflow-hidden rounded-t-xl">
-                            <img src="https://placehold.co/400x500/F59E0B/ffffff?text=Mochila" alt="Mochila" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
-                            <button class="absolute top-2 right-2 p-2 bg-white bg-opacity-80 rounded-full hover:bg-red-500 hover:text-white transition duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-900 truncate">Mochila Táctica Negra</h3>
-                            <p class="text-sm text-indigo-600 font-bold mt-1">$ 55.00</p>
-                            <p class="text-xs text-gray-500 mt-1">Por: Street Vibe Co.</p>
-                            <div class="flex items-center mt-2">
-                                <div class="flex text-yellow-400">
-                                    ★★★★★
-                                </div>
-                                <span class="text-xs text-gray-500 ml-1">(78)</span>
-                            </div>
-                        </div>
-                    </a>
-
-                </div>
+                    </div>
             </div>
         </section>
 
-        <!-- Sección: Tus Tiendas Favoritas -->
         <section class="py-12">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold text-gray-800 mb-8 border-b border-indigo-200 pb-2">
-                    ❤️ Tus Tiendas Favoritas
-                </h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    
-                    <!-- Tienda Favorita 1 -->
-                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300 overflow-hidden">
-                        <img src="https://placehold.co/400x250/374151/ffffff?text=URBANA" alt="Street Vibe Co." class="w-full h-32 object-cover">
-                        <div class="p-4">
-                            <div class="flex items-center justify-between mb-2">
-                                <h3 class="text-lg font-semibold text-gray-900">Street Vibe Co.</h3>
-                                <button class="text-red-500 hover:text-red-700 transition duration-150">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-3">Moda urbana y streetwear</p>
-                            <div class="flex items-center justify-between text-xs text-gray-500">
-                                <span>⭐ 4.8 (320)</span>
-                                <span>🛒 12 compras</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Tienda Favorita 2 -->
-                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300 overflow-hidden">
-                        <img src="https://placehold.co/400x250/1E40AF/ffffff?text=SPORT" alt="Performance Footwear" class="w-full h-32 object-cover">
-                        <div class="p-4">
-                            <div class="flex items-center justify-between mb-2">
-                                <h3 class="text-lg font-semibold text-gray-900">Performance Footwear</h3>
-                                <button class="text-red-500 hover:text-red-700 transition duration-150">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-3">Calzado deportivo técnico</p>
-                            <div class="flex items-center justify-between text-xs text-gray-500">
-                                <span>⭐ 4.6 (215)</span>
-                                <span>🛒 8 compras</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Tienda Favorita 3 -->
-                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300 overflow-hidden">
-                        <img src="https://placehold.co/400x250/7C3AED/ffffff?text=LUJO" alt="Glamour Time" class="w-full h-32 object-cover">
-                        <div class="p-4">
-                            <div class="flex items-center justify-between mb-2">
-                                <h3 class="text-lg font-semibold text-gray-900">Glamour Time</h3>
-                                <button class="text-red-500 hover:text-red-700 transition duration-150">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-3">Accesorios de lujo y joyería</p>
-                            <div class="flex items-center justify-between text-xs text-gray-500">
-                                <span>⭐ 4.9 (150)</span>
-                                <span>🛒 5 compras</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Añadir más tiendas -->
-                    <div class="bg-gray-50 rounded-xl border-2 border-dashed border-gray-300 hover:border-indigo-300 transition duration-300 flex items-center justify-center cursor-pointer">
-                        <div class="text-center p-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                            </svg>
-                            <p class="text-gray-600 text-sm">Descubrir más tiendas</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
+            </section>
 
     </main>
 
-    <!-- Pie de Página (Igual que index.html) -->
     <footer class="bg-gray-800 text-white mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div>
-                    <h4 class="font-bold text-lg mb-4 text-indigo-400">TapStyle</h4>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="#" class="hover:text-white transition duration-150">Acerca de Nosotros</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-150">Trabaja con Nosotros</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-150">Términos y Condiciones</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-lg mb-4 text-indigo-400">Ayuda</h4>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="#" class="hover:text-white transition duration-150">FAQ</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-150">Política de Envíos</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-150">Devoluciones</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-lg mb-4 text-indigo-400">Mi Cuenta</h4>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="#" class="hover:text-white transition duration-150">Mis Pedidos</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-150">Mis Favoritos</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-150">Configuración</a></li>
-                    </ul>
-                </div>
-                <div class="col-span-2 md:col-span-1">
-                    <h4 class="font-bold text-lg mb-4 text-indigo-400">Síguenos</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition duration-150">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2v-2c0-2.04 1.25-3.16 3.06-3.16.88 0 1.76.13 2.05.2v2.33h-1.35c-1.06 0-1.28.52-1.28 1.26V15h2.5l-.4 3H14v6.8c4.56-.93 8-4.96 8-9.8V12z"/></svg>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition duration-150">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C17.61 2 20 4.39 20 7.8v8.4c0 3.41-2.39 5.8-5.8 5.8H7.8C4.39 22 2 19.61 2 16.2V7.8C2 4.39 4.39 2 7.8 2zm-.22 4a.8.8 0 100 1.6.8.8 0 000-1.6zm8.82 4.4a5 5 0 11-10 0 5 5 0 0110 0zm-8 0a3 3 0 106 0 3 3 0 00-6 0z"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-8 pt-6 border-t border-gray-700 text-center">
-                <p class="text-sm text-gray-400">&copy; 2025 TapStyle S.A. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
+        </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../js/producto.js"></script>
+    <script src="../js/cliente.js"></script>
 </body>
 </html>

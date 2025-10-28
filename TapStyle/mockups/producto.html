@@ -5,13 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TapStyle - Tu Centro Comercial Digital</title>
-    <!-- Carga de Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./css/main.css">
 </head>
 
 <body class="bg-gray-50 flex flex-col min-h-screen">
-    <!-- Header -->
     <header class="bg-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <a href="index.html" class="text-2xl font-extrabold text-indigo-600 tracking-wider">
@@ -23,20 +21,17 @@
             </nav>
         </div>
     </header>
-    <!-- Contenido principal -->
     <main class="flex-grow">
         <section class="py-12">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                        <!-- Imagen del producto -->
                         <div class="p-6 bg-gradient-to-br from-blue-50 to-white flex items-center justify-center">
                             <img id="product-image" src="https://placehold.co/600x600/93C5FD/ffffff?text=Producto"
                                 alt="producto" class="w-full max-w-md rounded-lg object-cover shadow-md" />
                         </div>
 
-                        <!-- Información del producto -->
                         <div class="p-8">
                             <div class="flex items-center justify-between">
                                 <h1 id="product-name" class="text-3xl font-extrabold text-sky-900">
@@ -56,51 +51,39 @@
                             <p id="product-desc" class="mt-4 text-gray-600 leading-relaxed">
                                 Descripción breve y llamativa del producto. Materiales, corte y estilo resumidos para
                                 atraer al comprador.
-                                Esta ficha solo es visual (mockup).
                             </p>
 
-                            <!-- Colores -->
                             <div class="mt-6">
                                 <h4 class="text-sm font-semibold text-gray-700 mb-2">Colores disponibles</h4>
-                                <div class="flex items-center space-x-3">
+                                <div id="product-colors-buttons" class="flex items-center space-x-3">
                                     <button
                                         class="w-8 h-8 rounded-full bg-sky-600 ring-2 ring-transparent hover:ring-sky-300"
-                                        title="Azul"></button>
+                                        title="Azul" data-color="Azul"></button>
                                     <button
                                         class="w-8 h-8 rounded-full bg-gray-800 ring-2 ring-transparent hover:ring-sky-300"
-                                        title="Negro"></button>
+                                        title="Negro" data-color="Negro"></button>
                                     <button
                                         class="w-8 h-8 rounded-full bg-pink-500 ring-2 ring-transparent hover:ring-sky-300"
-                                        title="Rosa"></button>
+                                        title="Rosa" data-color="Rosa"></button>
                                     <button
                                         class="w-8 h-8 rounded-full bg-yellow-400 ring-2 ring-transparent hover:ring-sky-300"
-                                        title="Amarillo"></button>
+                                        title="Amarillo" data-color="Amarillo"></button>
                                 </div>
                             </div>
 
-                            <!-- Tallas -->
-                            <div class="mt-6">
+                            <div id="product-sizes-container" class="mt-6" style="display: none;">
                                 <h4 class="text-sm font-semibold text-gray-700 mb-2">Tallas</h4>
-                                <div class="flex items-center space-x-2">
-                                    <button
-                                        class="px-3 py-1 border rounded-md text-sm text-gray-700 hover:bg-sky-50">S</button>
-                                    <button
-                                        class="px-3 py-1 border rounded-md text-sm text-gray-700 hover:bg-sky-50">M</button>
-                                    <button
-                                        class="px-3 py-1 border rounded-md text-sm text-gray-700 hover:bg-sky-50">L</button>
-                                    <button
-                                        class="px-3 py-1 border rounded-md text-sm text-gray-700 hover:bg-sky-50">XL</button>
-                                </div>
+                                <div id="product-sizes-buttons" class="flex items-center space-x-2">
+                                    </div>
                             </div>
 
-                            <!-- Cantidad -->
+
                             <div class="mt-6 flex items-center space-x-4">
                                 <label class="text-sm text-gray-700">Cantidad</label>
                                 <input id="product-qty" type="number" min="1" value="1"
                                     class="w-20 px-3 py-2 border rounded-md" />
                             </div>
 
-                            <!-- Botones -->
                             <div class="mt-8 flex items-center space-x-4">
                                 <button id="btn-add"
                                     class="px-5 py-3 bg-sky-700 text-white rounded-lg shadow hover:bg-sky-800 transition">
@@ -116,7 +99,6 @@
                                 </a>
                             </div>
 
-                            <!-- Material y Envío -->
                             <div
                                 class="mt-8 text-base text-gray-600 leading-relaxed space-y-2 border-t border-gray-100 pt-4">
                                 <p><strong class="font-semibold text-gray-800">Material:</strong> 100% algodón premium.
@@ -130,9 +112,15 @@
             </div>
         </section>
     </main>
+
     <script>
         (function () {
             const CART_KEY = "tapstyle_cart";
+            
+            // --- NUEVAS VARIABLES PARA GUARDAR LA SELECCIÓN ---
+            let selectedSize = null;
+            let hasSizes = false; // Para saber si debemos validar la talla
+            let selectedColor = null;
 
             function qs(name) {
                 const url = new URL(location.href);
@@ -146,37 +134,70 @@
                 }
             }
 
+            // --- Lectura de Parámetros ---
             const name =
                 safeDecode(qs("name")) ||
-                document.getElementById("product-name").textContent ||
-                "Chaqueta de Cuero Vintage";
-            const priceRaw =
-                qs("price") ||
-                (document.getElementById("product-price") &&
-                    document.getElementById("product-price").textContent) ||
-                "120.00";
+                document.getElementById("product-name").textContent.trim() ||
+                "Producto por Defecto";
+            
+            const priceRaw = qs("price") || "0";
             const price =
-                parseFloat(priceRaw.replace(/[^0-9.,]/g, "").replace(",", ".")) || 120.0;
+                parseFloat(priceRaw.replace(/[^0-9.,]/g, "").replace(",", ".")) || 0.0;
+
             const image =
                 qs("image") ||
-                (document.getElementById("product-image") &&
-                    document.getElementById("product-image").src) ||
                 "https://placehold.co/600x600/93C5FD/ffffff?text=Producto";
+            
             const store =
                 safeDecode(qs("store")) ||
-                (document.getElementById("product-store") &&
-                    document.getElementById("product-store").textContent) ||
-                "Street Vibe Co.";
+                (document.getElementById("product-store").querySelector("span") && document.getElementById("product-store").querySelector("span").textContent.trim()) ||
+                "Tienda Desconocida";
 
+            const desc =
+                safeDecode(qs("desc")) ||
+                document.getElementById("product-desc").textContent.trim() ||
+                "Descripción no disponible.";
+
+            const sizesStr = safeDecode(qs("sizes")); // "S,M,L" o ""
+
+            
+            // --- Actualizar el HTML ---
             document.getElementById("product-name").textContent = name;
             document.getElementById("product-price").textContent =
-                "$" + Number(price).toFixed(2);
+                "S/ " + Number(price).toFixed(2);
             document.getElementById("product-image").src = image;
             document.getElementById("product-store").innerHTML =
                 'Vendido por: <span class="font-semibold text-sky-800">' +
                 store +
                 "</span>";
+            document.getElementById("product-desc").textContent = desc;
 
+            // Lógica para Tallas
+            const tallasContainer = document.getElementById("product-sizes-container");
+            const tallasButtonsContainer = document.getElementById("product-sizes-buttons");
+            
+            if (sizesStr) {
+                hasSizes = true; // Marcamos que este producto requiere talla
+                const sizes = sizesStr.split(',');
+                
+                tallasButtonsContainer.innerHTML = '';
+                
+                sizes.forEach(size => {
+                    const button = document.createElement('button');
+                    // Añadimos data-size para identificarlo
+                    button.dataset.size = size; 
+                    button.className = "px-3 py-1 border rounded-md text-sm text-gray-700 hover:bg-sky-50";
+                    button.textContent = size;
+                    tallasButtonsContainer.appendChild(button);
+                });
+                
+                tallasContainer.style.display = 'block';
+            } else {
+                tallasContainer.style.display = 'none';
+            }
+
+            // --- Lógica del Carrito ---
+            
             function showToast(msg) {
                 let t = document.getElementById("toast");
                 if (!t) {
@@ -207,7 +228,7 @@
                 updateCartCount();
             }
             function updateCartCount() {
-                const el = document.getElementById("cart-count");
+                const el = document.getElementById("cart-count"); 
                 if (!el) return;
                 const cart = getCart();
                 const count = cart.reduce((s, i) => s + (i.qty || 0), 0);
@@ -216,6 +237,7 @@
 
             function addItem(item) {
                 const cart = getCart();
+                // Esta lógica ahora funciona por variación (ej: p1_S_Negro)
                 const existing = cart.find((c) => c.id === item.id);
                 if (existing) {
                     existing.qty = (existing.qty || 0) + (item.qty || 1);
@@ -227,21 +249,76 @@
                 showToast("Producto añadido con éxito");
             }
 
+            // --- EVENTOS DE CLIC (NUEVO) ---
             document.addEventListener("DOMContentLoaded", () => {
+                
+                // 1. Event Listener para Tallas (con delegación de eventos)
+                tallasButtonsContainer.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'BUTTON') {
+                        selectedSize = e.target.dataset.size; // Guardamos la talla
+                        
+                        // Resaltar el botón seleccionado
+                        Array.from(tallasButtonsContainer.children).forEach(btn => 
+                            btn.classList.remove('ring-2', 'ring-sky-500', 'bg-sky-50')
+                        );
+                        e.target.classList.add('ring-2', 'ring-sky-500', 'bg-sky-50');
+                    }
+                });
+
+                // 2. Event Listener para Colores (con delegación de eventos)
+                const colorButtonsContainer = document.getElementById('product-colors-buttons');
+                colorButtonsContainer.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'BUTTON') {
+                        selectedColor = e.target.dataset.color; // Guardamos el color
+                        
+                        // Resaltar el botón seleccionado
+                        Array.from(colorButtonsContainer.children).forEach(btn => 
+                            btn.classList.remove('ring-2', 'ring-offset-2', 'ring-sky-500')
+                        );
+                        e.target.classList.add('ring-2', 'ring-offset-2', 'ring-sky-500');
+                    }
+                });
+
+                // 3. Event Listener para el botón "Añadir al carrito" (MODIFICADO)
                 const btn = document.getElementById("btn-add");
                 if (btn) {
                     btn.addEventListener("click", (e) => {
                         e.preventDefault();
+                        
+                        // --- VALIDACIÓN ---
+                        if (hasSizes && !selectedSize) {
+                            showToast("Por favor, selecciona una talla.");
+                            return; // Detenemos la función
+                        }
+                        if (!selectedColor) {
+                            showToast("Por favor, selecciona un color.");
+                            return; // Detenemos la función
+                        }
+
                         const qtyEl = document.getElementById("product-qty");
                         const qty = Math.max(1, parseInt(qtyEl && qtyEl.value) || 1);
-                        const productName = document.getElementById("product-name").textContent.trim();
-                        const productPriceText = document.getElementById("product-price").textContent || "0";
-                        const productPrice =
-                            parseFloat(productPriceText.replace(/[^0-9.,]/g, "").replace(",", ".")) || price;
-                        const productImage = document.getElementById("product-image").src || image;
-                        const id = qs("id") || productName.replace(/\s+/g, "_").toLowerCase();
+                        
+                        const productName = name; 
+                        const productPrice = price;
+                        const productImage = image;
+                        
+                        // ID del producto base (ej: 'p1')
+                        const productId = qs("id") || productName.replace(/\s+/g, "_").toLowerCase();
+                        
+                        // ID de la variación (ej: 'p1_S_Negro')
+                        const variationId = `${productId}_${selectedSize || 'talla-unica'}_${selectedColor.replace(/\s+/g, '-')}`;
 
-                        addItem({ id, name: productName, price: productPrice, image: productImage, qty });
+                        // Creamos el objeto completo para el carrito
+                        addItem({ 
+                            id: variationId,        // ID único de la variación
+                            productId: productId,   // ID del producto general
+                            name: productName, 
+                            price: productPrice, 
+                            image: productImage, 
+                            qty: qty,
+                            size: selectedSize,     // "S", "M", "L", etc.
+                            color: selectedColor    // "Negro", "Azul", etc.
+                        });
 
                         const original = btn.textContent;
                         btn.textContent = "Añadido";
@@ -252,6 +329,7 @@
             });
         })();
     </script>
+    
     <footer class="bg-gray-800 text-white mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -276,13 +354,12 @@
                     <ul class="space-y-2 text-sm text-gray-300">
                         <li><a href="#" class="hover:text-white transition duration-150">Regístrate como Vendedor</a>
                         </li>
-                        <li><a href="#" class="hover:text-white transition duration-150">Panel de Administración</a>
+                        <li><a href="#" class="hover:text-white transition duration-1S50">Panel de Administración</a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-span-2 md:col-span-1">
                     <h4 class="font-bold text-lg mb-4 text-indigo-400">Síguenos</h4>
-                    <!-- Íconos de redes sociales (simulados) -->
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-white transition duration-150">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24"
