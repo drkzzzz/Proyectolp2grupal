@@ -1,0 +1,109 @@
+/* css/modules/_productos.css
+ * Estilos específicos del módulo Productos alineados con css/base/_variables.css
+ */
+
+.productos-module {
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.productos-module h1 {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-2xl);
+    margin-bottom: calc(var(--space-3, 0.75rem));
+    color: var(--color-gray-900);
+}
+
+.productos-module p {
+    color: var(--color-gray-700);
+    margin-bottom: calc(var(--space-4, 1rem));
+}
+
+/* Tabla responsiva: en pantallas pequeñas convertimos cada fila en un card */
+.productos-table-container {
+    width: 100%;
+}
+
+/* Desktop: tabla tradicional */
+@media (min-width: 720px) {
+    .productos-table-container .ts-table {
+        width: 100%;
+    }
+}
+
+/* Mobile: filas como cards */
+@media (max-width: 719px) {
+    .productos-table-container .ts-table thead {
+        display: none;
+    }
+
+    .productos-table-container .ts-table,
+    .productos-table-container .ts-table tbody,
+    .productos-table-container .ts-table tr,
+    .productos-table-container .ts-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .productos-table-container .ts-table tr {
+        margin-bottom: calc(var(--space-4, 1rem));
+        background: var(--color-white);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow-sm);
+        padding: calc(var(--space-3, 0.75rem));
+    }
+
+    .productos-table-container .ts-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: calc(var(--space-3, 0.75rem)) 0;
+        border: none;
+    }
+
+    .productos-table-container .td-image {
+        margin-bottom: calc(var(--space-3, 0.75rem));
+    }
+
+    .productos-table-container .td-image img {
+        width: 88px;
+        height: 88px;
+    }
+
+    .productos-table-container .td-actions {
+        margin-top: calc(var(--space-2, 0.5rem));
+        display: flex;
+        gap: calc(var(--space-2, 0.5rem));
+    }
+
+    .productos-table-container .muted {
+        display: block;
+        margin-top: calc(var(--space-1, 0.25rem));
+    }
+}
+
+/* Toolbar spacing adjustments */
+.productos-toolbar {
+    gap: calc(var(--space-4, 1rem));
+}
+
+.productos-toolbar .toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--space-2, 0.5rem));
+}
+
+.productos-toolbar .toolbar-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Small polish: product name and meta */
+.ts-table td>div.muted {
+    margin-top: calc(var(--space-1, 0.25rem));
+}
+
+/* Ensure footer spacing in main */
+.main-content main {
+    padding-bottom: calc(var(--space-8, 2rem));
+}
