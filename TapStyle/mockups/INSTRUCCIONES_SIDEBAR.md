@@ -1,0 +1,115 @@
+# Sidebar Mejorado - Instrucciones de Implementación
+
+## Reemplazar el sidebar actual con este código:
+
+```html
+<!-- SIDEBAR MEJORADO CON SUBMENÚS -->
+<aside class="sidebar bg-gray-800 text-white p-6 flex flex-col fixed h-full z-20 hidden md:flex overflow-y-auto" style="width: 280px;">
+    <div class="text-center mb-6 pb-4 border-b border-gray-700">
+        <a href="index.html" class="text-2xl font-extrabold text-indigo-400 tracking-wider">TapStyle</a>
+    </div>
+    <div class="mb-6 text-center">
+        <div class="w-14 h-14 bg-white text-indigo-600 rounded-full mx-auto flex items-center justify-center text-lg font-bold mb-2">SV</div>
+        <p class="font-semibold">Street Vibe Co.</p>
+        <p class="text-xs text-gray-400">Admin de Negocio</p>
+    </div>
+    <nav class="flex-grow space-y-1">
+        <a href="dashboard_admin_negocio.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            <span class="text-sm font-medium">Dashboard</span>
+        </a>
+        <div class="submenu-container">
+            <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                <div class="flex items-center">
+                    <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    <span class="text-sm font-medium">Catálogo</span>
+                </div>
+                <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div class="submenu hidden ml-7 mt-1 space-y-1">
+                <a href="crud_producto.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Productos</a>
+                <a href="categorias.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Categorías</a>
+                <a href="marcas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Marcas</a>
+            </div>
+        </div>
+        <div class="submenu-container">
+            <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                <div class="flex items-center">
+                    <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                    <span class="text-sm font-medium">Operaciones</span>
+                </div>
+                <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div class="submenu hidden ml-7 mt-1 space-y-1">
+                <a href="compras.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Compras</a>
+                <a href="ventas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Ventas</a>
+                <a href="stock.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Stock</a>
+                <a href="caja.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Caja</a>
+            </div>
+        </div>
+        <a href="finanzas_pagos.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            <span class="text-sm font-medium">Finanzas</span>
+        </a>
+        <div class="submenu-container">
+            <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                <div class="flex items-center">
+                    <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <span class="text-sm font-medium">Administración</span>
+                </div>
+                <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div class="submenu hidden ml-7 mt-1 space-y-1">
+                <a href="gestion_empleados.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Empleados</a>
+                <a href="roles_permisos.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Roles y Permisos</a>
+            </div>
+        </div>
+    </nav>
+    <div class="mt-auto pt-4 border-t border-gray-700">
+        <a href="login.html" class="flex items-center p-2 rounded-lg text-red-400 hover:bg-gray-700 transition">
+            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+            <span class="text-sm font-medium">Cerrar Sesión</span>
+        </a>
+    </div>
+</aside>
+```
+
+## Agregar este script antes de </body>:
+
+```javascript
+<script>
+// Script para submenús
+const toggles = document.querySelectorAll('.submenu-toggle');
+toggles.forEach(toggle => {
+    toggle.addEventListener('click', function() {
+        const container = this.parentElement;
+        const submenu = container.querySelector('.submenu');
+        const icon = this.querySelector('.submenu-icon');
+        document.querySelectorAll('.submenu').forEach(sm => {
+            if (sm !== submenu) {
+                sm.classList.add('hidden');
+                sm.parentElement.querySelector('.submenu-icon').style.transform = 'rotate(0deg)';
+            }
+        });
+        submenu.classList.toggle('hidden');
+        icon.style.transform = submenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+    });
+});
+const currentPage = window.location.pathname.split('/').pop();
+document.querySelectorAll('nav a').forEach(link => {
+    if (link.getAttribute('href') === currentPage) {
+        link.classList.add('bg-indigo-600', 'text-white');
+        link.classList.remove('text-gray-300', 'text-gray-400');
+        const submenu = link.closest('.submenu');
+        if (submenu) {
+            submenu.classList.remove('hidden');
+            submenu.parentElement.querySelector('.submenu-icon').style.transform = 'rotate(180deg)';
+        }
+    }
+});
+</script>
+```
+
+## Páginas completadas:
+- ✅ dashboard_admin_negocio.html
+- ✅ crud_producto.html
