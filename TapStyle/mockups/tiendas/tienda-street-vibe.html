@@ -7,7 +7,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="../TapStyle/mockups/css/tienda-styles.css">
+    <link rel="stylesheet" href="../css/tienda-styles.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 </head>
@@ -31,17 +31,18 @@
 
             <!-- Acciones del Header -->
             <div class="header-actions">
-                <button class="icon-btn">
+                <button class="icon-btn" title="Buscar">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                         <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2"/>
                     </svg>
                 </button>
-                <button class="icon-btn">
+                <a href="../carrito.html" class="icon-btn" title="Carrito">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                         <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.707 15.293C4.077 15.923 4.523 17 5.414 17H17M17 17C15.895 17 15 17.895 15 19C15 20.105 15.895 21 17 21C18.105 21 19 20.105 19 19C19 17.895 18.105 17 17 17ZM9 19C9 20.105 8.105 21 7 21C5.895 21 5 20.105 5 19C5 17.895 5.895 17 7 17C8.105 17 9 17.895 9 19Z" stroke="currentColor" stroke-width="2"/>
                     </svg>
-                </button>
-                <button class="btn btn-outline" id="loginBtn">Iniciar Sesión</button>
+                    <span id="cart-count-badge" class="cart-count-badge">0</span>
+                </a>
+                <a href="../login.html" class="btn btn-outline" id="headerLogin">Iniciar Sesión</a>
             </div>
         </div>
     </header>
@@ -521,10 +522,8 @@
     </footer>
 
     <script>
-        document.getElementById('loginBtn').addEventListener('click', function() {
-            alert('Para comprar, debes iniciar sesión o registrarte');
-        });
-
+        // Header login is a link to ../login.html now.
+        // Keep size-option toggling behaviour.
         document.querySelectorAll('.size-option').forEach(button => {
             button.addEventListener('click', function() {
                 document.querySelectorAll('.size-option').forEach(btn => {
@@ -533,6 +532,138 @@
                 this.classList.add('active');
             });
         });
+    </script>
+    <!-- Script: Añadir enlaces a producto, carrito y login en cada tarjeta -->
+    <script>
+        (function(){
+            // Desde este archivo (carpeta 'tiendas') los destinos están en ../ (mockups)
+            const PRODUCT_PAGE = '../producto.html';
+            const CART_PAGE = '../carrito.html';
+            const LOGIN_PAGE = '../login.html';
+            const CART_KEY = 'tapstyle_cart';
+
+            function makeQuery(params){
+                return Object.keys(params).map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k])).join('&');
+            }
+
+            function getCart(){
+                try{ return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }catch(e){ return []; }
+            }
+            function saveCart(cart){
+                localStorage.setItem(CART_KEY, JSON.stringify(cart));
+                updateCartCount();
+            }
+            function updateCartCount(){
+                const el = document.getElementById('cart-count-badge');
+                if(!el) return;
+                const cart = getCart();
+                const count = cart.reduce((s,i)=> s + (i.qty||0), 0);
+                el.textContent = count || 0;
+            }
+            function showToast(msg){
+                let t = document.getElementById('ts-toast');
+                if(!t){
+                    t = document.createElement('div');
+                    t.id = 'ts-toast';
+                    t.style.position = 'fixed';
+                    t.style.right = '18px';
+                    t.style.bottom = '18px';
+                    t.style.background = 'rgba(15,23,42,0.9)';
+                    t.style.color = 'white';
+                    t.style.padding = '8px 12px';
+                    t.style.borderRadius = '8px';
+                    t.style.boxShadow = '0 6px 18px rgba(2,6,23,0.3)';
+                    t.style.zIndex = 1200;
+                    t.style.opacity = '0';
+                    t.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+                    document.body.appendChild(t);
+                }
+                t.textContent = msg;
+                t.style.opacity = '1';
+                t.style.transform = 'translateY(0)';
+                clearTimeout(t._hide);
+                t._hide = setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateY(8px)'; }, 1600);
+            }
+
+            function addItem(item){
+                const cart = getCart();
+                const existing = cart.find(c=> c.id === item.id);
+                if(existing){
+                    existing.qty = (existing.qty||0) + (item.qty||1);
+                } else {
+                    item.qty = item.qty || 1;
+                    cart.push(item);
+                }
+                saveCart(cart);
+                showToast('Producto añadido');
+            }
+
+            document.querySelectorAll('.product-card').forEach(card => {
+                const titleEl = card.querySelector('.product-title');
+                const imgEl = card.querySelector('.product-image img');
+                const priceEl = card.querySelector('.product-price');
+
+                const name = titleEl ? titleEl.textContent.trim() : '';
+                // price may contain nested spans for sale/original; grab visible text
+                const priceText = priceEl ? priceEl.textContent.replace(/\s+/g,' ').trim() : '';
+                const price = parseFloat((priceText || '').replace(/[^0-9.,]/g,'').replace(',', '.')) || 0;
+                const image = imgEl ? imgEl.src : '';
+
+                const query = makeQuery({ name: name, price: priceText, image: image });
+                const productUrl = PRODUCT_PAGE + (query ? ('?' + query) : '');
+
+                // Wrap image with link to product page if not already wrapped
+                if (imgEl && !imgEl.closest('a')){
+                    const a = document.createElement('a');
+                    a.href = productUrl;
+                    a.title = name;
+                    a.className = 'product-image-link';
+                    imgEl.parentNode.insertBefore(a, imgEl);
+                    a.appendChild(imgEl);
+                }
+
+                // Make title clickable
+                if (titleEl && !titleEl.querySelector('a')){
+                    const a = document.createElement('a');
+                    a.href = productUrl;
+                    a.textContent = titleEl.textContent;
+                    a.className = 'product-title-link';
+                    // replace title text with link
+                    titleEl.textContent = '';
+                    titleEl.appendChild(a);
+                }
+
+                // Add action buttons (Añadir y Ver) — compact and centered. Only add once.
+                if (!card.querySelector('.product-actions')){
+                    const actions = document.createElement('div');
+                    actions.className = 'product-actions';
+
+                    const addBtn = document.createElement('a');
+                    addBtn.href = '#';
+                    addBtn.className = 'product-action-btn btn-add';
+                    addBtn.textContent = 'Añadir';
+                    addBtn.addEventListener('click', function(e){
+                        e.preventDefault();
+                        const id = (name || 'prod').replace(/\s+/g,'_').toLowerCase();
+                        addItem({ id: id, name: name, price: price, image: image, qty: 1 });
+                    });
+
+                    const viewBtn = document.createElement('a');
+                    viewBtn.href = productUrl;
+                    viewBtn.className = 'product-action-btn btn-view';
+                    viewBtn.textContent = 'Ver';
+
+                    actions.appendChild(addBtn);
+                    actions.appendChild(viewBtn);
+
+                    const info = card.querySelector('.product-info');
+                    if (info) info.appendChild(actions);
+                }
+            });
+
+            // inicializar contador
+            updateCartCount();
+        })();
     </script>
 </body>
 </html>
