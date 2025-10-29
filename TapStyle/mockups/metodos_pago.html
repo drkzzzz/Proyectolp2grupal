@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TapStyle - Ventas</title>
+    <title>TapStyle - Métodos de Pago</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body class="flex">
+
+    <!-- SIDEBAR -->
     <aside class="sidebar bg-gray-800 text-white p-6 flex flex-col fixed h-full z-20 hidden md:flex overflow-y-auto" style="width: 280px;">
         <div class="text-center mb-6 pb-4 border-b border-gray-700">
             <a href="index.html" class="text-2xl font-extrabold text-indigo-400 tracking-wider">TapStyle</a>
@@ -17,6 +19,7 @@
             <p class="font-semibold">Street Vibe Co.</p>
             <p class="text-xs text-gray-400">Admin de Negocio</p>
         </div>
+
         <nav class="flex-grow space-y-1">
             <a href="dashboard_admin_negocio.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
                 <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
@@ -46,11 +49,11 @@
                 </button>
                 <div class="submenu ml-7 mt-1 space-y-1">
                     <a href="compras.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Compras</a>
-                    <a href="ventas.html" class="block p-2 text-sm text-white bg-indigo-600 rounded">Ventas</a>
+                    <a href="ventas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Ventas</a>
                     <a href="stock.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Stock</a>
                     <a href="caja.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Caja</a>
                     <a href="proveedores.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Proveedores</a>
-                    <a href="metodos_pago.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Métodos de Pago</a>
+                    <a href="metodos_pago.html" class="block p-2 text-sm text-white bg-indigo-600 rounded">Métodos de Pago</a>
                 </div>
             </div>
             <a href="finanzas_pagos.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
@@ -78,136 +81,149 @@
             </a>
         </div>
     </aside>
-    <div class="flex-1 md:ml-[280px] p-8 w-full">
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="flex-1 md:ml-[280px] p-4 sm:p-8 w-full">
+        
         <header class="flex justify-between items-center bg-white p-4 rounded-xl shadow-md mb-8">
-            <h1 class="text-2xl font-bold text-gray-800">Gestión de Ventas</h1>
-            <button id="btnNuevaVenta" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">+ Nueva Venta</button>
+            <h1 class="text-2xl font-bold text-gray-800">Métodos de Pago</h1>
+            <button id="btnNuevoMetodo" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150">
+                + Nuevo Método
+            </button>
         </header>
+
+        <!-- Tabla de Métodos de Pago -->
         <div class="bg-white rounded-xl shadow-md overflow-hidden">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Comprobante</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Cliente</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fecha</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo de Pago</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     <tr>
-                        <td class="px-6 py-4 text-sm font-medium">#F001-00125</td>
-                        <td class="px-6 py-4 text-sm">Juan Pérez</td>
-                        <td class="px-6 py-4 text-sm">2024-01-15</td>
-                        <td class="px-6 py-4 text-sm">S/. 350.00</td>
-                        <td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Pagado</span></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Efectivo</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Activo</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <button class="text-indigo-600 hover:text-indigo-900 mr-3 btn-editar" data-id="1">Editar</button>
+                            <button class="text-red-600 hover:text-red-900 btn-eliminar" data-id="1">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Tarjeta de Crédito</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Activo</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <button class="text-indigo-600 hover:text-indigo-900 mr-3 btn-editar" data-id="2">Editar</button>
+                            <button class="text-red-600 hover:text-red-900 btn-eliminar" data-id="2">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Transferencia Bancaria</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Activo</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <button class="text-indigo-600 hover:text-indigo-900 mr-3 btn-editar" data-id="3">Editar</button>
+                            <button class="text-red-600 hover:text-red-900 btn-eliminar" data-id="3">Eliminar</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
     </div>
-    <div id="modalNuevaVenta" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl mx-4">
+
+    <!-- Modal Nuevo/Editar Método de Pago -->
+    <div id="modalMetodo" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4">
             <div class="p-6 border-b flex justify-between items-center">
-                <h2 class="text-2xl font-bold">Nueva Venta</h2>
-                <button id="btnCerrar" class="text-gray-500 hover:text-gray-700"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-800">Nuevo Método de Pago</h2>
+                <button id="btnCerrarModal" class="text-gray-500 hover:text-gray-700">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
             </div>
-            <form id="formVenta" class="p-6">
-                <div class="grid grid-cols-2 gap-4">
-                    <div><label class="block text-sm font-medium mb-2">Cliente *</label><select id="id_cliente" required class="w-full px-4 py-2 border rounded-lg"><option value="">Seleccionar...</option><option value="1">Juan Pérez</option></select></div>
-                    <div><label class="block text-sm font-medium mb-2">Tipo Comprobante *</label><select id="id_tipo_comprobante" required class="w-full px-4 py-2 border rounded-lg"><option value="1">Boleta</option><option value="2">Factura</option></select></div>
-                </div>
-                <div class="mt-4">
-                    <label class="block text-sm font-medium mb-2">Productos</label>
-                    <div id="productosVenta" class="space-y-2 mb-4">
-                        <!-- Productos agregados -->
+            <form id="formMetodo" class="p-6">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Pago *</label>
+                        <input type="text" id="tipo_pago" name="tipo_pago" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
                     </div>
-                    <button type="button" id="btnAgregarProducto" class="w-full px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-indigo-500 hover:text-indigo-500">+ Agregar Producto</button>
                 </div>
-                <div class="grid grid-cols-2 gap-4 mt-4">
-                    <div><label class="block text-sm font-medium mb-2">Subtotal</label><input type="number" step="0.01" id="subtotal" readonly class="w-full px-4 py-2 border rounded-lg bg-gray-50"></div>
-                    <div><label class="block text-sm font-medium mb-2">IGV (18%)</label><input type="number" step="0.01" id="igv" readonly class="w-full px-4 py-2 border rounded-lg bg-gray-50"></div>
-                    <div class="col-span-2"><label class="block text-sm font-medium mb-2">Total</label><input type="number" step="0.01" id="total" readonly class="w-full px-4 py-2 border rounded-lg bg-gray-100 font-bold text-lg"></div>
-                </div>
+                
                 <div class="flex justify-end space-x-3 mt-6">
-                    <button type="button" id="btnCancelar" class="px-6 py-2 border rounded-lg">Cancelar</button>
-                    <button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg">Registrar</button>
+                    <button type="button" id="btnCancelar" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition duration-150">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150">
+                        Guardar
+                    </button>
                 </div>
             </form>
         </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#btnNuevaVenta').click(() => $('#modalNuevaVenta').removeClass('hidden'));
-            $('#btnCerrar, #btnCancelar').click(() => { $('#modalNuevaVenta').addClass('hidden'); $('#formVenta')[0].reset(); });
-            let productosSeleccionados = [];
+            let editandoId = null;
             
-            $('#btnAgregarProducto').click(function() {
-                const productoHTML = `
-                    <div class="flex items-center gap-2 p-2 border rounded-lg producto-item">
-                        <select class="flex-1 px-2 py-1 border rounded producto-select">
-                            <option value="">Seleccionar producto...</option>
-                            <option value="1" data-precio="199.90">Zapatilla Nike - S/. 199.90</option>
-                            <option value="2" data-precio="259.90">Chaqueta Adidas - S/. 259.90</option>
-                            <option value="3" data-precio="59.90">Gorra Puma - S/. 59.90</option>
-                        </select>
-                        <input type="number" min="1" value="1" class="w-20 px-2 py-1 border rounded cantidad-input" placeholder="Cant">
-                        <button type="button" class="text-red-600 hover:text-red-800 btn-eliminar-producto">×</button>
-                    </div>
-                `;
-                $('#productosVenta').append(productoHTML);
+            $('#btnNuevoMetodo').click(function() {
+                $('#modalTitle').text('Nuevo Método de Pago');
+                $('#formMetodo')[0].reset();
+                editandoId = null;
+                $('#modalMetodo').removeClass('hidden');
             });
             
-            $(document).on('click', '.btn-eliminar-producto', function() {
-                $(this).closest('.producto-item').remove();
-                calcularTotales();
+            $('.btn-editar').click(function() {
+                editandoId = $(this).data('id');
+                $('#modalTitle').text('Editar Método de Pago');
+                $('#modalMetodo').removeClass('hidden');
             });
             
-            $(document).on('change', '.producto-select, .cantidad-input', calcularTotales);
+            $('#btnCerrarModal, #btnCancelar').click(function() {
+                $('#modalMetodo').addClass('hidden');
+                $('#formMetodo')[0].reset();
+                editandoId = null;
+            });
             
-            function calcularTotales() {
-                let subtotal = 0;
-                $('.producto-item').each(function() {
-                    const precio = parseFloat($(this).find('.producto-select option:selected').data('precio') || 0);
-                    const cantidad = parseInt($(this).find('.cantidad-input').val() || 0);
-                    subtotal += precio * cantidad;
-                });
-                const igv = subtotal * 0.18;
-                const total = subtotal + igv;
-                $('#subtotal').val(subtotal.toFixed(2));
-                $('#igv').val(igv.toFixed(2));
-                $('#total').val(total.toFixed(2));
-            }
-            
-            $('#formVenta').submit(function(e) {
+            $('#formMetodo').submit(function(e) {
                 e.preventDefault();
-                const detalles = [];
-                $('.producto-item').each(function() {
-                    const idVariante = $(this).find('.producto-select').val();
-                    const cantidad = $(this).find('.cantidad-input').val();
-                    const precioUnitario = $(this).find('.producto-select option:selected').data('precio');
-                    if(idVariante) {
-                        detalles.push({ id_variante: idVariante, cantidad: cantidad, precio_unitario: precioUnitario });
-                    }
-                });
-                const data = { 
-                    id_empresa: 1, 
-                    id_cliente: $('#id_cliente').val(), 
-                    id_usuario: 1, 
-                    id_tipo_comprobante: $('#id_tipo_comprobante').val(), 
-                    total: $('#total').val(), 
-                    igv: $('#igv').val(), 
-                    subtotal: $('#subtotal').val(),
-                    detalles: detalles
+                
+                const formData = {
+                    tipo_pago: $('#tipo_pago').val()
                 };
-                console.log('Venta:', data);
-                alert('Venta registrada con ' + detalles.length + ' productos');
-                $('#modalNuevaVenta').addClass('hidden');
-                $('#formVenta')[0].reset();
-                $('#productosVenta').empty();
+                
+                if (editandoId) {
+                    formData.id_tipopago = editandoId;
+                    console.log('Actualizando método de pago:', formData);
+                    alert('Método de pago actualizado correctamente');
+                } else {
+                    console.log('Creando nuevo método de pago:', formData);
+                    alert('Método de pago creado correctamente');
+                }
+                
+                $('#modalMetodo').addClass('hidden');
+                $('#formMetodo')[0].reset();
+                editandoId = null;
+            });
+            
+            $('.btn-eliminar').click(function() {
+                const id = $(this).data('id');
+                if (confirm('¿Está seguro de eliminar este método de pago?')) {
+                    console.log('Eliminando método de pago ID:', id);
+                    alert('Método de pago eliminado correctamente');
+                }
             });
         });
+
         // Script para submenús
         const toggles = document.querySelectorAll('.submenu-toggle');
         toggles.forEach(toggle => {
@@ -224,18 +240,6 @@
                 submenu.classList.toggle('hidden');
                 icon.style.transform = submenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
             });
-        });
-        const currentPage = window.location.pathname.split('/').pop();
-        document.querySelectorAll('nav a').forEach(link => {
-            if (link.getAttribute('href') === currentPage) {
-                link.classList.add('bg-indigo-600', 'text-white');
-                link.classList.remove('text-gray-300', 'text-gray-400');
-                const submenu = link.closest('.submenu');
-                if (submenu) {
-                    submenu.classList.remove('hidden');
-                    submenu.parentElement.querySelector('.submenu-icon').style.transform = 'rotate(180deg)';
-                }
-            }
         });
     </script>
 </body>

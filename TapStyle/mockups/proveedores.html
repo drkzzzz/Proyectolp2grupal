@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TapStyle - Gestión de Proveedores</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="flex">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar bg-gray-800 text-white p-6 flex flex-col fixed h-full z-20 hidden md:flex overflow-y-auto" style="width: 280px;">
+        <div class="text-center mb-6 pb-4 border-b border-gray-700">
+            <a href="index.html" class="text-2xl font-extrabold text-indigo-400 tracking-wider">TapStyle</a>
+        </div>
+        <div class="mb-6 text-center">
+            <div class="w-14 h-14 bg-white text-indigo-600 rounded-full mx-auto flex items-center justify-center text-lg font-bold mb-2">SV</div>
+            <p class="font-semibold">Street Vibe Co.</p>
+            <p class="text-xs text-gray-400">Admin de Negocio</p>
+        </div>
+
+        <nav class="flex-grow space-y-1">
+            <a href="dashboard_admin_negocio.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                <span class="text-sm font-medium">Dashboard</span>
+            </a>
+            <div class="submenu-container">
+                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                    <div class="flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                        <span class="text-sm font-medium">Catálogo</span>
+                    </div>
+                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="submenu hidden ml-7 mt-1 space-y-1">
+                    <a href="crud_producto.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Productos</a>
+                    <a href="categorias.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Categorías</a>
+                    <a href="marcas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Marcas</a>
+                </div>
+            </div>
+            <div class="submenu-container">
+                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                    <div class="flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                        <span class="text-sm font-medium">Operaciones</span>
+                    </div>
+                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="submenu ml-7 mt-1 space-y-1">
+                    <a href="compras.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Compras</a>
+                    <a href="ventas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Ventas</a>
+                    <a href="stock.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Stock</a>
+                    <a href="caja.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Caja</a>
+                    <a href="proveedores.html" class="block p-2 text-sm text-white bg-indigo-600 rounded">Proveedores</a>
+                    <a href="metodos_pago.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Métodos de Pago</a>
+                </div>
+            </div>
+            <a href="finanzas_pagos.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                <span class="text-sm font-medium">Finanzas</span>
+            </a>
+            <div class="submenu-container">
+                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                    <div class="flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        <span class="text-sm font-medium">Administración</span>
+                    </div>
+                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="submenu hidden ml-7 mt-1 space-y-1">
+                    <a href="gestion_empleados.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Empleados</a>
+                    <a href="roles_permisos.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Roles y Permisos</a>
+                </div>
+            </div>
+        </nav>
+        <div class="mt-auto pt-4 border-t border-gray-700">
+            <a href="login.html" class="flex items-center p-2 rounded-lg text-red-400 hover:bg-gray-700 transition">
+                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                <span class="text-sm font-medium">Cerrar Sesión</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="flex-1 md:ml-[280px] p-4 sm:p-8 w-full">
+        
+        <header class="flex justify-between items-center bg-white p-4 rounded-xl shadow-md mb-8">
+            <h1 class="text-2xl font-bold text-gray-800">Gestión de Proveedores</h1>
+            <button id="btnNuevoProveedor" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150">
+                + Nuevo Proveedor
+            </button>
+        </header>
+
+        <!-- Filtros -->
+        <div class="bg-white p-6 rounded-xl shadow-md mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <input type="text" placeholder="Buscar por razón social..." class="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+                <input type="text" placeholder="Buscar por RUC..." class="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+                <button class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Filtrar</button>
+            </div>
+        </div>
+
+        <!-- Tabla de Proveedores -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Razón Social</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">RUC</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rubro</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teléfono</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Distribuidora Lima SAC</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20123456789</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Calzado y Accesorios</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">01-234-5678</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">ventas@distlima.com</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <button class="text-indigo-600 hover:text-indigo-900 mr-3 btn-editar" data-id="1">Editar</button>
+                            <button class="text-red-600 hover:text-red-900 btn-eliminar" data-id="1">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Textiles del Norte EIRL</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20987654321</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Textiles y Confecciones</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">044-567-890</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">contacto@texnorte.pe</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <button class="text-indigo-600 hover:text-indigo-900 mr-3 btn-editar" data-id="2">Editar</button>
+                            <button class="text-red-600 hover:text-red-900 btn-eliminar" data-id="2">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- Modal Nuevo/Editar Proveedor -->
+    <div id="modalProveedor" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-800">Nuevo Proveedor</h2>
+                <button id="btnCerrarModal" class="text-gray-500 hover:text-gray-700">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <form id="formProveedor" class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Razón Social *</label>
+                        <input type="text" id="razon_social" name="razon_social" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre Comercial</label>
+                        <input type="text" id="nombre_comercial" name="nombre_comercial" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">RUC *</label>
+                        <input type="text" id="ruc" name="ruc" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div class="col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Rubro</label>
+                        <input type="text" id="rubro" name="rubro" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div class="col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Dirección</label>
+                        <textarea id="direccion" name="direccion" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Teléfono</label>
+                        <input type="text" id="telefono" name="telefono" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+                
+                <div class="flex justify-end space-x-3 mt-6">
+                    <button type="button" id="btnCancelar" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition duration-150">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let editandoId = null;
+            
+            // Abrir modal nuevo proveedor
+            $('#btnNuevoProveedor').click(function() {
+                $('#modalTitle').text('Nuevo Proveedor');
+                $('#formProveedor')[0].reset();
+                editandoId = null;
+                $('#modalProveedor').removeClass('hidden');
+            });
+            
+            // Abrir modal editar proveedor
+            $('.btn-editar').click(function() {
+                editandoId = $(this).data('id');
+                $('#modalTitle').text('Editar Proveedor');
+                // Aquí cargarías los datos del proveedor desde la BD
+                $('#modalProveedor').removeClass('hidden');
+            });
+            
+            // Cerrar modal
+            $('#btnCerrarModal, #btnCancelar').click(function() {
+                $('#modalProveedor').addClass('hidden');
+                $('#formProveedor')[0].reset();
+                editandoId = null;
+            });
+            
+            // Enviar formulario
+            $('#formProveedor').submit(function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    id_empresa: 1, // ID de la empresa actual
+                    razon_social: $('#razon_social').val(),
+                    nombre_comercial: $('#nombre_comercial').val(),
+                    ruc: $('#ruc').val(),
+                    rubro: $('#rubro').val(),
+                    direccion: $('#direccion').val(),
+                    telefono: $('#telefono').val(),
+                    email: $('#email').val()
+                };
+                
+                if (editandoId) {
+                    formData.id_proveedor = editandoId;
+                    console.log('Actualizando proveedor:', formData);
+                    alert('Proveedor actualizado correctamente');
+                } else {
+                    console.log('Creando nuevo proveedor:', formData);
+                    alert('Proveedor creado correctamente');
+                }
+                
+                $('#modalProveedor').addClass('hidden');
+                $('#formProveedor')[0].reset();
+                editandoId = null;
+            });
+            
+            // Eliminar proveedor
+            $('.btn-eliminar').click(function() {
+                const id = $(this).data('id');
+                if (confirm('¿Está seguro de eliminar este proveedor?')) {
+                    console.log('Eliminando proveedor ID:', id);
+                    alert('Proveedor eliminado correctamente');
+                    // Aquí recargarías la tabla
+                }
+            });
+        });
+
+        // Script para submenús
+        const toggles = document.querySelectorAll('.submenu-toggle');
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const container = this.parentElement;
+                const submenu = container.querySelector('.submenu');
+                const icon = this.querySelector('.submenu-icon');
+                document.querySelectorAll('.submenu').forEach(sm => {
+                    if (sm !== submenu) {
+                        sm.classList.add('hidden');
+                        sm.parentElement.querySelector('.submenu-icon').style.transform = 'rotate(0deg)';
+                    }
+                });
+                submenu.classList.toggle('hidden');
+                icon.style.transform = submenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+            });
+        });
+    </script>
+</body>
+</html>
