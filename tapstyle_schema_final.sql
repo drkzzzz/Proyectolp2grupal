@@ -48,6 +48,7 @@ CREATE TABLE TipoDocumento (
 CREATE TABLE Usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     id_empresa INT, 
+    id_rol INT NOT NULL,
     nombres VARCHAR(100) NOT NULL,
     apellidos VARCHAR(100) NOT NULL,
     id_tipodocumento INT,
@@ -63,15 +64,8 @@ CREATE TABLE Usuarios (
     
     CONSTRAINT FK_Usuarios_TipoDocumento FOREIGN KEY (id_tipodocumento) REFERENCES TipoDocumento(id_tipodocumento),
     CONSTRAINT UQ_Usuarios_Documento UNIQUE (id_tipodocumento, numero_documento),
-    CONSTRAINT FK_Usuarios_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa)
-);
-
-CREATE TABLE Usuario_Roles (
-    id_usuario INT NOT NULL,
-    id_rol INT NOT NULL,
-    PRIMARY KEY (id_usuario, id_rol),
-    CONSTRAINT FK_UsuarioRoles_Usuarios FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
-    CONSTRAINT FK_UsuarioRoles_Roles FOREIGN KEY (id_rol) REFERENCES Roles(id_rol) ON DELETE CASCADE
+    CONSTRAINT FK_Usuarios_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa),
+    CONSTRAINT FK_Usuarios_Roles FOREIGN KEY (id_rol) REFERENCES Roles(id_rol)
 );
 
 CREATE TABLE Bitacora (
