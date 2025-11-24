@@ -17,11 +17,18 @@ public class AuthController {
     private final UsuarioService usuarioService;
 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse<UsuarioDTO>> login(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<ApiResponse<java.util.Map<String, Object>>> login(@RequestBody LoginDTO loginDTO) {
         try {
-            UsuarioDTO usuario = usuarioService.obtenerPorUsername(loginDTO.getUsername());
-            // En una implementación real, verificar la contraseña
-            return ResponseEntity.ok(ApiResponse.success(usuario, "Login exitoso"));
+            com.lp2.tapstyle.model.Usuario usuarioEntity = usuarioService.obtenerEntidadPorUsernameOEmail(loginDTO.getUsername());
+            if (!java.util.Objects.equals(loginDTO.getContraseña(), usuarioEntity.getContraseñaHash())) {
+                return ResponseEntity.status(401)
+                        .body(ApiResponse.error("AuthenticationFailed", "Usuario o contraseña incorrectos"));
+            }
+            UsuarioDTO usuario = usuarioService.obtenerPorUsername(usuarioEntity.getUsername());
+            java.util.Map<String, Object> payload = new java.util.HashMap<>();
+            payload.put("token", "dev-token-" + usuario.getUsername());
+            payload.put("usuario", usuario);
+            return ResponseEntity.ok(ApiResponse.success(payload, "Login exitoso"));
         } catch (Exception e) {
             return ResponseEntity.status(401)
                     .body(ApiResponse.error("AuthenticationFailed", "Usuario o contraseña incorrectos"));

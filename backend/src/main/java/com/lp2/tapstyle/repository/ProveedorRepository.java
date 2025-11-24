@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface ProveedorRepository extends JpaRepository<Proveedor, Integer> {
-    List<Proveedor> findByEmpresa(Integer empresaId);
+    List<Proveedor> findByEmpresa_IdEmpresa(Integer empresaId);
 
-    boolean existsByEmpresaAndRuc(Integer empresaId, String ruc);
+    boolean existsByEmpresa_IdEmpresaAndRuc(Integer empresaId, String ruc);
 }

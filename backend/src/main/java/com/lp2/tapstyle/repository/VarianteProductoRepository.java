@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface VarianteProductoRepository extends JpaRepository<VarianteProducto, Integer> {
-    List<VarianteProducto> findByProducto(Integer productoId);
+    List<VarianteProducto> findByProducto_IdProducto(Integer productoId);
 
     boolean existsByCodigoSku(String codigoSku);
 }

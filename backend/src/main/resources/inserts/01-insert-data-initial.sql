@@ -80,33 +80,33 @@ INSERT INTO Rol_Permisos (id_rol, id_permiso) VALUES
 -- ====================================================================
 -- SuperAdmin
 INSERT INTO Usuarios (id_empresa, id_rol, nombres, apellidos, id_tipodocumento, numero_documento, celular, direccion, username, email, contraseña_hash, estado) VALUES 
-(1, 1, 'Carlos', 'Admin', 1, '12345678', '987654300', 'Lima, Perú', 'superadmin', 'superadmin@tapstyle.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeQmGvzH.EsyhHcqDR2', TRUE);
+(1, 1, 'Carlos', 'Admin', 1, '12345678', '987654300', 'Lima, Perú', 'superadmin', 'superadmin@tapstyle.com', '123456', TRUE);
 
 -- Admins por empresa
 INSERT INTO Usuarios (id_empresa, id_rol, nombres, apellidos, id_tipodocumento, numero_documento, celular, direccion, username, email, contraseña_hash, estado) VALUES 
-(1, 2, 'María', 'García', 1, '87654321', '987654301', 'Lima, Perú', 'admin_ge', 'admin@tapstyle-ge.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeQmGvzH.EsyhHcqDR2', TRUE),
-(2, 2, 'Juan', 'López', 1, '87654322', '987654302', 'Lima, Perú', 'admin_gt', 'admin@tapstyle-gt.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeQmGvzH.EsyhHcqDR2', TRUE),
-(3, 2, 'Ana', 'Martínez', 1, '87654323', '987654303', 'Lima, Perú', 'admin_pf', 'admin@tapstyle-pf.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeQmGvzH.EsyhHcqDR2', TRUE),
-(4, 2, 'Pedro', 'Rodríguez', 1, '87654324', '987654304', 'Lima, Perú', 'admin_sv', 'admin@tapstyle-sv.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeQmGvzH.EsyhHcqDR2', TRUE);
+(1, 2, 'María', 'García', 1, '87654321', '987654301', 'Lima, Perú', 'admin_ge', 'admin@tapstyle-ge.com', '123456', TRUE),
+(2, 2, 'Juan', 'López', 1, '87654322', '987654302', 'Lima, Perú', 'admin_gt', 'admin@tapstyle-gt.com', '123456', TRUE),
+(3, 2, 'Ana', 'Martínez', 1, '87654323', '987654303', 'Lima, Perú', 'admin_pf', 'admin@tapstyle-pf.com', '123456', TRUE),
+(4, 2, 'Pedro', 'Rodríguez', 1, '87654324', '987654304', 'Lima, Perú', 'admin_sv', 'admin@tapstyle-sv.com', '123456', TRUE);
 
 -- Vendedores
 INSERT INTO Usuarios (id_empresa, id_rol, nombres, apellidos, id_tipodocumento, numero_documento, celular, direccion, username, email, contraseña_hash, estado) VALUES 
-(1, 3, 'Laura', 'Sánchez', 1, '87654325', '987654305', 'Lima, Perú', 'vendedor_ge1', 'vendedor1@tapstyle-ge.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeQmGvzH.EsyhHcqDR2', TRUE),
-(1, 3, 'Roberto', 'Fernández', 1, '87654326', '987654306', 'Lima, Perú', 'vendedor_ge2', 'vendedor2@tapstyle-ge.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeQmGvzH.EsyhHcqDR2', TRUE),
-(2, 3, 'Sofia', 'Torres', 1, '87654327', '987654307', 'Lima, Perú', 'vendedor_gt1', 'vendedor1@tapstyle-gt.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeQmGvzH.EsyhHcqDR2', TRUE),
-(3, 3, 'Miguel', 'Gómez', 1, '87654328', '987654308', 'Lima, Perú', 'vendedor_pf1', 'vendedor1@tapstyle-pf.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeQmGvzH.EsyhHcqDR2', TRUE),
-(4, 3, 'Carmen', 'Díaz', 1, '87654329', '987654309', 'Lima, Perú', 'vendedor_sv1', 'vendedor1@tapstyle-sv.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeQmGvzH.EsyhHcqDR2', TRUE);
+(1, 3, 'Laura', 'Sánchez', 1, '87654325', '987654305', 'Lima, Perú', 'vendedor_ge1', 'vendedor1@tapstyle-ge.com', '123456', TRUE),
+(1, 3, 'Roberto', 'Fernández', 1, '87654326', '987654306', 'Lima, Perú', 'vendedor_ge2', 'vendedor2@tapstyle-ge.com', '123456', TRUE),
+(2, 3, 'Sofia', 'Torres', 1, '87654327', '987654307', 'Lima, Perú', 'vendedor_gt1', 'vendedor1@tapstyle-gt.com', '123456', TRUE),
+(3, 3, 'Miguel', 'Gómez', 1, '87654328', '987654308', 'Lima, Perú', 'vendedor_pf1', 'vendedor1@tapstyle-pf.com', '123456', TRUE),
+(4, 3, 'Carmen', 'Díaz', 1, '87654329', '987654309', 'Lima, Perú', 'vendedor_sv1', 'vendedor1@tapstyle-sv.com', '123456', TRUE);
 
 -- Empleados
 INSERT INTO Usuarios (id_empresa, id_rol, nombres, apellidos, id_tipodocumento, numero_documento, celular, direccion, username, email, contraseña_hash, estado) VALUES 
-(1, 4, 'David', 'Ruiz', 1, '87654330', '987654310', 'Lima, Perú', 'empleado_ge1', 'empleado1@tapstyle-ge.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeQmGvzH.EsyhHcqDR2', TRUE),
-(2, 4, 'Elena', 'Morales', 1, '87654331', '987654311', 'Lima, Perú', 'empleado_gt1', 'empleado1@tapstyle-gt.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeQmGvzH.EsyhHcqDR2', TRUE);
+(1, 4, 'David', 'Ruiz', 1, '87654330', '987654310', 'Lima, Perú', 'empleado_ge1', 'empleado1@tapstyle-ge.com', '123456', TRUE),
+(2, 4, 'Elena', 'Morales', 1, '87654331', '987654311', 'Lima, Perú', 'empleado_gt1', 'empleado1@tapstyle-gt.com', '123456', TRUE);
 
 -- Clientes
 INSERT INTO Usuarios (id_empresa, id_rol, nombres, apellidos, id_tipodocumento, numero_documento, celular, direccion, username, email, contraseña_hash, estado) VALUES 
-(1, 5, 'Cliente', 'Uno', 1, '11111111', '987111111', 'Lima, Perú', 'cliente_uno', 'cliente1@email.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeQmGvzH.EsyhHcqDR2', TRUE),
-(1, 5, 'Cliente', 'Dos', 1, '22222222', '987222222', 'Lima, Perú', 'cliente_dos', 'cliente2@email.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeQmGvzH.EsyhHcqDR2', TRUE),
-(2, 5, 'Cliente', 'Tres', 1, '33333333', '987333333', 'Lima, Perú', 'cliente_tres', 'cliente3@email.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeQmGvzH.EsyhHcqDR2', TRUE);
+(1, 5, 'Cliente', 'Uno', 1, '11111111', '987111111', 'Lima, Perú', 'cliente_uno', 'cliente1@email.com', '123456', TRUE),
+(1, 5, 'Cliente', 'Dos', 1, '22222222', '987222222', 'Lima, Perú', 'cliente_dos', 'cliente2@email.com', '123456', TRUE),
+(2, 5, 'Cliente', 'Tres', 1, '33333333', '987333333', 'Lima, Perú', 'cliente_tres', 'cliente3@email.com', '123456', TRUE);
 
 -- ====================================================================
 -- 7. INSERTAR CLIENTES
