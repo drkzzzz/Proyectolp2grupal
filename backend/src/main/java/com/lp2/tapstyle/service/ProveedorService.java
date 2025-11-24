@@ -27,7 +27,7 @@ public class ProveedorService {
     }
 
     public List<ProveedorDTO> obtenerPorEmpresa(Integer empresaId) {
-        return proveedorRepository.findByEmpresa(empresaId).stream()
+        return proveedorRepository.findByEmpresa_IdEmpresa(empresaId).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
@@ -42,7 +42,7 @@ public class ProveedorService {
         Empresa empresa = empresaRepository.findById(dto.getIdEmpresa())
                 .orElseThrow(() -> new RuntimeException("Empresa no encontrada con id: " + dto.getIdEmpresa()));
 
-        if (dto.getRuc() != null && proveedorRepository.existsByEmpresaAndRuc(dto.getIdEmpresa(), dto.getRuc())) {
+        if (dto.getRuc() != null && proveedorRepository.existsByEmpresa_IdEmpresaAndRuc(dto.getIdEmpresa(), dto.getRuc())) {
             throw new RuntimeException("Ya existe un proveedor con este RUC en la empresa");
         }
 

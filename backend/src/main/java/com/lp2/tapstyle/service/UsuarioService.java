@@ -6,7 +6,7 @@ import com.lp2.tapstyle.model.Usuario;
 import com.lp2.tapstyle.repository.RolRepository;
 import com.lp2.tapstyle.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +20,6 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final RolRepository rolRepository;
-    private final PasswordEncoder passwordEncoder;
 
     public List<UsuarioDTO> obtenerTodos() {
         return usuarioRepository.findAll().stream()
@@ -44,7 +43,7 @@ public class UsuarioService {
         }
 
         Usuario usuario = convertToEntity(dto);
-        usuario.setContraseñaHash(passwordEncoder.encode(dto.getUsername())); // Cambiar por contraseña real
+        usuario.setContraseñaHash(dto.getUsername());
 
         Rol rol = rolRepository.findById(dto.getIdRol())
                 .orElseThrow(() -> new RuntimeException("Rol no encontrado con id: " + dto.getIdRol()));
@@ -78,6 +77,12 @@ public class UsuarioService {
         return usuarioRepository.findByUsername(username)
                 .map(this::convertToDTO)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con username: " + username));
+    }
+
+    public Usuario obtenerEntidadPorUsernameOEmail(String usernameOrEmail) {
+        return usuarioRepository.findByUsername(usernameOrEmail)
+                .or(() -> usuarioRepository.findByEmail(usernameOrEmail))
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
 
     private UsuarioDTO convertToDTO(Usuario usuario) {

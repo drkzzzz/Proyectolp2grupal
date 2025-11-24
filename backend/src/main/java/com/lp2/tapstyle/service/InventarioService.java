@@ -37,7 +37,7 @@ public class InventarioService {
     }
 
     public List<InventarioDTO> obtenerPorAlmacen(Integer almacenId) {
-        return inventarioRepository.findByAlmacen(almacenId).stream()
+        return inventarioRepository.findByAlmacen_IdAlmacen(almacenId).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }

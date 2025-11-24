@@ -9,9 +9,9 @@ import java.util.Optional;
 
 @Repository
 public interface InventarioRepository extends JpaRepository<Inventario, Integer> {
-    Optional<Inventario> findByVarianteAndAlmacen(Integer varianteId, Integer almacenId);
+    Optional<Inventario> findByVariante_IdVarianteAndAlmacen_IdAlmacen(Integer varianteId, Integer almacenId);
 
-    List<Inventario> findByAlmacen(Integer almacenId);
+    List<Inventario> findByAlmacen_IdAlmacen(Integer almacenId);
 
     List<Inventario> findByCantidadStockLessThan(Integer stockMinimo);
 }

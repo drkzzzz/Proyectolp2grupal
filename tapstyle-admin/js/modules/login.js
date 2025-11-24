@@ -41,13 +41,11 @@ $(document).ready(function () {
       }, 1500); // Simular 1.5 segundos de carga
     } else {
       // Llamada a la API REAL (requiere api-client.js)
-      ApiClient.post(CONFIG.API_ENDPOINTS.LOGIN, { email, password })
-        .then((response) => {
-          // Éxito: Usamos el Auth helper
-          Auth.handleLoginSuccess(response.token);
+      ApiClient.login(email, password)
+        .then((data) => {
+          setLoading(false);
         })
         .catch((error) => {
-          // Error: Mostramos el error de la API
           handleLoginError(error.message || "Error inesperado del servidor.");
         });
     }

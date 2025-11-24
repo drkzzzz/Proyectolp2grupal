@@ -56,10 +56,7 @@
 		<groupId>org.flywaydb</groupId>
 		<artifactId>flyway-core</artifactId>
 	</dependency>
-	<dependency>
-		<groupId>org.flywaydb</groupId>
-		<artifactId>flyway-mysql</artifactId>
-	</dependency>
+	<!-- Removed database-specific Flyway module; flyway-core supports SQL Server -->
 
 	<dependency>
 		<groupId>com.mysql</groupId>
@@ -118,7 +115,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com.lp2.backend.BackendApplication</mainClass>
+					<mainClass>com.lp2.tapstyle.TapStyleApplication</mainClass>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>

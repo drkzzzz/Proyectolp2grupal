@@ -38,11 +38,14 @@ public class Empresa implements Serializable {
     private String emailContacto;
 
     @Column(nullable = false, updatable = false)
+    @Builder.Default
     private LocalDateTime fechaRegistro = LocalDateTime.now();
 
     @Column(nullable = false, length = 20)
+    @Builder.Default
     private String estadoAprobacion = "Pendiente";
 
     @Column(nullable = false, precision = 5, scale = 2)
+    @Builder.Default
     private BigDecimal tasaComision = new BigDecimal("0.15");
 }

@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface MarcaProductoRepository extends JpaRepository<MarcaProducto, Integer> {
-    List<MarcaProducto> findByEmpresa(Integer empresaId);
+    List<MarcaProducto> findByEmpresa_IdEmpresa(Integer empresaId);
 }

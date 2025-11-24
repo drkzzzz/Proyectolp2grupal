@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface AlmacenRepository extends JpaRepository<Almacen, Integer> {
-    List<Almacen> findByEmpresa(Integer empresaId);
+    List<Almacen> findByEmpresa_IdEmpresa(Integer empresaId);
 }

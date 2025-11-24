@@ -31,7 +31,7 @@ public class ProductoService {
     }
 
     public List<ProductoDTO> obtenerPorEmpresa(Integer empresaId) {
-        return productoRepository.findByEmpresa(empresaId).stream()
+        return productoRepository.findByEmpresa_IdEmpresa(empresaId).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
