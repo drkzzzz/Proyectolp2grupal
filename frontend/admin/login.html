@@ -41,23 +41,34 @@
         </div>
     </div>
     <script>
+        // Usuarios mock para testing
+        const mockAdminUsers = [
+            { username: 'Santi', password: '12345', tipo: 'superadmin' },
+            { username: 'admin', password: '12345', tipo: 'admin_negocio' }
+        ];
+
         document.getElementById('loginForm').onsubmit = async (e) => {
             e.preventDefault();
             document.getElementById('error').classList.add('hidden');
-            try {
-                const r = await fetch('http://localhost:8083/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: document.getElementById('username').value, password: document.getElementById('password').value }) });
-                const d = await r.json();
-                if (d.status === 'SUCCESS') {
-                    localStorage.setItem('tapstyle_token', d.data.token);
-                    localStorage.setItem('tapstyle_user', JSON.stringify(d.data.usuario));
-                    localStorage.setItem('tapstyle_tipo', d.data.tipo);
-                    location.href = d.data.tipo === 'superadmin' ? 'dashboard_superadmin.html' : 'dashboard_admin_negocio.html';
-                } else {
-                    document.getElementById('errorText').textContent = d.message || 'Credenciales incorrectas';
-                    document.getElementById('error').classList.remove('hidden');
-                }
-            } catch (e) {
-                document.getElementById('errorText').textContent = 'Error de conexión';
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Buscar usuario en mock
+            const user = mockAdminUsers.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                // Login exitoso
+                localStorage.setItem('tapstyle_token', 'mock_token_' + username);
+                localStorage.setItem('tapstyle_user', JSON.stringify({ username: username }));
+                localStorage.setItem('tapstyle_tipo', user.tipo);
+                
+                // Redireccionar según el tipo
+                const redirect = user.tipo === 'superadmin' ? 'dashboard_superadmin.html' : 'dashboard_admin_negocio.html';
+                location.href = redirect;
+            } else {
+                // Error: usuario no encontrado
+                document.getElementById('errorText').textContent = 'Usuario o contraseña incorrectos. Intenta: Santi/12345 o admin/12345';
                 document.getElementById('error').classList.remove('hidden');
             }
         }
