@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TapStyle - Dashboard de Negocio</title>
+    <!-- Carga de Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="flex">
+
+    <!-- SIDEBAR MEJORADO CON SUBMENÚS -->
+    <aside class="sidebar bg-gray-800 text-white p-6 flex flex-col fixed h-full z-20 hidden md:flex overflow-y-auto" style="width: 280px;">
+        <!-- Logo -->
+        <div class="text-center mb-6 pb-4 border-b border-gray-700">
+            <a href="index.html" class="text-2xl font-extrabold text-indigo-400 tracking-wider">TapStyle</a>
+        </div>
+
+        <!-- Perfil Tienda -->
+        <div class="mb-6 text-center">
+            <div class="w-14 h-14 bg-white text-indigo-600 rounded-full mx-auto flex items-center justify-center text-lg font-bold mb-2">SV</div>
+            <p class="font-semibold">Street Vibe Co.</p>
+            <p class="text-xs text-gray-400">Admin de Negocio</p>
+        </div>
+
+        <!-- Navegación con Submenús -->
+        <nav class="flex-grow space-y-1">
+            <!-- Dashboard -->
+            <a href="dashboard_admin_negocio.html" class="flex items-center p-2 rounded-lg bg-indigo-600 text-white transition">
+                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                <span class="text-sm font-medium">Dashboard</span>
+            </a>
+
+            <!-- Catálogo (con submenú) -->
+            <div class="submenu-container">
+                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                    <div class="flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                        <span class="text-sm font-medium">Catálogo</span>
+                    </div>
+                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="submenu hidden ml-7 mt-1 space-y-1">
+                    <a href="crud_producto.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Productos</a>
+                    <a href="categorias.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Categorías</a>
+                    <a href="marcas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Marcas</a>
+                </div>
+            </div>
+
+            <!-- Operaciones (con submenú) -->
+            <div class="submenu-container">
+                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                    <div class="flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                        <span class="text-sm font-medium">Operaciones</span>
+                    </div>
+                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="submenu hidden ml-7 mt-1 space-y-1">
+                    <a href="compras.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Compras</a>
+                    <a href="ventas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Ventas</a>
+                    <a href="stock.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Stock</a>
+                    <a href="caja.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Caja</a>
+                    <a href="proveedores.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Proveedores</a>
+                    <a href="metodos_pago.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Métodos de Pago</a>
+                </div>
+            </div>
+
+            <!-- Finanzas -->
+            <a href="finanzas_pagos.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                <span class="text-sm font-medium">Finanzas</span>
+            </a>
+
+            <!-- Administración (con submenú) -->
+            <div class="submenu-container">
+                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
+                    <div class="flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        <span class="text-sm font-medium">Administración</span>
+                    </div>
+                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="submenu hidden ml-7 mt-1 space-y-1">
+                    <a href="gestion_empleados.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Empleados</a>
+                    <a href="roles_permisos.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Roles y Permisos</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Cerrar Sesión -->
+        <div class="mt-auto pt-6 border-t border-gray-700">
+            <a href="login.html" class="flex items-center p-3 rounded-xl text-red-400 hover:bg-gray-700 transition duration-150">
+                <svg class="h-6 w-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                <span class="font-medium">Cerrar Sesión</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- 2. CONTENIDO PRINCIPAL DEL DASHBOARD -->
+        <!-- CONTENIDO PRINCIPAL -->
+    <div class="flex-1 md:ml-[280px] p-4 sm:p-8 w-full">  
+        
+        <!-- CABECERA DEL CONTENIDO (Search/Notificaciones) -->
+        <header class="flex justify-between items-center bg-white p-4 rounded-xl shadow-md mb-8">
+            <h1 class="text-2xl font-bold text-gray-800">Panel de Control de Street Vibe Co.</h1>
+            
+            <div class="flex items-center space-x-4">
+                <!-- Notificaciones -->
+                <button class="p-2 text-gray-500 hover:text-indigo-600 rounded-full hover:bg-indigo-50 transition duration-150 relative">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+                    <span class="absolute top-1 right-1 inline-flex items-center justify-center h-2 w-2 bg-red-500 rounded-full"></span>
+                </button>
+                <!-- Botón de Vista de Tienda -->
+                <a href="tienda.html" target="_blank" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-green-500 hover:bg-green-600 transition duration-150">
+                    Ver mi Tienda
+                </a>
+            </div>
+        </header>
+
+        <!-- 3. TARJETAS DE MÉTRICAS (KPIs) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            
+            <!-- Tarjeta 1: Ventas Totales -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-indigo-500">
+                <div class="flex items-center justify-between">
+                    <p class="text-sm font-medium text-gray-500 uppercase">Ventas (Mes)</p>
+                    <svg class="h-6 w-6 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2v2m-3 0h6m-3-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                <p class="text-3xl font-extrabold text-gray-900 mt-1">$ 8,540.00</p>
+                <p class="text-xs text-green-500 mt-2">+12.5% vs. mes anterior</p>
+            </div>
+
+            <!-- Tarjeta 2: Pedidos Pendientes -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-yellow-500">
+                <div class="flex items-center justify-between">
+                    <p class="text-sm font-medium text-gray-500 uppercase">Pedidos Pendientes</p>
+                    <svg class="h-6 w-6 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
+                </div>
+                <p class="text-3xl font-extrabold text-gray-900 mt-1">14</p>
+                <p class="text-xs text-yellow-500 mt-2">Requiere acción inholiiimediata</p>
+            </div>
+            
+            <!-- Tarjeta 3: Productos Publicados -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500">
+                <div class="flex items-center justify-between">
+                    <p class="text-sm font-medium text-gray-500 uppercase">Productos Activos</p>
+                    <svg class="h-6 w-6 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" /></svg>
+                </div>
+                <p class="text-3xl font-extrabold text-gray-900 mt-1">218</p>
+                <p class="text-xs text-gray-400 mt-2">4 borradores sin publicar</p>
+            </div>
+
+            <!-- Tarjeta 4: Valoración Media -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500">
+                <div class="flex items-center justify-between">
+                    <p class="text-sm font-medium text-gray-500 uppercase">Valoración Media</p>
+                    <svg class="h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.199a.75.75 0 01.707 0l2.355 1.472a.75.75 0 00.723-.17l1.498-1.503a.75.75 0 011.06 1.06l-1.503 1.498a.75.75 0 00-.17.723l1.472 2.355a.75.75 0 010 .707l-1.472 2.355a.75.75 0 00.17.723l1.503 1.498a.75.75 0 01-1.06 1.06l-1.498-1.503a.75.75 0 00-.723-.17l-2.355 1.472a.75.75 0 01-.707 0l-2.355-1.472a.75.75 0 00-.723.17l-1.503 1.498a.75.75 0 01-1.06-1.06l1.503-1.498a.75.75 0 00.17-.723l-1.472-2.355a.75.75 0 010-.707l1.472-2.355a.75.75 0 00-.17-.723l-1.503-1.498a.75.75 0 011.06-1.06l1.498 1.503a.75.75 0 00.723.17l2.355-1.472z" clip-rule="evenodd" /></svg>
+                </div>
+                <p class="text-3xl font-extrabold text-gray-900 mt-1">4.8 / 5.0</p>
+                <p class="text-xs text-gray-400 mt-2">Basado en 320 opiniones</p>
+            </div>
+
+        </div>
+
+        <!-- 4. SECCIÓN PRINCIPAL: Gráficos y Actividad Reciente -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- Columna 1 y 2: Gráfico de Ventas -->
+            <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Ventas vs. Pedidos (Últimos 6 meses)</h2>
+                <!-- Placeholder para el gráfico de líneas. En la implementación usarías una librería JS como Chart.js -->
+                <div class="h-64 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500">
+                    [Gráfico: Librería de JS para visualización de datos]
+                </div>
+            </div>
+
+            <!-- Columna 3: Pedidos Recientes -->
+            <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Últimos Pedidos</h2>
+                <div class="space-y-4">
+                    <!-- Pedido 1 -->
+                    <div class="flex items-center justify-between border-b pb-2">
+                        <div>
+                            <p class="font-medium text-gray-800">#TS-4001</p>
+                            <p class="text-sm text-gray-500">Cliente: Ana Gómez</p>
+                        </div>
+                        <span class="text-sm font-semibold text-green-600">S/. 95.00</span>
+                    </div>
+                    <!-- Pedido 2 -->
+                    <div class="flex items-center justify-between border-b pb-2">
+                        <div>
+                            <p class="font-medium text-gray-800">#TS-4002</p>
+                            <p class="text-sm text-gray-500">Cliente: Carlos Ruiz</p>
+                        </div>
+                        <span class="text-sm font-semibold text-yellow-600">S/. 24.99</span>
+                    </div>
+                    <!-- Pedido 3 -->
+                    <div class="flex items-center justify-between border-b pb-2">
+                        <div>
+                            <p class="font-medium text-gray-800">#TS-4003</p>
+                            <p class="text-sm text-gray-500">Cliente: Elvira Soto</p>
+                        </div>
+                        <span class="text-sm font-semibold text-green-600">S/. 120.00</span>
+                    </div>
+                    <!-- Ver todos los pedidos -->
+                    <div class="pt-2 text-center">
+                        <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">Ver todos los pedidos</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+    // Script para manejar submenús
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggles = document.querySelectorAll('.submenu-toggle');
+        
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const container = this.parentElement;
+                const submenu = container.querySelector('.submenu');
+                const icon = this.querySelector('.submenu-icon');
+                
+                // Cerrar otros submenús
+                document.querySelectorAll('.submenu').forEach(sm => {
+                    if (sm !== submenu) {
+                        sm.classList.add('hidden');
+                        sm.parentElement.querySelector('.submenu-icon').style.transform = 'rotate(0deg)';
+                    }
+                });
+                
+                // Toggle actual
+                submenu.classList.toggle('hidden');
+                icon.style.transform = submenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+            });
+        });
+        
+        // Marcar página activa
+        const currentPage = window.location.pathname.split('/').pop();
+        document.querySelectorAll('nav a').forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('bg-indigo-600', 'text-white');
+                link.classList.remove('text-gray-300', 'text-gray-400');
+                
+                // Abrir submenú si está dentro de uno
+                const submenu = link.closest('.submenu');
+                if (submenu) {
+                    submenu.classList.remove('hidden');
+                    submenu.parentElement.querySelector('.submenu-icon').style.transform = 'rotate(180deg)';
+                }
+            }
+        });
+    });
+    </script>
+</body>
+</html>

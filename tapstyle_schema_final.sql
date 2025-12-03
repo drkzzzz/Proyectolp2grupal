@@ -1,577 +1,1830 @@
--- 1. Creación de la Base de Datos
-CREATE DATABASE IF NOT EXISTS TAPSTYLE;
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 01-12-2025 a las 13:05:57
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
-USE TAPSTYLE;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
--- GESTIÓN DE EMPRESAS/TIENDAS (Multi-Tenencia)
-CREATE TABLE Empresas (
-    id_empresa INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_tienda VARCHAR(100) NOT NULL UNIQUE, 
-    ruc_empresa VARCHAR(20) UNIQUE, 
-    direccion_legal VARCHAR(255),
-    telefono VARCHAR(20),
-    email_contacto VARCHAR(100),
-    fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    estado_aprobacion VARCHAR(20) NOT NULL DEFAULT 'Pendiente', 
-    tasa_comision DECIMAL(5, 2) NOT NULL DEFAULT 0.15, 
-    CONSTRAINT CHK_EstadoAprobacion CHECK (estado_aprobacion IN ('Pendiente', 'Aprobada', 'Suspendida'))
-);
 
--- MÓDULO 1: GESTIÓN DE USUARIOS, ROLES Y PERMISOS (RBAC)
-CREATE TABLE Roles (
-    id_rol INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_rol VARCHAR(50) NOT NULL UNIQUE, 
-    estado BOOLEAN NOT NULL DEFAULT TRUE, -- BIT a BOOLEAN
-    descripcion VARCHAR(255)
-);
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-CREATE TABLE Permisos (
-    id_permiso INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_permiso VARCHAR(100) NOT NULL UNIQUE,
-    descripcion VARCHAR(255)
-);
+--
+-- Base de datos: `tapstyle`
+--
 
-CREATE TABLE Rol_Permisos (
-    id_rol INT NOT NULL,
-    id_permiso INT NOT NULL,
-    PRIMARY KEY (id_rol, id_permiso),
-    CONSTRAINT FK_RolPermisos_Roles FOREIGN KEY (id_rol) REFERENCES Roles(id_rol) ON DELETE CASCADE,
-    CONSTRAINT FK_RolPermisos_Permisos FOREIGN KEY (id_permiso) REFERENCES Permisos(id_permiso) ON DELETE CASCADE
-);
+-- --------------------------------------------------------
 
-CREATE TABLE TipoDocumento (
-    id_tipodocumento INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_tipodocumento VARCHAR(50) NOT NULL UNIQUE
-);
+--
+-- Estructura de tabla para la tabla `almacenes`
+--
 
--- Tabla de Usuarios (Para Login y Roles)
-CREATE TABLE Usuarios (
-    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-    id_empresa INT, 
-    id_rol INT NOT NULL,
-    nombres VARCHAR(100) NOT NULL,
-    apellidos VARCHAR(100) NOT NULL,
-    id_tipodocumento INT,
-    numero_documento VARCHAR(20),
-    celular VARCHAR(20),
-    direccion VARCHAR(255),
-    username VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    contraseña_hash VARCHAR(255) NOT NULL,
-    estado BOOLEAN NOT NULL DEFAULT TRUE, -- BIT a BOOLEAN
-    fecha_creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    fecha_ultima_sesion DATETIME,
-    
-    CONSTRAINT FK_Usuarios_TipoDocumento FOREIGN KEY (id_tipodocumento) REFERENCES TipoDocumento(id_tipodocumento),
-    CONSTRAINT UQ_Usuarios_Documento UNIQUE (id_tipodocumento, numero_documento),
-    CONSTRAINT FK_Usuarios_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa),
-    CONSTRAINT FK_Usuarios_Roles FOREIGN KEY (id_rol) REFERENCES Roles(id_rol)
-);
+CREATE TABLE `almacenes` (
+  `id_almacen` int(11) NOT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `nombre_almacen` varchar(100) NOT NULL,
+  `ubicacion` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE Bitacora (
-    id_bitacora BIGINT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT,
-    fecha_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    accion VARCHAR(100) NOT NULL,
-    detalle_accion TEXT, -- NVARCHAR(600) a TEXT
-    ip_origen VARCHAR(45),
-    CONSTRAINT FK_Bitacora_Usuarios FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
-);
+--
+-- Volcado de datos para la tabla `almacenes`
+--
 
--- MÓDULO 2: GESTIÓN DE CLIENTES Y PROVEEDORES
--- Tabla de Clientes (Datos del Comprador, vinculado al Usuario para mantener la relación)
-CREATE TABLE Clientes (
-    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT UNIQUE, 
-    nombre VARCHAR(100) NOT NULL,
-    apellido VARCHAR(100) NOT NULL,
-    id_tipodocumento INT,
-    numero_documento VARCHAR(20),
-    direccion VARCHAR(255),
-    telefono VARCHAR(20),
-    email VARCHAR(100), 
-    fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    estado BOOLEAN NOT NULL DEFAULT TRUE, -- BIT a BOOLEAN
-    
-    CONSTRAINT FK_Clientes_TipoDocumento FOREIGN KEY (id_tipodocumento) REFERENCES TipoDocumento(id_tipodocumento),
-    CONSTRAINT UQ_Clientes_Documento UNIQUE (id_tipodocumento, numero_documento),
-    CONSTRAINT FK_Clientes_Usuarios FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
-);
+INSERT INTO `almacenes` (`id_almacen`, `id_empresa`, `nombre_almacen`, `ubicacion`) VALUES
+(1, 1, 'Almacén Central GE', 'Jr. Warehouse #100'),
+(2, 1, 'Almacén Secundario GE', 'Av. Segunda #200');
 
--- Tabla de Proveedores (Vinculado a la Empresa/Tienda)
-CREATE TABLE Proveedores (
-    id_proveedor INT AUTO_INCREMENT PRIMARY KEY,
-    id_empresa INT NOT NULL,
-    razon_social VARCHAR(255) NOT NULL,
-    nombre_comercial VARCHAR(100),
-    ruc VARCHAR(20),
-    rubro VARCHAR(100),
-    direccion VARCHAR(255),
-    telefono VARCHAR(20),
-    email VARCHAR(100),
-    
-    CONSTRAINT UQ_Proveedor_Empresa_RUC UNIQUE (id_empresa, ruc),
-    CONSTRAINT FK_Proveedores_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa)
-);
+-- --------------------------------------------------------
 
--- MÓDULO 3: GESTIÓN DE PRODUCTOS E INVENTARIO
--- CategoríasProducto (Global)
-CREATE TABLE CategoriasProducto (
-    id_categoria INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_categoria VARCHAR(50) NOT NULL UNIQUE,
-    descripcion VARCHAR(255)
-);
+--
+-- Estructura de tabla para la tabla `aperturascaja`
+--
 
--- MarcasProducto (Vinculado a la Empresa)
-CREATE TABLE MarcasProducto (
-    id_marca INT AUTO_INCREMENT PRIMARY KEY,
-    id_empresa INT NOT NULL,
-    nombre_marca VARCHAR(50) NOT NULL,
-    
-    CONSTRAINT UQ_Marca_Empresa UNIQUE (id_empresa, nombre_marca),
-    CONSTRAINT FK_Marcas_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa)
-);
+CREATE TABLE `aperturascaja` (
+  `id_apertura` bigint(20) NOT NULL,
+  `id_caja` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `fecha_apertura` date NOT NULL,
+  `hora_apertura` time NOT NULL,
+  `monto_inicial` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE Modelos (
-    id_modelo INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_modelo VARCHAR(100) NOT NULL,
-    id_marca INT NOT NULL,
-    imagen_principal VARCHAR(255),
-    CONSTRAINT FK_Modelos_Marcas FOREIGN KEY (id_marca) REFERENCES MarcasProducto(id_marca)
-);
+-- --------------------------------------------------------
 
-CREATE TABLE MaterialesProducto (
-    id_material INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_material VARCHAR(100) NOT NULL UNIQUE
-);
+--
+-- Estructura de tabla para la tabla `bitacora`
+--
 
-CREATE TABLE UnidadesMedida (
-    id_unidad_medida INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_unidad VARCHAR(50) NOT NULL UNIQUE,
-    abreviatura VARCHAR(10)
-);
+CREATE TABLE `bitacora` (
+  `id_bitacora` bigint(20) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `fecha_hora` datetime NOT NULL DEFAULT current_timestamp(),
+  `accion` varchar(100) NOT NULL,
+  `detalle_accion` text DEFAULT NULL,
+  `ip_origen` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Productos (Maestro, Vinculado a la Empresa)
-CREATE TABLE Productos (
-    id_producto INT AUTO_INCREMENT PRIMARY KEY,
-    id_empresa INT NOT NULL, 
-    nombre_producto VARCHAR(100) NOT NULL,
-    descripcion TEXT, -- NVARCHAR(600) a TEXT
-    id_categoria INT NOT NULL,
-    id_proveedor INT,
-    id_unidad_medida INT NOT NULL,
-    dimensiones VARCHAR(50),
-    peso_gramos INT,
-    id_marca INT,
-    id_modelo INT,
-    id_material INT,
-    
-    CONSTRAINT UQ_Producto_Empresa_Nombre UNIQUE (id_empresa, nombre_producto),
-    CONSTRAINT FK_Productos_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa),
-    CONSTRAINT FK_Productos_Categorias FOREIGN KEY (id_categoria) REFERENCES CategoriasProducto(id_categoria),
-    CONSTRAINT FK_Productos_Proveedores FOREIGN KEY (id_proveedor) REFERENCES Proveedores(id_proveedor),
-    CONSTRAINT FK_Productos_Marcas FOREIGN KEY (id_marca) REFERENCES MarcasProducto(id_marca),
-    CONSTRAINT FK_Productos_Modelos FOREIGN KEY (id_modelo) REFERENCES Modelos(id_modelo),
-    CONSTRAINT FK_Productos_Materiales FOREIGN KEY (id_material) REFERENCES MaterialesProducto(id_material),
-    CONSTRAINT FK_Productos_UnidadesMedida FOREIGN KEY (id_unidad_medida) REFERENCES UnidadesMedida(id_unidad_medida)
-);
+-- --------------------------------------------------------
 
--- VariantesProducto (Talla, Color, Precio y SKU)
-CREATE TABLE VariantesProducto (
-    id_variante INT AUTO_INCREMENT PRIMARY KEY,
-    id_producto INT NOT NULL,
-    codigo_sku VARCHAR(50) UNIQUE,
-    talla VARCHAR(10) NOT NULL,
-    color VARCHAR(50) NOT NULL,
-    precio_venta DECIMAL(10, 2) NOT NULL,
-    costo_compra DECIMAL(10, 2),
-    
-    CONSTRAINT UQ_Variante_Producto_Talla_Color UNIQUE (id_producto, talla, color),
-    CONSTRAINT FK_Variantes_Productos FOREIGN KEY (id_producto) REFERENCES Productos(id_producto) ON DELETE CASCADE
-);
+--
+-- Estructura de tabla para la tabla `cajas`
+--
 
-CREATE TABLE TiposProducto (
-    id_tipo INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_tipo VARCHAR(50) NOT NULL UNIQUE
-);
+CREATE TABLE `cajas` (
+  `id_caja` int(11) NOT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `nombre_caja` varchar(50) NOT NULL,
+  `ubicacion` varchar(255) DEFAULT NULL,
+  `estado` varchar(20) NOT NULL DEFAULT 'Cerrada'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE Producto_Tipos (
-    id_producto INT NOT NULL,
-    id_tipo INT NOT NULL,
-    PRIMARY KEY (id_producto, id_tipo),
-    CONSTRAINT FK_ProductoTipos_Productos FOREIGN KEY (id_producto) REFERENCES Productos(id_producto) ON DELETE CASCADE,
-    CONSTRAINT FK_ProductoTipos_Tipos FOREIGN KEY (id_tipo) REFERENCES TiposProducto(id_tipo) ON DELETE CASCADE
-);
+-- --------------------------------------------------------
 
--- Almacenes (Vinculado a la Empresa)
-CREATE TABLE Almacenes (
-    id_almacen INT AUTO_INCREMENT PRIMARY KEY,
-    id_empresa INT NOT NULL,
-    nombre_almacen VARCHAR(100) NOT NULL,
-    ubicacion VARCHAR(255),
-    
-    CONSTRAINT UQ_Almacen_Empresa_Nombre UNIQUE (id_empresa, nombre_almacen),
-    CONSTRAINT FK_Almacenes_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa)
-);
+--
+-- Estructura de tabla para la tabla `categoriasproducto`
+--
 
--- Inventario (Stock por Variante y Almacén)
-CREATE TABLE Inventario (
-    id_inventario INT AUTO_INCREMENT PRIMARY KEY,
-    id_variante INT NOT NULL, 
-    id_almacen INT NOT NULL,
-    cantidad_stock INT NOT NULL DEFAULT 0,
-    stock_minimo INT NOT NULL DEFAULT 5,
-    -- Se añade ON UPDATE CURRENT_TIMESTAMP para que la fecha se actualice con cada cambio de stock
-    fecha_ultima_actualizacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
-    
-    CONSTRAINT UQ_Inventario_Variante_Almacen UNIQUE (id_variante, id_almacen),
-    CONSTRAINT FK_Inventario_Variantes FOREIGN KEY (id_variante) REFERENCES VariantesProducto(id_variante) ON DELETE CASCADE,
-    CONSTRAINT FK_Inventario_Almacenes FOREIGN KEY (id_almacen) REFERENCES Almacenes(id_almacen) ON DELETE CASCADE
-);
+CREATE TABLE `categoriasproducto` (
+  `id_categoria` int(11) NOT NULL,
+  `nombre_categoria` varchar(50) NOT NULL,
+  `descripcion` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- MÓDULO 4: GESTIÓN DE MOVIMIENTOS Y TRANSACCIONES
-CREATE TABLE TiposMovimientoInventario (
-    id_tipo_movimiento INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_tipo VARCHAR(50) NOT NULL UNIQUE,
-    es_entrada BOOLEAN NOT NULL -- BIT a BOOLEAN
-);
+--
+-- Volcado de datos para la tabla `categoriasproducto`
+--
 
--- MovimientosInventario (Enlazado a la Variante)
-CREATE TABLE MovimientosInventario (
-    id_movimiento_inv BIGINT AUTO_INCREMENT PRIMARY KEY,
-    id_variante INT NOT NULL,
-    id_almacen INT,
-    id_tipo_movimiento INT NOT NULL,
-    cantidad INT NOT NULL,
-    fecha_movimiento DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    id_usuario INT NOT NULL,
-    observaciones TEXT, -- NVARCHAR(MAX) a TEXT
-    referencia_doc VARCHAR(50),
-    
-    CONSTRAINT FK_MovInv_Variantes FOREIGN KEY (id_variante) REFERENCES VariantesProducto(id_variante),
-    CONSTRAINT FK_MovInv_Almacenes FOREIGN KEY (id_almacen) REFERENCES Almacenes(id_almacen),
-    CONSTRAINT FK_MovInv_TiposMovimiento FOREIGN KEY (id_tipo_movimiento) REFERENCES TiposMovimientoInventario(id_tipo_movimiento),
-    CONSTRAINT FK_MovInv_Usuarios FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
-);
+INSERT INTO `categoriasproducto` (`id_categoria`, `nombre_categoria`, `descripcion`) VALUES
+(1, 'Camisetas', 'Camisetas varias'),
+(2, 'Pantalones', 'Pantalones varias'),
+(3, 'Zapatos', 'Zapatos varias');
 
-CREATE TABLE TiposComprobantePago (
-    id_tipo_comprobante INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_tipo VARCHAR(50) NOT NULL UNIQUE,
-    serie_documento VARCHAR(10)
-);
+-- --------------------------------------------------------
 
-CREATE TABLE TiposPago (
-    id_tipopago INT AUTO_INCREMENT PRIMARY KEY,
-    tipo_pago VARCHAR(50) NOT NULL UNIQUE
-);
+--
+-- Estructura de tabla para la tabla `categorias_producto`
+--
 
-CREATE TABLE Proveedor_MetodosPago (
-    id_proveedor INT NOT NULL,
-    id_tipopago INT NOT NULL,
-    datos_pago VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id_proveedor, id_tipopago),
-    CONSTRAINT FK_ProvMetodos_Proveedor FOREIGN KEY (id_proveedor) REFERENCES Proveedores(id_proveedor) ON DELETE CASCADE,
-    CONSTRAINT FK_ProvMetodos_TipoPago FOREIGN KEY (id_tipopago) REFERENCES TiposPago(id_tipopago) ON DELETE CASCADE
-);
+CREATE TABLE `categorias_producto` (
+  `id_categoria` int(11) NOT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `nombre_categoria` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- ComprobantesPago (Vinculado a la Empresa dueña de la venta)
-CREATE TABLE ComprobantesPago (
-    id_comprobante BIGINT AUTO_INCREMENT PRIMARY KEY,
-    id_empresa INT NOT NULL, 
-    id_cliente INT, 
-    id_usuario INT NOT NULL, 
-    id_tipo_comprobante INT NOT NULL,
-    numero_comprobante VARCHAR(20) NOT NULL,
-    fecha_emision DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    total DECIMAL(10, 2) NOT NULL,
-    igv DECIMAL(10, 2) NOT NULL,
-    subtotal DECIMAL(10, 2) NOT NULL,
-    estado VARCHAR(20) NOT NULL DEFAULT 'Emitido',
-    motivo_anulacion TEXT, -- NVARCHAR(2000) a TEXT
-    
-    CONSTRAINT UQ_Comprobante_Tipo_Numero UNIQUE (id_tipo_comprobante, numero_comprobante),
-    CONSTRAINT FK_Comprobantes_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa),
-    CONSTRAINT FK_Comprobantes_Clientes FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente),
-    CONSTRAINT FK_Comprobantes_Usuarios FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario),
-    CONSTRAINT FK_Comprobantes_TiposComprobante FOREIGN KEY (id_tipo_comprobante) REFERENCES TiposComprobantePago(id_tipo_comprobante)
-);
+-- --------------------------------------------------------
 
-CREATE TABLE PagosComprobante (
-    id_pago BIGINT AUTO_INCREMENT PRIMARY KEY,
-    id_comprobante BIGINT NOT NULL,
-    id_tipopago INT NOT NULL,
-    monto_pagado DECIMAL(10, 2) NOT NULL,
-    referencia_pago VARCHAR(100),
-    CONSTRAINT FK_Pagos_Comprobantes FOREIGN KEY (id_comprobante) REFERENCES ComprobantesPago(id_comprobante) ON DELETE CASCADE,
-    CONSTRAINT FK_Pagos_TiposPago FOREIGN KEY (id_tipopago) REFERENCES TiposPago(id_tipopago)
-);
+--
+-- Estructura de tabla para la tabla `cierrescaja`
+--
 
--- DetallesComprobantePago (Enlazado a la Variante)
-CREATE TABLE DetallesComprobantePago (
-    id_detalle_comprobante BIGINT AUTO_INCREMENT PRIMARY KEY,
-    id_comprobante BIGINT NOT NULL,
-    id_variante INT NOT NULL, 
-    cantidad INT NOT NULL,
-    precio_unitario DECIMAL(10, 2) NOT NULL,
-    descuento_aplicado DECIMAL(10, 2) NOT NULL DEFAULT 0,
-    subtotal_linea DECIMAL(10, 2) NOT NULL,
-    
-    CONSTRAINT FK_DetallesComprobante_Comprobantes FOREIGN KEY (id_comprobante) REFERENCES ComprobantesPago(id_comprobante) ON DELETE CASCADE,
-    CONSTRAINT FK_DetallesComprobante_Variantes FOREIGN KEY (id_variante) REFERENCES VariantesProducto(id_variante)
-);
+CREATE TABLE `cierrescaja` (
+  `id_cierre` bigint(20) NOT NULL,
+  `id_apertura` bigint(20) NOT NULL,
+  `id_caja` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `fecha_cierre` date NOT NULL,
+  `hora_cierre` time NOT NULL,
+  `monto_final` decimal(10,2) NOT NULL,
+  `monto_esperado` decimal(10,2) NOT NULL,
+  `diferencia` decimal(10,2) NOT NULL,
+  `observaciones` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- MÓDULO 5: GESTIÓN DE CAJA
--- Cajas (Vinculado a la Empresa)
-CREATE TABLE Cajas (
-    id_caja INT AUTO_INCREMENT PRIMARY KEY,
-    id_empresa INT NOT NULL,
-    nombre_caja VARCHAR(50) NOT NULL,
-    ubicacion VARCHAR(255),
-    estado VARCHAR(20) NOT NULL DEFAULT 'Cerrada',
-    
-    CONSTRAINT UQ_Caja_Empresa_Nombre UNIQUE (id_empresa, nombre_caja),
-    CONSTRAINT FK_Cajas_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa)
-);
+-- --------------------------------------------------------
 
-CREATE TABLE AperturasCaja (
-    id_apertura BIGINT AUTO_INCREMENT PRIMARY KEY,
-    id_caja INT NOT NULL,
-    id_usuario INT NOT NULL,
-    fecha_apertura DATE NOT NULL,
-    hora_apertura TIME NOT NULL,
-    monto_inicial DECIMAL(10, 2) NOT NULL,
-    CONSTRAINT UQ_AperturaCaja_Caja_Fecha UNIQUE (id_caja, fecha_apertura),
-    CONSTRAINT FK_AperturasCaja_Cajas FOREIGN KEY (id_caja) REFERENCES Cajas(id_caja),
-    CONSTRAINT FK_AperturasCaja_Usuarios FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
-);
+--
+-- Estructura de tabla para la tabla `clientes`
+--
 
-CREATE TABLE CierresCaja (
-    id_cierre BIGINT AUTO_INCREMENT PRIMARY KEY,
-    id_apertura BIGINT NOT NULL UNIQUE,
-    id_caja INT NOT NULL,
-    id_usuario INT NOT NULL,
-    fecha_cierre DATE NOT NULL,
-    hora_cierre TIME NOT NULL,
-    monto_final DECIMAL(10, 2) NOT NULL,
-    monto_esperado DECIMAL(10, 2) NOT NULL,
-    diferencia DECIMAL(10, 2) NOT NULL,
-    observaciones TEXT, -- NVARCHAR(MAX) a TEXT
-    CONSTRAINT FK_CierresCaja_Aperturas FOREIGN KEY (id_apertura) REFERENCES AperturasCaja(id_apertura),
-    CONSTRAINT FK_CierresCaja_Cajas FOREIGN KEY (id_caja) REFERENCES Cajas(id_caja),
-    CONSTRAINT FK_CierresCaja_Usuarios FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
-);
+CREATE TABLE `clientes` (
+  `id_cliente` int(11) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `apellido` varchar(100) NOT NULL,
+  `id_tipodocumento` int(11) DEFAULT NULL,
+  `numero_documento` varchar(20) DEFAULT NULL,
+  `direccion` varchar(255) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `fecha_registro` datetime NOT NULL DEFAULT current_timestamp(),
+  `estado` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE MovimientosCaja (
-    id_movimiento_caja BIGINT AUTO_INCREMENT PRIMARY KEY,
-    id_caja INT NOT NULL,
-    id_usuario INT NOT NULL,
-    fecha_movimiento DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    tipo_movimiento VARCHAR(10) NOT NULL, 
-    monto DECIMAL(10, 2) NOT NULL,
-    descripcion TEXT, -- NVARCHAR(MAX) a TEXT
-    id_comprobante BIGINT,
-    CONSTRAINT FK_MovimientosCaja_Cajas FOREIGN KEY (id_caja) REFERENCES Cajas(id_caja),
-    CONSTRAINT FK_MovimientosCaja_Usuarios FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario),
-    CONSTRAINT FK_MovimientosCaja_Comprobantes FOREIGN KEY (id_comprobante) REFERENCES ComprobantesPago(id_comprobante)
-);
--- MÓDULO 6: GESTIÓN DE PEDIDOS A PROVEEDORES
-CREATE TABLE PedidosCompra (
-    id_pedido_compra BIGINT AUTO_INCREMENT PRIMARY KEY,
-    id_proveedor INT NOT NULL,
-    id_usuario INT NOT NULL,
-    fecha_pedido DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    fecha_entrega_esperada DATE,
-    estado_pedido VARCHAR(50) NOT NULL DEFAULT 'Pendiente',
-    total_pedido DECIMAL(10, 2) NOT NULL DEFAULT 0,
-    CONSTRAINT FK_PedidosCompra_Proveedores FOREIGN KEY (id_proveedor) REFERENCES Proveedores(id_proveedor),
-    CONSTRAINT FK_PedidosCompra_Usuarios FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
-);
--- DetallesPedidoCompra (Enlazado a la Variante)
-CREATE TABLE DetallesPedidoCompra (
-    id_detalle_pedido BIGINT AUTO_INCREMENT PRIMARY KEY,
-    id_pedido_compra BIGINT NOT NULL,
-    id_variante INT NOT NULL, 
-    cantidad_pedida INT NOT NULL,
-    costo_unitario DECIMAL(10, 2) NOT NULL,
-    subtotal_linea DECIMAL(10, 2) NOT NULL,
-    cantidad_recibida INT NOT NULL DEFAULT 0,
-    CONSTRAINT UQ_DetallePedido_Pedido_Variante UNIQUE (id_pedido_compra, id_variante),
-    CONSTRAINT FK_DetallesPedidoCompra_Pedidos FOREIGN KEY (id_pedido_compra) REFERENCES PedidosCompra(id_pedido_compra) ON DELETE CASCADE,
-    CONSTRAINT FK_DetallesPedidoCompra_Variantes FOREIGN KEY (id_variante) REFERENCES VariantesProducto(id_variante)
-);
+-- --------------------------------------------------------
 
--- MÓDULO 7: FINANZAS TAPSTYLE - MODELO HÍBRIDO (SUSCRIPCIÓN + COMISIÓN)
+--
+-- Estructura de tabla para la tabla `comprobantespago`
+--
 
--- Planes de Suscripción disponibles
-CREATE TABLE PlanesSuscripcion (
-    id_plan INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_plan VARCHAR(50) NOT NULL UNIQUE, -- 'Básico', 'Premium', 'Enterprise'
-    precio_mensual DECIMAL(10, 2) NOT NULL,
-    max_productos INT, -- Límite de productos por plan (NULL = ilimitado)
-    max_empleados INT, -- Límite de empleados por plan
-    comision_adicional DECIMAL(5, 2) NOT NULL DEFAULT 0, -- % comisión por ventas
-    descripcion TEXT,
-    estado BOOLEAN NOT NULL DEFAULT TRUE
-);
+CREATE TABLE `comprobantespago` (
+  `id_comprobante` bigint(20) NOT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `id_cliente` int(11) DEFAULT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_tipo_comprobante` int(11) NOT NULL,
+  `numero_comprobante` varchar(20) NOT NULL,
+  `fecha_emision` datetime NOT NULL DEFAULT current_timestamp(),
+  `total` decimal(10,2) NOT NULL,
+  `igv` decimal(10,2) NOT NULL,
+  `subtotal` decimal(10,2) NOT NULL,
+  `estado` varchar(20) NOT NULL DEFAULT 'Emitido',
+  `motivo_anulacion` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Suscripciones activas de las empresas
-CREATE TABLE SuscripcionesEmpresa (
-    id_suscripcion BIGINT AUTO_INCREMENT PRIMARY KEY,
-    id_empresa INT NOT NULL,
-    id_plan INT NOT NULL,
-    fecha_inicio DATE NOT NULL,
-    fecha_vencimiento DATE NOT NULL,
-    precio_acordado DECIMAL(10, 2) NOT NULL, -- Por si hay descuentos especiales
-    estado VARCHAR(20) NOT NULL DEFAULT 'Activa', -- 'Activa', 'Vencida', 'Suspendida'
-    fecha_creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    
-    CONSTRAINT FK_Suscripciones_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa),
-    CONSTRAINT FK_Suscripciones_Planes FOREIGN KEY (id_plan) REFERENCES PlanesSuscripcion(id_plan),
-    CONSTRAINT CHK_EstadoSuscripcion CHECK (estado IN ('Activa', 'Vencida', 'Suspendida'))
-);
+-- --------------------------------------------------------
 
--- Facturas que TapStyle emite a las empresas (SUSCRIPCIÓN)
-CREATE TABLE FacturasSuscripcion (
-    id_factura_suscripcion BIGINT AUTO_INCREMENT PRIMARY KEY,
-    id_empresa INT NOT NULL,
-    id_suscripcion BIGINT NOT NULL,
-    numero_factura VARCHAR(20) NOT NULL UNIQUE,
-    periodo_inicio DATE NOT NULL,
-    periodo_fin DATE NOT NULL,
-    monto_suscripcion DECIMAL(10, 2) NOT NULL,
-    fecha_emision DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    fecha_vencimiento DATE NOT NULL,
-    estado VARCHAR(20) NOT NULL DEFAULT 'Pendiente', -- 'Pendiente', 'Pagado', 'Vencido'
-    fecha_pago DATETIME,
-    metodo_pago VARCHAR(50),
-    
-    CONSTRAINT FK_FacturasSusc_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa),
-    CONSTRAINT FK_FacturasSusc_Suscripciones FOREIGN KEY (id_suscripcion) REFERENCES SuscripcionesEmpresa(id_suscripcion),
-    CONSTRAINT CHK_EstadoFacturaSusc CHECK (estado IN ('Pendiente', 'Pagado', 'Vencido'))
-);
+--
+-- Estructura de tabla para la tabla `detallescomprobantepago`
+--
 
--- Facturas de comisión por ventas (COMISIÓN)
-CREATE TABLE FacturasComision (
-    id_factura_comision BIGINT AUTO_INCREMENT PRIMARY KEY,
-    id_empresa INT NOT NULL,
-    numero_factura VARCHAR(20) NOT NULL UNIQUE,
-    periodo_inicio DATE NOT NULL,
-    periodo_fin DATE NOT NULL,
-    total_ventas_periodo DECIMAL(10, 2) NOT NULL,
-    porcentaje_comision DECIMAL(5, 2) NOT NULL,
-    monto_comision DECIMAL(10, 2) NOT NULL,
-    fecha_emision DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    fecha_vencimiento DATE NOT NULL,
-    estado VARCHAR(20) NOT NULL DEFAULT 'Pendiente', -- 'Pendiente', 'Pagado', 'Vencido'
-    fecha_pago DATETIME,
-    metodo_pago VARCHAR(50),
-    
-    CONSTRAINT FK_FacturasComision_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa),
-    CONSTRAINT CHK_EstadoFacturaComision CHECK (estado IN ('Pendiente', 'Pagado', 'Vencido'))
-);
+CREATE TABLE `detallescomprobantepago` (
+  `id_detalle_comprobante` bigint(20) NOT NULL,
+  `id_comprobante` bigint(20) NOT NULL,
+  `id_variante` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio_unitario` decimal(10,2) NOT NULL,
+  `descuento_aplicado` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `subtotal_linea` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Pagos realizados por las empresas a TapStyle
-CREATE TABLE PagosEmpresaATapStyle (
-    id_pago BIGINT AUTO_INCREMENT PRIMARY KEY,
-    id_empresa INT NOT NULL,
-    tipo_pago VARCHAR(20) NOT NULL, -- 'Suscripcion', 'Comision'
-    id_factura_suscripcion BIGINT,
-    id_factura_comision BIGINT,
-    monto_pagado DECIMAL(10, 2) NOT NULL,
-    fecha_pago DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    metodo_pago VARCHAR(50) NOT NULL, -- 'Transferencia', 'Tarjeta', 'Efectivo'
-    referencia_pago VARCHAR(100),
-    comprobante_pago VARCHAR(255), -- Ruta del archivo del comprobante
-    
-    CONSTRAINT FK_PagosEmpresa_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa),
-    CONSTRAINT FK_PagosEmpresa_FactSusc FOREIGN KEY (id_factura_suscripcion) REFERENCES FacturasSuscripcion(id_factura_suscripcion),
-    CONSTRAINT FK_PagosEmpresa_FactComision FOREIGN KEY (id_factura_comision) REFERENCES FacturasComision(id_factura_comision),
-    CONSTRAINT CHK_TipoPago CHECK (tipo_pago IN ('Suscripcion', 'Comision')),
-    CONSTRAINT CHK_FacturaValida CHECK (
-        (tipo_pago = 'Suscripcion' AND id_factura_suscripcion IS NOT NULL AND id_factura_comision IS NULL) OR
-        (tipo_pago = 'Comision' AND id_factura_comision IS NOT NULL AND id_factura_suscripcion IS NULL)
-    )
-);
+-- --------------------------------------------------------
 
--- MÓDULOS DEL SISTEMA TAPSTYLE
-CREATE TABLE ModulosSistema (
-    id_modulo INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_modulo VARCHAR(50) NOT NULL UNIQUE,
-    descripcion VARCHAR(255),
-    icono VARCHAR(50), -- Para la interfaz
-    orden_menu INT, -- Orden en el menú
-    estado BOOLEAN NOT NULL DEFAULT TRUE
-);
+--
+-- Estructura de tabla para la tabla `detallespedidocompra`
+--
 
--- MÓDULOS INCLUIDOS EN CADA PLAN
-CREATE TABLE PlanModulos (
-    id_plan INT NOT NULL,
-    id_modulo INT NOT NULL,
-    incluido BOOLEAN NOT NULL DEFAULT TRUE,
-    PRIMARY KEY (id_plan, id_modulo),
-    CONSTRAINT FK_PlanModulos_Planes FOREIGN KEY (id_plan) REFERENCES PlanesSuscripcion(id_plan) ON DELETE CASCADE,
-    CONSTRAINT FK_PlanModulos_Modulos FOREIGN KEY (id_modulo) REFERENCES ModulosSistema(id_modulo) ON DELETE CASCADE
-);
+CREATE TABLE `detallespedidocompra` (
+  `id_detalle_pedido` bigint(20) NOT NULL,
+  `id_pedido_compra` bigint(20) NOT NULL,
+  `id_variante` int(11) NOT NULL,
+  `cantidad_pedida` int(11) NOT NULL,
+  `costo_unitario` decimal(10,2) NOT NULL,
+  `subtotal_linea` decimal(10,2) NOT NULL,
+  `cantidad_recibida` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- MÓDULOS ACTIVOS POR EMPRESA (Personalización del Super Admin)
-CREATE TABLE EmpresaModulos (
-    id_empresa INT NOT NULL,
-    id_modulo INT NOT NULL,
-    activo BOOLEAN NOT NULL DEFAULT TRUE,
-    fecha_activacion DATETIME DEFAULT CURRENT_TIMESTAMP,
-    fecha_desactivacion DATETIME,
-    PRIMARY KEY (id_empresa, id_modulo),
-    CONSTRAINT FK_EmpresaModulos_Empresas FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa) ON DELETE CASCADE,
-    CONSTRAINT FK_EmpresaModulos_Modulos FOREIGN KEY (id_modulo) REFERENCES ModulosSistema(id_modulo) ON DELETE CASCADE
-);
+-- --------------------------------------------------------
 
--- DATOS INICIALES PARA MÓDULOS DEL SISTEMA
-INSERT INTO ModulosSistema (nombre_modulo, descripcion, icono, orden_menu) VALUES
-('productos_catalogo', 'Gestión de Productos y Catálogo', 'package', 1),
-('ventas_pedidos', 'Ventas y Gestión de Pedidos', 'shopping-cart', 2),
-('inventario_almacenes', 'Control de Inventario y Almacenes', 'warehouse', 3),
-('finanzas_pagos', 'Finanzas y Gestión de Pagos', 'credit-card', 4),
-('gestion_empleados', 'Gestión de Empleados', 'users', 5),
-('roles_permisos', 'Roles y Permisos', 'shield', 6),
-('reportes_analytics', 'Reportes y Analytics', 'bar-chart', 7),
-('configuracion', 'Configuración de la Tienda', 'settings', 8);
+--
+-- Estructura de tabla para la tabla `empresamodulos`
+--
 
--- DATOS INICIALES PARA PLANES DE SUSCRIPCIÓN
-INSERT INTO PlanesSuscripcion (nombre_plan, precio_mensual, max_productos, max_empleados, comision_adicional, descripcion) VALUES
-('Básico', 199.00, 100, 3, 2.0, 'Plan ideal para pequeñas tiendas. Incluye módulos básicos.'),
-('Premium', 399.00, 500, 10, 1.5, 'Plan para tiendas en crecimiento. Incluye módulos avanzados.'),
-('Enterprise', 799.00, NULL, NULL, 1.0, 'Plan completo para grandes empresas. Todos los módulos incluidos.');
+CREATE TABLE `empresamodulos` (
+  `id_empresa` int(11) NOT NULL,
+  `id_modulo` int(11) NOT NULL,
+  `activo` tinyint(1) NOT NULL DEFAULT 1,
+  `fecha_activacion` datetime DEFAULT current_timestamp(),
+  `fecha_desactivacion` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- ASIGNACIÓN DE MÓDULOS POR PLAN
--- Plan Básico: Solo productos, ventas e inventario
-INSERT INTO PlanModulos (id_plan, id_modulo, incluido) VALUES
-(1, 1, TRUE),  -- Productos y Catálogo
-(1, 2, TRUE),  -- Ventas y Pedidos
-(1, 3, TRUE),  -- Inventario y Almacenes
-(1, 8, TRUE),  -- Configuración
-(1, 4, FALSE), -- Finanzas (NO incluido)
-(1, 5, FALSE), -- Empleados (NO incluido)
-(1, 6, FALSE), -- Roles (NO incluido)
-(1, 7, FALSE); -- Reportes (NO incluido)
+-- --------------------------------------------------------
 
--- Plan Premium: Básico + finanzas + empleados + roles
-INSERT INTO PlanModulos (id_plan, id_modulo, incluido) VALUES
-(2, 1, TRUE),  -- Productos y Catálogo
-(2, 2, TRUE),  -- Ventas y Pedidos
-(2, 3, TRUE),  -- Inventario y Almacenes
-(2, 4, TRUE),  -- Finanzas y Pagos
-(2, 5, TRUE),  -- Gestión de Empleados
-(2, 6, TRUE),  -- Roles y Permisos
-(2, 8, TRUE),  -- Configuración
-(2, 7, FALSE); -- Reportes (NO incluido)
+--
+-- Estructura de tabla para la tabla `empresas`
+--
 
--- Plan Enterprise: Todos los módulos
-INSERT INTO PlanModulos (id_plan, id_modulo, incluido) VALUES
-(3, 1, TRUE),  -- Productos y Catálogo
-(3, 2, TRUE),  -- Ventas y Pedidos
-(3, 3, TRUE),  -- Inventario y Almacenes
-(3, 4, TRUE),  -- Finanzas y Pagos
-(3, 5, TRUE),  -- Gestión de Empleados
-(3, 6, TRUE),  -- Roles y Permisos
-(3, 7, TRUE),  -- Reportes y Analytics
-(3, 8, TRUE);  -- Configuración
+CREATE TABLE `empresas` (
+  `id_empresa` int(11) NOT NULL,
+  `nombre_tienda` varchar(100) NOT NULL,
+  `ruc_empresa` varchar(20) DEFAULT NULL,
+  `direccion_legal` varchar(255) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `email_contacto` varchar(100) DEFAULT NULL,
+  `fecha_registro` datetime NOT NULL DEFAULT current_timestamp(),
+  `estado_aprobacion` varchar(20) NOT NULL DEFAULT 'Pendiente',
+  `tasa_comision` decimal(5,2) NOT NULL DEFAULT 0.15
+) ;
+
+--
+-- Volcado de datos para la tabla `empresas`
+--
+
+INSERT INTO `empresas` (`id_empresa`, `nombre_tienda`, `ruc_empresa`, `direccion_legal`, `telefono`, `email_contacto`, `fecha_registro`, `estado_aprobacion`, `tasa_comision`) VALUES
+(1, 'TapStyle - Gentle Elegance', '20123456789', 'Jr. Fashion #101, Lima, Perú', '987654321', 'info@tapstyle-ge.com', '2025-12-01 07:02:00', 'Aprobada', 0.15),
+(2, 'TapStyle - Glamour Time', '20987654321', 'Av. Style #202, Lima, Perú', '987654322', 'info@tapstyle-gt.com', '2025-12-01 07:02:00', 'Aprobada', 0.15),
+(3, 'TapStyle - Performance Footwear', '20555666777', 'Calle Deporte #303, Lima, Perú', '987654323', 'info@tapstyle-pf.com', '2025-12-01 07:02:00', 'Aprobada', 0.12),
+(4, 'TapStyle - Street Vibe', '20888999000', 'Av. Urban #404, Lima, Perú', '987654324', 'info@tapstyle-sv.com', '2025-12-01 07:02:00', 'Aprobada', 0.15),
+(5, 'TapStyle - Sistema', '20000000000', 'Lima, Perú', '999000000', 'info@tapstyle.com', '2025-12-01 12:02:12', 'Aprobada', 0.15);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `facturascomision`
+--
+
+CREATE TABLE `facturascomision` (
+  `id_factura_comision` bigint(20) NOT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `numero_factura` varchar(20) NOT NULL,
+  `periodo_inicio` date NOT NULL,
+  `periodo_fin` date NOT NULL,
+  `total_ventas_periodo` decimal(10,2) NOT NULL,
+  `porcentaje_comision` decimal(5,2) NOT NULL,
+  `monto_comision` decimal(10,2) NOT NULL,
+  `fecha_emision` datetime NOT NULL DEFAULT current_timestamp(),
+  `fecha_vencimiento` date NOT NULL,
+  `estado` varchar(20) NOT NULL DEFAULT 'Pendiente',
+  `fecha_pago` datetime DEFAULT NULL,
+  `metodo_pago` varchar(50) DEFAULT NULL
+) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `facturassuscripcion`
+--
+
+CREATE TABLE `facturassuscripcion` (
+  `id_factura_suscripcion` bigint(20) NOT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `id_suscripcion` bigint(20) NOT NULL,
+  `numero_factura` varchar(20) NOT NULL,
+  `periodo_inicio` date NOT NULL,
+  `periodo_fin` date NOT NULL,
+  `monto_suscripcion` decimal(10,2) NOT NULL,
+  `fecha_emision` datetime NOT NULL DEFAULT current_timestamp(),
+  `fecha_vencimiento` date NOT NULL,
+  `estado` varchar(20) NOT NULL DEFAULT 'Pendiente',
+  `fecha_pago` datetime DEFAULT NULL,
+  `metodo_pago` varchar(50) DEFAULT NULL
+) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `inventario`
+--
+
+CREATE TABLE `inventario` (
+  `id_inventario` int(11) NOT NULL,
+  `id_variante` int(11) NOT NULL,
+  `id_almacen` int(11) NOT NULL,
+  `cantidad_stock` int(11) NOT NULL DEFAULT 0,
+  `stock_minimo` int(11) NOT NULL DEFAULT 5,
+  `fecha_ultima_actualizacion` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `marcasproducto`
+--
+
+CREATE TABLE `marcasproducto` (
+  `id_marca` int(11) NOT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `nombre_marca` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `marcasproducto`
+--
+
+INSERT INTO `marcasproducto` (`id_marca`, `id_empresa`, `nombre_marca`) VALUES
+(2, 1, 'Adidas'),
+(1, 1, 'Nike'),
+(3, 1, 'Puma'),
+(5, 2, 'Calvin Klein'),
+(4, 2, 'Tommy Hilfiger'),
+(6, 3, 'Converse'),
+(7, 3, 'Vans'),
+(9, 4, 'Chanel'),
+(8, 4, 'Gucci');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `marcas_producto`
+--
+
+CREATE TABLE `marcas_producto` (
+  `id_marca` int(11) NOT NULL,
+  `nombre_marca` varchar(50) NOT NULL,
+  `id_empresa` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `materialesproducto`
+--
+
+CREATE TABLE `materialesproducto` (
+  `id_material` int(11) NOT NULL,
+  `nombre_material` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `materialesproducto`
+--
+
+INSERT INTO `materialesproducto` (`id_material`, `nombre_material`) VALUES
+(1, 'Algodón'),
+(3, 'Cuero'),
+(4, 'Denim'),
+(6, 'Lana'),
+(7, 'Nylon'),
+(2, 'Poliéster'),
+(5, 'Spandex');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `materiales_producto`
+--
+
+CREATE TABLE `materiales_producto` (
+  `id_material` int(11) NOT NULL,
+  `nombre_material` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `modelos`
+--
+
+CREATE TABLE `modelos` (
+  `id_modelo` int(11) NOT NULL,
+  `nombre_modelo` varchar(100) NOT NULL,
+  `id_marca` int(11) NOT NULL,
+  `imagen_principal` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `modulossistema`
+--
+
+CREATE TABLE `modulossistema` (
+  `id_modulo` int(11) NOT NULL,
+  `nombre_modulo` varchar(50) NOT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `icono` varchar(50) DEFAULT NULL,
+  `orden_menu` int(11) DEFAULT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `modulossistema`
+--
+
+INSERT INTO `modulossistema` (`id_modulo`, `nombre_modulo`, `descripcion`, `icono`, `orden_menu`, `estado`) VALUES
+(1, 'productos_catalogo', 'Gestión de Productos y Catálogo', 'package', 1, 1),
+(2, 'ventas_pedidos', 'Ventas y Gestión de Pedidos', 'shopping-cart', 2, 1),
+(3, 'inventario_almacenes', 'Control de Inventario y Almacenes', 'warehouse', 3, 1),
+(4, 'finanzas_pagos', 'Finanzas y Gestión de Pagos', 'credit-card', 4, 1),
+(5, 'gestion_empleados', 'Gestión de Empleados', 'users', 5, 1),
+(6, 'roles_permisos', 'Roles y Permisos', 'shield', 6, 1),
+(7, 'reportes_analytics', 'Reportes y Analytics', 'bar-chart', 7, 1),
+(8, 'configuracion', 'Configuración de la Tienda', 'settings', 8, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `movimientoscaja`
+--
+
+CREATE TABLE `movimientoscaja` (
+  `id_movimiento_caja` bigint(20) NOT NULL,
+  `id_caja` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `fecha_movimiento` datetime NOT NULL DEFAULT current_timestamp(),
+  `tipo_movimiento` varchar(10) NOT NULL,
+  `monto` decimal(10,2) NOT NULL,
+  `descripcion` text DEFAULT NULL,
+  `id_comprobante` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `movimientosinventario`
+--
+
+CREATE TABLE `movimientosinventario` (
+  `id_movimiento_inv` bigint(20) NOT NULL,
+  `id_variante` int(11) NOT NULL,
+  `id_almacen` int(11) DEFAULT NULL,
+  `id_tipo_movimiento` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `fecha_movimiento` datetime NOT NULL DEFAULT current_timestamp(),
+  `id_usuario` int(11) NOT NULL,
+  `observaciones` text DEFAULT NULL,
+  `referencia_doc` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pagoscomprobante`
+--
+
+CREATE TABLE `pagoscomprobante` (
+  `id_pago` bigint(20) NOT NULL,
+  `id_comprobante` bigint(20) NOT NULL,
+  `id_tipopago` int(11) NOT NULL,
+  `monto_pagado` decimal(10,2) NOT NULL,
+  `referencia_pago` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pagosempresaatapstyle`
+--
+
+CREATE TABLE `pagosempresaatapstyle` (
+  `id_pago` bigint(20) NOT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `tipo_pago` varchar(20) NOT NULL,
+  `id_factura_suscripcion` bigint(20) DEFAULT NULL,
+  `id_factura_comision` bigint(20) DEFAULT NULL,
+  `monto_pagado` decimal(10,2) NOT NULL,
+  `fecha_pago` datetime NOT NULL DEFAULT current_timestamp(),
+  `metodo_pago` varchar(50) NOT NULL,
+  `referencia_pago` varchar(100) DEFAULT NULL,
+  `comprobante_pago` varchar(255) DEFAULT NULL
+) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedidoscompra`
+--
+
+CREATE TABLE `pedidoscompra` (
+  `id_pedido_compra` bigint(20) NOT NULL,
+  `id_proveedor` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `fecha_pedido` datetime NOT NULL DEFAULT current_timestamp(),
+  `fecha_entrega_esperada` date DEFAULT NULL,
+  `estado_pedido` varchar(50) NOT NULL DEFAULT 'Pendiente',
+  `total_pedido` decimal(10,2) NOT NULL DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `permisos`
+--
+
+CREATE TABLE `permisos` (
+  `id_permiso` int(11) NOT NULL,
+  `nombre_permiso` varchar(100) NOT NULL,
+  `descripcion` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `permisos`
+--
+
+INSERT INTO `permisos` (`id_permiso`, `nombre_permiso`, `descripcion`) VALUES
+(1, 'CREAR_EMPRESA', 'Permiso para crear nuevas empresas'),
+(2, 'EDITAR_EMPRESA', 'Permiso para editar información de empresa'),
+(3, 'ELIMINAR_EMPRESA', 'Permiso para eliminar empresas'),
+(4, 'GESTIONAR_USUARIOS', 'Permiso para gestionar usuarios'),
+(5, 'GESTIONAR_ROLES', 'Permiso para gestionar roles y permisos'),
+(6, 'VER_REPORTES', 'Permiso para ver reportes'),
+(7, 'GENERAR_REPORTES', 'Permiso para generar reportes'),
+(8, 'GESTIONAR_PRODUCTOS', 'Permiso para CRUD de productos'),
+(9, 'GESTIONAR_INVENTARIO', 'Permiso para gestionar inventario'),
+(10, 'GESTIONAR_PROVEEDORES', 'Permiso para CRUD de proveedores'),
+(11, 'GESTIONAR_CLIENTES', 'Permiso para CRUD de clientes'),
+(12, 'VER_VENTAS', 'Permiso para ver registro de ventas'),
+(13, 'REALIZAR_VENTAS', 'Permiso para procesar ventas'),
+(14, 'GESTIONAR_CAJA', 'Permiso para gestionar caja'),
+(15, 'APROBAR_PAGOS', 'Permiso para aprobar pagos'),
+(16, 'VER_FINANZAS', 'Permiso para ver información financiera');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `planessuscripcion`
+--
+
+CREATE TABLE `planessuscripcion` (
+  `id_plan` int(11) NOT NULL,
+  `nombre_plan` varchar(50) NOT NULL,
+  `precio_mensual` decimal(10,2) NOT NULL,
+  `max_productos` int(11) DEFAULT NULL,
+  `max_empleados` int(11) DEFAULT NULL,
+  `comision_adicional` decimal(5,2) NOT NULL DEFAULT 0.00,
+  `descripcion` text DEFAULT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `planessuscripcion`
+--
+
+INSERT INTO `planessuscripcion` (`id_plan`, `nombre_plan`, `precio_mensual`, `max_productos`, `max_empleados`, `comision_adicional`, `descripcion`, `estado`) VALUES
+(1, 'Básico', 199.00, 100, 3, 2.00, 'Plan ideal para pequeñas tiendas. Incluye módulos básicos.', 1),
+(2, 'Premium', 399.00, 500, 10, 1.50, 'Plan para tiendas en crecimiento. Incluye módulos avanzados.', 1),
+(3, 'Enterprise', 799.00, NULL, NULL, 1.00, 'Plan completo para grandes empresas. Todos los módulos incluidos.', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `planmodulos`
+--
+
+CREATE TABLE `planmodulos` (
+  `id_plan` int(11) NOT NULL,
+  `id_modulo` int(11) NOT NULL,
+  `incluido` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `planmodulos`
+--
+
+INSERT INTO `planmodulos` (`id_plan`, `id_modulo`, `incluido`) VALUES
+(1, 1, 1),
+(1, 2, 1),
+(1, 3, 1),
+(1, 4, 0),
+(1, 5, 0),
+(1, 6, 0),
+(1, 7, 0),
+(1, 8, 1),
+(2, 1, 1),
+(2, 2, 1),
+(2, 3, 1),
+(2, 4, 1),
+(2, 5, 1),
+(2, 6, 1),
+(2, 7, 0),
+(2, 8, 1),
+(3, 1, 1),
+(3, 2, 1),
+(3, 3, 1),
+(3, 4, 1),
+(3, 5, 1),
+(3, 6, 1),
+(3, 7, 1),
+(3, 8, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `productos`
+--
+
+CREATE TABLE `productos` (
+  `id_producto` int(11) NOT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `nombre_producto` varchar(100) NOT NULL,
+  `descripcion` text DEFAULT NULL,
+  `id_categoria` int(11) NOT NULL,
+  `id_proveedor` int(11) DEFAULT NULL,
+  `id_unidad_medida` int(11) NOT NULL,
+  `dimensiones` varchar(50) DEFAULT NULL,
+  `peso_gramos` int(11) DEFAULT NULL,
+  `id_marca` int(11) DEFAULT NULL,
+  `id_modelo` int(11) DEFAULT NULL,
+  `id_material` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `producto_tipos`
+--
+
+CREATE TABLE `producto_tipos` (
+  `id_producto` int(11) NOT NULL,
+  `id_tipo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proveedores`
+--
+
+CREATE TABLE `proveedores` (
+  `id_proveedor` int(11) NOT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `razon_social` varchar(255) NOT NULL,
+  `nombre_comercial` varchar(100) DEFAULT NULL,
+  `ruc` varchar(20) DEFAULT NULL,
+  `rubro` varchar(100) DEFAULT NULL,
+  `direccion` varchar(255) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `proveedores`
+--
+
+INSERT INTO `proveedores` (`id_proveedor`, `id_empresa`, `razon_social`, `nombre_comercial`, `ruc`, `rubro`, `direccion`, `telefono`, `email`) VALUES
+(1, 5, 'Distribuidor Premium SPA', 'Premium', '20123456700', 'Textil', 'Jr. Industrial #500', '987000001', 'proveedor@premium.com');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proveedor_metodospago`
+--
+
+CREATE TABLE `proveedor_metodospago` (
+  `id_proveedor` int(11) NOT NULL,
+  `id_tipopago` int(11) NOT NULL,
+  `datos_pago` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `roles`
+--
+
+CREATE TABLE `roles` (
+  `id_rol` int(11) NOT NULL,
+  `nombre_rol` varchar(50) NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT 1,
+  `descripcion` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id_rol`, `nombre_rol`, `estado`, `descripcion`) VALUES
+(1, 'SuperAdmin', 1, 'Administrador del sistema con acceso total'),
+(2, 'Admin', 1, 'Administrador de empresa con control completo'),
+(3, 'Vendedor', 1, 'Personal de ventas con acceso a inventario'),
+(4, 'Empleado', 1, 'Empleado general con permisos limitados'),
+(5, 'Cliente', 1, 'Cliente registrado de la tienda');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rol_permisos`
+--
+
+CREATE TABLE `rol_permisos` (
+  `id_rol` int(11) NOT NULL,
+  `id_permiso` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `rol_permisos`
+--
+
+INSERT INTO `rol_permisos` (`id_rol`, `id_permiso`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(1, 7),
+(1, 8),
+(1, 9),
+(1, 10),
+(1, 11),
+(1, 12),
+(1, 13),
+(1, 14),
+(1, 15),
+(1, 16),
+(2, 2),
+(2, 4),
+(2, 5),
+(2, 6),
+(2, 7),
+(2, 8),
+(2, 9),
+(2, 10),
+(2, 11),
+(2, 12),
+(2, 13),
+(2, 14),
+(2, 15),
+(2, 16),
+(3, 8),
+(3, 9),
+(3, 12),
+(3, 13),
+(3, 14),
+(4, 9),
+(4, 12);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `suscripcionesempresa`
+--
+
+CREATE TABLE `suscripcionesempresa` (
+  `id_suscripcion` bigint(20) NOT NULL,
+  `id_empresa` int(11) NOT NULL,
+  `id_plan` int(11) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_vencimiento` date NOT NULL,
+  `precio_acordado` decimal(10,2) NOT NULL,
+  `estado` varchar(20) NOT NULL DEFAULT 'Activa',
+  `fecha_creacion` datetime NOT NULL DEFAULT current_timestamp()
+) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipodocumento`
+--
+
+CREATE TABLE `tipodocumento` (
+  `id_tipodocumento` int(11) NOT NULL,
+  `nombre_tipodocumento` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tipodocumento`
+--
+
+INSERT INTO `tipodocumento` (`id_tipodocumento`, `nombre_tipodocumento`) VALUES
+(1, 'DNI'),
+(4, 'Licencia'),
+(5, 'Otro'),
+(3, 'Pasaporte'),
+(2, 'RUC');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tiposcomprobantepago`
+--
+
+CREATE TABLE `tiposcomprobantepago` (
+  `id_tipo_comprobante` int(11) NOT NULL,
+  `nombre_tipo` varchar(50) NOT NULL,
+  `serie_documento` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tiposmovimientoinventario`
+--
+
+CREATE TABLE `tiposmovimientoinventario` (
+  `id_tipo_movimiento` int(11) NOT NULL,
+  `nombre_tipo` varchar(50) NOT NULL,
+  `es_entrada` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipospago`
+--
+
+CREATE TABLE `tipospago` (
+  `id_tipopago` int(11) NOT NULL,
+  `tipo_pago` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tiposproducto`
+--
+
+CREATE TABLE `tiposproducto` (
+  `id_tipo` int(11) NOT NULL,
+  `nombre_tipo` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_documento`
+--
+
+CREATE TABLE `tipo_documento` (
+  `id_tipo_documento` int(11) NOT NULL,
+  `nombre_tipo_documento` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `unidadesmedida`
+--
+
+CREATE TABLE `unidadesmedida` (
+  `id_unidad_medida` int(11) NOT NULL,
+  `nombre_unidad` varchar(50) NOT NULL,
+  `abreviatura` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `unidadesmedida`
+--
+
+INSERT INTO `unidadesmedida` (`id_unidad_medida`, `nombre_unidad`, `abreviatura`) VALUES
+(1, 'Unidad', 'UND'),
+(2, 'Docena', 'DOC'),
+(3, 'Caja', 'CJA'),
+(4, 'Metro', 'MTR');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `unidades_medida`
+--
+
+CREATE TABLE `unidades_medida` (
+  `id_unidad_medida` int(11) NOT NULL,
+  `abreviatura` varchar(10) DEFAULT NULL,
+  `nombre_unidad` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id_usuario` int(11) NOT NULL,
+  `id_empresa` int(11) DEFAULT NULL,
+  `id_rol` int(11) NOT NULL,
+  `nombres` varchar(100) NOT NULL,
+  `apellidos` varchar(100) NOT NULL,
+  `id_tipodocumento` int(11) DEFAULT NULL,
+  `numero_documento` varchar(20) DEFAULT NULL,
+  `celular` varchar(20) DEFAULT NULL,
+  `direccion` varchar(255) DEFAULT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `contraseña_hash` varchar(255) NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT 1,
+  `fecha_creacion` datetime NOT NULL DEFAULT current_timestamp(),
+  `fecha_ultima_sesion` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `id_empresa`, `id_rol`, `nombres`, `apellidos`, `id_tipodocumento`, `numero_documento`, `celular`, `direccion`, `username`, `email`, `contraseña_hash`, `estado`, `fecha_creacion`, `fecha_ultima_sesion`) VALUES
+(16, 5, 1, 'Super', 'Admin', NULL, NULL, NULL, NULL, 'superadmin', 'super@tapstyle.com', '123456', 1, '2025-12-01 12:02:12', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `variantesproducto`
+--
+
+CREATE TABLE `variantesproducto` (
+  `id_variante` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `codigo_sku` varchar(50) DEFAULT NULL,
+  `talla` varchar(10) NOT NULL,
+  `color` varchar(50) NOT NULL,
+  `precio_venta` decimal(10,2) NOT NULL,
+  `costo_compra` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `variantes_producto`
+--
+
+CREATE TABLE `variantes_producto` (
+  `id_variante` int(11) NOT NULL,
+  `codigo_sku` varchar(50) DEFAULT NULL,
+  `color` varchar(50) NOT NULL,
+  `costo_compra` decimal(10,2) DEFAULT NULL,
+  `precio_venta` decimal(10,2) NOT NULL,
+  `talla` varchar(10) NOT NULL,
+  `id_producto` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `almacenes`
+--
+ALTER TABLE `almacenes`
+  ADD PRIMARY KEY (`id_almacen`),
+  ADD UNIQUE KEY `UQ_Almacen_Empresa_Nombre` (`id_empresa`,`nombre_almacen`);
+
+--
+-- Indices de la tabla `aperturascaja`
+--
+ALTER TABLE `aperturascaja`
+  ADD PRIMARY KEY (`id_apertura`),
+  ADD UNIQUE KEY `UQ_AperturaCaja_Caja_Fecha` (`id_caja`,`fecha_apertura`),
+  ADD KEY `FK_AperturasCaja_Usuarios` (`id_usuario`);
+
+--
+-- Indices de la tabla `bitacora`
+--
+ALTER TABLE `bitacora`
+  ADD PRIMARY KEY (`id_bitacora`),
+  ADD KEY `FK_Bitacora_Usuarios` (`id_usuario`);
+
+--
+-- Indices de la tabla `cajas`
+--
+ALTER TABLE `cajas`
+  ADD PRIMARY KEY (`id_caja`),
+  ADD UNIQUE KEY `UQ_Caja_Empresa_Nombre` (`id_empresa`,`nombre_caja`);
+
+--
+-- Indices de la tabla `categoriasproducto`
+--
+ALTER TABLE `categoriasproducto`
+  ADD PRIMARY KEY (`id_categoria`),
+  ADD UNIQUE KEY `nombre_categoria` (`nombre_categoria`);
+
+--
+-- Indices de la tabla `categorias_producto`
+--
+ALTER TABLE `categorias_producto`
+  ADD PRIMARY KEY (`id_categoria`),
+  ADD UNIQUE KEY `UKmcbr69d02xjufpj340yprgug3` (`nombre_categoria`);
+
+--
+-- Indices de la tabla `cierrescaja`
+--
+ALTER TABLE `cierrescaja`
+  ADD PRIMARY KEY (`id_cierre`),
+  ADD UNIQUE KEY `id_apertura` (`id_apertura`),
+  ADD KEY `FK_CierresCaja_Cajas` (`id_caja`),
+  ADD KEY `FK_CierresCaja_Usuarios` (`id_usuario`);
+
+--
+-- Indices de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`id_cliente`),
+  ADD UNIQUE KEY `id_usuario` (`id_usuario`),
+  ADD UNIQUE KEY `UQ_Clientes_Documento` (`id_tipodocumento`,`numero_documento`);
+
+--
+-- Indices de la tabla `comprobantespago`
+--
+ALTER TABLE `comprobantespago`
+  ADD PRIMARY KEY (`id_comprobante`),
+  ADD UNIQUE KEY `UQ_Comprobante_Tipo_Numero` (`id_tipo_comprobante`,`numero_comprobante`),
+  ADD KEY `FK_Comprobantes_Empresas` (`id_empresa`),
+  ADD KEY `FK_Comprobantes_Clientes` (`id_cliente`),
+  ADD KEY `FK_Comprobantes_Usuarios` (`id_usuario`);
+
+--
+-- Indices de la tabla `detallescomprobantepago`
+--
+ALTER TABLE `detallescomprobantepago`
+  ADD PRIMARY KEY (`id_detalle_comprobante`),
+  ADD KEY `FK_DetallesComprobante_Comprobantes` (`id_comprobante`),
+  ADD KEY `FK_DetallesComprobante_Variantes` (`id_variante`);
+
+--
+-- Indices de la tabla `detallespedidocompra`
+--
+ALTER TABLE `detallespedidocompra`
+  ADD PRIMARY KEY (`id_detalle_pedido`),
+  ADD UNIQUE KEY `UQ_DetallePedido_Pedido_Variante` (`id_pedido_compra`,`id_variante`),
+  ADD KEY `FK_DetallesPedidoCompra_Variantes` (`id_variante`);
+
+--
+-- Indices de la tabla `empresamodulos`
+--
+ALTER TABLE `empresamodulos`
+  ADD PRIMARY KEY (`id_empresa`,`id_modulo`),
+  ADD KEY `FK_EmpresaModulos_Modulos` (`id_modulo`);
+
+--
+-- Indices de la tabla `empresas`
+--
+ALTER TABLE `empresas`
+  ADD PRIMARY KEY (`id_empresa`),
+  ADD UNIQUE KEY `nombre_tienda` (`nombre_tienda`),
+  ADD UNIQUE KEY `ruc_empresa` (`ruc_empresa`);
+
+--
+-- Indices de la tabla `facturascomision`
+--
+ALTER TABLE `facturascomision`
+  ADD PRIMARY KEY (`id_factura_comision`),
+  ADD UNIQUE KEY `numero_factura` (`numero_factura`),
+  ADD KEY `FK_FacturasComision_Empresas` (`id_empresa`);
+
+--
+-- Indices de la tabla `facturassuscripcion`
+--
+ALTER TABLE `facturassuscripcion`
+  ADD PRIMARY KEY (`id_factura_suscripcion`),
+  ADD UNIQUE KEY `numero_factura` (`numero_factura`),
+  ADD KEY `FK_FacturasSusc_Empresas` (`id_empresa`),
+  ADD KEY `FK_FacturasSusc_Suscripciones` (`id_suscripcion`);
+
+--
+-- Indices de la tabla `inventario`
+--
+ALTER TABLE `inventario`
+  ADD PRIMARY KEY (`id_inventario`),
+  ADD UNIQUE KEY `UQ_Inventario_Variante_Almacen` (`id_variante`,`id_almacen`),
+  ADD KEY `FK_Inventario_Almacenes` (`id_almacen`);
+
+--
+-- Indices de la tabla `marcasproducto`
+--
+ALTER TABLE `marcasproducto`
+  ADD PRIMARY KEY (`id_marca`),
+  ADD UNIQUE KEY `UQ_Marca_Empresa` (`id_empresa`,`nombre_marca`);
+
+--
+-- Indices de la tabla `marcas_producto`
+--
+ALTER TABLE `marcas_producto`
+  ADD PRIMARY KEY (`id_marca`),
+  ADD KEY `FKk8xy23fxsuyax3m4qxb6qmmfl` (`id_empresa`);
+
+--
+-- Indices de la tabla `materialesproducto`
+--
+ALTER TABLE `materialesproducto`
+  ADD PRIMARY KEY (`id_material`),
+  ADD UNIQUE KEY `nombre_material` (`nombre_material`);
+
+--
+-- Indices de la tabla `materiales_producto`
+--
+ALTER TABLE `materiales_producto`
+  ADD PRIMARY KEY (`id_material`),
+  ADD UNIQUE KEY `UKaj2ue3y5333niyqhh6rs455wm` (`nombre_material`);
+
+--
+-- Indices de la tabla `modelos`
+--
+ALTER TABLE `modelos`
+  ADD PRIMARY KEY (`id_modelo`),
+  ADD KEY `FKtk8ky65qstmm0fblw2edmvmdc` (`id_marca`);
+
+--
+-- Indices de la tabla `modulossistema`
+--
+ALTER TABLE `modulossistema`
+  ADD PRIMARY KEY (`id_modulo`),
+  ADD UNIQUE KEY `nombre_modulo` (`nombre_modulo`);
+
+--
+-- Indices de la tabla `movimientoscaja`
+--
+ALTER TABLE `movimientoscaja`
+  ADD PRIMARY KEY (`id_movimiento_caja`),
+  ADD KEY `FK_MovimientosCaja_Cajas` (`id_caja`),
+  ADD KEY `FK_MovimientosCaja_Usuarios` (`id_usuario`),
+  ADD KEY `FK_MovimientosCaja_Comprobantes` (`id_comprobante`);
+
+--
+-- Indices de la tabla `movimientosinventario`
+--
+ALTER TABLE `movimientosinventario`
+  ADD PRIMARY KEY (`id_movimiento_inv`),
+  ADD KEY `FK_MovInv_Variantes` (`id_variante`),
+  ADD KEY `FK_MovInv_Almacenes` (`id_almacen`),
+  ADD KEY `FK_MovInv_TiposMovimiento` (`id_tipo_movimiento`),
+  ADD KEY `FK_MovInv_Usuarios` (`id_usuario`);
+
+--
+-- Indices de la tabla `pagoscomprobante`
+--
+ALTER TABLE `pagoscomprobante`
+  ADD PRIMARY KEY (`id_pago`),
+  ADD KEY `FK_Pagos_Comprobantes` (`id_comprobante`),
+  ADD KEY `FK_Pagos_TiposPago` (`id_tipopago`);
+
+--
+-- Indices de la tabla `pagosempresaatapstyle`
+--
+ALTER TABLE `pagosempresaatapstyle`
+  ADD PRIMARY KEY (`id_pago`),
+  ADD KEY `FK_PagosEmpresa_Empresas` (`id_empresa`),
+  ADD KEY `FK_PagosEmpresa_FactSusc` (`id_factura_suscripcion`),
+  ADD KEY `FK_PagosEmpresa_FactComision` (`id_factura_comision`);
+
+--
+-- Indices de la tabla `pedidoscompra`
+--
+ALTER TABLE `pedidoscompra`
+  ADD PRIMARY KEY (`id_pedido_compra`),
+  ADD KEY `FK_PedidosCompra_Proveedores` (`id_proveedor`),
+  ADD KEY `FK_PedidosCompra_Usuarios` (`id_usuario`);
+
+--
+-- Indices de la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  ADD PRIMARY KEY (`id_permiso`),
+  ADD UNIQUE KEY `nombre_permiso` (`nombre_permiso`);
+
+--
+-- Indices de la tabla `planessuscripcion`
+--
+ALTER TABLE `planessuscripcion`
+  ADD PRIMARY KEY (`id_plan`),
+  ADD UNIQUE KEY `nombre_plan` (`nombre_plan`);
+
+--
+-- Indices de la tabla `planmodulos`
+--
+ALTER TABLE `planmodulos`
+  ADD PRIMARY KEY (`id_plan`,`id_modulo`),
+  ADD KEY `FK_PlanModulos_Modulos` (`id_modulo`);
+
+--
+-- Indices de la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`id_producto`),
+  ADD UNIQUE KEY `UQ_Producto_Empresa_Nombre` (`id_empresa`,`nombre_producto`),
+  ADD KEY `FK_Productos_Proveedores` (`id_proveedor`),
+  ADD KEY `FK_Productos_Modelos` (`id_modelo`),
+  ADD KEY `FKqw5albhkktmfevctb70myb2nu` (`id_categoria`),
+  ADD KEY `FK49ujfbhnof23vb139e32moykv` (`id_marca`),
+  ADD KEY `FKae60lm3eg086ycu7ckwflwu5w` (`id_material`),
+  ADD KEY `FKj8sxarjjajqepr387tvy0el2o` (`id_unidad_medida`);
+
+--
+-- Indices de la tabla `producto_tipos`
+--
+ALTER TABLE `producto_tipos`
+  ADD PRIMARY KEY (`id_producto`,`id_tipo`),
+  ADD KEY `FK_ProductoTipos_Tipos` (`id_tipo`);
+
+--
+-- Indices de la tabla `proveedores`
+--
+ALTER TABLE `proveedores`
+  ADD PRIMARY KEY (`id_proveedor`),
+  ADD UNIQUE KEY `UQ_Proveedor_Empresa_RUC` (`id_empresa`,`ruc`);
+
+--
+-- Indices de la tabla `proveedor_metodospago`
+--
+ALTER TABLE `proveedor_metodospago`
+  ADD PRIMARY KEY (`id_proveedor`,`id_tipopago`),
+  ADD KEY `FK_ProvMetodos_TipoPago` (`id_tipopago`);
+
+--
+-- Indices de la tabla `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id_rol`),
+  ADD UNIQUE KEY `nombre_rol` (`nombre_rol`);
+
+--
+-- Indices de la tabla `rol_permisos`
+--
+ALTER TABLE `rol_permisos`
+  ADD PRIMARY KEY (`id_rol`,`id_permiso`),
+  ADD KEY `FK_RolPermisos_Permisos` (`id_permiso`);
+
+--
+-- Indices de la tabla `suscripcionesempresa`
+--
+ALTER TABLE `suscripcionesempresa`
+  ADD PRIMARY KEY (`id_suscripcion`),
+  ADD KEY `FK_Suscripciones_Empresas` (`id_empresa`),
+  ADD KEY `FK_Suscripciones_Planes` (`id_plan`);
+
+--
+-- Indices de la tabla `tipodocumento`
+--
+ALTER TABLE `tipodocumento`
+  ADD PRIMARY KEY (`id_tipodocumento`),
+  ADD UNIQUE KEY `nombre_tipodocumento` (`nombre_tipodocumento`);
+
+--
+-- Indices de la tabla `tiposcomprobantepago`
+--
+ALTER TABLE `tiposcomprobantepago`
+  ADD PRIMARY KEY (`id_tipo_comprobante`),
+  ADD UNIQUE KEY `nombre_tipo` (`nombre_tipo`);
+
+--
+-- Indices de la tabla `tiposmovimientoinventario`
+--
+ALTER TABLE `tiposmovimientoinventario`
+  ADD PRIMARY KEY (`id_tipo_movimiento`),
+  ADD UNIQUE KEY `nombre_tipo` (`nombre_tipo`);
+
+--
+-- Indices de la tabla `tipospago`
+--
+ALTER TABLE `tipospago`
+  ADD PRIMARY KEY (`id_tipopago`),
+  ADD UNIQUE KEY `tipo_pago` (`tipo_pago`);
+
+--
+-- Indices de la tabla `tiposproducto`
+--
+ALTER TABLE `tiposproducto`
+  ADD PRIMARY KEY (`id_tipo`),
+  ADD UNIQUE KEY `nombre_tipo` (`nombre_tipo`);
+
+--
+-- Indices de la tabla `tipo_documento`
+--
+ALTER TABLE `tipo_documento`
+  ADD PRIMARY KEY (`id_tipo_documento`),
+  ADD UNIQUE KEY `UKrum685a08qpwjhd2ilps9ugur` (`nombre_tipo_documento`);
+
+--
+-- Indices de la tabla `unidadesmedida`
+--
+ALTER TABLE `unidadesmedida`
+  ADD PRIMARY KEY (`id_unidad_medida`),
+  ADD UNIQUE KEY `nombre_unidad` (`nombre_unidad`);
+
+--
+-- Indices de la tabla `unidades_medida`
+--
+ALTER TABLE `unidades_medida`
+  ADD PRIMARY KEY (`id_unidad_medida`),
+  ADD UNIQUE KEY `UK9csr83j77r49hor8sbs2513i6` (`nombre_unidad`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `UQ_Usuarios_Documento` (`id_tipodocumento`,`numero_documento`),
+  ADD KEY `FK_Usuarios_Empresas` (`id_empresa`),
+  ADD KEY `FK_Usuarios_Roles` (`id_rol`);
+
+--
+-- Indices de la tabla `variantesproducto`
+--
+ALTER TABLE `variantesproducto`
+  ADD PRIMARY KEY (`id_variante`),
+  ADD UNIQUE KEY `UQ_Variante_Producto_Talla_Color` (`id_producto`,`talla`,`color`),
+  ADD UNIQUE KEY `codigo_sku` (`codigo_sku`);
+
+--
+-- Indices de la tabla `variantes_producto`
+--
+ALTER TABLE `variantes_producto`
+  ADD PRIMARY KEY (`id_variante`),
+  ADD UNIQUE KEY `UKe5v7iei67jdeiq68k2fdp021o` (`codigo_sku`),
+  ADD KEY `FKhvig28xl7y2ou5c1ccsjikqts` (`id_producto`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `almacenes`
+--
+ALTER TABLE `almacenes`
+  MODIFY `id_almacen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `aperturascaja`
+--
+ALTER TABLE `aperturascaja`
+  MODIFY `id_apertura` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `bitacora`
+--
+ALTER TABLE `bitacora`
+  MODIFY `id_bitacora` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `cajas`
+--
+ALTER TABLE `cajas`
+  MODIFY `id_caja` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `categoriasproducto`
+--
+ALTER TABLE `categoriasproducto`
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `categorias_producto`
+--
+ALTER TABLE `categorias_producto`
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `cierrescaja`
+--
+ALTER TABLE `cierrescaja`
+  MODIFY `id_cierre` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `comprobantespago`
+--
+ALTER TABLE `comprobantespago`
+  MODIFY `id_comprobante` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `detallescomprobantepago`
+--
+ALTER TABLE `detallescomprobantepago`
+  MODIFY `id_detalle_comprobante` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `detallespedidocompra`
+--
+ALTER TABLE `detallespedidocompra`
+  MODIFY `id_detalle_pedido` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `empresas`
+--
+ALTER TABLE `empresas`
+  MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `facturascomision`
+--
+ALTER TABLE `facturascomision`
+  MODIFY `id_factura_comision` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `facturassuscripcion`
+--
+ALTER TABLE `facturassuscripcion`
+  MODIFY `id_factura_suscripcion` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `inventario`
+--
+ALTER TABLE `inventario`
+  MODIFY `id_inventario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `marcasproducto`
+--
+ALTER TABLE `marcasproducto`
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT de la tabla `marcas_producto`
+--
+ALTER TABLE `marcas_producto`
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `materialesproducto`
+--
+ALTER TABLE `materialesproducto`
+  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de la tabla `materiales_producto`
+--
+ALTER TABLE `materiales_producto`
+  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `modelos`
+--
+ALTER TABLE `modelos`
+  MODIFY `id_modelo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `modulossistema`
+--
+ALTER TABLE `modulossistema`
+  MODIFY `id_modulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `movimientoscaja`
+--
+ALTER TABLE `movimientoscaja`
+  MODIFY `id_movimiento_caja` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `movimientosinventario`
+--
+ALTER TABLE `movimientosinventario`
+  MODIFY `id_movimiento_inv` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pagoscomprobante`
+--
+ALTER TABLE `pagoscomprobante`
+  MODIFY `id_pago` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pagosempresaatapstyle`
+--
+ALTER TABLE `pagosempresaatapstyle`
+  MODIFY `id_pago` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pedidoscompra`
+--
+ALTER TABLE `pedidoscompra`
+  MODIFY `id_pedido_compra` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  MODIFY `id_permiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT de la tabla `planessuscripcion`
+--
+ALTER TABLE `planessuscripcion`
+  MODIFY `id_plan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `proveedores`
+--
+ALTER TABLE `proveedores`
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `suscripcionesempresa`
+--
+ALTER TABLE `suscripcionesempresa`
+  MODIFY `id_suscripcion` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tipodocumento`
+--
+ALTER TABLE `tipodocumento`
+  MODIFY `id_tipodocumento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `tiposcomprobantepago`
+--
+ALTER TABLE `tiposcomprobantepago`
+  MODIFY `id_tipo_comprobante` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tiposmovimientoinventario`
+--
+ALTER TABLE `tiposmovimientoinventario`
+  MODIFY `id_tipo_movimiento` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tipospago`
+--
+ALTER TABLE `tipospago`
+  MODIFY `id_tipopago` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tiposproducto`
+--
+ALTER TABLE `tiposproducto`
+  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_documento`
+--
+ALTER TABLE `tipo_documento`
+  MODIFY `id_tipo_documento` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `unidadesmedida`
+--
+ALTER TABLE `unidadesmedida`
+  MODIFY `id_unidad_medida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `unidades_medida`
+--
+ALTER TABLE `unidades_medida`
+  MODIFY `id_unidad_medida` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT de la tabla `variantesproducto`
+--
+ALTER TABLE `variantesproducto`
+  MODIFY `id_variante` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `variantes_producto`
+--
+ALTER TABLE `variantes_producto`
+  MODIFY `id_variante` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `almacenes`
+--
+ALTER TABLE `almacenes`
+  ADD CONSTRAINT `FK_Almacenes_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`);
+
+--
+-- Filtros para la tabla `aperturascaja`
+--
+ALTER TABLE `aperturascaja`
+  ADD CONSTRAINT `FK_AperturasCaja_Cajas` FOREIGN KEY (`id_caja`) REFERENCES `cajas` (`id_caja`),
+  ADD CONSTRAINT `FK_AperturasCaja_Usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+
+--
+-- Filtros para la tabla `bitacora`
+--
+ALTER TABLE `bitacora`
+  ADD CONSTRAINT `FK_Bitacora_Usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+
+--
+-- Filtros para la tabla `cajas`
+--
+ALTER TABLE `cajas`
+  ADD CONSTRAINT `FK_Cajas_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`);
+
+--
+-- Filtros para la tabla `cierrescaja`
+--
+ALTER TABLE `cierrescaja`
+  ADD CONSTRAINT `FK_CierresCaja_Aperturas` FOREIGN KEY (`id_apertura`) REFERENCES `aperturascaja` (`id_apertura`),
+  ADD CONSTRAINT `FK_CierresCaja_Cajas` FOREIGN KEY (`id_caja`) REFERENCES `cajas` (`id_caja`),
+  ADD CONSTRAINT `FK_CierresCaja_Usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+
+--
+-- Filtros para la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  ADD CONSTRAINT `FK_Clientes_TipoDocumento` FOREIGN KEY (`id_tipodocumento`) REFERENCES `tipodocumento` (`id_tipodocumento`),
+  ADD CONSTRAINT `FK_Clientes_Usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
+  ADD CONSTRAINT `FKskkwwdshtf2q77wuxt7ea9x02` FOREIGN KEY (`id_tipodocumento`) REFERENCES `tipo_documento` (`id_tipo_documento`);
+
+--
+-- Filtros para la tabla `comprobantespago`
+--
+ALTER TABLE `comprobantespago`
+  ADD CONSTRAINT `FK_Comprobantes_Clientes` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`),
+  ADD CONSTRAINT `FK_Comprobantes_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`),
+  ADD CONSTRAINT `FK_Comprobantes_TiposComprobante` FOREIGN KEY (`id_tipo_comprobante`) REFERENCES `tiposcomprobantepago` (`id_tipo_comprobante`),
+  ADD CONSTRAINT `FK_Comprobantes_Usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+
+--
+-- Filtros para la tabla `detallescomprobantepago`
+--
+ALTER TABLE `detallescomprobantepago`
+  ADD CONSTRAINT `FK_DetallesComprobante_Comprobantes` FOREIGN KEY (`id_comprobante`) REFERENCES `comprobantespago` (`id_comprobante`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_DetallesComprobante_Variantes` FOREIGN KEY (`id_variante`) REFERENCES `variantesproducto` (`id_variante`);
+
+--
+-- Filtros para la tabla `detallespedidocompra`
+--
+ALTER TABLE `detallespedidocompra`
+  ADD CONSTRAINT `FK_DetallesPedidoCompra_Pedidos` FOREIGN KEY (`id_pedido_compra`) REFERENCES `pedidoscompra` (`id_pedido_compra`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_DetallesPedidoCompra_Variantes` FOREIGN KEY (`id_variante`) REFERENCES `variantesproducto` (`id_variante`);
+
+--
+-- Filtros para la tabla `empresamodulos`
+--
+ALTER TABLE `empresamodulos`
+  ADD CONSTRAINT `FK_EmpresaModulos_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_EmpresaModulos_Modulos` FOREIGN KEY (`id_modulo`) REFERENCES `modulossistema` (`id_modulo`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `facturascomision`
+--
+ALTER TABLE `facturascomision`
+  ADD CONSTRAINT `FK_FacturasComision_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`);
+
+--
+-- Filtros para la tabla `facturassuscripcion`
+--
+ALTER TABLE `facturassuscripcion`
+  ADD CONSTRAINT `FK_FacturasSusc_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`),
+  ADD CONSTRAINT `FK_FacturasSusc_Suscripciones` FOREIGN KEY (`id_suscripcion`) REFERENCES `suscripcionesempresa` (`id_suscripcion`);
+
+--
+-- Filtros para la tabla `inventario`
+--
+ALTER TABLE `inventario`
+  ADD CONSTRAINT `FK_Inventario_Almacenes` FOREIGN KEY (`id_almacen`) REFERENCES `almacenes` (`id_almacen`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_Inventario_Variantes` FOREIGN KEY (`id_variante`) REFERENCES `variantesproducto` (`id_variante`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FKtcxau05avpney9suju3psq2yk` FOREIGN KEY (`id_variante`) REFERENCES `variantes_producto` (`id_variante`);
+
+--
+-- Filtros para la tabla `marcasproducto`
+--
+ALTER TABLE `marcasproducto`
+  ADD CONSTRAINT `FK_Marcas_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`);
+
+--
+-- Filtros para la tabla `marcas_producto`
+--
+ALTER TABLE `marcas_producto`
+  ADD CONSTRAINT `FKk8xy23fxsuyax3m4qxb6qmmfl` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`);
+
+--
+-- Filtros para la tabla `modelos`
+--
+ALTER TABLE `modelos`
+  ADD CONSTRAINT `FK_Modelos_Marcas` FOREIGN KEY (`id_marca`) REFERENCES `marcasproducto` (`id_marca`),
+  ADD CONSTRAINT `FKtk8ky65qstmm0fblw2edmvmdc` FOREIGN KEY (`id_marca`) REFERENCES `marcas_producto` (`id_marca`);
+
+--
+-- Filtros para la tabla `movimientoscaja`
+--
+ALTER TABLE `movimientoscaja`
+  ADD CONSTRAINT `FK_MovimientosCaja_Cajas` FOREIGN KEY (`id_caja`) REFERENCES `cajas` (`id_caja`),
+  ADD CONSTRAINT `FK_MovimientosCaja_Comprobantes` FOREIGN KEY (`id_comprobante`) REFERENCES `comprobantespago` (`id_comprobante`),
+  ADD CONSTRAINT `FK_MovimientosCaja_Usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+
+--
+-- Filtros para la tabla `movimientosinventario`
+--
+ALTER TABLE `movimientosinventario`
+  ADD CONSTRAINT `FK_MovInv_Almacenes` FOREIGN KEY (`id_almacen`) REFERENCES `almacenes` (`id_almacen`),
+  ADD CONSTRAINT `FK_MovInv_TiposMovimiento` FOREIGN KEY (`id_tipo_movimiento`) REFERENCES `tiposmovimientoinventario` (`id_tipo_movimiento`),
+  ADD CONSTRAINT `FK_MovInv_Usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
+  ADD CONSTRAINT `FK_MovInv_Variantes` FOREIGN KEY (`id_variante`) REFERENCES `variantesproducto` (`id_variante`);
+
+--
+-- Filtros para la tabla `pagoscomprobante`
+--
+ALTER TABLE `pagoscomprobante`
+  ADD CONSTRAINT `FK_Pagos_Comprobantes` FOREIGN KEY (`id_comprobante`) REFERENCES `comprobantespago` (`id_comprobante`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_Pagos_TiposPago` FOREIGN KEY (`id_tipopago`) REFERENCES `tipospago` (`id_tipopago`);
+
+--
+-- Filtros para la tabla `pagosempresaatapstyle`
+--
+ALTER TABLE `pagosempresaatapstyle`
+  ADD CONSTRAINT `FK_PagosEmpresa_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`),
+  ADD CONSTRAINT `FK_PagosEmpresa_FactComision` FOREIGN KEY (`id_factura_comision`) REFERENCES `facturascomision` (`id_factura_comision`),
+  ADD CONSTRAINT `FK_PagosEmpresa_FactSusc` FOREIGN KEY (`id_factura_suscripcion`) REFERENCES `facturassuscripcion` (`id_factura_suscripcion`);
+
+--
+-- Filtros para la tabla `pedidoscompra`
+--
+ALTER TABLE `pedidoscompra`
+  ADD CONSTRAINT `FK_PedidosCompra_Proveedores` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id_proveedor`),
+  ADD CONSTRAINT `FK_PedidosCompra_Usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+
+--
+-- Filtros para la tabla `planmodulos`
+--
+ALTER TABLE `planmodulos`
+  ADD CONSTRAINT `FK_PlanModulos_Modulos` FOREIGN KEY (`id_modulo`) REFERENCES `modulossistema` (`id_modulo`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_PlanModulos_Planes` FOREIGN KEY (`id_plan`) REFERENCES `planessuscripcion` (`id_plan`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD CONSTRAINT `FK49ujfbhnof23vb139e32moykv` FOREIGN KEY (`id_marca`) REFERENCES `marcas_producto` (`id_marca`),
+  ADD CONSTRAINT `FK_Productos_Categorias` FOREIGN KEY (`id_categoria`) REFERENCES `categoriasproducto` (`id_categoria`),
+  ADD CONSTRAINT `FK_Productos_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`),
+  ADD CONSTRAINT `FK_Productos_Marcas` FOREIGN KEY (`id_marca`) REFERENCES `marcasproducto` (`id_marca`),
+  ADD CONSTRAINT `FK_Productos_Materiales` FOREIGN KEY (`id_material`) REFERENCES `materialesproducto` (`id_material`),
+  ADD CONSTRAINT `FK_Productos_Modelos` FOREIGN KEY (`id_modelo`) REFERENCES `modelos` (`id_modelo`),
+  ADD CONSTRAINT `FK_Productos_Proveedores` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id_proveedor`),
+  ADD CONSTRAINT `FK_Productos_UnidadesMedida` FOREIGN KEY (`id_unidad_medida`) REFERENCES `unidadesmedida` (`id_unidad_medida`),
+  ADD CONSTRAINT `FKae60lm3eg086ycu7ckwflwu5w` FOREIGN KEY (`id_material`) REFERENCES `materiales_producto` (`id_material`),
+  ADD CONSTRAINT `FKj8sxarjjajqepr387tvy0el2o` FOREIGN KEY (`id_unidad_medida`) REFERENCES `unidades_medida` (`id_unidad_medida`),
+  ADD CONSTRAINT `FKqw5albhkktmfevctb70myb2nu` FOREIGN KEY (`id_categoria`) REFERENCES `categorias_producto` (`id_categoria`);
+
+--
+-- Filtros para la tabla `producto_tipos`
+--
+ALTER TABLE `producto_tipos`
+  ADD CONSTRAINT `FK_ProductoTipos_Productos` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_ProductoTipos_Tipos` FOREIGN KEY (`id_tipo`) REFERENCES `tiposproducto` (`id_tipo`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `proveedores`
+--
+ALTER TABLE `proveedores`
+  ADD CONSTRAINT `FK_Proveedores_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`);
+
+--
+-- Filtros para la tabla `proveedor_metodospago`
+--
+ALTER TABLE `proveedor_metodospago`
+  ADD CONSTRAINT `FK_ProvMetodos_Proveedor` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id_proveedor`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_ProvMetodos_TipoPago` FOREIGN KEY (`id_tipopago`) REFERENCES `tipospago` (`id_tipopago`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `rol_permisos`
+--
+ALTER TABLE `rol_permisos`
+  ADD CONSTRAINT `FK_RolPermisos_Permisos` FOREIGN KEY (`id_permiso`) REFERENCES `permisos` (`id_permiso`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_RolPermisos_Roles` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_rol`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `suscripcionesempresa`
+--
+ALTER TABLE `suscripcionesempresa`
+  ADD CONSTRAINT `FK_Suscripciones_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`),
+  ADD CONSTRAINT `FK_Suscripciones_Planes` FOREIGN KEY (`id_plan`) REFERENCES `planessuscripcion` (`id_plan`);
+
+--
+-- Filtros para la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `FK2nymbi40lnnspgsojtlidxof5` FOREIGN KEY (`id_tipodocumento`) REFERENCES `tipo_documento` (`id_tipo_documento`),
+  ADD CONSTRAINT `FK_Usuarios_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`),
+  ADD CONSTRAINT `FK_Usuarios_Roles` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_rol`),
+  ADD CONSTRAINT `FK_Usuarios_TipoDocumento` FOREIGN KEY (`id_tipodocumento`) REFERENCES `tipodocumento` (`id_tipodocumento`);
+
+--
+-- Filtros para la tabla `variantesproducto`
+--
+ALTER TABLE `variantesproducto`
+  ADD CONSTRAINT `FK_Variantes_Productos` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `variantes_producto`
+--
+ALTER TABLE `variantes_producto`
+  ADD CONSTRAINT `FKhvig28xl7y2ou5c1ccsjikqts` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
