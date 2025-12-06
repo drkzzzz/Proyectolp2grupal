@@ -41,11 +41,18 @@ public class Empresa implements Serializable {
     @Builder.Default
     private LocalDateTime fechaRegistro = LocalDateTime.now();
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     @Builder.Default
-    private String estadoAprobacion = "Pendiente";
+    private Boolean estado = true;
 
     @Column(nullable = false, precision = 5, scale = 2)
     @Builder.Default
     private BigDecimal tasaComision = new BigDecimal("0.15");
+
+    @Column(columnDefinition = "TEXT")
+    @Builder.Default
+    private String modulosActivos = "DASHBOARD,CATALOGO,OPERACIONES,FINANZAS,ADMINISTRACION";
+
+    @Column(name = "plan_id")
+    private Long planId;
 }

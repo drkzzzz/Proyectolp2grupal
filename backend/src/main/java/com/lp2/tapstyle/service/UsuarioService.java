@@ -65,6 +65,10 @@ public class UsuarioService {
         usuario.setEmail(dto.getEmail());
         usuario.setEstado(dto.getEstado());
 
+        if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
+            usuario.setContraseñaHash(dto.getPassword());
+        }
+
         Usuario updated = usuarioRepository.save(usuario);
         return convertToDTO(updated);
     }

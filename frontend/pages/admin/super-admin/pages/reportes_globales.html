@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,65 +8,106 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="../../../../styles/dashboard.css">
 </head>
+
 <body class="flex">
 
     <!-- BARRA LATERAL -->
     <aside class="sidebar bg-gray-800 text-white p-4 flex flex-col fixed h-full z-20 hidden md:flex">
         <!-- Logo de la Plataforma -->
         <div class="text-center mb-8 pb-4 border-b border-gray-700">
-            <a href="index.html" class="text-2xl font-black text-red-500 tracking-widest">TAPSTYLE</a>
+            <a href="../../../../../pages/cliente/index.html"
+                class="text-2xl font-black text-red-500 tracking-widest">TAPSTYLE</a>
             <p class="text-xs text-gray-400 mt-1">SUPER ADMIN</p>
         </div>
 
         <!-- Perfil del Super Admin -->
         <div class="mb-8 text-center">
-            <div class="w-14 h-14 bg-red-600 text-white rounded-full mx-auto flex items-center justify-center text-xl font-bold mb-2 shadow-lg">SA</div>
+            <div
+                class="w-14 h-14 bg-red-600 text-white rounded-full mx-auto flex items-center justify-center text-xl font-bold mb-2 shadow-lg">
+                SA</div>
             <p class="font-semibold text-base">Super Administrador</p>
             <p class="text-sm text-gray-400">Control Total</p>
         </div>
-        
+
         <nav class="flex-grow space-y-1">
-            <a href="dashboard_superadmin.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
-                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+            <a href="../dashboard_superadmin.html"
+                class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
                 <span>Dashboard Global</span>
             </a>
-            <a href="gestion_empresas.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
-                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2" /></svg>
+            <a href="gestion_empresas.html"
+                class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2" />
+                </svg>
                 <span>Gestión de Empresas</span>
             </a>
-            <a href="gestion_modulos_empresa.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
-                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M9 7h6m0 0V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2m6 0v2a2 2 0 01-2 2H9a2 2 0 01-2-2V9a2 2 0 012-2h6a2 2 0 012 2z" /></svg>
+            <a href="gestion_modulos_empresa.html"
+                class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M9 7h6m0 0V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2m6 0v2a2 2 0 01-2 2H9a2 2 0 01-2-2V9a2 2 0 012-2h6a2 2 0 012 2z" />
+                </svg>
                 <span>Módulos por Empresa</span>
             </a>
-            <a href="comisiones_pagos.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
-                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+            <a href="comisiones_pagos.html"
+                class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
                 <span>Facturación y Cobranzas</span>
             </a>
-            <a href="reportes_globales.html" class="flex items-center p-3 rounded-lg bg-red-600 text-white font-semibold transition duration-150">
-                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-8v8m-4-8v8M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4-4-4m-4 0v1a3 3 0 003 3h10a3 3 0 003-3v-1" /></svg>
+            <a href="reportes_globales.html"
+                class="flex items-center p-3 rounded-lg bg-red-600 text-white font-semibold transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 8v8m-4-8v8m-4-8v8M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4-4-4m-4 0v1a3 3 0 003 3h10a3 3 0 003-3v-1" />
+                </svg>
                 <span>Reportes Globales</span>
             </a>
-            <a href="configuracion_sistema.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
-                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            <a href="configuracion_sistema.html"
+                class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
                 <span>Configuración del Sistema</span>
             </a>
         </nav>
-        <div class="mt-auto pt-4 border-t border-gray-700"><a href="login.html" class="text-red-400">Cerrar Sesión</a></div>
+        <div class="mt-auto pt-4 border-t border-gray-700"><a href="../../login.html" class="text-red-400">Cerrar
+                Sesión</a></div>
     </aside>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <div class="flex-1 md:ml-[280px] p-4 sm:p-8 w-full"> 
-        
+    <div class="flex-1 md:ml-[280px] p-4 sm:p-8 w-full">
+
         <header class="bg-white p-4 rounded-xl shadow-lg mb-8">
             <div class="flex justify-between items-center">
                 <div>
                     <h1 class="text-3xl font-bold text-gray-800">Reportes Globales</h1>
-                    <p class="text-gray-500 mt-1">Análisis consolidado de todas las empresas del marketplace TapStyle.</p>
+                    <p class="text-gray-500 mt-1">Análisis consolidado de todas las empresas del marketplace TapStyle.
+                    </p>
                 </div>
                 <div class="flex space-x-3">
-                    <select id="periodo-reporte" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                    <select id="periodo-reporte"
+                        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
                         <option value="mes">Último Mes</option>
                         <option value="trimestre">Último Trimestre</option>
                         <option value="año">Último Año</option>
@@ -79,7 +121,7 @@
 
         <!-- MÉTRICAS GLOBALES -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            
+
             <!-- Total Ventas Marketplace -->
             <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500">
                 <div class="flex items-start justify-between">
@@ -88,7 +130,11 @@
                         <p class="text-3xl font-extrabold text-gray-900 mt-1">S/ 285,450</p>
                     </div>
                     <div class="p-2 bg-blue-100 rounded-full text-blue-500">
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
                     </div>
                 </div>
                 <p class="text-xs text-blue-600 mt-3 font-medium">1,247 comprobantes emitidos</p>
@@ -102,7 +148,13 @@
                         <p class="text-3xl font-extrabold text-gray-900 mt-1">S/ 6,890</p>
                     </div>
                     <div class="p-2 bg-green-100 rounded-full text-green-500">
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
                     </div>
                 </div>
                 <p class="text-xs text-green-600 mt-3 font-medium">Suscripciones + Comisiones</p>
@@ -116,7 +168,11 @@
                         <p class="text-3xl font-extrabold text-gray-900 mt-1">5</p>
                     </div>
                     <div class="p-2 bg-purple-100 rounded-full text-purple-500">
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
                     </div>
                 </div>
                 <p class="text-xs text-purple-600 mt-3 font-medium">2 pendientes de aprobación</p>
@@ -130,7 +186,11 @@
                         <p class="text-3xl font-extrabold text-gray-900 mt-1">1,847</p>
                     </div>
                     <div class="p-2 bg-orange-100 rounded-full text-orange-500">
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                        </svg>
                     </div>
                 </div>
                 <p class="text-xs text-orange-600 mt-3 font-medium">4,523 variantes disponibles</p>
@@ -140,7 +200,7 @@
 
         <!-- GRÁFICOS Y REPORTES -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            
+
             <!-- Gráfico de Ventas por Mes -->
             <div class="bg-white p-6 rounded-xl shadow-lg">
                 <h3 class="text-lg font-semibold text-gray-800 mb-4">Evolución de Ventas (Últimos 6 Meses)</h3>
@@ -157,7 +217,7 @@
 
         <!-- RANKING DE EMPRESAS -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            
+
             <!-- Top Empresas por Ventas -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden">
                 <div class="p-6 border-b border-gray-200">
@@ -167,9 +227,12 @@
                 <div class="p-6">
                     <div class="space-y-4">
                         <!-- Empresa 1 -->
-                        <div class="flex items-center justify-between p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
+                        <div
+                            class="flex items-center justify-between p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
                             <div class="flex items-center">
-                                <div class="w-8 h-8 bg-yellow-400 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">1</div>
+                                <div
+                                    class="w-8 h-8 bg-yellow-400 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">
+                                    1</div>
                                 <div>
                                     <p class="font-semibold text-gray-900">Street Vibe Co.</p>
                                     <p class="text-sm text-gray-500">Plan Premium</p>
@@ -182,9 +245,12 @@
                         </div>
 
                         <!-- Empresa 2 -->
-                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border-l-4 border-gray-400">
+                        <div
+                            class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border-l-4 border-gray-400">
                             <div class="flex items-center">
-                                <div class="w-8 h-8 bg-gray-400 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">2</div>
+                                <div
+                                    class="w-8 h-8 bg-gray-400 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">
+                                    2</div>
                                 <div>
                                     <p class="font-semibold text-gray-900">Mega Store</p>
                                     <p class="text-sm text-gray-500">Plan Enterprise</p>
@@ -197,9 +263,12 @@
                         </div>
 
                         <!-- Empresa 3 -->
-                        <div class="flex items-center justify-between p-4 bg-orange-50 rounded-lg border-l-4 border-orange-400">
+                        <div
+                            class="flex items-center justify-between p-4 bg-orange-50 rounded-lg border-l-4 border-orange-400">
                             <div class="flex items-center">
-                                <div class="w-8 h-8 bg-orange-400 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">3</div>
+                                <div
+                                    class="w-8 h-8 bg-orange-400 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">
+                                    3</div>
                                 <div>
                                     <p class="font-semibold text-gray-900">Calzado Élite</p>
                                     <p class="text-sm text-gray-500">Plan Básico</p>
@@ -237,19 +306,27 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Empresa</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plan</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ventas</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Productos</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Comisión Generada</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Empresa</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Plan</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Ventas</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Productos</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Comisión Generada</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Estado</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">SV</div>
+                                    <div
+                                        class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">
+                                        SV</div>
                                     <div>
                                         <div class="text-sm font-medium text-gray-900">Street Vibe Co.</div>
                                         <div class="text-sm text-gray-500">Registrada: 15/08/2024</div>
@@ -257,7 +334,8 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Premium</span>
+                                <span
+                                    class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Premium</span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 <div class="font-semibold">S/ 125,800</div>
@@ -269,13 +347,16 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-semibold">S/ 1,887</td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Activa</span>
+                                <span
+                                    class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Activa</span>
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">MS</div>
+                                    <div
+                                        class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">
+                                        MS</div>
                                     <div>
                                         <div class="text-sm font-medium text-gray-900">Mega Store</div>
                                         <div class="text-sm text-gray-500">Registrada: 22/07/2024</div>
@@ -283,7 +364,8 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">Enterprise</span>
+                                <span
+                                    class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">Enterprise</span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 <div class="font-semibold">S/ 89,650</div>
@@ -295,13 +377,16 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-semibold">S/ 896</td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Activa</span>
+                                <span
+                                    class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Activa</span>
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">CE</div>
+                                    <div
+                                        class="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">
+                                        CE</div>
                                     <div>
                                         <div class="text-sm font-medium text-gray-900">Calzado Élite</div>
                                         <div class="text-sm text-gray-500">Registrada: 05/09/2024</div>
@@ -309,7 +394,8 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">Básico</span>
+                                <span
+                                    class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">Básico</span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 <div class="font-semibold">S/ 45,200</div>
@@ -321,7 +407,8 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-semibold">S/ 904</td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Vencida</span>
+                                <span
+                                    class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Vencida</span>
                             </td>
                         </tr>
                     </tbody>
@@ -401,4 +488,5 @@
     </script>
 
 </body>
+
 </html>
