@@ -4,6 +4,8 @@ import com.lp2.tapstyle.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.lp2.tapstyle.model.Empresa;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -15,4 +17,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     boolean existsByUsername(String username);
 
     boolean existsByEmail(String email);
+
+    List<Usuario> findByEmpresaAndRolIdRol(Empresa empresa, Integer idRol);
 }

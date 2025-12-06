@@ -1,65 +1,106 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TapStyle - Gestión de Módulos por Empresa</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="../../../../styles/dashboard.css">
 </head>
+
 <body class="flex">
 
     <!-- BARRA LATERAL -->
     <aside class="sidebar bg-gray-800 text-white p-4 flex flex-col fixed h-full z-20 hidden md:flex">
         <!-- Logo de la Plataforma -->
         <div class="text-center mb-8 pb-4 border-b border-gray-700">
-            <a href="index.html" class="text-2xl font-black text-red-500 tracking-widest">TAPSTYLE</a>
+            <a href="../../../../../pages/cliente/index.html"
+                class="text-2xl font-black text-red-500 tracking-widest">TAPSTYLE</a>
             <p class="text-xs text-gray-400 mt-1">SUPER ADMIN</p>
         </div>
 
         <!-- Perfil del Super Admin -->
         <div class="mb-8 text-center">
-            <div class="w-14 h-14 bg-red-600 text-white rounded-full mx-auto flex items-center justify-center text-xl font-bold mb-2 shadow-lg">SA</div>
+            <div
+                class="w-14 h-14 bg-red-600 text-white rounded-full mx-auto flex items-center justify-center text-xl font-bold mb-2 shadow-lg">
+                SA</div>
             <p class="font-semibold text-base">Super Administrador</p>
             <p class="text-sm text-gray-400">Control Total</p>
         </div>
-        
+
         <nav class="flex-grow space-y-1">
-            <a href="dashboard_superadmin.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
-                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+            <a href="../dashboard_superadmin.html"
+                class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
                 <span>Dashboard Global</span>
             </a>
-            <a href="gestion_empresas.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
-                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2" /></svg>
+            <a href="gestion_empresas.html"
+                class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2" />
+                </svg>
                 <span>Gestión de Empresas</span>
             </a>
-            <a href="gestion_modulos_empresa.html" class="flex items-center p-3 rounded-lg bg-red-600 text-white font-semibold transition duration-150">
-                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M9 7h6m0 0V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2m6 0v2a2 2 0 01-2 2H9a2 2 0 01-2-2V9a2 2 0 012-2h6a2 2 0 012 2z" /></svg>
+            <a href="gestion_modulos_empresa.html"
+                class="flex items-center p-3 rounded-lg bg-red-600 text-white font-semibold transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M9 7h6m0 0V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2m6 0v2a2 2 0 01-2 2H9a2 2 0 01-2-2V9a2 2 0 012-2h6a2 2 0 012 2z" />
+                </svg>
                 <span>Módulos por Empresa</span>
             </a>
-            <a href="comisiones_pagos.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
-                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+            <a href="comisiones_pagos.html"
+                class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
                 <span>Facturación y Cobranzas</span>
             </a>
-            <a href="reportes_globales.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
-                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-8v8m-4-8v8M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4-4-4m-4 0v1a3 3 0 003 3h10a3 3 0 003-3v-1" /></svg>
+            <a href="reportes_globales.html"
+                class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 8v8m-4-8v8m-4-8v8M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4-4-4m-4 0v1a3 3 0 003 3h10a3 3 0 003-3v-1" />
+                </svg>
                 <span>Reportes Globales</span>
             </a>
-            <a href="configuracion_sistema.html" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
-                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            <a href="configuracion_sistema.html"
+                class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700 transition duration-150">
+                <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
                 <span>Configuración del Sistema</span>
             </a>
         </nav>
-        <div class="mt-auto pt-4 border-t border-gray-700"><a href="login.html" class="text-red-400">Cerrar Sesión</a></div>
+        <div class="mt-auto pt-4 border-t border-gray-700"><a href="../../login.html" class="text-red-400">Cerrar
+                Sesión</a></div>
     </aside>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <div class="flex-1 md:ml-[280px] p-4 sm:p-8 w-full"> 
-        
+    <div class="flex-1 md:ml-[280px] p-4 sm:p-8 w-full">
+
         <header class="bg-white p-4 rounded-xl shadow-lg mb-8">
             <h1 class="text-3xl font-bold text-gray-800">Gestión de Módulos por Empresa</h1>
-            <p class="text-gray-500 mt-1">Controla qué módulos del sistema puede acceder cada empresa según su plan de suscripción.</p>
+            <p class="text-gray-500 mt-1">Controla qué módulos del sistema puede acceder cada empresa según su plan de
+                suscripción.</p>
         </header>
 
         <!-- FILTROS Y BÚSQUEDA -->
@@ -67,20 +108,23 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Buscar Empresa</label>
-                    <input type="text" id="buscar-empresa" placeholder="Nombre de empresa..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                    <input type="text" id="buscar-empresa" placeholder="Nombre de empresa..."
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Filtrar por Plan</label>
-                    <select id="filtro-plan" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                    <select id="filtro-plan"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
                         <option value="">Todos los planes</option>
-                        <option value="basico">Plan Básico</option>
-                        <option value="premium">Plan Premium</option>
-                        <option value="enterprise">Plan Enterprise</option>
+                        <option value="1">Plan Básico</option>
+                        <option value="2">Plan Premium</option>
+                        <option value="3">Plan Enterprise</option>
                     </select>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Estado Suscripción</label>
-                    <select id="filtro-estado" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                    <select id="filtro-estado"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
                         <option value="">Todos los estados</option>
                         <option value="activa">Activa</option>
                         <option value="vencida">Vencida</option>
@@ -88,7 +132,8 @@
                     </select>
                 </div>
                 <div class="flex items-end">
-                    <button id="btn-filtrar" class="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-150">
+                    <button id="btn-filtrar"
+                        class="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-150">
                         Filtrar
                     </button>
                 </div>
@@ -101,280 +146,229 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sticky left-0 bg-gray-50">Empresa</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Productos</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Ventas</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Inventario</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Finanzas</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Empleados</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Roles</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Reportes</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Config</th>
-                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sticky left-0 bg-gray-50">
+                                Empresa</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Dashboard</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Catálogo</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Operaciones</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Finanzas</th>
+                            <th
+                                class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Administración</th>
+                            <th
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        
-                        <!-- Empresa 1 - Plan Premium -->
-                        <tr class="hover:bg-gray-50 transition duration-100">
-                            <td class="px-6 py-4 whitespace-nowrap sticky left-0 bg-white">
-                                <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">SV</div>
-                                    <div>
-                                        <div class="text-sm font-medium text-gray-900">Street Vibe Co.</div>
-                                        <div class="text-sm text-gray-500">Plan Premium</div>
-                                        <div class="text-xs text-green-600 font-semibold">Activa</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="1" data-modulo="productos">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="1" data-modulo="ventas">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="1" data-modulo="inventario">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="1" data-modulo="finanzas">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="1" data-modulo="empleados">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="1" data-modulo="roles">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" disabled class="form-checkbox h-5 w-5 text-gray-400 rounded" data-empresa="1" data-modulo="reportes">
-                                    <span class="ml-2 text-red-600">✗</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="1" data-modulo="config">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <button class="px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition duration-150" onclick="guardarCambios(1)">
-                                    Guardar
-                                </button>
+                        <tr>
+                            <td colspan="10" class="px-6 py-4 text-center text-gray-500">
+                                Cargando datos...
                             </td>
                         </tr>
-
-                        <!-- Empresa 2 - Plan Básico -->
-                        <tr class="hover:bg-gray-50 transition duration-100">
-                            <td class="px-6 py-4 whitespace-nowrap sticky left-0 bg-white">
-                                <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">CE</div>
-                                    <div>
-                                        <div class="text-sm font-medium text-gray-900">Calzado Élite</div>
-                                        <div class="text-sm text-gray-500">Plan Básico</div>
-                                        <div class="text-xs text-red-600 font-semibold">Vencida</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="2" data-modulo="productos">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="2" data-modulo="ventas">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="2" data-modulo="inventario">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" disabled class="form-checkbox h-5 w-5 text-gray-400 rounded" data-empresa="2" data-modulo="finanzas">
-                                    <span class="ml-2 text-red-600">✗</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" disabled class="form-checkbox h-5 w-5 text-gray-400 rounded" data-empresa="2" data-modulo="empleados">
-                                    <span class="ml-2 text-red-600">✗</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" disabled class="form-checkbox h-5 w-5 text-gray-400 rounded" data-empresa="2" data-modulo="roles">
-                                    <span class="ml-2 text-red-600">✗</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" disabled class="form-checkbox h-5 w-5 text-gray-400 rounded" data-empresa="2" data-modulo="reportes">
-                                    <span class="ml-2 text-red-600">✗</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="2" data-modulo="config">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <button class="px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition duration-150" onclick="guardarCambios(2)">
-                                    Guardar
-                                </button>
-                            </td>
-                        </tr>
-
-                        <!-- Empresa 3 - Plan Enterprise -->
-                        <tr class="hover:bg-gray-50 transition duration-100">
-                            <td class="px-6 py-4 whitespace-nowrap sticky left-0 bg-white">
-                                <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">MS</div>
-                                    <div>
-                                        <div class="text-sm font-medium text-gray-900">Mega Store</div>
-                                        <div class="text-sm text-gray-500">Plan Enterprise</div>
-                                        <div class="text-xs text-green-600 font-semibold">Activa</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="3" data-modulo="productos">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="3" data-modulo="ventas">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="3" data-modulo="inventario">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="3" data-modulo="finanzas">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="3" data-modulo="empleados">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="3" data-modulo="roles">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="3" data-modulo="reportes">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-4 py-4 text-center">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" checked class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500" data-empresa="3" data-modulo="config">
-                                    <span class="ml-2 text-green-600">✓</span>
-                                </label>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <button class="px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition duration-150" onclick="guardarCambios(3)">
-                                    Guardar
-                                </button>
-                            </td>
-                        </tr>
-
                     </tbody>
                 </table>
             </div>
         </div>
+        <!-- JAVASCRIPT -->
+        <!-- Configuración API -->
+        <script src="../../../../config/api-config.js"></script>
+        <script>
+            const API_BASE_URL = window.API_CONFIG ? window.API_CONFIG.BASE_URL : 'http://localhost:8083/api';
 
-        <!-- LEYENDA -->
-        <div class="mt-8 bg-white p-6 rounded-xl shadow-lg">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">Leyenda de Módulos</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="flex items-center">
-                    <span class="w-4 h-4 bg-green-500 rounded mr-2"></span>
-                    <span class="text-sm text-gray-700">Módulo Activo</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="w-4 h-4 bg-red-500 rounded mr-2"></span>
-                    <span class="text-sm text-gray-700">Módulo Inactivo</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="w-4 h-4 bg-gray-400 rounded mr-2"></span>
-                    <span class="text-sm text-gray-700">No Incluido en Plan</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="w-4 h-4 bg-yellow-500 rounded mr-2"></span>
-                    <span class="text-sm text-gray-700">Suscripción Vencida</span>
-                </div>
-            </div>
-        </div>
+            document.addEventListener('DOMContentLoaded', () => {
+                cargarEmpresasModulos();
 
-    </div>
-
-    <!-- JAVASCRIPT -->
-    <script>
-        function guardarCambios(empresaId) {
-            const checkboxes = document.querySelectorAll(`input[data-empresa="${empresaId}"]`);
-            const modulos = [];
-            
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked && !checkbox.disabled) {
-                    modulos.push(checkbox.dataset.modulo);
-                }
+                document.getElementById('buscar-empresa').addEventListener('input', filtrarTabla);
+                document.getElementById('filtro-plan').addEventListener('change', filtrarTabla);
+                document.getElementById('filtro-estado').addEventListener('change', filtrarTabla);
             });
 
-            // Aquí iría la lógica para enviar al backend
-            console.log(`Guardando módulos para empresa ${empresaId}:`, modulos);
-            
-            // Simulación de guardado exitoso
-            alert(`Módulos actualizados exitosamente para la empresa ${empresaId}`);
-        }
+            let empresasGlobal = [];
 
-        // Filtros
-        document.getElementById('btn-filtrar').addEventListener('click', function() {
-            const busqueda = document.getElementById('buscar-empresa').value.toLowerCase();
-            const plan = document.getElementById('filtro-plan').value;
-            const estado = document.getElementById('filtro-estado').value;
-            
-            console.log('Aplicando filtros:', { busqueda, plan, estado });
-            // Aquí iría la lógica de filtrado
-        });
-    </script>
+            async function cargarEmpresasModulos() {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/empresas`);
+                    if (!response.ok) throw new Error('Error al cargar empresas');
+
+                    empresasGlobal = await response.json();
+                    renderizarTabla(empresasGlobal);
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Error al cargar los datos');
+                }
+            }
+
+            function renderizarTabla(empresas) {
+                const tbody = document.querySelector('tbody');
+
+                if (empresas.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="10" class="px-6 py-4 text-center text-gray-500">No hay empresas encontradas</td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = empresas.map(empresa => {
+                    // Iniciales
+                    const iniciales = empresa.nombreTienda ? empresa.nombreTienda.substring(0, 2).toUpperCase() : 'EM';
+
+                    // Colores por plan (solo visual)
+                    let bgClass = "bg-gray-600";
+                    if (empresa.planId === 1) bgClass = "bg-green-600";
+                    else if (empresa.planId === 2) bgClass = "bg-blue-600";
+                    else if (empresa.planId === 3) bgClass = "bg-purple-600";
+
+                    const modulos = empresa.modulosActivos ? empresa.modulosActivos.split(',') : [];
+
+                    return `
+                        <tr class="hover:bg-gray-50 transition duration-100">
+                            <td class="px-6 py-4 whitespace-nowrap sticky left-0 bg-white">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 ${bgClass} text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">
+                                        ${iniciales}
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900">${empresa.nombreTienda}</div>
+                                        <div class="text-sm text-gray-500">
+                                            <select class="block w-full text-xs border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm py-1 pl-2 pr-6 bg-white"
+                                                onchange="cambiarPlan(${empresa.idEmpresa}, this.value)">
+                                                <option value="" disabled ${!empresa.planId ? 'selected' : ''}>Sin Plan</option>
+                                                <option value="1" ${empresa.planId == 1 ? 'selected' : ''}>Básico</option>
+                                                <option value="2" ${empresa.planId == 2 ? 'selected' : ''}>Premium</option>
+                                                <option value="3" ${empresa.planId == 3 ? 'selected' : ''}>Enterprise</option>
+                                            </select>
+                                        </div>
+                                        <div class="text-xs ${empresa.estado ? 'text-green-600' : 'text-red-600'} font-semibold">
+                                            ${empresa.estado ? 'Activa' : 'Suspendida'}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            ${renderCheckbox(empresa.idEmpresa, 'DASHBOARD', modulos.includes('DASHBOARD'))}
+                            ${renderCheckbox(empresa.idEmpresa, 'CATALOGO', modulos.includes('CATALOGO'))}
+                            ${renderCheckbox(empresa.idEmpresa, 'OPERACIONES', modulos.includes('OPERACIONES'))}
+                            ${renderCheckbox(empresa.idEmpresa, 'FINANZAS', modulos.includes('FINANZAS'))}
+                            ${renderCheckbox(empresa.idEmpresa, 'ADMINISTRACION', modulos.includes('ADMINISTRACION'))}
+                            <td class="px-6 py-4 text-center">
+                                <button
+                                    class="px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition duration-150"
+                                    onclick="guardarCambios(${empresa.idEmpresa})">
+                                    Guardar
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            function renderCheckbox(idEmpresa, modulo, checked) {
+                // Mapeo de nombres mostrados vs valor
+                return `
+                    <td class="px-4 py-4 text-center">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" ${checked ? 'checked' : ''}
+                                class="form-checkbox h-5 w-5 text-green-600 rounded focus:ring-green-500"
+                                data-empresa="${idEmpresa}" data-modulo="${modulo}">
+                            <span class="ml-2 text-green-600"></span>
+                        </label>
+                    </td>
+                `;
+            }
+
+            function filtrarTabla() {
+                const texto = document.getElementById('buscar-empresa').value.toLowerCase();
+                const estado = document.getElementById('filtro-estado').value;
+                const planFiltro = document.getElementById('filtro-plan').value;
+
+                const filtradas = empresasGlobal.filter(empresa => {
+                    const cumpleTexto = empresa.nombreTienda.toLowerCase().includes(texto);
+
+                    let cumpleEstado = true;
+                    if (estado === 'activa') cumpleEstado = empresa.estado === true;
+                    if (estado === 'suspendida') cumpleEstado = empresa.estado === false;
+
+                    let cumplePlan = true;
+                    if (planFiltro !== "") {
+                        cumplePlan = (empresa.planId == planFiltro);
+                    }
+
+                    return cumpleTexto && cumpleEstado && cumplePlan;
+                });
+
+                renderizarTabla(filtradas);
+            }
+
+            async function cambiarPlan(idEmpresa, nuevoPlanId) {
+                if (!confirm('¿Estás seguro de cambiar el plan? Esto actualizará los módulos y la comisión.')) return;
+
+                const empresa = empresasGlobal.find(e => e.idEmpresa === idEmpresa);
+                if (!empresa) return;
+
+                // Actualizar localmente para feedback inmediato
+                empresa.planId = parseInt(nuevoPlanId);
+
+                try {
+                    const response = await fetch(`${API_BASE_URL}/empresas/${idEmpresa}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ ...empresa, planId: nuevoPlanId }) // Enviamos todo el objeto actualizado
+                    });
+
+                    if (response.ok) {
+                        alert('Plan actualizado correctamente');
+                        cargarEmpresasModulos(); // Recargar para asegurar consistencia
+                    } else {
+                        throw new Error('Error al actualizar plan');
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert('Error al actualizar el plan');
+                }
+            }
+
+            async function guardarCambios(idEmpresa) {
+                // Recopilar checkboxes
+                const checkboxes = document.querySelectorAll(`input[data-empresa="${idEmpresa}"]`);
+                const modulosActivos = [];
+                checkboxes.forEach(cb => {
+                    if (cb.checked) modulosActivos.push(cb.dataset.modulo);
+                });
+
+                const empresa = empresasGlobal.find(e => e.idEmpresa === idEmpresa);
+                if (!empresa) return;
+
+                const modulosStr = modulosActivos.join(',');
+
+                try {
+                    const response = await fetch(`${API_BASE_URL}/empresas/${idEmpresa}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ ...empresa, modulosActivos: modulosStr })
+                    });
+
+                    if (response.ok) {
+                        alert('Cambios guardados correctamente');
+                        cargarEmpresasModulos();
+                    } else {
+                        alert('Error al guardar cambios');
+                    }
+                } catch (e) {
+                    console.error(e);
+                    alert('Error de conexión');
+                }
+            }
+        </script>
 
 </body>
+
 </html>

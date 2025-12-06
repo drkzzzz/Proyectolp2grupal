@@ -27,7 +27,6 @@ public class DataLoader {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-
     @Autowired
     private EmpresaRepository empresaRepository;
 
@@ -57,7 +56,7 @@ public class DataLoader {
                             .direccionLegal("Lima, Perú")
                             .telefono("999000000")
                             .emailContacto("info@tapstyle.com")
-                            .estadoAprobacion("Aprobada")
+                            .estado(true)
                             .tasaComision(new java.math.BigDecimal("0.15"))
                             .build();
                     empresa = empresaRepository.save(empresa);
@@ -105,7 +104,6 @@ public class DataLoader {
     public void onReady() {
         showDataSummary();
     }
-
 
     /**
      * Muestra un resumen de los datos cargados

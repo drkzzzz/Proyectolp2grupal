@@ -18,6 +18,10 @@ public class EmpresaDTO {
     private String telefono;
     private String emailContacto;
     private LocalDateTime fechaRegistro;
-    private String estadoAprobacion;
+    private Boolean estado;
     private BigDecimal tasaComision;
+    private String modulosActivos;
+    private Long planId; // Para seleccionar el plan (1, 2, 3)
+    private String nombrePlan;
+    private BigDecimal precioMensual;
 }

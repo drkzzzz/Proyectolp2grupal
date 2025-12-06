@@ -18,6 +18,7 @@ public class AuthController {
 
     private final UsuarioService usuarioService;
     private final EmpresaService empresaService;
+    private final com.lp2.tapstyle.service.SuscripcionEmpresaService suscripcionService;
     private final PasswordEncoder passwordEncoder;
 
     // TEMPORAL: Generar hash BCrypt
@@ -49,6 +50,13 @@ public class AuthController {
             EmpresaDTO empresaDTO = null;
             if (usuario.getEmpresa() != null) {
                 empresaDTO = empresaService.obtenerPorId(usuario.getEmpresa().getIdEmpresa());
+
+                // Verificar si la empresa tiene acceso (Suscripción activa)
+                if (!suscripcionService.verificarAcceso(empresaDTO.getIdEmpresa())) {
+                    return ResponseEntity.status(403)
+                            .body(ApiResponse.error("SubscriptionSuspended",
+                                    "Acceso denegado: La suscripción de la empresa está suspendida o inactiva."));
+                }
             }
 
             // Determinar tipo según rol

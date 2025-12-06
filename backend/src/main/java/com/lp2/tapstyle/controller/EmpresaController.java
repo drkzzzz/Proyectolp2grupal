@@ -1,5 +1,6 @@
 package com.lp2.tapstyle.controller;
 
+import com.lp2.tapstyle.dto.CrearEmpresaConAdminRequest;
 import com.lp2.tapstyle.dto.EmpresaDTO;
 import com.lp2.tapstyle.service.EmpresaService;
 import lombok.RequiredArgsConstructor;
@@ -36,9 +37,36 @@ public class EmpresaController {
         return ResponseEntity.ok(empresaService.actualizar(id, dto));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        empresaService.eliminar(id);
-        return ResponseEntity.noContent().build();
+    /**
+     * Crear empresa junto con su usuario administrador
+     */
+    @PostMapping("/crear-con-admin")
+    public ResponseEntity<EmpresaDTO> crearEmpresaConAdministrador(@RequestBody CrearEmpresaConAdminRequest request) {
+        try {
+            EmpresaDTO empresaCreada = empresaService.crearEmpresaConAdministrador(request);
+            return ResponseEntity.ok(empresaCreada);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    /**
+     * Obtener empresas por estado de aprobación
+     */
+    @GetMapping("/estado/{estado}")
+    public ResponseEntity<List<EmpresaDTO>> obtenerPorEstado(@PathVariable Boolean estado) {
+        return ResponseEntity.ok(empresaService.obtenerPorEstado(estado));
+    }
+
+    @PatchMapping("/{id}/estado")
+    public ResponseEntity<Void> cambiarEstado(@PathVariable Integer id, @RequestParam Boolean activo) {
+        empresaService.cambiarEstado(id, activo);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{id}/modulos")
+    public ResponseEntity<Void> actualizarModulos(@PathVariable Integer id, @RequestParam String modulos) {
+        empresaService.actualizarModulos(id, modulos);
+        return ResponseEntity.ok().build();
     }
 }
