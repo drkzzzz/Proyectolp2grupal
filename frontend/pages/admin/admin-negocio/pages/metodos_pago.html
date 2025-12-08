@@ -1,246 +1,471 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TapStyle - Métodos de Pago</title>
+    <title>Métodos de Pago - Admin Negocio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="flex">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar bg-gray-800 text-white p-6 flex flex-col fixed h-full z-20 hidden md:flex overflow-y-auto" style="width: 280px;">
-        <div class="text-center mb-6 pb-4 border-b border-gray-700">
-            <a href="index.html" class="text-2xl font-extrabold text-indigo-400 tracking-wider">TapStyle</a>
-        </div>
-        <div class="mb-6 text-center">
-            <div class="w-14 h-14 bg-white text-indigo-600 rounded-full mx-auto flex items-center justify-center text-lg font-bold mb-2">SV</div>
-            <p class="font-semibold">Street Vibe Co.</p>
-            <p class="text-xs text-gray-400">Admin de Negocio</p>
-        </div>
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
 
-        <nav class="flex-grow space-y-1">
-            <a href="dashboard_admin_negocio.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
-                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                <span class="text-sm font-medium">Dashboard</span>
-            </a>
-            <div class="submenu-container">
-                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
-                    <div class="flex items-center">
-                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                        <span class="text-sm font-medium">Catálogo</span>
-                    </div>
-                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="submenu hidden ml-7 mt-1 space-y-1">
-                    <a href="crud_producto.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Productos</a>
-                    <a href="categorias.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Categorías</a>
-                    <a href="marcas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Marcas</a>
-                </div>
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
+
+            <div class="p-6 border-b border-gray-700">
+                <h1 class="text-3xl font-extrabold text-blue-400 tracking-wider">TapStyle</h1>
+                <p class="text-xs text-gray-400 mt-1">ADMIN NEGOCIO</p>
             </div>
-            <div class="submenu-container">
-                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
-                    <div class="flex items-center">
-                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
-                        <span class="text-sm font-medium">Operaciones</span>
-                    </div>
-                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="submenu ml-7 mt-1 space-y-1">
-                    <a href="compras.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Compras</a>
-                    <a href="ventas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Ventas</a>
-                    <a href="stock.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Stock</a>
-                    <a href="caja.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Caja</a>
-                    <a href="proveedores.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Proveedores</a>
-                    <a href="metodos_pago.html" class="block p-2 text-sm text-white bg-indigo-600 rounded">Métodos de Pago</a>
-                </div>
-            </div>
-            <a href="finanzas_pagos.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
-                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                <span class="text-sm font-medium">Finanzas</span>
-            </a>
-            <div class="submenu-container">
-                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
-                    <div class="flex items-center">
-                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                        <span class="text-sm font-medium">Administración</span>
-                    </div>
-                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="submenu hidden ml-7 mt-1 space-y-1">
-                    <a href="gestion_empleados.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Empleados</a>
-                    <a href="roles_permisos.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Roles y Permisos</a>
-                </div>
-            </div>
-        </nav>
-        <div class="mt-auto pt-4 border-t border-gray-700">
-            <a href="login.html" class="flex items-center p-2 rounded-lg text-red-400 hover:bg-gray-700 transition">
-                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                <span class="text-sm font-medium">Cerrar Sesión</span>
-            </a>
-        </div>
-    </aside>
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <div class="flex-1 md:ml-[280px] p-4 sm:p-8 w-full">
-        
-        <header class="flex justify-between items-center bg-white p-4 rounded-xl shadow-md mb-8">
-            <h1 class="text-2xl font-bold text-gray-800">Métodos de Pago</h1>
-            <button id="btnNuevoMetodo" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150">
-                + Nuevo Método
-            </button>
-        </header>
+            <div class="flex flex-col items-center py-6 border-b border-gray-700 px-4">
+                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg" data-empresa-initials>SV</div>
+                <h2 class="mt-3 text-lg font-semibold text-center" data-empresa-nombre>Tu Empresa</h2>
+                <p class="text-sm text-gray-400 mt-1" data-usuario-nombre>Usuario</p>
+            </div>
 
-        <!-- Tabla de Métodos de Pago -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo de Pago</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Efectivo</td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Activo</span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <button class="text-indigo-600 hover:text-indigo-900 mr-3 btn-editar" data-id="1">Editar</button>
-                            <button class="text-red-600 hover:text-red-900 btn-eliminar" data-id="1">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Tarjeta de Crédito</td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Activo</span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <button class="text-indigo-600 hover:text-indigo-900 mr-3 btn-editar" data-id="2">Editar</button>
-                            <button class="text-red-600 hover:text-red-900 btn-eliminar" data-id="2">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Transferencia Bancaria</td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Activo</span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <button class="text-indigo-600 hover:text-indigo-900 mr-3 btn-editar" data-id="3">Editar</button>
-                            <button class="text-red-600 hover:text-red-900 btn-eliminar" data-id="3">Eliminar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+
+                <a href="../dashboard_admin_negocio.html" class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150">
+                    <i class="fas fa-chart-line mr-3 text-lg"></i>
+                    <span class="font-medium">Dashboard</span>
+                </a>
+
+                <div class="mt-4">
+                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-box mr-3 text-lg"></i>
+                            <span class="font-medium">Catálogo</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="submenu hidden ml-8 space-y-2 mt-2">
+                        <a href="productos.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-cube mr-2"></i> Productos
+                        </a>
+                        <a href="categorias.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-list mr-2"></i> Categorías
+                        </a>
+                        <a href="marcas.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-tag mr-2"></i> Marcas
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-tasks mr-3 text-lg"></i>
+                            <span class="font-medium">Operaciones</span>
+                        </div>
+                        <i class="fas fa-chevron-up text-sm"></i>
+                    </button>
+                    <div class="submenu ml-8 space-y-2 mt-2">
+                        <a href="compras.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-shopping-cart mr-2"></i> Compras
+                        </a>
+                        <a href="ventas.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-cash-register mr-2"></i> Ventas
+                        </a>
+                        <a href="stock.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-warehouse mr-2"></i> Stock
+                        </a>
+                        <a href="proveedores.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-truck mr-2"></i> Proveedores
+                        </a>
+                        <a href="metodos_pago.html" class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded transition">
+                            <i class="fas fa-credit-card mr-2"></i> Métodos de Pago
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-money-bill-wave mr-3 text-lg"></i>
+                            <span class="font-medium">Finanzas</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="submenu hidden ml-8 space-y-2 mt-2">
+                        <a href="caja.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-cash-register mr-2"></i> Caja
+                        </a>
+                        <a href="finanzas_pagos.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-chart-bar mr-2"></i> Finanzas
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-cog mr-3 text-lg"></i>
+                            <span class="font-medium">Administración</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="submenu hidden ml-8 space-y-2 mt-2">
+                        <a href="clientes.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-users mr-2"></i> Clientes
+                        </a>
+                        <a href="empleados.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-user-tie mr-2"></i> Empleados
+                        </a>
+                        <a href="roles_permisos.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-shield-alt mr-2"></i> Roles y Permisos
+                        </a>
+                    </div>
+                </div>
+
+            </nav>
+
+            <div class="p-4 border-t border-gray-700">
+                <button onclick="cerrarSesionConfirm()" class="w-full flex items-center justify-center px-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg transition">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+
+            <!-- CABECERA -->
+            <header class="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-gray-800">Métodos de Pago</h1>
+                <button onclick="abrirModalMetodo()"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2">
+                    <i class="fas fa-plus"></i> Nuevo Método
+                </button>
+            </header>
+
+            <!-- CONTENIDO -->
+            <main class="flex-1 overflow-y-auto p-8">
+
+                <!-- TABLA DE MÉTODOS -->
+                <div class="bg-white rounded-xl shadow overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50 border-b border-gray-200">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Nombre</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Tipo</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Descripción</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Comisión</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Estado</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaMetodos" class="divide-y divide-gray-200">
+                                <tr>
+                                    <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                                        <i class="fas fa-spinner fa-spin mr-2"></i> Cargando métodos...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+
         </div>
 
     </div>
 
-    <!-- Modal Nuevo/Editar Método de Pago -->
-    <div id="modalMetodo" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4">
-            <div class="p-6 border-b flex justify-between items-center">
-                <h2 id="modalTitle" class="text-2xl font-bold text-gray-800">Nuevo Método de Pago</h2>
-                <button id="btnCerrarModal" class="text-gray-500 hover:text-gray-700">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
+    <!-- MODAL: Nuevo Método -->
+    <div id="modalMetodo" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md max-h-screen overflow-y-auto">
+
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-gray-800">Nuevo Método de Pago</h2>
+                <button onclick="cerrarModalMetodo()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
                 </button>
             </div>
-            <form id="formMetodo" class="p-6">
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Pago *</label>
-                        <input type="text" id="tipo_pago" name="tipo_pago" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+
+            <div class="p-6">
+                <form id="formMetodo" onsubmit="guardarMetodo(event)">
+
+                    <!-- Nombre -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre *</label>
+                        <input type="text" id="nombre" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                     </div>
-                </div>
-                
-                <div class="flex justify-end space-x-3 mt-6">
-                    <button type="button" id="btnCancelar" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition duration-150">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150">
-                        Guardar
-                    </button>
-                </div>
-            </form>
+
+                    <!-- Tipo -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipo *</label>
+                        <select id="tipo" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Selecciona tipo</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Tarjeta Débito">Tarjeta Débito</option>
+                            <option value="Tarjeta Crédito">Tarjeta Crédito</option>
+                            <option value="Transferencia">Transferencia Bancaria</option>
+                            <option value="Cheque">Cheque</option>
+                            <option value="Billetera Digital">Billetera Digital</option>
+                        </select>
+                    </div>
+
+                    <!-- Descripción -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Descripción</label>
+                        <textarea id="descripcion"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 h-16"></textarea>
+                    </div>
+
+                    <!-- Comisión -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Comisión (%)</label>
+                        <input type="number" id="comision" step="0.01" min="0"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="flex gap-3 justify-end">
+                        <button type="button" onclick="cerrarModalMetodo()"
+                            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                            Cancelar
+                        </button>
+                        <button type="submit"
+                            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center gap-2">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- SCRIPTS -->
+    <script src="/frontend/config/api-config.js"></script>
+    <script src="/frontend/components/sidebar/sidebar_script.js"></script>
     <script>
-        $(document).ready(function() {
-            let editandoId = null;
-            
-            $('#btnNuevoMetodo').click(function() {
-                $('#modalTitle').text('Nuevo Método de Pago');
-                $('#formMetodo')[0].reset();
-                editandoId = null;
-                $('#modalMetodo').removeClass('hidden');
-            });
-            
-            $('.btn-editar').click(function() {
-                editandoId = $(this).data('id');
-                $('#modalTitle').text('Editar Método de Pago');
-                $('#modalMetodo').removeClass('hidden');
-            });
-            
-            $('#btnCerrarModal, #btnCancelar').click(function() {
-                $('#modalMetodo').addClass('hidden');
-                $('#formMetodo')[0].reset();
-                editandoId = null;
-            });
-            
-            $('#formMetodo').submit(function(e) {
-                e.preventDefault();
-                
-                const formData = {
-                    tipo_pago: $('#tipo_pago').val()
-                };
-                
-                if (editandoId) {
-                    formData.id_tipopago = editandoId;
-                    console.log('Actualizando método de pago:', formData);
-                    alert('Método de pago actualizado correctamente');
-                } else {
-                    console.log('Creando nuevo método de pago:', formData);
-                    alert('Método de pago creado correctamente');
-                }
-                
-                $('#modalMetodo').addClass('hidden');
-                $('#formMetodo')[0].reset();
-                editandoId = null;
-            });
-            
-            $('.btn-eliminar').click(function() {
-                const id = $(this).data('id');
-                if (confirm('¿Está seguro de eliminar este método de pago?')) {
-                    console.log('Eliminando método de pago ID:', id);
-                    alert('Método de pago eliminado correctamente');
-                }
-            });
+
+        let idMetodoEditando = null;
+
+        function obtenerToken() {
+            return localStorage.getItem('tapstyle_token') || localStorage.getItem('token') || localStorage.getItem('authToken');
+        }
+
+        function toggleMenu(button) {
+            const submenu = button.nextElementSibling;
+            const icon = button.querySelector('i:last-child');
+            submenu.classList.toggle('hidden');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+
+        function cerrarSesionConfirm() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                cerrarSesion();
+            }
+        }
+
+        function abrirModalMetodo() {
+            idMetodoEditando = null;
+            document.getElementById('modalMetodo').classList.remove('hidden');
+            document.getElementById('formMetodo').reset();
+        }
+
+        function cerrarModalMetodo() {
+            document.getElementById('modalMetodo').classList.add('hidden');
+            document.getElementById('formMetodo').reset();
+            idMetodoEditando = null;
+        }
+
+        async function cargarMetodos() {
+            try {
+                // Simulación de métodos de pago (como no hay endpoint específico)
+                const metodos = [
+                    { id: 1, nombre: 'Efectivo', estado: 'Activo', descripcion: 'Pago en efectivo' },
+                    { id: 2, nombre: 'Tarjeta de Crédito', estado: 'Activo', descripcion: 'Tarjetas Visa, Mastercard' },
+                    { id: 3, nombre: 'Transferencia Bancaria', estado: 'Activo', descripcion: 'Transferencias interbancarias' },
+                    { id: 4, nombre: 'Cheque', estado: 'Inactivo', descripcion: 'Pagos con cheque' }
+                ];
+
+                const tbody = document.getElementById('tablaMetodos');
+                tbody.innerHTML = metodos.map(m => `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">${m.nombre}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${m.descripcion}</td>
+                        <td class="px-6 py-4 text-sm">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold ${m.estado === 'Activo' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}">
+                                ${m.estado}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-sm flex gap-2">
+                            <button onclick="editarMetodo(${m.id})" class="text-yellow-600 hover:text-yellow-800">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button onclick="cambiarEstado(${m.id})" class="text-blue-600 hover:text-blue-800">
+                                <i class="fas fa-toggle-on"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function editarMetodo(id) {
+            alert('Editar método de pago #' + id);
+        }
+
+        function cambiarEstado(id) {
+            alert('Cambiar estado del método #' + id);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const auth = validarAutenticacion();
+            if (!auth) return;
+
+            console.log('💳 Cargando métodos de pago...');
+            cargarMetodos();
         });
 
-        // Script para submenús
-        const toggles = document.querySelectorAll('.submenu-toggle');
-        toggles.forEach(toggle => {
-            toggle.addEventListener('click', function() {
-                const container = this.parentElement;
-                const submenu = container.querySelector('.submenu');
-                const icon = this.querySelector('.submenu-icon');
-                document.querySelectorAll('.submenu').forEach(sm => {
-                    if (sm !== submenu) {
-                        sm.classList.add('hidden');
-                        sm.parentElement.querySelector('.submenu-icon').style.transform = 'rotate(0deg)';
-                    }
-                });
-                submenu.classList.toggle('hidden');
-                icon.style.transform = submenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
-            });
-        });
     </script>
+    <script>
+
+        function toggleMenu(button) {
+            const submenu = button.nextElementSibling;
+            const icon = button.querySelector('i:last-child');
+            submenu.classList.toggle('hidden');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+
+        function cerrarSesionConfirm() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                cerrarSesion();
+            }
+        }
+
+        function abrirModalMetodo() {
+            document.getElementById('modalMetodo').classList.remove('hidden');
+        }
+
+        function cerrarModalMetodo() {
+            document.getElementById('modalMetodo').classList.add('hidden');
+            document.getElementById('formMetodo').reset();
+        }
+
+        async function cargarMetodos() {
+            try {
+                // Simular métodos de pago
+                const metodos = [
+                    { id: 1, nombre: 'Efectivo', tipo: 'Efectivo', descripcion: 'Pago al contado', comision: 0, estado: 'activo' },
+                    { id: 2, nombre: 'Visa', tipo: 'Tarjeta Crédito', descripcion: 'Tarjetas de crédito Visa', comision: 2.5, estado: 'activo' },
+                    { id: 3, nombre: 'MasterCard', tipo: 'Tarjeta Crédito', descripcion: 'Tarjetas de crédito MasterCard', comision: 2.5, estado: 'activo' },
+                    { id: 4, nombre: 'Transferencia', tipo: 'Transferencia', descripcion: 'Transferencia bancaria', comision: 1, estado: 'activo' }
+                ];
+
+                const tbody = document.getElementById('tablaMetodos');
+                tbody.innerHTML = metodos.map(met => `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">${met.nombre}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${met.tipo}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${met.descripcion}</td>
+                        <td class="px-6 py-4 text-sm font-semibold text-gray-900">
+                            ${met.comision}%
+                        </td>
+                        <td class="px-6 py-4 text-sm">
+                            <span class="px-3 py-1 rounded-full bg-green-100 text-green-800 text-xs font-semibold">✓ Activo</span>
+                        </td>
+                        <td class="px-6 py-4 text-sm space-x-2">
+                            <button onclick="editarMetodo(${met.id})" class="text-yellow-600 hover:text-yellow-800">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button onclick="eliminarMetodo(${met.id})" class="text-red-600 hover:text-red-800">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error cargando métodos:', error);
+                mostrarTablaVacia();
+                mostrarError('Error: ' + error.message);
+            }
+        }
+
+        async function guardarMetodo(event) {
+            event.preventDefault();
+
+            const nombre = document.getElementById('nombre').value;
+            const tipo = document.getElementById('tipo').value;
+            const descripcion = document.getElementById('descripcion').value;
+            const comision = parseFloat(document.getElementById('comision').value) || 0;
+
+            if (!nombre || !tipo) {
+                mostrarError('Completa todos los campos requeridos');
+                return;
+            }
+
+            try {
+                const boton = event.target.querySelector('button[type="submit"]');
+                mostrarLoading(boton, 'Guardando...');
+
+                const datosMetodo = {
+                    nombre,
+                    tipo,
+                    descripcion,
+                    comision,
+                    estado: 'activo'
+                };
+
+                console.log('Guardando método:', datosMetodo);
+                mostrarExito('Método de pago creado exitosamente');
+                cerrarModalMetodo();
+                cargarMetodos();
+
+            } catch (error) {
+                console.error('Error:', error);
+                mostrarError('Error: ' + error.message);
+            }
+        }
+
+        function editarMetodo(id) {
+            alert('Editar método #' + id + ' (implementar después)');
+        }
+
+        function eliminarMetodo(id) {
+            if (confirm('¿Estás seguro de eliminar este método?')) {
+                mostrarExito('Método eliminado');
+                cargarMetodos();
+            }
+        }
+
+        function mostrarTablaVacia() {
+            document.getElementById('tablaMetodos').innerHTML = `
+                <tr>
+                    <td colspan="6" class="px-6 py-8 text-center">
+                        <i class="fas fa-inbox text-3xl text-gray-400 mb-2"></i>
+                        <p class="text-gray-500">No hay métodos de pago registrados</p>
+                    </td>
+                </tr>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const auth = validarAutenticacion();
+            if (!auth) return;
+
+            console.log('💳 Cargando métodos de pago...');
+            cargarMetodos();
+        });
+
+    </script>
+
 </body>
+
 </html>

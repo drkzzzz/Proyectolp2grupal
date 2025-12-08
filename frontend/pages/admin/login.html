@@ -77,13 +77,50 @@
                 if (response.ok && data.success) {
                     const authData = data.data;
 
+                    console.log('✅ Login exitoso:', authData);
+                    console.log('📋 OBJETO EMPRESA COMPLETO:', authData.empresa);
+                    console.log('🔍 CAMPOS DE EMPRESA:', Object.keys(authData.empresa));
+                    
+                    // Imprimir cada campo para debug
+                    if (authData.empresa) {
+                        for (let key in authData.empresa) {
+                            console.log(`  ${key}: ${authData.empresa[key]}`);
+                        }
+                    }
+
                     // Guardar sesión
                     localStorage.setItem('tapstyle_token', authData.token);
                     localStorage.setItem('tapstyle_user', JSON.stringify(authData.usuario));
                     localStorage.setItem('tapstyle_role', authData.tipo);
+                    
+                    // Guardar ID del usuario
+                    if (authData.usuario && authData.usuario.idUsuario) {
+                        localStorage.setItem('idUsuario', String(authData.usuario.idUsuario));
+                    }
 
                     if (authData.empresa) {
                         localStorage.setItem('tapstyle_empresa', JSON.stringify(authData.empresa));
+                        // Guardar datos de empresa para módulos operativos
+                        localStorage.setItem('idEmpresa', String(authData.empresa.idEmpresa));
+                        
+                        // El backend devuelve nombreTienda (camelCase)
+                        const nombreEmpresa = authData.empresa.nombreTienda || 'Tu Empresa';
+                        console.log('✅ Nombre de empresa seleccionado:', nombreEmpresa);
+                        localStorage.setItem('empresaNombre', String(nombreEmpresa));
+                        
+                        // Generar siglas del nombre
+                        const palabras = nombreEmpresa.split(' ');
+                        const siglas = palabras.map(p => p[0].toUpperCase()).join('').substring(0, 2);
+                        localStorage.setItem('empresaInitials', siglas);
+
+                        console.log('📦 Datos guardados:', {
+                            token: authData.token.substring(0, 20) + '...',
+                            usuario: authData.usuario.nombres,
+                            rol: authData.tipo,
+                            empresa: localStorage.getItem('empresaNombre'),
+                            idEmpresa: authData.empresa.idEmpresa,
+                            siglas: siglas
+                        });
                     }
 
                     // Redireccionar según rol
@@ -100,6 +137,7 @@
                             throw new Error('Rol de usuario no autorizado para este panel');
                     }
 
+                    console.log('🔄 Redirigiendo a:', redirectUrl);
                     window.location.href = redirectUrl;
                 } else {
                     throw new Error(data.message || 'Error en la autenticación');

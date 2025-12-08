@@ -7,7 +7,7 @@ import lombok.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "UnidadesMedida")
+@Table(name = "unidadesmedida")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

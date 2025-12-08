@@ -8,7 +8,7 @@ import lombok.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Proveedores")
+@Table(name = "proveedores")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

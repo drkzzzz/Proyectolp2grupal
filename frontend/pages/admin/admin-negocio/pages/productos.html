@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Catálogo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
+            <div class="p-6 border-b border-gray-700">
+                <h1 class="text-3xl font-extrabold text-blue-400 tracking-wider">TapStyle</h1>
+                <p class="text-xs text-gray-400 mt-1">ADMIN NEGOCIO</p>
+            </div>
+
+            <div class="flex flex-col items-center py-6 border-b border-gray-700 px-4">
+                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg" data-empresa-initials>TE</div>
+                <h2 class="mt-3 text-lg font-semibold text-center" data-empresa-nombre>Tu Empresa</h2>
+                <p class="text-sm text-gray-400 mt-1" data-usuario-nombre>Usuario</p>
+            </div>
+
+            <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+                <a href="../dashboard_admin_negocio.html" class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150">
+                    <i class="fas fa-chart-line mr-3 text-lg"></i>
+                    <span class="font-medium">Dashboard</span>
+                </a>
+
+                <div class="mt-4">
+                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-box mr-3 text-lg"></i>
+                            <span class="font-medium">Catálogo</span>
+                        </div>
+                        <i class="fas fa-chevron-up text-sm"></i>
+                    </button>
+                    <div class="submenu ml-8 space-y-2 mt-2">
+                        <a href="productos.html" class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 rounded transition">
+                            <i class="fas fa-cube mr-2"></i> Productos
+                        </a>
+                        <a href="categorias.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-list mr-2"></i> Categorías
+                        </a>
+                        <a href="marcas.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-tag mr-2"></i> Marcas
+                        </a>
+                    </div>
+                </div>
+
+                <button onclick="cerrarSesionConfirm()" class="mt-auto flex items-center px-4 py-3 rounded-lg bg-red-600 hover:bg-red-700 transition duration-150 w-full text-center justify-center">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    <span class="font-medium">Cerrar Sesión</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="flex-1 overflow-y-auto">
+            <div class="p-8">
+                <!-- HEADER -->
+                <div class="flex justify-between items-center mb-8">
+                    <div>
+                        <h1 class="text-4xl font-bold text-gray-900">Productos</h1>
+                        <p class="text-gray-600 mt-2">Gestiona el catálogo de productos</p>
+                    </div>
+                    <button onclick="abrirModalNuevoProducto()" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center">
+                        <i class="fas fa-plus mr-2"></i> Nuevo Producto
+                    </button>
+                </div>
+
+                <!-- TABLA DE PRODUCTOS -->
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-100 border-b">
+                                <tr>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">ID</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Nombre</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Categoría</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Marca</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Stock</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaProductos" class="divide-y">
+                                <tr>
+                                    <td colspan="6" class="px-6 py-4 text-center text-gray-500">Cargando productos...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL NUEVO/EDITAR PRODUCTO -->
+    <div id="modalProducto" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b flex justify-between items-center sticky top-0 bg-white">
+                <h2 class="text-2xl font-bold text-gray-900" id="tituloModal">Nuevo Producto</h2>
+                <button onclick="cerrarModalProducto()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <form id="formProducto" class="p-6 space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Nombre Producto</label>
+                        <input type="text" id="nombreProducto" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" placeholder="Ej: Zapatilla Nike" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Categoría</label>
+                        <select id="idCategoria" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+                            <option value="">Seleccionar categoría...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Marca</label>
+                        <select id="idMarca" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+                            <option value="">Seleccionar marca...</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Proveedor</label>
+                        <select id="idProveedor" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+                            <option value="">Seleccionar proveedor...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Descripción</label>
+                    <textarea id="descripcion" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" rows="3" placeholder="Descripción del producto..."></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Unidad de Medida *</label>
+                        <select id="idUnidadMedida" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+                            <option value="">Seleccionar unidad...</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Material</label>
+                        <select id="idMaterial" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+                            <option value="">Seleccionar material...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Peso (g)</label>
+                        <input type="number" id="pesoGramos" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" placeholder="0">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Dimensiones</label>
+                        <input type="text" id="dimensiones" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" placeholder="Ej: 10x20x30">
+                    </div>
+                </div>
+
+                <div class="flex gap-4 pt-4">
+                    <button type="submit" class="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition font-semibold">
+                        Guardar Producto
+                    </button>
+                    <button type="button" onclick="cerrarModalProducto()" class="flex-1 bg-gray-400 text-white py-2 rounded-lg hover:bg-gray-500 transition font-semibold">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="../scripts/auth.js"></script>
+    <script src="../scripts/api.js"></script>
+    <script>
+        let idProductoEditar = null;
+        const API_BASE = 'http://localhost:8083/api';
+
+        // ============================================
+        // INICIALIZACIÓN
+        // ============================================
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const auth = validarAutenticacion();
+            if (!auth) return;
+
+            console.log('📦 Cargando módulo de Productos');
+            actualizarUIUsuario(auth);
+
+            // Cargar datos iniciales
+            await Promise.all([
+                cargarProductos(),
+                cargarCategorias(),
+                cargarMarcas(),
+                cargarMateriales(),
+                cargarProveedores(),
+                cargarUnidadesMedida()
+            ]);
+        });
+
+        function toggleMenu(button) {
+            const submenu = button.nextElementSibling;
+            const icon = button.querySelector('i:last-child');
+            submenu.classList.toggle('hidden');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+
+        function cerrarSesionConfirm() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                cerrarSesion();
+            }
+        }
+
+        // ============================================
+        // CARGAR DATOS
+        // ============================================
+
+        async function cargarProductos() {
+            try {
+                const contexto = obtenerContexto();
+                const response = await fetch(`${API_BASE}/productos/empresa/${contexto.idEmpresa}`);
+                const data = await response.json();
+
+                if (data.success && data.data) {
+                    mostrarProductos(data.data);
+                } else {
+                    mostrarErrorTabla('No hay productos registrados');
+                }
+            } catch (error) {
+                console.error('Error al cargar productos:', error);
+                mostrarErrorTabla('Error al cargar los productos');
+            }
+        }
+
+        async function cargarCategorias() {
+            try {
+                const response = await fetch(`${API_BASE}/categorias`);
+                const data = await response.json();
+
+                if (data.success && data.data) {
+                    const select = document.getElementById('idCategoria');
+                    select.innerHTML = '<option value="">Seleccionar categoría...</option>';
+                    data.data.forEach(cat => {
+                        select.innerHTML += `<option value="${cat.idCategoria}">${cat.nombreCategoria}</option>`;
+                    });
+                }
+            } catch (error) {
+                console.error('Error al cargar categorías:', error);
+            }
+        }
+
+        async function cargarMarcas() {
+            try {
+                const contexto = obtenerContexto();
+                const response = await fetch(`${API_BASE}/marcas/empresa/${contexto.idEmpresa}`);
+                const data = await response.json();
+
+                if (data.success && data.data) {
+                    const select = document.getElementById('idMarca');
+                    select.innerHTML = '<option value="">Seleccionar marca...</option>';
+                    data.data.forEach(marca => {
+                        select.innerHTML += `<option value="${marca.idMarca}">${marca.nombreMarca}</option>`;
+                    });
+                }
+            } catch (error) {
+                console.error('Error al cargar marcas:', error);
+            }
+        }
+
+        async function cargarMateriales() {
+            try {
+                const response = await fetch(`${API_BASE}/materiales`);
+                const data = await response.json();
+
+                if (data.success && data.data) {
+                    const select = document.getElementById('idMaterial');
+                    select.innerHTML = '<option value="">Seleccionar material...</option>';
+                    data.data.forEach(mat => {
+                        select.innerHTML += `<option value="${mat.idMaterial}">${mat.nombreMaterial}</option>`;
+                    });
+                }
+            } catch (error) {
+                console.error('Error al cargar materiales:', error);
+            }
+        }
+
+        async function cargarProveedores() {
+            try {
+                const contexto = obtenerContexto();
+                console.log('Cargando proveedores para empresa:', contexto.idEmpresa);
+                const response = await fetch(`${API_BASE}/proveedores/empresa/${contexto.idEmpresa}`);
+                const data = await response.json();
+                console.log('Respuesta proveedores:', data);
+
+                let proveedores = [];
+                
+                // Manejar tanto ApiResponse como array directo
+                if (data.success && data.data) {
+                    proveedores = data.data;
+                } else if (Array.isArray(data)) {
+                    proveedores = data;
+                }
+
+                if (proveedores && proveedores.length > 0) {
+                    const select = document.getElementById('idProveedor');
+                    select.innerHTML = '<option value="">Seleccionar proveedor...</option>';
+                    proveedores.forEach(prov => {
+                        select.innerHTML += `<option value="${prov.idProveedor}">${prov.nombreComercial || prov.razonSocial}</option>`;
+                    });
+                    console.log('Proveedores cargados:', proveedores.length);
+                } else {
+                    console.warn('No hay proveedores:', data);
+                }
+            } catch (error) {
+                console.error('Error al cargar proveedores:', error);
+            }
+        }
+
+        async function cargarUnidadesMedida() {
+            try {
+                const response = await fetch(`${API_BASE}/unidades-medida`);
+                const data = await response.json();
+
+                if (data.success && data.data) {
+                    const select = document.getElementById('idUnidadMedida');
+                    select.innerHTML = '<option value="">Seleccionar unidad...</option>';
+                    data.data.forEach(unidad => {
+                        select.innerHTML += `<option value="${unidad.idUnidadMedida}">${unidad.nombreUnidad} (${unidad.abreviatura})</option>`;
+                    });
+                }
+            } catch (error) {
+                console.error('Error al cargar unidades de medida:', error);
+            }
+        }
+
+        // ============================================
+        // MOSTRAR DATOS EN TABLA
+        // ============================================
+
+        function mostrarProductos(productos) {
+            const tbody = document.getElementById('tablaProductos');
+            
+            if (productos.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">No hay productos registrados</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = productos.map(prod => `
+                <tr>
+                    <td class="px-6 py-4 text-sm text-gray-900">${prod.idProducto}</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 font-medium">${prod.nombreProducto}</td>
+                    <td class="px-6 py-4 text-sm text-gray-600">${prod.nombreCategoria || 'N/A'}</td>
+                    <td class="px-6 py-4 text-sm text-gray-600">${prod.nombreMarca || 'N/A'}</td>
+                    <td class="px-6 py-4 text-sm">
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold ${prod.stock > 10 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                            ${prod.stock || 0}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-sm space-x-2">
+                        <button onclick="editarProducto(${prod.idProducto})" class="text-blue-600 hover:text-blue-900 font-semibold">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                        <button onclick="eliminarProducto(${prod.idProducto})" class="text-red-600 hover:text-red-900 font-semibold">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function mostrarErrorTabla(mensaje) {
+            document.getElementById('tablaProductos').innerHTML = `
+                <tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">${mensaje}</td></tr>
+            `;
+        }
+
+        // ============================================
+        // CRUD PRODUCTOS
+        // ============================================
+
+        function abrirModalNuevoProducto() {
+            idProductoEditar = null;
+            document.getElementById('tituloModal').textContent = 'Nuevo Producto';
+            document.getElementById('formProducto').reset();
+            
+            // Recargar dropdowns para mostrar categorías/marcas recién creadas
+            cargarCategorias();
+            cargarMarcas();
+            cargarMateriales();
+            cargarProveedores();
+            cargarUnidadesMedida();
+            
+            document.getElementById('modalProducto').classList.remove('hidden');
+        }
+
+        async function editarProducto(idProducto) {
+            try {
+                const response = await fetch(`${API_BASE}/productos/${idProducto}`);
+                const data = await response.json();
+
+                if (data.success && data.data) {
+                    const prod = data.data;
+                    idProductoEditar = idProducto;
+                    document.getElementById('tituloModal').textContent = 'Editar Producto';
+                    document.getElementById('nombreProducto').value = prod.nombreProducto;
+                    document.getElementById('idCategoria').value = prod.idCategoria || '';
+                    document.getElementById('idUnidadMedida').value = prod.idUnidadMedida || '';
+                    document.getElementById('idMarca').value = prod.idMarca || '';
+                    document.getElementById('idProveedor').value = prod.idProveedor || '';
+                    document.getElementById('descripcion').value = prod.descripcion || '';
+                    document.getElementById('pesoGramos').value = prod.pesoGramos || '';
+                    document.getElementById('dimensiones').value = prod.dimensiones || '';
+                    document.getElementById('idMaterial').value = prod.idMaterial || '';
+                    
+                    document.getElementById('modalProducto').classList.remove('hidden');
+                }
+            } catch (error) {
+                alert('Error al cargar el producto');
+                console.error(error);
+            }
+        }
+
+        document.getElementById('formProducto').onsubmit = async (e) => {
+            e.preventDefault();
+
+            const contexto = obtenerContexto();
+            const producto = {
+                idEmpresa: contexto.idEmpresa,
+                nombreProducto: document.getElementById('nombreProducto').value,
+                descripcion: document.getElementById('descripcion').value,
+                idCategoria: parseInt(document.getElementById('idCategoria').value),
+                idUnidadMedida: parseInt(document.getElementById('idUnidadMedida').value),
+                idMarca: document.getElementById('idMarca').value ? parseInt(document.getElementById('idMarca').value) : null,
+                idProveedor: document.getElementById('idProveedor').value ? parseInt(document.getElementById('idProveedor').value) : null,
+                pesoGramos: document.getElementById('pesoGramos').value ? parseInt(document.getElementById('pesoGramos').value) : null,
+                dimensiones: document.getElementById('dimensiones').value,
+                idMaterial: document.getElementById('idMaterial').value ? parseInt(document.getElementById('idMaterial').value) : null
+            };
+
+            try {
+                let url = `${API_BASE}/productos`;
+                let metodo = 'POST';
+
+                if (idProductoEditar) {
+                    url += `/${idProductoEditar}`;
+                    metodo = 'PUT';
+                }
+
+                const response = await fetch(url, {
+                    method: metodo,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(producto)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert(idProductoEditar ? 'Producto actualizado correctamente' : 'Producto creado correctamente');
+                    cerrarModalProducto();
+                    await cargarProductos();
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            } catch (error) {
+                alert('Error al guardar el producto');
+                console.error(error);
+            }
+        };
+
+        async function eliminarProducto(idProducto) {
+            if (!confirm('¿Estás seguro de que deseas eliminar este producto?')) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/productos/${idProducto}`, {
+                    method: 'DELETE'
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Producto eliminado correctamente');
+                    await cargarProductos();
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            } catch (error) {
+                alert('Error al eliminar el producto');
+                console.error(error);
+            }
+        }
+
+        function cerrarModalProducto() {
+            document.getElementById('modalProducto').classList.add('hidden');
+            document.getElementById('formProducto').reset();
+            idProductoEditar = null;
+        }
+    </script>
+
+</body>
+
+</html>

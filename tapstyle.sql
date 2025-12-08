@@ -1,11 +1,8 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
+-- Versión 5.2.1
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-12-2025 a las 20:39:01
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Base de datos: `tapstyle`
+-- Tiempo de generación: 06-12-2025
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,15 +15,25 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `tapstyle`
+-- Nota de Corrección: Se eliminaron las tablas duplicadas (ej. `categorias_producto`, `marcas_producto`, etc.) 
+-- y se reasignaron todas las referencias (`FOREIGN KEY`) a las tablas principales.
 --
+
+--
+-- Eliminación de tablas duplicadas o redundantes para evitar conflictos
+--
+DROP TABLE IF EXISTS `variantes_producto`;
+DROP TABLE IF EXISTS `unidades_medida`;
+DROP TABLE IF EXISTS `tipo_documento`;
+DROP TABLE IF EXISTS `materiales_producto`;
+DROP TABLE IF EXISTS `marcas_producto`;
+DROP TABLE IF EXISTS `categorias_producto`;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `almacenes`
 --
-
 CREATE TABLE `almacenes` (
   `id_almacen` int(11) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -37,7 +44,6 @@ CREATE TABLE `almacenes` (
 --
 -- Volcado de datos para la tabla `almacenes`
 --
-
 INSERT INTO `almacenes` (`id_almacen`, `id_empresa`, `nombre_almacen`, `ubicacion`) VALUES
 (1, 1, 'Almacén Central GE', 'Jr. Warehouse #100'),
 (2, 1, 'Almacén Secundario GE', 'Av. Segunda #200');
@@ -47,7 +53,6 @@ INSERT INTO `almacenes` (`id_almacen`, `id_empresa`, `nombre_almacen`, `ubicacio
 --
 -- Estructura de tabla para la tabla `aperturascaja`
 --
-
 CREATE TABLE `aperturascaja` (
   `id_apertura` bigint(20) NOT NULL,
   `id_caja` int(11) NOT NULL,
@@ -62,7 +67,6 @@ CREATE TABLE `aperturascaja` (
 --
 -- Estructura de tabla para la tabla `bitacora`
 --
-
 CREATE TABLE `bitacora` (
   `id_bitacora` bigint(20) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
@@ -77,7 +81,6 @@ CREATE TABLE `bitacora` (
 --
 -- Estructura de tabla para la tabla `cajas`
 --
-
 CREATE TABLE `cajas` (
   `id_caja` int(11) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -91,7 +94,6 @@ CREATE TABLE `cajas` (
 --
 -- Estructura de tabla para la tabla `categoriasproducto`
 --
-
 CREATE TABLE `categoriasproducto` (
   `id_categoria` int(11) NOT NULL,
   `nombre_categoria` varchar(50) NOT NULL,
@@ -101,7 +103,6 @@ CREATE TABLE `categoriasproducto` (
 --
 -- Volcado de datos para la tabla `categoriasproducto`
 --
-
 INSERT INTO `categoriasproducto` (`id_categoria`, `nombre_categoria`, `descripcion`) VALUES
 (1, 'Camisetas', 'Camisetas varias'),
 (2, 'Pantalones', 'Pantalones varias'),
@@ -110,21 +111,8 @@ INSERT INTO `categoriasproducto` (`id_categoria`, `nombre_categoria`, `descripci
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categorias_producto`
---
-
-CREATE TABLE `categorias_producto` (
-  `id_categoria` int(11) NOT NULL,
-  `descripcion` varchar(255) DEFAULT NULL,
-  `nombre_categoria` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `cierrescaja`
 --
-
 CREATE TABLE `cierrescaja` (
   `id_cierre` bigint(20) NOT NULL,
   `id_apertura` bigint(20) NOT NULL,
@@ -143,7 +131,6 @@ CREATE TABLE `cierrescaja` (
 --
 -- Estructura de tabla para la tabla `clientes`
 --
-
 CREATE TABLE `clientes` (
   `id_cliente` int(11) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
@@ -163,7 +150,6 @@ CREATE TABLE `clientes` (
 --
 -- Estructura de tabla para la tabla `comprobantespago`
 --
-
 CREATE TABLE `comprobantespago` (
   `id_comprobante` bigint(20) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -184,7 +170,6 @@ CREATE TABLE `comprobantespago` (
 --
 -- Estructura de tabla para la tabla `detallescomprobantepago`
 --
-
 CREATE TABLE `detallescomprobantepago` (
   `id_detalle_comprobante` bigint(20) NOT NULL,
   `id_comprobante` bigint(20) NOT NULL,
@@ -200,7 +185,6 @@ CREATE TABLE `detallescomprobantepago` (
 --
 -- Estructura de tabla para la tabla `detallespedidocompra`
 --
-
 CREATE TABLE `detallespedidocompra` (
   `id_detalle_pedido` bigint(20) NOT NULL,
   `id_pedido_compra` bigint(20) NOT NULL,
@@ -216,7 +200,6 @@ CREATE TABLE `detallespedidocompra` (
 --
 -- Estructura de tabla para la tabla `empresamodulos`
 --
-
 CREATE TABLE `empresamodulos` (
   `id_empresa` int(11) NOT NULL,
   `id_modulo` int(11) NOT NULL,
@@ -230,7 +213,6 @@ CREATE TABLE `empresamodulos` (
 --
 -- Estructura de tabla para la tabla `empresas`
 --
-
 CREATE TABLE `empresas` (
   `id_empresa` int(11) NOT NULL,
   `nombre_tienda` varchar(100) NOT NULL,
@@ -244,12 +226,11 @@ CREATE TABLE `empresas` (
   `estado` bit(1) NOT NULL,
   `modulos_activos` text DEFAULT NULL,
   `plan_id` bigint(20) DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `empresas`
 --
-
 INSERT INTO `empresas` (`id_empresa`, `nombre_tienda`, `ruc_empresa`, `direccion_legal`, `telefono`, `email_contacto`, `fecha_registro`, `estado_aprobacion`, `tasa_comision`, `estado`, `modulos_activos`, `plan_id`) VALUES
 (1, 'TapStyle - Gentle Elegance', '20123456789', 'Jr. Fashion #101, Lima, Perú', '987654321', 'info@tapstyle-ge.com', '2025-12-01 07:02:00', 'Suspendida', 0.15, b'0', NULL, NULL),
 (2, 'TapStyle - Glamour Time', '20987654321', 'Av. Style #202, Lima, Perú', '987654322', 'info@tapstyle-gt.com', '2025-12-01 07:02:00', 'Aprobada', 0.15, b'0', NULL, NULL),
@@ -263,7 +244,6 @@ INSERT INTO `empresas` (`id_empresa`, `nombre_tienda`, `ruc_empresa`, `direccion
 --
 -- Estructura de tabla para la tabla `facturascomision`
 --
-
 CREATE TABLE `facturascomision` (
   `id_factura_comision` bigint(20) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -278,14 +258,13 @@ CREATE TABLE `facturascomision` (
   `estado` varchar(20) NOT NULL DEFAULT 'Pendiente',
   `fecha_pago` datetime DEFAULT NULL,
   `metodo_pago` varchar(50) DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `facturassuscripcion`
 --
-
 CREATE TABLE `facturassuscripcion` (
   `id_factura_suscripcion` bigint(20) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -299,14 +278,13 @@ CREATE TABLE `facturassuscripcion` (
   `estado` varchar(20) NOT NULL DEFAULT 'Pendiente',
   `fecha_pago` datetime DEFAULT NULL,
   `metodo_pago` varchar(50) DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `inventario`
 --
-
 CREATE TABLE `inventario` (
   `id_inventario` int(11) NOT NULL,
   `id_variante` int(11) NOT NULL,
@@ -321,7 +299,6 @@ CREATE TABLE `inventario` (
 --
 -- Estructura de tabla para la tabla `marcasproducto`
 --
-
 CREATE TABLE `marcasproducto` (
   `id_marca` int(11) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -331,7 +308,6 @@ CREATE TABLE `marcasproducto` (
 --
 -- Volcado de datos para la tabla `marcasproducto`
 --
-
 INSERT INTO `marcasproducto` (`id_marca`, `id_empresa`, `nombre_marca`) VALUES
 (2, 1, 'Adidas'),
 (1, 1, 'Nike'),
@@ -346,21 +322,8 @@ INSERT INTO `marcasproducto` (`id_marca`, `id_empresa`, `nombre_marca`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `marcas_producto`
---
-
-CREATE TABLE `marcas_producto` (
-  `id_marca` int(11) NOT NULL,
-  `nombre_marca` varchar(50) NOT NULL,
-  `id_empresa` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `materialesproducto`
 --
-
 CREATE TABLE `materialesproducto` (
   `id_material` int(11) NOT NULL,
   `nombre_material` varchar(100) NOT NULL
@@ -369,7 +332,6 @@ CREATE TABLE `materialesproducto` (
 --
 -- Volcado de datos para la tabla `materialesproducto`
 --
-
 INSERT INTO `materialesproducto` (`id_material`, `nombre_material`) VALUES
 (1, 'Algodón'),
 (3, 'Cuero'),
@@ -382,20 +344,8 @@ INSERT INTO `materialesproducto` (`id_material`, `nombre_material`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `materiales_producto`
---
-
-CREATE TABLE `materiales_producto` (
-  `id_material` int(11) NOT NULL,
-  `nombre_material` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `modelos`
 --
-
 CREATE TABLE `modelos` (
   `id_modelo` int(11) NOT NULL,
   `nombre_modelo` varchar(100) NOT NULL,
@@ -408,7 +358,6 @@ CREATE TABLE `modelos` (
 --
 -- Estructura de tabla para la tabla `modulosistema`
 --
-
 CREATE TABLE `modulosistema` (
   `id_modulo` int(11) NOT NULL,
   `nombre_modulo` varchar(50) NOT NULL,
@@ -421,7 +370,6 @@ CREATE TABLE `modulosistema` (
 --
 -- Volcado de datos para la tabla `modulosistema`
 --
-
 INSERT INTO `modulosistema` (`id_modulo`, `nombre_modulo`, `descripcion`, `icono`, `orden_menu`, `estado`) VALUES
 (1, 'DASHBOARD', 'Panel principal', 'fas fa-chart-pie', 1, 1),
 (2, 'CATALOGO', 'Gestión de productos', 'fas fa-box', 2, 1),
@@ -434,7 +382,6 @@ INSERT INTO `modulosistema` (`id_modulo`, `nombre_modulo`, `descripcion`, `icono
 --
 -- Estructura de tabla para la tabla `movimientoscaja`
 --
-
 CREATE TABLE `movimientoscaja` (
   `id_movimiento_caja` bigint(20) NOT NULL,
   `id_caja` int(11) NOT NULL,
@@ -451,7 +398,6 @@ CREATE TABLE `movimientoscaja` (
 --
 -- Estructura de tabla para la tabla `movimientosinventario`
 --
-
 CREATE TABLE `movimientosinventario` (
   `id_movimiento_inv` bigint(20) NOT NULL,
   `id_variante` int(11) NOT NULL,
@@ -469,7 +415,6 @@ CREATE TABLE `movimientosinventario` (
 --
 -- Estructura de tabla para la tabla `pagoscomprobante`
 --
-
 CREATE TABLE `pagoscomprobante` (
   `id_pago` bigint(20) NOT NULL,
   `id_comprobante` bigint(20) NOT NULL,
@@ -483,7 +428,6 @@ CREATE TABLE `pagoscomprobante` (
 --
 -- Estructura de tabla para la tabla `pagosempresaatapstyle`
 --
-
 CREATE TABLE `pagosempresaatapstyle` (
   `id_pago` bigint(20) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -495,14 +439,13 @@ CREATE TABLE `pagosempresaatapstyle` (
   `metodo_pago` varchar(50) NOT NULL,
   `referencia_pago` varchar(100) DEFAULT NULL,
   `comprobante_pago` varchar(255) DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `pedidoscompra`
 --
-
 CREATE TABLE `pedidoscompra` (
   `id_pedido_compra` bigint(20) NOT NULL,
   `id_proveedor` int(11) NOT NULL,
@@ -518,7 +461,6 @@ CREATE TABLE `pedidoscompra` (
 --
 -- Estructura de tabla para la tabla `permisos`
 --
-
 CREATE TABLE `permisos` (
   `id_permiso` int(11) NOT NULL,
   `nombre_permiso` varchar(100) NOT NULL,
@@ -528,7 +470,6 @@ CREATE TABLE `permisos` (
 --
 -- Volcado de datos para la tabla `permisos`
 --
-
 INSERT INTO `permisos` (`id_permiso`, `nombre_permiso`, `descripcion`) VALUES
 (1, 'CREAR_EMPRESA', 'Permiso para crear nuevas empresas'),
 (2, 'EDITAR_EMPRESA', 'Permiso para editar información de empresa'),
@@ -552,7 +493,6 @@ INSERT INTO `permisos` (`id_permiso`, `nombre_permiso`, `descripcion`) VALUES
 --
 -- Estructura de tabla para la tabla `planes`
 --
-
 CREATE TABLE `planes` (
   `id_plan` bigint(20) NOT NULL,
   `nombre_plan` varchar(255) NOT NULL,
@@ -565,7 +505,6 @@ CREATE TABLE `planes` (
 --
 -- Volcado de datos para la tabla `planes`
 --
-
 INSERT INTO `planes` (`id_plan`, `nombre_plan`, `precio_mensual`, `comision_adicional`, `descripcion`, `estado`) VALUES
 (1, 'Básico', 199.00, 0.02, 'Emprendedores', 1),
 (2, 'Premium', 399.00, 0.02, 'Crecimiento', 1),
@@ -576,7 +515,6 @@ INSERT INTO `planes` (`id_plan`, `nombre_plan`, `precio_mensual`, `comision_adic
 --
 -- Estructura de tabla para la tabla `plan_modulos`
 --
-
 CREATE TABLE `plan_modulos` (
   `id_plan` bigint(20) NOT NULL,
   `id_modulo` int(11) NOT NULL,
@@ -586,7 +524,6 @@ CREATE TABLE `plan_modulos` (
 --
 -- Volcado de datos para la tabla `plan_modulos`
 --
-
 INSERT INTO `plan_modulos` (`id_plan`, `id_modulo`, `incluido`) VALUES
 (1, 1, 1),
 (1, 2, 1),
@@ -605,7 +542,6 @@ INSERT INTO `plan_modulos` (`id_plan`, `id_modulo`, `incluido`) VALUES
 --
 -- Estructura de tabla para la tabla `productos`
 --
-
 CREATE TABLE `productos` (
   `id_producto` int(11) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -626,7 +562,6 @@ CREATE TABLE `productos` (
 --
 -- Estructura de tabla para la tabla `proveedores`
 --
-
 CREATE TABLE `proveedores` (
   `id_proveedor` int(11) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -642,7 +577,6 @@ CREATE TABLE `proveedores` (
 --
 -- Volcado de datos para la tabla `proveedores`
 --
-
 INSERT INTO `proveedores` (`id_proveedor`, `id_empresa`, `razon_social`, `nombre_comercial`, `ruc`, `rubro`, `direccion`, `telefono`, `email`) VALUES
 (1, 5, 'Distribuidor Premium SPA', 'Premium', '20123456700', 'Textil', 'Jr. Industrial #500', '987000001', 'proveedor@premium.com');
 
@@ -651,7 +585,6 @@ INSERT INTO `proveedores` (`id_proveedor`, `id_empresa`, `razon_social`, `nombre
 --
 -- Estructura de tabla para la tabla `proveedor_metodospago`
 --
-
 CREATE TABLE `proveedor_metodospago` (
   `id_proveedor` int(11) NOT NULL,
   `id_tipopago` int(11) NOT NULL,
@@ -663,7 +596,6 @@ CREATE TABLE `proveedor_metodospago` (
 --
 -- Estructura de tabla para la tabla `roles`
 --
-
 CREATE TABLE `roles` (
   `id_rol` int(11) NOT NULL,
   `nombre_rol` varchar(50) NOT NULL,
@@ -674,7 +606,6 @@ CREATE TABLE `roles` (
 --
 -- Volcado de datos para la tabla `roles`
 --
-
 INSERT INTO `roles` (`id_rol`, `nombre_rol`, `estado`, `descripcion`) VALUES
 (1, 'SuperAdmin', 1, 'Administrador del sistema con acceso total'),
 (2, 'Admin', 1, 'Administrador de empresa con control completo'),
@@ -687,7 +618,6 @@ INSERT INTO `roles` (`id_rol`, `nombre_rol`, `estado`, `descripcion`) VALUES
 --
 -- Estructura de tabla para la tabla `rol_permisos`
 --
-
 CREATE TABLE `rol_permisos` (
   `id_rol` int(11) NOT NULL,
   `id_permiso` int(11) NOT NULL
@@ -696,7 +626,6 @@ CREATE TABLE `rol_permisos` (
 --
 -- Volcado de datos para la tabla `rol_permisos`
 --
-
 INSERT INTO `rol_permisos` (`id_rol`, `id_permiso`) VALUES
 (1, 1),
 (1, 2),
@@ -741,7 +670,6 @@ INSERT INTO `rol_permisos` (`id_rol`, `id_permiso`) VALUES
 --
 -- Estructura de tabla para la tabla `suscripcionesempresa`
 --
-
 CREATE TABLE `suscripcionesempresa` (
   `id_suscripcion` bigint(20) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -751,12 +679,11 @@ CREATE TABLE `suscripcionesempresa` (
   `precio_acordado` decimal(38,2) NOT NULL,
   `estado` varchar(255) NOT NULL,
   `fecha_creacion` datetime NOT NULL DEFAULT current_timestamp()
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `suscripcionesempresa`
 --
-
 INSERT INTO `suscripcionesempresa` (`id_suscripcion`, `id_empresa`, `id_plan`, `fecha_inicio`, `fecha_vencimiento`, `precio_acordado`, `estado`, `fecha_creacion`) VALUES
 (4, 122, 1, '2025-12-06', '2026-01-06', 199.00, 'Pagado', '2025-12-06 17:06:30'),
 (6, 122, 1, '2025-12-06', '2026-01-06', 199.00, 'Activa', '2025-12-06 19:35:22');
@@ -766,7 +693,6 @@ INSERT INTO `suscripcionesempresa` (`id_suscripcion`, `id_empresa`, `id_plan`, `
 --
 -- Estructura de tabla para la tabla `tipodocumento`
 --
-
 CREATE TABLE `tipodocumento` (
   `id_tipodocumento` int(11) NOT NULL,
   `nombre_tipodocumento` varchar(50) NOT NULL
@@ -775,7 +701,6 @@ CREATE TABLE `tipodocumento` (
 --
 -- Volcado de datos para la tabla `tipodocumento`
 --
-
 INSERT INTO `tipodocumento` (`id_tipodocumento`, `nombre_tipodocumento`) VALUES
 (1, 'DNI'),
 (4, 'Licencia'),
@@ -788,7 +713,6 @@ INSERT INTO `tipodocumento` (`id_tipodocumento`, `nombre_tipodocumento`) VALUES
 --
 -- Estructura de tabla para la tabla `tiposcomprobantepago`
 --
-
 CREATE TABLE `tiposcomprobantepago` (
   `id_tipo_comprobante` int(11) NOT NULL,
   `nombre_tipo` varchar(50) NOT NULL,
@@ -800,7 +724,6 @@ CREATE TABLE `tiposcomprobantepago` (
 --
 -- Estructura de tabla para la tabla `tiposmovimientoinventario`
 --
-
 CREATE TABLE `tiposmovimientoinventario` (
   `id_tipo_movimiento` int(11) NOT NULL,
   `nombre_tipo` varchar(50) NOT NULL,
@@ -812,7 +735,6 @@ CREATE TABLE `tiposmovimientoinventario` (
 --
 -- Estructura de tabla para la tabla `tipospago`
 --
-
 CREATE TABLE `tipospago` (
   `id_tipopago` int(11) NOT NULL,
   `tipo_pago` varchar(50) NOT NULL
@@ -823,7 +745,6 @@ CREATE TABLE `tipospago` (
 --
 -- Estructura de tabla para la tabla `tiposproducto`
 --
-
 CREATE TABLE `tiposproducto` (
   `id_tipo` int(11) NOT NULL,
   `nombre_tipo` varchar(50) NOT NULL
@@ -832,20 +753,8 @@ CREATE TABLE `tiposproducto` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipo_documento`
---
-
-CREATE TABLE `tipo_documento` (
-  `id_tipo_documento` int(11) NOT NULL,
-  `nombre_tipo_documento` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `unidadesmedida`
 --
-
 CREATE TABLE `unidadesmedida` (
   `id_unidad_medida` int(11) NOT NULL,
   `nombre_unidad` varchar(50) NOT NULL,
@@ -855,7 +764,6 @@ CREATE TABLE `unidadesmedida` (
 --
 -- Volcado de datos para la tabla `unidadesmedida`
 --
-
 INSERT INTO `unidadesmedida` (`id_unidad_medida`, `nombre_unidad`, `abreviatura`) VALUES
 (1, 'Unidad', 'UND'),
 (2, 'Docena', 'DOC'),
@@ -865,21 +773,8 @@ INSERT INTO `unidadesmedida` (`id_unidad_medida`, `nombre_unidad`, `abreviatura`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `unidades_medida`
---
-
-CREATE TABLE `unidades_medida` (
-  `id_unidad_medida` int(11) NOT NULL,
-  `abreviatura` varchar(10) DEFAULT NULL,
-  `nombre_unidad` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `usuarios`
 --
-
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `id_empresa` int(11) DEFAULT NULL,
@@ -901,7 +796,6 @@ CREATE TABLE `usuarios` (
 --
 -- Volcado de datos para la tabla `usuarios`
 --
-
 INSERT INTO `usuarios` (`id_usuario`, `id_empresa`, `id_rol`, `nombres`, `apellidos`, `id_tipodocumento`, `numero_documento`, `celular`, `direccion`, `username`, `email`, `contraseña_hash`, `estado`, `fecha_creacion`, `fecha_ultima_sesion`) VALUES
 (90, 5, 1, 'Santiago', 'Ponce', NULL, NULL, NULL, NULL, 'Santi', 'santi@tapstyle.com', '$2a$10$soeIL/AQhk.hY1Wxj3HP6uYxUpUD8LwUXR9wQFaVckHHHyqGlzjJK', 1, '2025-12-02 08:34:21', NULL),
 (535, 122, 2, 'Santiago', 'Ponce', NULL, NULL, NULL, NULL, 'san', 'san@gmail.com', '$2a$10$xsuOm.PDfXJV4vfjAC5pPuRtCed89EINIOW5JdhacoAOEuGSgHPFK', 1, '2025-12-06 04:16:46', NULL);
@@ -911,7 +805,6 @@ INSERT INTO `usuarios` (`id_usuario`, `id_empresa`, `id_rol`, `nombres`, `apelli
 --
 -- Estructura de tabla para la tabla `variantesproducto`
 --
-
 CREATE TABLE `variantesproducto` (
   `id_variante` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
@@ -920,22 +813,6 @@ CREATE TABLE `variantesproducto` (
   `color` varchar(50) NOT NULL,
   `precio_venta` decimal(10,2) NOT NULL,
   `costo_compra` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `variantes_producto`
---
-
-CREATE TABLE `variantes_producto` (
-  `id_variante` int(11) NOT NULL,
-  `codigo_sku` varchar(50) DEFAULT NULL,
-  `color` varchar(50) NOT NULL,
-  `costo_compra` decimal(10,2) DEFAULT NULL,
-  `precio_venta` decimal(10,2) NOT NULL,
-  `talla` varchar(10) NOT NULL,
-  `id_producto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -947,7 +824,8 @@ CREATE TABLE `variantes_producto` (
 --
 ALTER TABLE `almacenes`
   ADD PRIMARY KEY (`id_almacen`),
-  ADD UNIQUE KEY `UQ_Almacen_Empresa_Nombre` (`id_empresa`,`nombre_almacen`);
+  ADD UNIQUE KEY `UQ_Almacen_Empresa_Nombre` (`id_empresa`,`nombre_almacen`),
+  ADD KEY `FK_Almacenes_Empresas` (`id_empresa`);
 
 --
 -- Indices de la tabla `aperturascaja`
@@ -955,7 +833,8 @@ ALTER TABLE `almacenes`
 ALTER TABLE `aperturascaja`
   ADD PRIMARY KEY (`id_apertura`),
   ADD UNIQUE KEY `UQ_AperturaCaja_Caja_Fecha` (`id_caja`,`fecha_apertura`),
-  ADD KEY `FK_AperturasCaja_Usuarios` (`id_usuario`);
+  ADD KEY `FK_AperturasCaja_Usuarios` (`id_usuario`),
+  ADD KEY `FK_AperturasCaja_Cajas` (`id_caja`);
 
 --
 -- Indices de la tabla `bitacora`
@@ -969,7 +848,8 @@ ALTER TABLE `bitacora`
 --
 ALTER TABLE `cajas`
   ADD PRIMARY KEY (`id_caja`),
-  ADD UNIQUE KEY `UQ_Caja_Empresa_Nombre` (`id_empresa`,`nombre_caja`);
+  ADD UNIQUE KEY `UQ_Caja_Empresa_Nombre` (`id_empresa`,`nombre_caja`),
+  ADD KEY `FK_Cajas_Empresas` (`id_empresa`);
 
 --
 -- Indices de la tabla `categoriasproducto`
@@ -979,20 +859,14 @@ ALTER TABLE `categoriasproducto`
   ADD UNIQUE KEY `nombre_categoria` (`nombre_categoria`);
 
 --
--- Indices de la tabla `categorias_producto`
---
-ALTER TABLE `categorias_producto`
-  ADD PRIMARY KEY (`id_categoria`),
-  ADD UNIQUE KEY `UKmcbr69d02xjufpj340yprgug3` (`nombre_categoria`);
-
---
 -- Indices de la tabla `cierrescaja`
 --
 ALTER TABLE `cierrescaja`
   ADD PRIMARY KEY (`id_cierre`),
   ADD UNIQUE KEY `id_apertura` (`id_apertura`),
   ADD KEY `FK_CierresCaja_Cajas` (`id_caja`),
-  ADD KEY `FK_CierresCaja_Usuarios` (`id_usuario`);
+  ADD KEY `FK_CierresCaja_Usuarios` (`id_usuario`),
+  ADD KEY `FK_CierresCaja_Aperturas` (`id_apertura`);
 
 --
 -- Indices de la tabla `clientes`
@@ -1000,7 +874,9 @@ ALTER TABLE `cierrescaja`
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id_cliente`),
   ADD UNIQUE KEY `id_usuario` (`id_usuario`),
-  ADD UNIQUE KEY `UQ_Clientes_Documento` (`id_tipodocumento`,`numero_documento`);
+  ADD UNIQUE KEY `UQ_Clientes_Documento` (`id_tipodocumento`,`numero_documento`),
+  ADD KEY `FK_Clientes_TipoDocumento` (`id_tipodocumento`),
+  ADD KEY `FK_Clientes_Usuarios` (`id_usuario`);
 
 --
 -- Indices de la tabla `comprobantespago`
@@ -1010,7 +886,8 @@ ALTER TABLE `comprobantespago`
   ADD UNIQUE KEY `UQ_Comprobante_Tipo_Numero` (`id_tipo_comprobante`,`numero_comprobante`),
   ADD KEY `FK_Comprobantes_Empresas` (`id_empresa`),
   ADD KEY `FK_Comprobantes_Clientes` (`id_cliente`),
-  ADD KEY `FK_Comprobantes_Usuarios` (`id_usuario`);
+  ADD KEY `FK_Comprobantes_Usuarios` (`id_usuario`),
+  ADD KEY `FK_Comprobantes_TiposComprobante` (`id_tipo_comprobante`);
 
 --
 -- Indices de la tabla `detallescomprobantepago`
@@ -1026,14 +903,16 @@ ALTER TABLE `detallescomprobantepago`
 ALTER TABLE `detallespedidocompra`
   ADD PRIMARY KEY (`id_detalle_pedido`),
   ADD UNIQUE KEY `UQ_DetallePedido_Pedido_Variante` (`id_pedido_compra`,`id_variante`),
-  ADD KEY `FK_DetallesPedidoCompra_Variantes` (`id_variante`);
+  ADD KEY `FK_DetallesPedidoCompra_Variantes` (`id_variante`),
+  ADD KEY `FK_DetallesPedidoCompra_Pedidos` (`id_pedido_compra`);
 
 --
 -- Indices de la tabla `empresamodulos`
 --
 ALTER TABLE `empresamodulos`
   ADD PRIMARY KEY (`id_empresa`,`id_modulo`),
-  ADD KEY `FK_EmpresaModulos_Modulos` (`id_modulo`);
+  ADD KEY `FK_EmpresaModulos_Modulos` (`id_modulo`),
+  ADD KEY `FK_EmpresaModulos_Empresas` (`id_empresa`);
 
 --
 -- Indices de la tabla `empresas`
@@ -1066,21 +945,16 @@ ALTER TABLE `facturassuscripcion`
 ALTER TABLE `inventario`
   ADD PRIMARY KEY (`id_inventario`),
   ADD UNIQUE KEY `UQ_Inventario_Variante_Almacen` (`id_variante`,`id_almacen`),
-  ADD KEY `FK_Inventario_Almacenes` (`id_almacen`);
+  ADD KEY `FK_Inventario_Almacenes` (`id_almacen`),
+  ADD KEY `FK_Inventario_Variantes` (`id_variante`); -- Corregido: Referencia a variantesproducto
 
 --
 -- Indices de la tabla `marcasproducto`
 --
 ALTER TABLE `marcasproducto`
   ADD PRIMARY KEY (`id_marca`),
-  ADD UNIQUE KEY `UQ_Marca_Empresa` (`id_empresa`,`nombre_marca`);
-
---
--- Indices de la tabla `marcas_producto`
---
-ALTER TABLE `marcas_producto`
-  ADD PRIMARY KEY (`id_marca`),
-  ADD KEY `FKk8xy23fxsuyax3m4qxb6qmmfl` (`id_empresa`);
+  ADD UNIQUE KEY `UQ_Marca_Empresa` (`id_empresa`,`nombre_marca`),
+  ADD KEY `FK_Marcas_Empresas` (`id_empresa`);
 
 --
 -- Indices de la tabla `materialesproducto`
@@ -1090,18 +964,11 @@ ALTER TABLE `materialesproducto`
   ADD UNIQUE KEY `nombre_material` (`nombre_material`);
 
 --
--- Indices de la tabla `materiales_producto`
---
-ALTER TABLE `materiales_producto`
-  ADD PRIMARY KEY (`id_material`),
-  ADD UNIQUE KEY `UKaj2ue3y5333niyqhh6rs455wm` (`nombre_material`);
-
---
 -- Indices de la tabla `modelos`
 --
 ALTER TABLE `modelos`
   ADD PRIMARY KEY (`id_modelo`),
-  ADD KEY `FKtk8ky65qstmm0fblw2edmvmdc` (`id_marca`);
+  ADD KEY `FK_Modelos_Marcas` (`id_marca`);
 
 --
 -- Indices de la tabla `modulosistema`
@@ -1172,8 +1039,8 @@ ALTER TABLE `planes`
 --
 ALTER TABLE `plan_modulos`
   ADD PRIMARY KEY (`id_plan`,`id_modulo`),
-  ADD KEY `FK_PM_Plan` (`id_plan`),
-  ADD KEY `FK_PM_Modulo` (`id_modulo`);
+  ADD KEY `FK_PM_Modulo` (`id_modulo`),
+  ADD KEY `FK_PM_Plan` (`id_plan`);
 
 --
 -- Indices de la tabla `productos`
@@ -1183,24 +1050,27 @@ ALTER TABLE `productos`
   ADD UNIQUE KEY `UQ_Producto_Empresa_Nombre` (`id_empresa`,`nombre_producto`),
   ADD KEY `FK_Productos_Proveedores` (`id_proveedor`),
   ADD KEY `FK_Productos_Modelos` (`id_modelo`),
-  ADD KEY `FKqw5albhkktmfevctb70myb2nu` (`id_categoria`),
-  ADD KEY `FK49ujfbhnof23vb139e32moykv` (`id_marca`),
-  ADD KEY `FKae60lm3eg086ycu7ckwflwu5w` (`id_material`),
-  ADD KEY `FKj8sxarjjajqepr387tvy0el2o` (`id_unidad_medida`);
+  ADD KEY `FK_Productos_Categorias` (`id_categoria`),
+  ADD KEY `FK_Productos_Marcas` (`id_marca`),
+  ADD KEY `FK_Productos_Materiales` (`id_material`),
+  ADD KEY `FK_Productos_UnidadesMedida` (`id_unidad_medida`),
+  ADD KEY `FK_Productos_Empresas` (`id_empresa`);
 
 --
 -- Indices de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
   ADD PRIMARY KEY (`id_proveedor`),
-  ADD UNIQUE KEY `UQ_Proveedor_Empresa_RUC` (`id_empresa`,`ruc`);
+  ADD UNIQUE KEY `UQ_Proveedor_Empresa_RUC` (`id_empresa`,`ruc`),
+  ADD KEY `FK_Proveedores_Empresas` (`id_empresa`);
 
 --
 -- Indices de la tabla `proveedor_metodospago`
 --
 ALTER TABLE `proveedor_metodospago`
   ADD PRIMARY KEY (`id_proveedor`,`id_tipopago`),
-  ADD KEY `FK_ProvMetodos_TipoPago` (`id_tipopago`);
+  ADD KEY `FK_ProvMetodos_TipoPago` (`id_tipopago`),
+  ADD KEY `FK_ProvMetodos_Proveedor` (`id_proveedor`);
 
 --
 -- Indices de la tabla `roles`
@@ -1214,7 +1084,8 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `rol_permisos`
   ADD PRIMARY KEY (`id_rol`,`id_permiso`),
-  ADD KEY `FK_RolPermisos_Permisos` (`id_permiso`);
+  ADD KEY `FK_RolPermisos_Permisos` (`id_permiso`),
+  ADD KEY `FK_RolPermisos_Roles` (`id_rol`);
 
 --
 -- Indices de la tabla `suscripcionesempresa`
@@ -1222,7 +1093,8 @@ ALTER TABLE `rol_permisos`
 ALTER TABLE `suscripcionesempresa`
   ADD PRIMARY KEY (`id_suscripcion`),
   ADD KEY `FK_Suscripciones_Empresas` (`id_empresa`),
-  ADD KEY `IDX_Suscripciones_Planes` (`id_plan`);
+  ADD KEY `IDX_Suscripciones_Planes` (`id_plan`),
+  ADD KEY `FK_Suscripciones_Planes` (`id_plan`);
 
 --
 -- Indices de la tabla `tipodocumento`
@@ -1260,25 +1132,11 @@ ALTER TABLE `tiposproducto`
   ADD UNIQUE KEY `nombre_tipo` (`nombre_tipo`);
 
 --
--- Indices de la tabla `tipo_documento`
---
-ALTER TABLE `tipo_documento`
-  ADD PRIMARY KEY (`id_tipo_documento`),
-  ADD UNIQUE KEY `UKrum685a08qpwjhd2ilps9ugur` (`nombre_tipo_documento`);
-
---
 -- Indices de la tabla `unidadesmedida`
 --
 ALTER TABLE `unidadesmedida`
   ADD PRIMARY KEY (`id_unidad_medida`),
   ADD UNIQUE KEY `nombre_unidad` (`nombre_unidad`);
-
---
--- Indices de la tabla `unidades_medida`
---
-ALTER TABLE `unidades_medida`
-  ADD PRIMARY KEY (`id_unidad_medida`),
-  ADD UNIQUE KEY `UK9csr83j77r49hor8sbs2513i6` (`nombre_unidad`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -1289,7 +1147,8 @@ ALTER TABLE `usuarios`
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `UQ_Usuarios_Documento` (`id_tipodocumento`,`numero_documento`),
   ADD KEY `FK_Usuarios_Empresas` (`id_empresa`),
-  ADD KEY `FK_Usuarios_Roles` (`id_rol`);
+  ADD KEY `FK_Usuarios_Roles` (`id_rol`),
+  ADD KEY `FK_Usuarios_TipoDocumento` (`id_tipodocumento`);
 
 --
 -- Indices de la tabla `variantesproducto`
@@ -1297,279 +1156,125 @@ ALTER TABLE `usuarios`
 ALTER TABLE `variantesproducto`
   ADD PRIMARY KEY (`id_variante`),
   ADD UNIQUE KEY `UQ_Variante_Producto_Talla_Color` (`id_producto`,`talla`,`color`),
-  ADD UNIQUE KEY `codigo_sku` (`codigo_sku`);
-
---
--- Indices de la tabla `variantes_producto`
---
-ALTER TABLE `variantes_producto`
-  ADD PRIMARY KEY (`id_variante`),
-  ADD UNIQUE KEY `UKe5v7iei67jdeiq68k2fdp021o` (`codigo_sku`);
+  ADD UNIQUE KEY `codigo_sku` (`codigo_sku`),
+  ADD KEY `FK_Variantes_Productos` (`id_producto`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
-
---
--- AUTO_INCREMENT de la tabla `almacenes`
---
 ALTER TABLE `almacenes`
   MODIFY `id_almacen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
---
--- AUTO_INCREMENT de la tabla `aperturascaja`
---
 ALTER TABLE `aperturascaja`
   MODIFY `id_apertura` bigint(20) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `bitacora`
---
 ALTER TABLE `bitacora`
   MODIFY `id_bitacora` bigint(20) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `cajas`
---
 ALTER TABLE `cajas`
   MODIFY `id_caja` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `categoriasproducto`
---
 ALTER TABLE `categoriasproducto`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
---
--- AUTO_INCREMENT de la tabla `categorias_producto`
---
-ALTER TABLE `categorias_producto`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `cierrescaja`
---
 ALTER TABLE `cierrescaja`
   MODIFY `id_cierre` bigint(20) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `clientes`
---
 ALTER TABLE `clientes`
   MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
---
--- AUTO_INCREMENT de la tabla `comprobantespago`
---
 ALTER TABLE `comprobantespago`
   MODIFY `id_comprobante` bigint(20) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `detallescomprobantepago`
---
 ALTER TABLE `detallescomprobantepago`
   MODIFY `id_detalle_comprobante` bigint(20) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `detallespedidocompra`
---
 ALTER TABLE `detallespedidocompra`
   MODIFY `id_detalle_pedido` bigint(20) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `empresas`
---
 ALTER TABLE `empresas`
-  MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
---
--- AUTO_INCREMENT de la tabla `facturascomision`
---
 ALTER TABLE `facturascomision`
   MODIFY `id_factura_comision` bigint(20) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `facturassuscripcion`
---
 ALTER TABLE `facturassuscripcion`
   MODIFY `id_factura_suscripcion` bigint(20) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `inventario`
---
 ALTER TABLE `inventario`
   MODIFY `id_inventario` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `marcasproducto`
---
 ALTER TABLE `marcasproducto`
   MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=413;
 
---
--- AUTO_INCREMENT de la tabla `marcas_producto`
---
-ALTER TABLE `marcas_producto`
-  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `materialesproducto`
---
 ALTER TABLE `materialesproducto`
   MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=323;
 
---
--- AUTO_INCREMENT de la tabla `materiales_producto`
---
-ALTER TABLE `materiales_producto`
-  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `modelos`
---
 ALTER TABLE `modelos`
   MODIFY `id_modelo` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `modulosistema`
---
 ALTER TABLE `modulosistema`
   MODIFY `id_modulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
---
--- AUTO_INCREMENT de la tabla `movimientoscaja`
---
 ALTER TABLE `movimientoscaja`
   MODIFY `id_movimiento_caja` bigint(20) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `movimientosinventario`
---
 ALTER TABLE `movimientosinventario`
   MODIFY `id_movimiento_inv` bigint(20) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `pagoscomprobante`
---
 ALTER TABLE `pagoscomprobante`
   MODIFY `id_pago` bigint(20) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `pagosempresaatapstyle`
---
 ALTER TABLE `pagosempresaatapstyle`
   MODIFY `id_pago` bigint(20) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `pedidoscompra`
---
 ALTER TABLE `pedidoscompra`
   MODIFY `id_pedido_compra` bigint(20) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `permisos`
---
 ALTER TABLE `permisos`
   MODIFY `id_permiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=728;
 
---
--- AUTO_INCREMENT de la tabla `planes`
---
 ALTER TABLE `planes`
   MODIFY `id_plan` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
---
--- AUTO_INCREMENT de la tabla `productos`
---
 ALTER TABLE `productos`
   MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `proveedores`
---
 ALTER TABLE `proveedores`
   MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de la tabla `roles`
---
 ALTER TABLE `roles`
   MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
 
---
--- AUTO_INCREMENT de la tabla `suscripcionesempresa`
---
 ALTER TABLE `suscripcionesempresa`
-  MODIFY `id_suscripcion` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_suscripcion` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
---
--- AUTO_INCREMENT de la tabla `tipodocumento`
---
 ALTER TABLE `tipodocumento`
   MODIFY `id_tipodocumento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
 
---
--- AUTO_INCREMENT de la tabla `tiposcomprobantepago`
---
 ALTER TABLE `tiposcomprobantepago`
   MODIFY `id_tipo_comprobante` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `tiposmovimientoinventario`
---
 ALTER TABLE `tiposmovimientoinventario`
   MODIFY `id_tipo_movimiento` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `tipospago`
---
 ALTER TABLE `tipospago`
   MODIFY `id_tipopago` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `tiposproducto`
---
 ALTER TABLE `tiposproducto`
   MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `tipo_documento`
---
-ALTER TABLE `tipo_documento`
-  MODIFY `id_tipo_documento` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `unidadesmedida`
---
 ALTER TABLE `unidadesmedida`
   MODIFY `id_unidad_medida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 
---
--- AUTO_INCREMENT de la tabla `unidades_medida`
---
-ALTER TABLE `unidades_medida`
-  MODIFY `id_unidad_medida` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
 ALTER TABLE `usuarios`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=774;
 
---
--- AUTO_INCREMENT de la tabla `variantesproducto`
---
 ALTER TABLE `variantesproducto`
   MODIFY `id_variante` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `variantes_producto`
---
-ALTER TABLE `variantes_producto`
-  MODIFY `id_variante` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Restricciones para tablas volcadas
+-- Restricciones para tablas volcadas (Claves Foráneas corregidas)
 --
 
 --
@@ -1610,8 +1315,7 @@ ALTER TABLE `cierrescaja`
 --
 ALTER TABLE `clientes`
   ADD CONSTRAINT `FK_Clientes_TipoDocumento` FOREIGN KEY (`id_tipodocumento`) REFERENCES `tipodocumento` (`id_tipodocumento`),
-  ADD CONSTRAINT `FK_Clientes_Usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
-  ADD CONSTRAINT `FKskkwwdshtf2q77wuxt7ea9x02` FOREIGN KEY (`id_tipodocumento`) REFERENCES `tipo_documento` (`id_tipo_documento`);
+  ADD CONSTRAINT `FK_Clientes_Usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
 
 --
 -- Filtros para la tabla `comprobantespago`
@@ -1641,7 +1345,7 @@ ALTER TABLE `detallespedidocompra`
 --
 ALTER TABLE `empresamodulos`
   ADD CONSTRAINT `FK_EmpresaModulos_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_EmpresaModulos_Modulos` FOREIGN KEY (`id_modulo`) REFERENCES `modulossistema` (`id_modulo`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_EmpresaModulos_Modulos` FOREIGN KEY (`id_modulo`) REFERENCES `modulosistema` (`id_modulo`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `facturascomision`
@@ -1661,8 +1365,7 @@ ALTER TABLE `facturassuscripcion`
 --
 ALTER TABLE `inventario`
   ADD CONSTRAINT `FK_Inventario_Almacenes` FOREIGN KEY (`id_almacen`) REFERENCES `almacenes` (`id_almacen`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_Inventario_Variantes` FOREIGN KEY (`id_variante`) REFERENCES `variantesproducto` (`id_variante`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FKtcxau05avpney9suju3psq2yk` FOREIGN KEY (`id_variante`) REFERENCES `variantes_producto` (`id_variante`);
+  ADD CONSTRAINT `FK_Inventario_Variantes` FOREIGN KEY (`id_variante`) REFERENCES `variantesproducto` (`id_variante`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `marcasproducto`
@@ -1671,17 +1374,10 @@ ALTER TABLE `marcasproducto`
   ADD CONSTRAINT `FK_Marcas_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`);
 
 --
--- Filtros para la tabla `marcas_producto`
---
-ALTER TABLE `marcas_producto`
-  ADD CONSTRAINT `FKk8xy23fxsuyax3m4qxb6qmmfl` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`);
-
---
 -- Filtros para la tabla `modelos`
 --
 ALTER TABLE `modelos`
-  ADD CONSTRAINT `FK_Modelos_Marcas` FOREIGN KEY (`id_marca`) REFERENCES `marcasproducto` (`id_marca`),
-  ADD CONSTRAINT `FKtk8ky65qstmm0fblw2edmvmdc` FOREIGN KEY (`id_marca`) REFERENCES `marcas_producto` (`id_marca`);
+  ADD CONSTRAINT `FK_Modelos_Marcas` FOREIGN KEY (`id_marca`) REFERENCES `marcasproducto` (`id_marca`);
 
 --
 -- Filtros para la tabla `movimientoscaja`
@@ -1733,17 +1429,13 @@ ALTER TABLE `plan_modulos`
 -- Filtros para la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD CONSTRAINT `FK49ujfbhnof23vb139e32moykv` FOREIGN KEY (`id_marca`) REFERENCES `marcas_producto` (`id_marca`),
   ADD CONSTRAINT `FK_Productos_Categorias` FOREIGN KEY (`id_categoria`) REFERENCES `categoriasproducto` (`id_categoria`),
   ADD CONSTRAINT `FK_Productos_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`),
   ADD CONSTRAINT `FK_Productos_Marcas` FOREIGN KEY (`id_marca`) REFERENCES `marcasproducto` (`id_marca`),
   ADD CONSTRAINT `FK_Productos_Materiales` FOREIGN KEY (`id_material`) REFERENCES `materialesproducto` (`id_material`),
   ADD CONSTRAINT `FK_Productos_Modelos` FOREIGN KEY (`id_modelo`) REFERENCES `modelos` (`id_modelo`),
   ADD CONSTRAINT `FK_Productos_Proveedores` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id_proveedor`),
-  ADD CONSTRAINT `FK_Productos_UnidadesMedida` FOREIGN KEY (`id_unidad_medida`) REFERENCES `unidadesmedida` (`id_unidad_medida`),
-  ADD CONSTRAINT `FKae60lm3eg086ycu7ckwflwu5w` FOREIGN KEY (`id_material`) REFERENCES `materiales_producto` (`id_material`),
-  ADD CONSTRAINT `FKj8sxarjjajqepr387tvy0el2o` FOREIGN KEY (`id_unidad_medida`) REFERENCES `unidades_medida` (`id_unidad_medida`),
-  ADD CONSTRAINT `FKqw5albhkktmfevctb70myb2nu` FOREIGN KEY (`id_categoria`) REFERENCES `categorias_producto` (`id_categoria`);
+  ADD CONSTRAINT `FK_Productos_UnidadesMedida` FOREIGN KEY (`id_unidad_medida`) REFERENCES `unidadesmedida` (`id_unidad_medida`);
 
 --
 -- Filtros para la tabla `proveedores`
@@ -1776,7 +1468,6 @@ ALTER TABLE `suscripcionesempresa`
 -- Filtros para la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD CONSTRAINT `FK2nymbi40lnnspgsojtlidxof5` FOREIGN KEY (`id_tipodocumento`) REFERENCES `tipo_documento` (`id_tipo_documento`),
   ADD CONSTRAINT `FK_Usuarios_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`),
   ADD CONSTRAINT `FK_Usuarios_Roles` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_rol`),
   ADD CONSTRAINT `FK_Usuarios_TipoDocumento` FOREIGN KEY (`id_tipodocumento`) REFERENCES `tipodocumento` (`id_tipodocumento`);

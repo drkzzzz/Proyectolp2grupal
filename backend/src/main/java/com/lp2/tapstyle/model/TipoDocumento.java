@@ -6,7 +6,7 @@ import lombok.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "TipoDocumento")
+@Table(name = "tipodocumento")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

@@ -13,11 +13,18 @@ public class ProductoDTO {
     private String nombreProducto;
     private String descripcion;
     private Integer idCategoria;
+    private String nombreCategoria;
     private Integer idProveedor;
+    private String nombreProveedor;
     private Integer idUnidadMedida;
+    private String nombreUnidad;
     private String dimensiones;
     private Integer pesoGramos;
     private Integer idMarca;
+    private String nombreMarca;
     private Integer idModelo;
+    private String nombreModelo;
     private Integer idMaterial;
+    private String nombreMaterial;
+    private Integer stock;
 }

@@ -1,242 +1,772 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TapStyle - Ventas</title>
+    <title>Ventas - Admin Negocio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="flex">
-    <aside class="sidebar bg-gray-800 text-white p-6 flex flex-col fixed h-full z-20 hidden md:flex overflow-y-auto" style="width: 280px;">
-        <div class="text-center mb-6 pb-4 border-b border-gray-700">
-            <a href="index.html" class="text-2xl font-extrabold text-indigo-400 tracking-wider">TapStyle</a>
-        </div>
-        <div class="mb-6 text-center">
-            <div class="w-14 h-14 bg-white text-indigo-600 rounded-full mx-auto flex items-center justify-center text-lg font-bold mb-2">SV</div>
-            <p class="font-semibold">Street Vibe Co.</p>
-            <p class="text-xs text-gray-400">Admin de Negocio</p>
-        </div>
-        <nav class="flex-grow space-y-1">
-            <a href="dashboard_admin_negocio.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
-                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                <span class="text-sm font-medium">Dashboard</span>
-            </a>
-            <div class="submenu-container">
-                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
-                    <div class="flex items-center">
-                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                        <span class="text-sm font-medium">Catálogo</span>
-                    </div>
-                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="submenu hidden ml-7 mt-1 space-y-1">
-                    <a href="crud_producto.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Productos</a>
-                    <a href="categorias.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Categorías</a>
-                    <a href="marcas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Marcas</a>
-                </div>
+
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
+
+            <div class="p-6 border-b border-gray-700">
+                <h1 class="text-3xl font-extrabold text-blue-400 tracking-wider">TapStyle</h1>
+                <p class="text-xs text-gray-400 mt-1">ADMIN NEGOCIO</p>
             </div>
-            <div class="submenu-container">
-                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
-                    <div class="flex items-center">
-                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
-                        <span class="text-sm font-medium">Operaciones</span>
-                    </div>
-                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="submenu ml-7 mt-1 space-y-1">
-                    <a href="compras.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Compras</a>
-                    <a href="ventas.html" class="block p-2 text-sm text-white bg-indigo-600 rounded">Ventas</a>
-                    <a href="stock.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Stock</a>
-                    <a href="caja.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Caja</a>
-                    <a href="proveedores.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Proveedores</a>
-                    <a href="metodos_pago.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Métodos de Pago</a>
+
+            <div class="flex flex-col items-center py-6 border-b border-gray-700 px-4">
+                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg" data-empresa-initials>
+                    SV
                 </div>
+                <h2 class="mt-3 text-lg font-semibold text-center" data-empresa-nombre>Tu Empresa</h2>
+                <p class="text-sm text-gray-400 mt-1" data-usuario-nombre>Usuario</p>
             </div>
-            <a href="finanzas_pagos.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
-                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                <span class="text-sm font-medium">Finanzas</span>
-            </a>
-            <div class="submenu-container">
-                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
-                    <div class="flex items-center">
-                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                        <span class="text-sm font-medium">Administración</span>
-                    </div>
-                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="submenu hidden ml-7 mt-1 space-y-1">
-                    <a href="gestion_empleados.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Empleados</a>
-                    <a href="roles_permisos.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Roles y Permisos</a>
-                </div>
-            </div>
-        </nav>
-        <div class="mt-auto pt-4 border-t border-gray-700">
-            <a href="login.html" class="flex items-center p-2 rounded-lg text-red-400 hover:bg-gray-700 transition">
-                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                <span class="text-sm font-medium">Cerrar Sesión</span>
-            </a>
-        </div>
-    </aside>
-    <div class="flex-1 md:ml-[280px] p-8 w-full">
-        <header class="flex justify-between items-center bg-white p-4 rounded-xl shadow-md mb-8">
-            <h1 class="text-2xl font-bold text-gray-800">Gestión de Ventas</h1>
-            <button id="btnNuevaVenta" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">+ Nueva Venta</button>
-        </header>
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Comprobante</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Cliente</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fecha</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <tr>
-                        <td class="px-6 py-4 text-sm font-medium">#F001-00125</td>
-                        <td class="px-6 py-4 text-sm">Juan Pérez</td>
-                        <td class="px-6 py-4 text-sm">2024-01-15</td>
-                        <td class="px-6 py-4 text-sm">S/. 350.00</td>
-                        <td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Pagado</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div id="modalNuevaVenta" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl mx-4">
-            <div class="p-6 border-b flex justify-between items-center">
-                <h2 class="text-2xl font-bold">Nueva Venta</h2>
-                <button id="btnCerrar" class="text-gray-500 hover:text-gray-700"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
-            </div>
-            <form id="formVenta" class="p-6">
-                <div class="grid grid-cols-2 gap-4">
-                    <div><label class="block text-sm font-medium mb-2">Cliente *</label><select id="id_cliente" required class="w-full px-4 py-2 border rounded-lg"><option value="">Seleccionar...</option><option value="1">Juan Pérez</option></select></div>
-                    <div><label class="block text-sm font-medium mb-2">Tipo Comprobante *</label><select id="id_tipo_comprobante" required class="w-full px-4 py-2 border rounded-lg"><option value="1">Boleta</option><option value="2">Factura</option></select></div>
-                </div>
+
+            <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+
+                <a href="../dashboard_admin_negocio.html"
+                    class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150">
+                    <i class="fas fa-chart-line mr-3 text-lg"></i>
+                    <span class="font-medium">Dashboard</span>
+                </a>
+
                 <div class="mt-4">
-                    <label class="block text-sm font-medium mb-2">Productos</label>
-                    <div id="productosVenta" class="space-y-2 mb-4">
-                        <!-- Productos agregados -->
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-box mr-3 text-lg"></i>
+                            <span class="font-medium">Catálogo</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="submenu hidden ml-8 space-y-2 mt-2">
+                        <a href="productos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-cube mr-2"></i> Productos
+                        </a>
+                        <a href="categorias.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-list mr-2"></i> Categorías
+                        </a>
+                        <a href="marcas.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-tag mr-2"></i> Marcas
+                        </a>
                     </div>
-                    <button type="button" id="btnAgregarProducto" class="w-full px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-indigo-500 hover:text-indigo-500">+ Agregar Producto</button>
                 </div>
-                <div class="grid grid-cols-2 gap-4 mt-4">
-                    <div><label class="block text-sm font-medium mb-2">Subtotal</label><input type="number" step="0.01" id="subtotal" readonly class="w-full px-4 py-2 border rounded-lg bg-gray-50"></div>
-                    <div><label class="block text-sm font-medium mb-2">IGV (18%)</label><input type="number" step="0.01" id="igv" readonly class="w-full px-4 py-2 border rounded-lg bg-gray-50"></div>
-                    <div class="col-span-2"><label class="block text-sm font-medium mb-2">Total</label><input type="number" step="0.01" id="total" readonly class="w-full px-4 py-2 border rounded-lg bg-gray-100 font-bold text-lg"></div>
+
+                <div class="mt-2">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-tasks mr-3 text-lg"></i>
+                            <span class="font-medium">Operaciones</span>
+                        </div>
+                        <i class="fas fa-chevron-up text-sm"></i>
+                    </button>
+                    <div class="submenu ml-8 space-y-2 mt-2">
+                        <a href="compras.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-shopping-cart mr-2"></i> Compras
+                        </a>
+                        <a href="ventas.html"
+                            class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded transition">
+                            <i class="fas fa-cash-register mr-2"></i> Ventas
+                        </a>
+                        <a href="stock.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-warehouse mr-2"></i> Stock
+                        </a>
+                        <a href="proveedores.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-truck mr-2"></i> Proveedores
+                        </a>
+                        <a href="metodos_pago.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-credit-card mr-2"></i> Métodos de Pago
+                        </a>
+                    </div>
                 </div>
-                <div class="flex justify-end space-x-3 mt-6">
-                    <button type="button" id="btnCancelar" class="px-6 py-2 border rounded-lg">Cancelar</button>
-                    <button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg">Registrar</button>
+
+                <div class="mt-2">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-money-bill-wave mr-3 text-lg"></i>
+                            <span class="font-medium">Finanzas</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="submenu hidden ml-8 space-y-2 mt-2">
+                        <a href="caja.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-cash-register mr-2"></i> Caja
+                        </a>
+                        <a href="finanzas_pagos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-chart-bar mr-2"></i> Finanzas
+                        </a>
+                    </div>
                 </div>
-            </form>
+
+                <div class="mt-2">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-cog mr-3 text-lg"></i>
+                            <span class="font-medium">Administración</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="submenu hidden ml-8 space-y-2 mt-2">
+                        <a href="clientes.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-users mr-2"></i> Clientes
+                        </a>
+                        <a href="empleados.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-user-tie mr-2"></i> Empleados
+                        </a>
+                        <a href="roles_permisos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-shield-alt mr-2"></i> Roles y Permisos
+                        </a>
+                    </div>
+                </div>
+
+            </nav>
+
+            <div class="p-4 border-t border-gray-700">
+                <button onclick="cerrarSesionConfirm()"
+                    class="w-full flex items-center justify-center px-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg transition">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+
+            <!-- CABECERA -->
+            <header class="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-gray-800">Ventas a Clientes</h1>
+                <button onclick="abrirModalVenta()"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2">
+                    <i class="fas fa-plus"></i> Nueva Venta
+                </button>
+            </header>
+
+            <!-- CONTENIDO -->
+            <main class="flex-1 overflow-y-auto p-8">
+
+                <!-- TABLA DE VENTAS -->
+                <div class="bg-white rounded-xl shadow overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50 border-b border-gray-200">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">#</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Cliente</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Fecha</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Total</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Estado</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaVentas" class="divide-y divide-gray-200">
+                                <tr>
+                                    <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                                        <i class="fas fa-spinner fa-spin mr-2"></i> Cargando ventas...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <!-- MODAL: Nueva Venta -->
+    <div id="modalVenta" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-screen overflow-y-auto">
+
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-gray-800">Registrar Nueva Venta</h2>
+                <button onclick="cerrarModalVenta()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <div class="p-6">
+                <form id="formVenta" onsubmit="guardarVenta(event)">
+
+                    <!-- Cliente (Seleccionar o crear) -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Cliente *</label>
+                        <div class="flex gap-2">
+                            <select id="idCliente"
+                                class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">Selecciona un cliente</option>
+                            </select>
+                            <button type="button" onclick="abrirModalNuevoCliente()"
+                                class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Número de Comprobante -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Número de Comprobante *</label>
+                        <input type="text" id="numComprobante" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Tipo de Comprobante -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Comprobante *</label>
+                        <select id="tipoComprobante" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Selecciona tipo</option>
+                            <option value="Boleta">Boleta</option>
+                            <option value="Factura">Factura</option>
+                        </select>
+                    </div>
+
+                    <!-- Productos -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Productos *</label>
+                        <div id="productosSeleccionados" class="space-y-3 max-h-64 overflow-y-auto border border-gray-300 p-3 rounded-lg bg-gray-50">
+                            <div id="productosTable">
+                                <p class="text-gray-500 text-sm text-center">Cargando productos...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carrito de Venta -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Artículos Seleccionados</label>
+                        <div id="carritoProductos" class="space-y-2 max-h-48 overflow-y-auto border border-blue-300 p-3 rounded-lg bg-blue-50">
+                            <p class="text-gray-500 text-sm text-center">Sin productos seleccionados</p>
+                        </div>
+                    </div>
+
+                    <!-- Método de Pago -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Método de Pago *</label>
+                        <select id="metodoPago" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Selecciona método</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Tarjeta">Tarjeta</option>
+                            <option value="Transferencia">Transferencia</option>
+                        </select>
+                    </div>
+
+                    <!-- Descuento -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Descuento (%)</label>
+                        <input type="number" id="descuento" value="0" min="0" max="100"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                            onchange="actualizarTotal()">
+                    </div>
+
+                    <!-- Total -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Total</label>
+                        <input type="text" id="totalVenta" readonly
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 font-bold">
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="flex gap-3 justify-end">
+                        <button type="button" onclick="cerrarModalVenta()"
+                            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                            Cancelar
+                        </button>
+                        <button type="submit"
+                            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center gap-2">
+                            <i class="fas fa-save"></i> Guardar Venta
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- SCRIPTS -->
+    <script src="/frontend/config/api-config.js"></script>
+    <script src="/frontend/components/sidebar/sidebar_script.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#btnNuevaVenta').click(() => $('#modalNuevaVenta').removeClass('hidden'));
-            $('#btnCerrar, #btnCancelar').click(() => { $('#modalNuevaVenta').addClass('hidden'); $('#formVenta')[0].reset(); });
-            let productosSeleccionados = [];
-            
-            $('#btnAgregarProducto').click(function() {
-                const productoHTML = `
-                    <div class="flex items-center gap-2 p-2 border rounded-lg producto-item">
-                        <select class="flex-1 px-2 py-1 border rounded producto-select">
-                            <option value="">Seleccionar producto...</option>
-                            <option value="1" data-precio="199.90">Zapatilla Nike - S/. 199.90</option>
-                            <option value="2" data-precio="259.90">Chaqueta Adidas - S/. 259.90</option>
-                            <option value="3" data-precio="59.90">Gorra Puma - S/. 59.90</option>
-                        </select>
-                        <input type="number" min="1" value="1" class="w-20 px-2 py-1 border rounded cantidad-input" placeholder="Cant">
-                        <button type="button" class="text-red-600 hover:text-red-800 btn-eliminar-producto">×</button>
-                    </div>
-                `;
-                $('#productosVenta').append(productoHTML);
-            });
-            
-            $(document).on('click', '.btn-eliminar-producto', function() {
-                $(this).closest('.producto-item').remove();
-                calcularTotales();
-            });
-            
-            $(document).on('change', '.producto-select, .cantidad-input', calcularTotales);
-            
-            function calcularTotales() {
-                let subtotal = 0;
-                $('.producto-item').each(function() {
-                    const precio = parseFloat($(this).find('.producto-select option:selected').data('precio') || 0);
-                    const cantidad = parseInt($(this).find('.cantidad-input').val() || 0);
-                    subtotal += precio * cantidad;
-                });
-                const igv = subtotal * 0.18;
-                const total = subtotal + igv;
-                $('#subtotal').val(subtotal.toFixed(2));
-                $('#igv').val(igv.toFixed(2));
-                $('#total').val(total.toFixed(2));
+
+        let idComprobantEditando = null;
+
+        function obtenerToken() {
+            return localStorage.getItem('tapstyle_token') || obtenerToken() || localStorage.getItem('authToken');
+        }
+
+        function toggleMenu(button) {
+            const submenu = button.nextElementSibling;
+            const icon = button.querySelector('i:last-child');
+            submenu.classList.toggle('hidden');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+
+        function cerrarSesionConfirm() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                cerrarSesion();
             }
-            
-            $('#formVenta').submit(function(e) {
-                e.preventDefault();
-                const detalles = [];
-                $('.producto-item').each(function() {
-                    const idVariante = $(this).find('.producto-select').val();
-                    const cantidad = $(this).find('.cantidad-input').val();
-                    const precioUnitario = $(this).find('.producto-select option:selected').data('precio');
-                    if(idVariante) {
-                        detalles.push({ id_variante: idVariante, cantidad: cantidad, precio_unitario: precioUnitario });
-                    }
+        }
+
+        function abrirModalVenta() {
+            idComprobantEditando = null;
+            document.getElementById('modalVenta').classList.remove('hidden');
+            cargarClientes();
+            cargarTiposComprobante();
+            cargarProductos();
+        }
+
+        function cerrarModalVenta() {
+            document.getElementById('modalVenta').classList.add('hidden');
+            document.getElementById('formVenta').reset();
+            window.carrito = [];
+            idComprobantEditando = null;
+        }
+
+        function abrirModalNuevoCliente() {
+            alert('Crear nuevo cliente (implementar después)');
+        }
+
+        async function cargarVentas() {
+            try {
+                const empresaId = obtenerContexto();
+                if (!empresaId) return;
+
+                const response = await fetch(`${API_BASE_URL}/comprobantes-pago/empresa/${empresaId}`, {
+                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
                 });
-                const data = { 
-                    id_empresa: 1, 
-                    id_cliente: $('#id_cliente').val(), 
-                    id_usuario: 1, 
-                    id_tipo_comprobante: $('#id_tipo_comprobante').val(), 
-                    total: $('#total').val(), 
-                    igv: $('#igv').val(), 
-                    subtotal: $('#subtotal').val(),
-                    detalles: detalles
-                };
-                console.log('Venta:', data);
-                alert('Venta registrada con ' + detalles.length + ' productos');
-                $('#modalNuevaVenta').addClass('hidden');
-                $('#formVenta')[0].reset();
-                $('#productosVenta').empty();
-            });
-        });
-        // Script para submenús
-        const toggles = document.querySelectorAll('.submenu-toggle');
-        toggles.forEach(toggle => {
-            toggle.addEventListener('click', function() {
-                const container = this.parentElement;
-                const submenu = container.querySelector('.submenu');
-                const icon = this.querySelector('.submenu-icon');
-                document.querySelectorAll('.submenu').forEach(sm => {
-                    if (sm !== submenu) {
-                        sm.classList.add('hidden');
-                        sm.parentElement.querySelector('.submenu-icon').style.transform = 'rotate(0deg)';
-                    }
-                });
-                submenu.classList.toggle('hidden');
-                icon.style.transform = submenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
-            });
-        });
-        const currentPage = window.location.pathname.split('/').pop();
-        document.querySelectorAll('nav a').forEach(link => {
-            if (link.getAttribute('href') === currentPage) {
-                link.classList.add('bg-indigo-600', 'text-white');
-                link.classList.remove('text-gray-300', 'text-gray-400');
-                const submenu = link.closest('.submenu');
-                if (submenu) {
-                    submenu.classList.remove('hidden');
-                    submenu.parentElement.querySelector('.submenu-icon').style.transform = 'rotate(180deg)';
+
+                if (!response.ok) throw new Error('Error al cargar ventas');
+
+                const resultado = await response.json();
+                const ventas = resultado.data || resultado;
+
+                if (!Array.isArray(ventas)) {
+                    mostrarTablaVacia();
+                    return;
                 }
+
+                const tbody = document.getElementById('tablaVentas');
+                tbody.innerHTML = ventas.map(venta => `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">#${venta.idComprobante}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${venta.nombreCliente || 'Cliente General'}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${new Date(venta.fechaEmision).toLocaleDateString()}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900 font-semibold">$${(venta.total || 0).toFixed(2)}</td>
+                        <td class="px-6 py-4 text-sm">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold ${getEstadoBadge(venta.estado)}">
+                                ${venta.estado}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-sm flex gap-2">
+                            <button onclick="editarVenta(${venta.idComprobante})" class="text-yellow-600 hover:text-yellow-800">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button onclick="eliminarVenta(${venta.idComprobante})" class="text-red-600 hover:text-red-800">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error cargando ventas:', error);
+                mostrarTablaVacia();
             }
+        }
+
+        async function cargarClientes() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/clientes`, {
+                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error al cargar clientes');
+                }
+
+                const resultado = await response.json();
+                const clientes = resultado.data || resultado;
+
+                const select = document.getElementById('idCliente');
+                if (Array.isArray(clientes) && clientes.length > 0) {
+                    select.innerHTML = '<option value="">Selecciona un cliente</option>' +
+                        clientes.map(c => `<option value="${c.idCliente}">${c.nombre} ${c.apellido || ''}</option>`).join('');
+                } else {
+                    select.innerHTML = '<option value="">No hay clientes disponibles</option>';
+                }
+            } catch (error) {
+                console.error('Error cargando clientes:', error);
+                const select = document.getElementById('idCliente');
+                select.innerHTML = '<option value="">Error al cargar clientes</option>';
+            }
+        }
+
+        async function cargarTiposComprobante() {
+            try {
+                console.log('📋 Cargando tipos de comprobante...');
+                
+                const response = await fetch(`${API_BASE_URL}/tipos-comprobante`, {
+                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
+                });
+
+                console.log('📦 Respuesta tipos:', response.status);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('❌ Error en respuesta:', errorText);
+                    throw new Error(`Error ${response.status}: ${response.statusText}`);
+                }
+
+                const resultado = await response.json();
+                console.log('✅ Tipos de comprobante cargados:', resultado);
+                
+                const tipos = resultado.data || resultado;
+
+                const select = document.getElementById('tipoComprobante');
+                if (Array.isArray(tipos) && tipos.length > 0) {
+                    select.innerHTML = '<option value="">Selecciona tipo</option>' +
+                        tipos.map(t => `<option value="${t.idTipoComprobante}">${t.nombreTipo}</option>`).join('');
+                } else {
+                    select.innerHTML = '<option value="">No hay tipos disponibles</option>';
+                }
+            } catch (error) {
+                console.error('❌ Error cargando tipos de comprobante:', error);
+                const select = document.getElementById('tipoComprobante');
+                select.innerHTML = '<option value="">Error cargando tipos</option>';
+            }
+        }
+
+        async function cargarProductos() {
+            try {
+                const empresaId = obtenerContexto();
+                console.log('📦 Cargando productos para empresa:', empresaId);
+                
+                const response = await fetch(`${API_BASE_URL}/productos/empresa/${empresaId}`, {
+                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
+                });
+
+                console.log('📦 Respuesta productos:', response.status);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('❌ Error en respuesta:', errorText);
+                    throw new Error(`Error ${response.status}: ${response.statusText}`);
+                }
+
+                const resultado = await response.json();
+                console.log('✅ Productos cargados:', resultado);
+                
+                const productos = resultado.data || resultado;
+
+                const container = document.getElementById('productosTable');
+                if (!Array.isArray(productos) || productos.length === 0) {
+                    container.innerHTML = '<p class="text-gray-500 text-sm text-center">No hay productos disponibles</p>';
+                    return;
+                }
+
+                container.innerHTML = `
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b bg-gray-100">
+                                <th class="text-left p-2">Producto</th>
+                                <th class="text-center p-2 w-24">Cantidad</th>
+                                <th class="text-right p-2 w-20">Precio Unit.</th>
+                                <th class="text-center p-2 w-20">Añadir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${productos.map(prod => `
+                                <tr class="border-b hover:bg-gray-100">
+                                    <td class="p-2">${prod.nombreProducto}</td>
+                                    <td class="p-2"><input type="number" class="cantidad-prod-${prod.idProducto} w-full px-2 py-1 border rounded text-center" value="1" min="1" data-precio="${prod.precioUnitario || 0}"></td>
+                                    <td class="text-right p-2">$${(prod.precioUnitario || 0).toFixed(2)}</td>
+                                    <td class="text-center p-2">
+                                        <button type="button" onclick="agregarProductoAlCarrito(${prod.idProducto}, '${prod.nombreProducto}', ${prod.precioUnitario || 0})" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } catch (error) {
+                console.error('❌ Error cargando productos:', error);
+                const container = document.getElementById('productosTable');
+                container.innerHTML = '<p class="text-red-500 text-sm text-center">Error al cargar productos</p>';
+            }
+        }
+
+        async function guardarVenta(event) {
+            event.preventDefault();
+
+            const idCliente = parseInt(document.getElementById('idCliente').value);
+            const numComprobante = document.getElementById('numComprobante').value;
+            const idTipoComprobante = parseInt(document.getElementById('tipoComprobante').value);
+
+            if (!idCliente || !numComprobante || !idTipoComprobante) {
+                alert('Completa todos los campos requeridos');
+                return;
+            }
+
+            if (!window.carrito || window.carrito.length === 0) {
+                alert('Debes agregar al menos un producto');
+                return;
+            }
+
+            try {
+                // Calcular total
+                let total = 0;
+                window.carrito.forEach(prod => {
+                    total += prod.precioUnitario * prod.cantidad;
+                });
+
+                // Aplicar descuento (si existe el elemento)
+                const descuentoElement = document.getElementById('descuento');
+                const descuento = descuentoElement ? (parseFloat(descuentoElement.value) || 0) : 0;
+                const descuentoAmount = total * (descuento / 100);
+                const subtotal = total - descuentoAmount;
+                const igv = subtotal * 0.18;
+                const totalFinal = subtotal + igv;
+
+                // Obtener idUsuario
+                const idUsuarioStored = localStorage.getItem('idUsuario');
+                const idUsuarioFromUser = localStorage.getItem('tapstyle_user') ? 
+                    JSON.parse(localStorage.getItem('tapstyle_user')).idUsuario : null;
+                let idUsuario = idUsuarioStored || idUsuarioFromUser;
+                
+                if (!idUsuario) {
+                    alert('Error: No se encontró ID de usuario. Por favor, inicia sesión de nuevo.');
+                    return;
+                }
+
+                const empresaId = obtenerContexto();
+                const datos = {
+                    idEmpresa: parseInt(empresaId),
+                    idCliente: idCliente,
+                    numeroComprobante: numComprobante,
+                    idTipoComprobante: idTipoComprobante,
+                    idUsuario: parseInt(idUsuario),
+                    total: totalFinal,
+                    igv: igv,
+                    subtotal: subtotal,
+                    estado: 'Emitido',
+                    detalles: window.carrito.map(prod => ({
+                        idProducto: prod.idProducto,
+                        cantidad: prod.cantidad,
+                        precioUnitario: prod.precioUnitario
+                    }))
+                };
+
+                const url = idComprobantEditando ? `${API_BASE_URL}/comprobantes-pago/${idComprobantEditando}` : `${API_BASE_URL}/comprobantes-pago`;
+                const method = idComprobantEditando ? 'PUT' : 'POST';
+
+                const response = await fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${obtenerToken()}`
+                    },
+                    body: JSON.stringify(datos)
+                });
+
+                if (!response.ok) throw new Error('Error al guardar venta');
+
+                alert(idComprobantEditando ? 'Venta actualizada' : 'Venta registrada');
+                cerrarModalVenta();
+                window.carrito = [];
+                cargarVentas();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error: ' + error.message);
+            }
+        }
+
+        function agregarProductoAlCarrito(idProducto, nombreProducto, precioUnitario) {
+            const cantidad = parseInt(document.querySelector(`.cantidad-prod-${idProducto}`).value) || 1;
+            
+            if (!window.carrito) window.carrito = [];
+            
+            // Verificar si el producto ya está en el carrito
+            const indice = window.carrito.findIndex(p => p.idProducto === idProducto);
+            if (indice >= 0) {
+                window.carrito[indice].cantidad += cantidad;
+            } else {
+                window.carrito.push({
+                    idProducto,
+                    nombreProducto,
+                    precioUnitario,
+                    cantidad
+                });
+            }
+            
+            actualizarVistaCarrito();
+            actualizarTotal();
+        }
+
+        function actualizarVistaCarrito() {
+            const container = document.getElementById('carritoProductos');
+            
+            if (!window.carrito || window.carrito.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-sm text-center">Sin productos seleccionados</p>';
+                return;
+            }
+
+            container.innerHTML = `
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b bg-blue-100">
+                            <th class="text-left p-2">Producto</th>
+                            <th class="text-center p-2 w-20">Cantidad</th>
+                            <th class="text-right p-2 w-24">Subtotal</th>
+                            <th class="text-center p-2 w-16">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${window.carrito.map((prod, idx) => `
+                            <tr class="border-b hover:bg-blue-50">
+                                <td class="p-2">${prod.nombreProducto}</td>
+                                <td class="p-2 text-center">${prod.cantidad}</td>
+                                <td class="text-right p-2">$${(prod.precioUnitario * prod.cantidad).toFixed(2)}</td>
+                                <td class="text-center p-2">
+                                    <button type="button" onclick="eliminarDelCarrito(${idx})" class="text-red-600 hover:text-red-800">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function eliminarDelCarrito(indice) {
+            if (window.carrito) {
+                window.carrito.splice(indice, 1);
+                actualizarVistaCarrito();
+                actualizarTotal();
+            }
+        }
+
+        function actualizarTotal() {
+            let total = 0;
+            if (window.carrito) {
+                window.carrito.forEach(prod => {
+                    total += prod.precioUnitario * prod.cantidad;
+                });
+            }
+
+            // Aplicar descuento
+            const descuentoElement = document.getElementById('descuento');
+            const descuento = descuentoElement ? (parseFloat(descuentoElement.value) || 0) : 0;
+            const descuentoAmount = total * (descuento / 100);
+            const subtotal = total - descuentoAmount;
+            const igv = subtotal * 0.18;
+            const totalFinal = subtotal + igv;
+
+            const totalElement = document.getElementById('totalVenta');
+            if (totalElement) {
+                totalElement.value = `$${totalFinal.toFixed(2)}`;
+            }
+        }
+
+        function getEstadoBadge(estado) {
+            const badges = {
+                'Emitido': 'bg-green-100 text-green-800',
+                'Pagado': 'bg-blue-100 text-blue-800',
+                'Anulado': 'bg-red-100 text-red-800'
+            };
+            return badges[estado] || 'bg-gray-100 text-gray-800';
+        }
+
+        function mostrarTablaVacia() {
+            document.getElementById('tablaVentas').innerHTML = `
+                <tr>
+                    <td colspan="6" class="px-6 py-8 text-center">
+                        <i class="fas fa-inbox text-3xl text-gray-400 mb-2"></i>
+                        <p class="text-gray-500">No hay ventas registradas</p>
+                    </td>
+                </tr>
+            `;
+        }
+
+        async function editarVenta(id) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/comprobantes-pago/${id}`, {
+                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
+                });
+
+                if (!response.ok) throw new Error('Error al cargar venta');
+
+                const resultado = await response.json();
+                const venta = resultado.data || resultado;
+
+                idComprobantEditando = id;
+                document.getElementById('idCliente').value = venta.idCliente;
+                document.getElementById('numComprobante').value = venta.numeroComprobante;
+                document.getElementById('tipoComprobante').value = venta.tipoComprobante || 'Boleta';
+                document.getElementById('totalVenta').value = venta.total;
+                document.getElementById('modalVenta').classList.remove('hidden');
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        function eliminarVenta(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar esta venta?')) {
+                fetch(`${API_BASE_URL}/comprobantes-pago/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
+                })
+                    .then(res => {
+                        if (!res.ok) throw new Error('Error al eliminar');
+                        alert('Venta eliminada');
+                        cargarVentas();
+                    })
+                    .catch(error => alert('Error: ' + error.message));
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const auth = validarAutenticacion();
+            if (!auth) return;
+
+            // Inicializar carrito
+            if (!window.carrito) {
+                window.carrito = [];
+            }
+
+            console.log('💳 Cargando ventas...');
+            cargarVentas();
         });
+
     </script>
+
 </body>
+
 </html>
