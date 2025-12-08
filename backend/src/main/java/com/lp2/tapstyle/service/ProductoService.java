@@ -110,13 +110,19 @@ public class ProductoService {
                 .nombreProducto(producto.getNombreProducto())
                 .descripcion(producto.getDescripcion())
                 .idCategoria(producto.getCategoria().getIdCategoria())
+                .nombreCategoria(producto.getCategoria().getNombreCategoria())
                 .idProveedor(producto.getProveedor() != null ? producto.getProveedor().getIdProveedor() : null)
+                .nombreProveedor(producto.getProveedor() != null ? producto.getProveedor().getNombreComercial() : null)
                 .idUnidadMedida(producto.getUnidadMedida().getIdUnidadMedida())
+                .nombreUnidad(producto.getUnidadMedida().getNombreUnidad())
                 .dimensiones(producto.getDimensiones())
                 .pesoGramos(producto.getPesoGramos())
                 .idMarca(producto.getMarca() != null ? producto.getMarca().getIdMarca() : null)
+                .nombreMarca(producto.getMarca() != null ? producto.getMarca().getNombreMarca() : null)
                 .idModelo(producto.getModelo() != null ? producto.getModelo().getIdModelo() : null)
+                .nombreModelo(producto.getModelo() != null ? producto.getModelo().getNombreModelo() : null)
                 .idMaterial(producto.getMaterial() != null ? producto.getMaterial().getIdMaterial() : null)
+                .nombreMaterial(producto.getMaterial() != null ? producto.getMaterial().getNombreMaterial() : null)
                 .build();
     }
 }

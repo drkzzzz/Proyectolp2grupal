@@ -1,4 +1,4 @@
-// Script para manejar submenús colapsables
+// Script para manejar submenús colapsables y autenticación
 document.addEventListener('DOMContentLoaded', function() {
     const toggles = document.querySelectorAll('.submenu-toggle');
     
@@ -37,4 +37,42 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    
+    // Validar autenticación
+    validarAutenticacion();
 });
+
+// Funciones de autenticación
+function validarAutenticacion() {
+    const token = localStorage.getItem('tapstyle_token') || localStorage.getItem('authToken') || localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '/frontend/pages/admin/login.html';
+        return false;
+    }
+    return true;
+}
+
+function obtenerContexto() {
+    try {
+        // Intentar obtener del contexto guardado (para compatibilidad)
+        const contexto = localStorage.getItem('contexto');
+        if (contexto) {
+            const ctx = JSON.parse(contexto);
+            return ctx.empresaId || ctx.idEmpresa;
+        }
+        // Si no existe contexto, intentar obtener idEmpresa directamente
+        const idEmpresa = localStorage.getItem('idEmpresa');
+        return idEmpresa ? parseInt(idEmpresa) : null;
+    } catch (e) {
+        console.error('Error obteniendo contexto:', e);
+        return localStorage.getItem('idEmpresa');
+    }
+}
+
+function cerrarSesion() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('token');
+    localStorage.removeItem('contexto');
+    localStorage.removeItem('usuario');
+    window.location.href = '/frontend/pages/admin/login.html';
+}

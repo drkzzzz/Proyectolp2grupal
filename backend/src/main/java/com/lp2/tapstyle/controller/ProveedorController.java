@@ -1,5 +1,6 @@
 package com.lp2.tapstyle.controller;
 
+import com.lp2.tapstyle.dto.ApiResponse;
 import com.lp2.tapstyle.dto.ProveedorDTO;
 import com.lp2.tapstyle.service.ProveedorService;
 import lombok.RequiredArgsConstructor;
@@ -17,33 +18,71 @@ public class ProveedorController {
     private final ProveedorService proveedorService;
 
     @GetMapping
-    public ResponseEntity<List<ProveedorDTO>> obtenerTodos() {
-        return ResponseEntity.ok(proveedorService.obtenerTodos());
+    public ResponseEntity<ApiResponse<List<ProveedorDTO>>> obtenerTodos() {
+        try {
+            List<ProveedorDTO> proveedores = proveedorService.obtenerTodos();
+            return ResponseEntity.ok(ApiResponse.success(proveedores, "Proveedores obtenidos"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("ProveedorError", "Error: " + e.getMessage()));
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProveedorDTO> obtenerPorId(@PathVariable Integer id) {
-        return ResponseEntity.ok(proveedorService.obtenerPorId(id));
+    public ResponseEntity<ApiResponse<ProveedorDTO>> obtenerPorId(@PathVariable Integer id) {
+        try {
+            ProveedorDTO proveedor = proveedorService.obtenerPorId(id);
+            return ResponseEntity.ok(ApiResponse.success(proveedor, "Proveedor encontrado"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("NotFound", "Proveedor no encontrado"));
+        }
     }
 
     @GetMapping("/empresa/{empresaId}")
-    public ResponseEntity<List<ProveedorDTO>> obtenerPorEmpresa(@PathVariable Integer empresaId) {
-        return ResponseEntity.ok(proveedorService.obtenerPorEmpresa(empresaId));
+    public ResponseEntity<ApiResponse<List<ProveedorDTO>>> obtenerPorEmpresa(@PathVariable Integer empresaId) {
+        try {
+            System.out.println("📋 Buscando proveedores para empresa: " + empresaId);
+            List<ProveedorDTO> proveedores = proveedorService.obtenerPorEmpresa(empresaId);
+            System.out.println("✅ Proveedores encontrados: " + proveedores.size());
+            return ResponseEntity.ok(ApiResponse.success(proveedores, "Proveedores obtenidos"));
+        } catch (Exception e) {
+            System.out.println("❌ Error en obtenerPorEmpresa: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.internalServerError()
+                    .body(ApiResponse.error("Error interno", "Error: " + e.getMessage()));
+        }
     }
 
     @PostMapping
-    public ResponseEntity<ProveedorDTO> crear(@RequestBody ProveedorDTO dto) {
-        return ResponseEntity.ok(proveedorService.crear(dto));
+    public ResponseEntity<ApiResponse<ProveedorDTO>> crear(@RequestBody ProveedorDTO dto) {
+        try {
+            ProveedorDTO nuevoProveedor = proveedorService.crear(dto);
+            return ResponseEntity.ok(ApiResponse.success(nuevoProveedor, "Proveedor creado exitosamente"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(ApiResponse.error("CreationError", "Error al crear: " + e.getMessage()));
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProveedorDTO> actualizar(@PathVariable Integer id, @RequestBody ProveedorDTO dto) {
-        return ResponseEntity.ok(proveedorService.actualizar(id, dto));
+    public ResponseEntity<ApiResponse<ProveedorDTO>> actualizar(@PathVariable Integer id,
+            @RequestBody ProveedorDTO dto) {
+        try {
+            ProveedorDTO actualizado = proveedorService.actualizar(id, dto);
+            return ResponseEntity.ok(ApiResponse.success(actualizado, "Proveedor actualizado exitosamente"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(ApiResponse.error("UpdateError", "Error al actualizar: " + e.getMessage()));
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        proveedorService.eliminar(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<ApiResponse<Void>> eliminar(@PathVariable Integer id) {
+        try {
+            proveedorService.eliminar(id);
+            return ResponseEntity.ok(ApiResponse.success(null, "Proveedor eliminado exitosamente"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(ApiResponse.error("DeleteError", "Error al eliminar: " + e.getMessage()));
+        }
     }
 }

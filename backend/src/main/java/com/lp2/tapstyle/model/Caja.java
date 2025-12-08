@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Cajas")
@@ -31,4 +33,18 @@ public class Caja implements Serializable {
     @Column(nullable = false, length = 20)
     @Builder.Default
     private String estado = "Cerrada";
+
+    @Column(precision = 10, scale = 2)
+    @Builder.Default
+    private BigDecimal montoInicial = BigDecimal.ZERO;
+
+    @Column(precision = 10, scale = 2)
+    @Builder.Default
+    private BigDecimal montoActual = BigDecimal.ZERO;
+
+    @Column
+    private LocalDateTime fechaApertura;
+
+    @Column
+    private LocalDateTime fechaCierre;
 }

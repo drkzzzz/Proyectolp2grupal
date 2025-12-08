@@ -1,288 +1,581 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TapStyle - Gestión de Proveedores</title>
+    <title>Proveedores - Admin Negocio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="flex">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar bg-gray-800 text-white p-6 flex flex-col fixed h-full z-20 hidden md:flex overflow-y-auto" style="width: 280px;">
-        <div class="text-center mb-6 pb-4 border-b border-gray-700">
-            <a href="index.html" class="text-2xl font-extrabold text-indigo-400 tracking-wider">TapStyle</a>
-        </div>
-        <div class="mb-6 text-center">
-            <div class="w-14 h-14 bg-white text-indigo-600 rounded-full mx-auto flex items-center justify-center text-lg font-bold mb-2">SV</div>
-            <p class="font-semibold">Street Vibe Co.</p>
-            <p class="text-xs text-gray-400">Admin de Negocio</p>
-        </div>
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
 
-        <nav class="flex-grow space-y-1">
-            <a href="dashboard_admin_negocio.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
-                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                <span class="text-sm font-medium">Dashboard</span>
-            </a>
-            <div class="submenu-container">
-                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
-                    <div class="flex items-center">
-                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                        <span class="text-sm font-medium">Catálogo</span>
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
+
+            <div class="p-6 border-b border-gray-700">
+                <h1 class="text-3xl font-extrabold text-blue-400 tracking-wider">TapStyle</h1>
+                <p class="text-xs text-gray-400 mt-1">ADMIN NEGOCIO</p>
+            </div>
+
+            <div class="flex flex-col items-center py-6 border-b border-gray-700 px-4">
+                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg" data-empresa-initials>SV</div>
+                <h2 class="mt-3 text-lg font-semibold text-center" data-empresa-nombre>Tu Empresa</h2>
+                <p class="text-sm text-gray-400 mt-1" data-usuario-nombre>Usuario</p>
+            </div>
+
+            <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+
+                <a href="../dashboard_admin_negocio.html" class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150">
+                    <i class="fas fa-chart-line mr-3 text-lg"></i>
+                    <span class="font-medium">Dashboard</span>
+                </a>
+
+                <div class="mt-4">
+                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-box mr-3 text-lg"></i>
+                            <span class="font-medium">Catálogo</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="submenu hidden ml-8 space-y-2 mt-2">
+                        <a href="productos.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-cube mr-2"></i> Productos
+                        </a>
+                        <a href="categorias.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-list mr-2"></i> Categorías
+                        </a>
+                        <a href="marcas.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-tag mr-2"></i> Marcas
+                        </a>
                     </div>
-                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="submenu hidden ml-7 mt-1 space-y-1">
-                    <a href="crud_producto.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Productos</a>
-                    <a href="categorias.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Categorías</a>
-                    <a href="marcas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Marcas</a>
                 </div>
-            </div>
-            <div class="submenu-container">
-                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
-                    <div class="flex items-center">
-                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
-                        <span class="text-sm font-medium">Operaciones</span>
+
+                <div class="mt-2">
+                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-tasks mr-3 text-lg"></i>
+                            <span class="font-medium">Operaciones</span>
+                        </div>
+                        <i class="fas fa-chevron-up text-sm"></i>
+                    </button>
+                    <div class="submenu ml-8 space-y-2 mt-2">
+                        <a href="compras.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-shopping-cart mr-2"></i> Compras
+                        </a>
+                        <a href="ventas.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-cash-register mr-2"></i> Ventas
+                        </a>
+                        <a href="stock.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-warehouse mr-2"></i> Stock
+                        </a>
+                        <a href="proveedores.html" class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded transition">
+                            <i class="fas fa-truck mr-2"></i> Proveedores
+                        </a>
+                        <a href="metodos_pago.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-credit-card mr-2"></i> Métodos de Pago
+                        </a>
                     </div>
-                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="submenu ml-7 mt-1 space-y-1">
-                    <a href="compras.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Compras</a>
-                    <a href="ventas.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Ventas</a>
-                    <a href="stock.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Stock</a>
-                    <a href="caja.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Caja</a>
-                    <a href="proveedores.html" class="block p-2 text-sm text-white bg-indigo-600 rounded">Proveedores</a>
-                    <a href="metodos_pago.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Métodos de Pago</a>
                 </div>
-            </div>
-            <a href="finanzas_pagos.html" class="flex items-center p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
-                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                <span class="text-sm font-medium">Finanzas</span>
-            </a>
-            <div class="submenu-container">
-                <button class="submenu-toggle flex items-center justify-between w-full p-2 rounded-lg text-gray-300 hover:bg-gray-700 transition">
-                    <div class="flex items-center">
-                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                        <span class="text-sm font-medium">Administración</span>
+
+                <div class="mt-2">
+                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-money-bill-wave mr-3 text-lg"></i>
+                            <span class="font-medium">Finanzas</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="submenu hidden ml-8 space-y-2 mt-2">
+                        <a href="caja.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-cash-register mr-2"></i> Caja
+                        </a>
+                        <a href="finanzas_pagos.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-chart-bar mr-2"></i> Finanzas
+                        </a>
                     </div>
-                    <svg class="h-4 w-4 transition-transform submenu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="submenu hidden ml-7 mt-1 space-y-1">
-                    <a href="gestion_empleados.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Empleados</a>
-                    <a href="roles_permisos.html" class="block p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 rounded">Roles y Permisos</a>
                 </div>
+
+                <div class="mt-2">
+                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-cog mr-3 text-lg"></i>
+                            <span class="font-medium">Administración</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="submenu hidden ml-8 space-y-2 mt-2">
+                        <a href="clientes.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-users mr-2"></i> Clientes
+                        </a>
+                        <a href="empleados.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-user-tie mr-2"></i> Empleados
+                        </a>
+                        <a href="roles_permisos.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-shield-alt mr-2"></i> Roles y Permisos
+                        </a>
+                    </div>
+                </div>
+
+            </nav>
+
+            <div class="p-4 border-t border-gray-700">
+                <button onclick="cerrarSesionConfirm()" class="w-full flex items-center justify-center px-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg transition">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    <span>Cerrar Sesión</span>
+                </button>
             </div>
-        </nav>
-        <div class="mt-auto pt-4 border-t border-gray-700">
-            <a href="login.html" class="flex items-center p-2 rounded-lg text-red-400 hover:bg-gray-700 transition">
-                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                <span class="text-sm font-medium">Cerrar Sesión</span>
-            </a>
-        </div>
-    </aside>
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <div class="flex-1 md:ml-[280px] p-4 sm:p-8 w-full">
-        
-        <header class="flex justify-between items-center bg-white p-4 rounded-xl shadow-md mb-8">
-            <h1 class="text-2xl font-bold text-gray-800">Gestión de Proveedores</h1>
-            <button id="btnNuevoProveedor" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150">
-                + Nuevo Proveedor
-            </button>
-        </header>
+        </aside>
 
-        <!-- Filtros -->
-        <div class="bg-white p-6 rounded-xl shadow-md mb-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <input type="text" placeholder="Buscar por razón social..." class="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
-                <input type="text" placeholder="Buscar por RUC..." class="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
-                <button class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Filtrar</button>
-            </div>
-        </div>
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="flex-1 flex flex-col overflow-hidden">
 
-        <!-- Tabla de Proveedores -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Razón Social</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">RUC</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rubro</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teléfono</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Distribuidora Lima SAC</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20123456789</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Calzado y Accesorios</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">01-234-5678</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">ventas@distlima.com</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <button class="text-indigo-600 hover:text-indigo-900 mr-3 btn-editar" data-id="1">Editar</button>
-                            <button class="text-red-600 hover:text-red-900 btn-eliminar" data-id="1">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Textiles del Norte EIRL</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20987654321</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Textiles y Confecciones</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">044-567-890</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">contacto@texnorte.pe</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <button class="text-indigo-600 hover:text-indigo-900 mr-3 btn-editar" data-id="2">Editar</button>
-                            <button class="text-red-600 hover:text-red-900 btn-eliminar" data-id="2">Eliminar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- CABECERA -->
+            <header class="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-gray-800">Gestión de Proveedores</h1>
+                <button onclick="abrirModalProveedor()"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2">
+                    <i class="fas fa-plus"></i> Nuevo Proveedor
+                </button>
+            </header>
+
+            <!-- CONTENIDO -->
+            <main class="flex-1 overflow-y-auto p-8">
+
+                <!-- TABLA DE PROVEEDORES -->
+                <div class="bg-white rounded-xl shadow overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50 border-b border-gray-200">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Nombre</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Contacto</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Teléfono</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Compras</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Estado</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaProveedores" class="divide-y divide-gray-200">
+                                <tr>
+                                    <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                                        <i class="fas fa-spinner fa-spin mr-2"></i> Cargando proveedores...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+
         </div>
 
     </div>
 
-    <!-- Modal Nuevo/Editar Proveedor -->
-    <div id="modalProveedor" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
-            <div class="p-6 border-b flex justify-between items-center">
-                <h2 id="modalTitle" class="text-2xl font-bold text-gray-800">Nuevo Proveedor</h2>
-                <button id="btnCerrarModal" class="text-gray-500 hover:text-gray-700">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
+    <!-- MODAL: Nuevo Proveedor -->
+    <div id="modalProveedor" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md max-h-screen overflow-y-auto">
+
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-gray-800">Nuevo Proveedor</h2>
+                <button onclick="cerrarModalProveedor()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
                 </button>
             </div>
-            <form id="formProveedor" class="p-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="col-span-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Razón Social *</label>
-                        <input type="text" id="razon_social" name="razon_social" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+
+            <div class="p-6">
+                <form id="formProveedor" onsubmit="guardarProveedor(event)">
+
+                    <!-- Nombre -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre *</label>
+                        <input type="text" id="nombre" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre Comercial</label>
-                        <input type="text" id="nombre_comercial" name="nombre_comercial" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+
+                    <!-- Contacto -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Persona de Contacto *</label>
+                        <input type="text" id="contacto" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">RUC *</label>
-                        <input type="text" id="ruc" name="ruc" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+
+                    <!-- Teléfono -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Teléfono *</label>
+                        <input type="tel" id="telefono" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                     </div>
-                    <div class="col-span-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Rubro</label>
-                        <input type="text" id="rubro" name="rubro" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                    <div class="col-span-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Dirección</label>
-                        <textarea id="direccion" name="direccion" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500"></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Teléfono</label>
-                        <input type="text" id="telefono" name="telefono" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                    <div>
+
+                    <!-- Email -->
+                    <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                        <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500">
+                        <input type="email" id="email"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                     </div>
-                </div>
-                
-                <div class="flex justify-end space-x-3 mt-6">
-                    <button type="button" id="btnCancelar" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition duration-150">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150">
-                        Guardar
-                    </button>
-                </div>
-            </form>
+
+                    <!-- Dirección -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Dirección</label>
+                        <textarea id="direccion"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 h-16"></textarea>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="flex gap-3 justify-end">
+                        <button type="button" onclick="cerrarModalProveedor()"
+                            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                            Cancelar
+                        </button>
+                        <button type="submit"
+                            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center gap-2">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- SCRIPTS -->
+    <script src="/frontend/config/api-config.js"></script>
+    <script src="/frontend/components/sidebar/sidebar_script.js"></script>
     <script>
-        $(document).ready(function() {
-            let editandoId = null;
-            
-            // Abrir modal nuevo proveedor
-            $('#btnNuevoProveedor').click(function() {
-                $('#modalTitle').text('Nuevo Proveedor');
-                $('#formProveedor')[0].reset();
-                editandoId = null;
-                $('#modalProveedor').removeClass('hidden');
-            });
-            
-            // Abrir modal editar proveedor
-            $('.btn-editar').click(function() {
-                editandoId = $(this).data('id');
-                $('#modalTitle').text('Editar Proveedor');
-                // Aquí cargarías los datos del proveedor desde la BD
-                $('#modalProveedor').removeClass('hidden');
-            });
-            
-            // Cerrar modal
-            $('#btnCerrarModal, #btnCancelar').click(function() {
-                $('#modalProveedor').addClass('hidden');
-                $('#formProveedor')[0].reset();
-                editandoId = null;
-            });
-            
-            // Enviar formulario
-            $('#formProveedor').submit(function(e) {
-                e.preventDefault();
-                
-                const formData = {
-                    id_empresa: 1, // ID de la empresa actual
-                    razon_social: $('#razon_social').val(),
-                    nombre_comercial: $('#nombre_comercial').val(),
-                    ruc: $('#ruc').val(),
-                    rubro: $('#rubro').val(),
-                    direccion: $('#direccion').val(),
-                    telefono: $('#telefono').val(),
-                    email: $('#email').val()
+
+        let idProveedorEditando = null;
+
+        function obtenerToken() {
+            return localStorage.getItem('tapstyle_token') || localStorage.getItem('token') || localStorage.getItem('authToken');
+        }
+
+        function toggleMenu(button) {
+            const submenu = button.nextElementSibling;
+            const icon = button.querySelector('i:last-child');
+            submenu.classList.toggle('hidden');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+
+        function cerrarSesionConfirm() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                cerrarSesion();
+            }
+        }
+
+        function abrirModalProveedor() {
+            idProveedorEditando = null;
+            document.getElementById('modalProveedor').classList.remove('hidden');
+            document.getElementById('formProveedor').reset();
+        }
+
+        function cerrarModalProveedor() {
+            document.getElementById('modalProveedor').classList.add('hidden');
+            document.getElementById('formProveedor').reset();
+            idProveedorEditando = null;
+        }
+
+        async function cargarProveedores() {
+            try {
+                const contexto = obtenerContexto();
+                const response = await fetch(`${API_BASE_URL}/proveedores/empresa/${contexto.idEmpresa}`, {
+                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
+                });
+
+                if (!response.ok) throw new Error('Error al cargar proveedores');
+
+                const resultado = await response.json();
+                const proveedores = resultado.data || resultado;
+
+                if (!Array.isArray(proveedores)) {
+                    mostrarTablaVacia();
+                    return;
+                }
+
+                const tbody = document.getElementById('tablaProveedores');
+                tbody.innerHTML = proveedores.map(prov => `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">${prov.nombreComercial || prov.razonSocial}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${prov.ruc || '-'}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${prov.email || '-'}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${prov.telefono || '-'}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${prov.rubro || '-'}</td>
+                        <td class="px-6 py-4 text-sm flex gap-2">
+                            <button onclick="editarProveedor(${prov.idProveedor})" class="text-yellow-600 hover:text-yellow-800">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button onclick="eliminarProveedor(${prov.idProveedor})" class="text-red-600 hover:text-red-800">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error:', error);
+                mostrarTablaVacia();
+            }
+        }
+
+        async function guardarProveedor(event) {
+            event.preventDefault();
+
+            const razonSocial = document.getElementById('razonSocial').value;
+            const nombreComercial = document.getElementById('nombreComercial').value;
+            const ruc = document.getElementById('ruc').value;
+            const email = document.getElementById('email').value;
+            const telefono = document.getElementById('telefono').value;
+            const rubro = document.getElementById('rubro').value;
+            const direccion = document.getElementById('direccion').value;
+
+            if (!razonSocial || !nombreComercial) {
+                alert('Completa campos obligatorios');
+                return;
+            }
+
+            try {
+                const contexto = obtenerContexto();
+                const datos = {
+                    idEmpresa: contexto.idEmpresa,
+                    razonSocial,
+                    nombreComercial,
+                    ruc,
+                    email,
+                    telefono,
+                    rubro,
+                    direccion
                 };
-                
-                if (editandoId) {
-                    formData.id_proveedor = editandoId;
-                    console.log('Actualizando proveedor:', formData);
-                    alert('Proveedor actualizado correctamente');
-                } else {
-                    console.log('Creando nuevo proveedor:', formData);
-                    alert('Proveedor creado correctamente');
-                }
-                
-                $('#modalProveedor').addClass('hidden');
-                $('#formProveedor')[0].reset();
-                editandoId = null;
-            });
-            
-            // Eliminar proveedor
-            $('.btn-eliminar').click(function() {
-                const id = $(this).data('id');
-                if (confirm('¿Está seguro de eliminar este proveedor?')) {
-                    console.log('Eliminando proveedor ID:', id);
-                    alert('Proveedor eliminado correctamente');
-                    // Aquí recargarías la tabla
-                }
-            });
+
+                const url = idProveedorEditando ? `${API_BASE_URL}/proveedores/${idProveedorEditando}` : `${API_BASE_URL}/proveedores`;
+                const method = idProveedorEditando ? 'PUT' : 'POST';
+
+                const response = await fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${obtenerToken()}`
+                    },
+                    body: JSON.stringify(datos)
+                });
+
+                if (!response.ok) throw new Error('Error al guardar proveedor');
+
+                alert(idProveedorEditando ? 'Proveedor actualizado' : 'Proveedor creado');
+                cerrarModalProveedor();
+                cargarProveedores();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error: ' + error.message);
+            }
+        }
+
+        async function editarProveedor(id) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/proveedores/${id}`, {
+                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
+                });
+
+                if (!response.ok) throw new Error('Error al cargar proveedor');
+
+                const resultado = await response.json();
+                const prov = resultado.data || resultado;
+
+                idProveedorEditando = id;
+                document.getElementById('razonSocial').value = prov.razonSocial;
+                document.getElementById('nombreComercial').value = prov.nombreComercial;
+                document.getElementById('ruc').value = prov.ruc || '';
+                document.getElementById('email').value = prov.email || '';
+                document.getElementById('telefono').value = prov.telefono || '';
+                document.getElementById('rubro').value = prov.rubro || '';
+                document.getElementById('direccion').value = prov.direccion || '';
+                document.getElementById('modalProveedor').classList.remove('hidden');
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        function eliminarProveedor(id) {
+            if (confirm('¿Estás seguro?')) {
+                fetch(`${API_BASE_URL}/proveedores/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
+                })
+                    .then(res => {
+                        if (!res.ok) throw new Error('Error');
+                        alert('Proveedor eliminado');
+                        cargarProveedores();
+                    })
+                    .catch(error => alert('Error: ' + error.message));
+            }
+        }
+
+        function mostrarTablaVacia() {
+            document.getElementById('tablaProveedores').innerHTML = `
+                <tr>
+                    <td colspan="6" class="px-6 py-8 text-center">
+                        <i class="fas fa-inbox text-3xl text-gray-400 mb-2"></i>
+                        <p class="text-gray-500">No hay proveedores registrados</p>
+                    </td>
+                </tr>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const auth = validarAutenticacion();
+            if (!auth) return;
+
+            console.log('🚚 Cargando proveedores...');
+            cargarProveedores();
         });
 
-        // Script para submenús
-        const toggles = document.querySelectorAll('.submenu-toggle');
-        toggles.forEach(toggle => {
-            toggle.addEventListener('click', function() {
-                const container = this.parentElement;
-                const submenu = container.querySelector('.submenu');
-                const icon = this.querySelector('.submenu-icon');
-                document.querySelectorAll('.submenu').forEach(sm => {
-                    if (sm !== submenu) {
-                        sm.classList.add('hidden');
-                        sm.parentElement.querySelector('.submenu-icon').style.transform = 'rotate(0deg)';
-                    }
-                });
-                submenu.classList.toggle('hidden');
-                icon.style.transform = submenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
-            });
-        });
     </script>
+    <script>
+
+        function toggleMenu(button) {
+            const submenu = button.nextElementSibling;
+            const icon = button.querySelector('i:last-child');
+            submenu.classList.toggle('hidden');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+
+        function cerrarSesionConfirm() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                cerrarSesion();
+            }
+        }
+
+        function abrirModalProveedor() {
+            document.getElementById('modalProveedor').classList.remove('hidden');
+        }
+
+        function cerrarModalProveedor() {
+            document.getElementById('modalProveedor').classList.add('hidden');
+            document.getElementById('formProveedor').reset();
+        }
+
+        async function cargarProveedores() {
+            try {
+                const proveedores = await getRequest('/api/proveedores');
+                console.log('Proveedores cargados:', proveedores);
+
+                if (!Array.isArray(proveedores)) {
+                    mostrarTablaVacia();
+                    return;
+                }
+
+                const tbody = document.getElementById('tablaProveedores');
+                tbody.innerHTML = proveedores.map(prov => `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">${prov.nombre}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${prov.contacto}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${prov.telefono}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">
+                            <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold">
+                                ${prov.compras || 0}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-sm">
+                            <span class="px-3 py-1 rounded-full ${prov.estado === 'activo' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'} text-xs font-semibold">
+                                ${prov.estado === 'activo' ? '✓ Activo' : '✗ Inactivo'}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-sm space-x-2">
+                            <button onclick="editarProveedor(${prov.id})" class="text-yellow-600 hover:text-yellow-800">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button onclick="eliminarProveedor(${prov.id})" class="text-red-600 hover:text-red-800">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error cargando proveedores:', error);
+                mostrarTablaVacia();
+                mostrarError('Error: ' + error.message);
+            }
+        }
+
+        async function guardarProveedor(event) {
+            event.preventDefault();
+
+            const nombre = document.getElementById('nombre').value;
+            const contacto = document.getElementById('contacto').value;
+            const telefono = document.getElementById('telefono').value;
+            const email = document.getElementById('email').value;
+            const direccion = document.getElementById('direccion').value;
+
+            if (!nombre || !contacto || !telefono) {
+                mostrarError('Completa todos los campos requeridos');
+                return;
+            }
+
+            try {
+                const boton = event.target.querySelector('button[type="submit"]');
+                mostrarLoading(boton, 'Guardando...');
+
+                const datosProveedor = {
+                    nombre,
+                    contacto,
+                    telefono,
+                    email,
+                    direccion,
+                    estado: 'activo'
+                };
+
+                await postRequest('/api/proveedores', datosProveedor);
+                mostrarExito('Proveedor registrado exitosamente');
+                cerrarModalProveedor();
+                cargarProveedores();
+
+            } catch (error) {
+                console.error('Error:', error);
+                mostrarError('Error: ' + error.message);
+            }
+        }
+
+        function editarProveedor(id) {
+            alert('Editar proveedor #' + id + ' (implementar después)');
+        }
+
+        function eliminarProveedor(id) {
+            if (confirm('¿Estás seguro de eliminar este proveedor?')) {
+                deleteRequest('/api/proveedores', id)
+                    .then(() => {
+                        mostrarExito('Proveedor eliminado');
+                        cargarProveedores();
+                    })
+                    .catch(error => mostrarError('Error: ' + error.message));
+            }
+        }
+
+        function mostrarTablaVacia() {
+            document.getElementById('tablaProveedores').innerHTML = `
+                <tr>
+                    <td colspan="6" class="px-6 py-8 text-center">
+                        <i class="fas fa-inbox text-3xl text-gray-400 mb-2"></i>
+                        <p class="text-gray-500">No hay proveedores registrados</p>
+                    </td>
+                </tr>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const auth = validarAutenticacion();
+            if (!auth) return;
+
+            console.log('🚚 Cargando proveedores...');
+            cargarProveedores();
+        });
+
+    </script>
+
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 package com.lp2.tapstyle.controller;
 
+import com.lp2.tapstyle.dto.AjusteStockRequest;
 import com.lp2.tapstyle.dto.InventarioDTO;
 import com.lp2.tapstyle.service.InventarioService;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,11 @@ public class InventarioController {
         return ResponseEntity.ok(inventarioService.obtenerPorAlmacen(almacenId));
     }
 
+    @GetMapping("/empresa/{empresaId}")
+    public ResponseEntity<List<InventarioDTO>> obtenerPorEmpresa(@PathVariable Integer empresaId) {
+        return ResponseEntity.ok(inventarioService.obtenerPorEmpresa(empresaId));
+    }
+
     @GetMapping("/bajo-stock")
     public ResponseEntity<List<InventarioDTO>> obtenerProductosBajoStock() {
         return ResponseEntity.ok(inventarioService.obtenerProductosBajoStock());
@@ -53,6 +59,17 @@ public class InventarioController {
             @RequestParam String tipo) {
         inventarioService.ajustarStock(id, cantidad, tipo);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/registrar-ajuste")
+    public ResponseEntity<String> registrarAjuste(@RequestBody AjusteStockRequest request) {
+        try {
+            inventarioService.ajustarStockPorProducto(request.getIdProducto(), request.getCantidad(),
+                    request.getTipo());
+            return ResponseEntity.ok("Ajuste guardado exitosamente");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error al guardar ajuste: " + e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
