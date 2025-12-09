@@ -53,6 +53,7 @@ public class CajaController {
             CajaDTO nuevaCaja = cajaService.crear(dto);
             return ResponseEntity.ok(ApiResponse.success(nuevaCaja, "Caja creada exitosamente"));
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.badRequest().body(ApiResponse.error("CreationError", "Error: " + e.getMessage()));
         }
     }
@@ -70,7 +71,8 @@ public class CajaController {
     @PostMapping("/{id}/abrir")
     public ResponseEntity<ApiResponse<CajaDTO>> abrirCaja(@PathVariable Integer id, @RequestBody CajaDTO dto) {
         try {
-            CajaDTO abierta = cajaService.abrirCaja(id, dto.getMontoInicial());
+            // Se asume que el DTO trae idUsuario y montoInicial
+            CajaDTO abierta = cajaService.abrirCaja(id, dto.getMontoInicial(), dto.getIdUsuario());
             return ResponseEntity.ok(ApiResponse.success(abierta, "Caja abierta exitosamente"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ApiResponse.error("OpenError", "Error: " + e.getMessage()));
@@ -78,11 +80,14 @@ public class CajaController {
     }
 
     @PostMapping("/{id}/cerrar")
-    public ResponseEntity<ApiResponse<CajaDTO>> cerrarCaja(@PathVariable Integer id) {
+    public ResponseEntity<ApiResponse<CajaDTO>> cerrarCaja(@PathVariable Integer id, @RequestBody CajaDTO dto) {
         try {
-            CajaDTO cerrada = cajaService.cerrarCaja(id);
+            // Se asume que el DTO trae idUsuario, montoFinal y observaciones
+            CajaDTO cerrada = cajaService.cerrarCaja(id, dto.getMontoFinal(), dto.getObservaciones(),
+                    dto.getIdUsuario());
             return ResponseEntity.ok(ApiResponse.success(cerrada, "Caja cerrada exitosamente"));
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.badRequest().body(ApiResponse.error("CloseError", "Error: " + e.getMessage()));
         }
     }

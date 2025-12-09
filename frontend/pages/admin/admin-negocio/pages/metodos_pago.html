@@ -13,7 +13,8 @@
     <div class="flex h-screen overflow-hidden">
 
         <!-- SIDEBAR -->
-        <aside id="sidebar" class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
+        <aside id="sidebar"
+            class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
 
             <div class="p-6 border-b border-gray-700">
                 <h1 class="text-3xl font-extrabold text-blue-400 tracking-wider">TapStyle</h1>
@@ -21,20 +22,23 @@
             </div>
 
             <div class="flex flex-col items-center py-6 border-b border-gray-700 px-4">
-                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg" data-empresa-initials>SV</div>
+                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg"
+                    data-empresa-initials>SV</div>
                 <h2 class="mt-3 text-lg font-semibold text-center" data-empresa-nombre>Tu Empresa</h2>
                 <p class="text-sm text-gray-400 mt-1" data-usuario-nombre>Usuario</p>
             </div>
 
             <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
 
-                <a href="../dashboard_admin_negocio.html" class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150">
+                <a href="../dashboard_admin_negocio.html"
+                    class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150">
                     <i class="fas fa-chart-line mr-3 text-lg"></i>
                     <span class="font-medium">Dashboard</span>
                 </a>
 
                 <div class="mt-4">
-                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
                         <div class="flex items-center">
                             <i class="fas fa-box mr-3 text-lg"></i>
                             <span class="font-medium">Catálogo</span>
@@ -42,20 +46,24 @@
                         <i class="fas fa-chevron-down text-sm"></i>
                     </button>
                     <div class="submenu hidden ml-8 space-y-2 mt-2">
-                        <a href="productos.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="productos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-cube mr-2"></i> Productos
                         </a>
-                        <a href="categorias.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="categorias.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-list mr-2"></i> Categorías
                         </a>
-                        <a href="marcas.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="marcas.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-tag mr-2"></i> Marcas
                         </a>
                     </div>
                 </div>
 
                 <div class="mt-2">
-                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-gray-700 transition duration-150 text-left">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-gray-700 transition duration-150 text-left">
                         <div class="flex items-center">
                             <i class="fas fa-tasks mr-3 text-lg"></i>
                             <span class="font-medium">Operaciones</span>
@@ -63,26 +71,32 @@
                         <i class="fas fa-chevron-up text-sm"></i>
                     </button>
                     <div class="submenu ml-8 space-y-2 mt-2">
-                        <a href="compras.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="compras.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-shopping-cart mr-2"></i> Compras
                         </a>
-                        <a href="ventas.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="ventas.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-cash-register mr-2"></i> Ventas
                         </a>
-                        <a href="stock.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="stock.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-warehouse mr-2"></i> Stock
                         </a>
-                        <a href="proveedores.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="proveedores.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-truck mr-2"></i> Proveedores
                         </a>
-                        <a href="metodos_pago.html" class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded transition">
+                        <a href="metodos_pago.html"
+                            class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded transition">
                             <i class="fas fa-credit-card mr-2"></i> Métodos de Pago
                         </a>
                     </div>
                 </div>
 
                 <div class="mt-2">
-                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
                         <div class="flex items-center">
                             <i class="fas fa-money-bill-wave mr-3 text-lg"></i>
                             <span class="font-medium">Finanzas</span>
@@ -90,17 +104,20 @@
                         <i class="fas fa-chevron-down text-sm"></i>
                     </button>
                     <div class="submenu hidden ml-8 space-y-2 mt-2">
-                        <a href="caja.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="caja.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-cash-register mr-2"></i> Caja
                         </a>
-                        <a href="finanzas_pagos.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="finanzas_pagos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-chart-bar mr-2"></i> Finanzas
                         </a>
                     </div>
                 </div>
 
                 <div class="mt-2">
-                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
                         <div class="flex items-center">
                             <i class="fas fa-cog mr-3 text-lg"></i>
                             <span class="font-medium">Administración</span>
@@ -108,13 +125,16 @@
                         <i class="fas fa-chevron-down text-sm"></i>
                     </button>
                     <div class="submenu hidden ml-8 space-y-2 mt-2">
-                        <a href="clientes.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="clientes.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-users mr-2"></i> Clientes
                         </a>
-                        <a href="empleados.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="empleados.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-user-tie mr-2"></i> Empleados
                         </a>
-                        <a href="roles_permisos.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="roles_permisos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-shield-alt mr-2"></i> Roles y Permisos
                         </a>
                     </div>
@@ -123,7 +143,8 @@
             </nav>
 
             <div class="p-4 border-t border-gray-700">
-                <button onclick="cerrarSesionConfirm()" class="w-full flex items-center justify-center px-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg transition">
+                <button onclick="cerrarSesionConfirm()"
+                    class="w-full flex items-center justify-center px-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg transition">
                     <i class="fas fa-sign-out-alt mr-2"></i>
                     <span>Cerrar Sesión</span>
                 </button>
@@ -153,16 +174,13 @@
                             <thead class="bg-gray-50 border-b border-gray-200">
                                 <tr>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Nombre</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Tipo</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Descripción</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Comisión</th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Estado</th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="tablaMetodos" class="divide-y divide-gray-200">
                                 <tr>
-                                    <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                                    <td colspan="3" class="px-6 py-4 text-center text-gray-500">
                                         <i class="fas fa-spinner fa-spin mr-2"></i> Cargando métodos...
                                     </td>
                                 </tr>
@@ -192,49 +210,21 @@
                 <form id="formMetodo" onsubmit="guardarMetodo(event)">
 
                     <!-- Nombre -->
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre *</label>
-                        <input type="text" id="nombre" required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-
-                    <!-- Tipo -->
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipo *</label>
-                        <select id="tipo" required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">Selecciona tipo</option>
-                            <option value="Efectivo">Efectivo</option>
-                            <option value="Tarjeta Débito">Tarjeta Débito</option>
-                            <option value="Tarjeta Crédito">Tarjeta Crédito</option>
-                            <option value="Transferencia">Transferencia Bancaria</option>
-                            <option value="Cheque">Cheque</option>
-                            <option value="Billetera Digital">Billetera Digital</option>
-                        </select>
-                    </div>
-
-                    <!-- Descripción -->
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Descripción</label>
-                        <textarea id="descripcion"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 h-16"></textarea>
-                    </div>
-
-                    <!-- Comisión -->
                     <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Comisión (%)</label>
-                        <input type="number" id="comision" step="0.01" min="0"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre del Método *</label>
+                        <input type="text" id="nombre" required placeholder="Ej: Pago Móvil, Yape, Efectivo"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150">
+                        <p class="text-xs text-gray-500 mt-1">El nombre visible para el cajero al cobrar.</p>
                     </div>
 
                     <!-- Botones -->
-                    <div class="flex gap-3 justify-end">
+                    <div class="flex gap-3 justify-end pt-4 border-t">
                         <button type="button" onclick="cerrarModalMetodo()"
-                            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition duration-150">
                             Cancelar
                         </button>
                         <button type="submit"
-                            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center gap-2">
+                            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center gap-2 transition duration-150 shadow-md">
                             <i class="fas fa-save"></i> Guardar
                         </button>
                     </div>
@@ -246,11 +236,13 @@
     </div>
 
     <!-- SCRIPTS -->
-    <script src="/frontend/config/api-config.js"></script>
-    <script src="/frontend/components/sidebar/sidebar_script.js"></script>
+    <script src="../../../../config/api-config.js"></script>
+    <script src="../../../../components/sidebar/sidebar_script.js"></script>
+    <script src="../scripts/auth.js"></script>
     <script>
 
-        let idMetodoEditando = null;
+        // Variables globales
+        let currentIdEmpresa = null;
 
         function obtenerToken() {
             return localStorage.getItem('tapstyle_token') || localStorage.getItem('token') || localStorage.getItem('authToken');
@@ -271,7 +263,6 @@
         }
 
         function abrirModalMetodo() {
-            idMetodoEditando = null;
             document.getElementById('modalMetodo').classList.remove('hidden');
             document.getElementById('formMetodo').reset();
         }
@@ -279,122 +270,56 @@
         function cerrarModalMetodo() {
             document.getElementById('modalMetodo').classList.add('hidden');
             document.getElementById('formMetodo').reset();
-            idMetodoEditando = null;
         }
 
         async function cargarMetodos() {
+            console.log("Cargando métodos... Empresa ID:", currentIdEmpresa);
+
+            if (!currentIdEmpresa) {
+                mostrarError("No se identificó la empresa. Por favor inicie sesión nuevamente.");
+                return;
+            }
+
             try {
-                // Simulación de métodos de pago (como no hay endpoint específico)
-                const metodos = [
-                    { id: 1, nombre: 'Efectivo', estado: 'Activo', descripcion: 'Pago en efectivo' },
-                    { id: 2, nombre: 'Tarjeta de Crédito', estado: 'Activo', descripcion: 'Tarjetas Visa, Mastercard' },
-                    { id: 3, nombre: 'Transferencia Bancaria', estado: 'Activo', descripcion: 'Transferencias interbancarias' },
-                    { id: 4, nombre: 'Cheque', estado: 'Inactivo', descripcion: 'Pagos con cheque' }
-                ];
+                const response = await fetch(`${API_BASE_URL}/metodos-pago?idEmpresa=${currentIdEmpresa}`);
+
+                if (!response.ok) {
+                    throw new Error(`Error ${response.status}: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                const metodos = result.data || [];
 
                 const tbody = document.getElementById('tablaMetodos');
-                tbody.innerHTML = metodos.map(m => `
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 text-sm font-medium text-gray-900">${m.nombre}</td>
-                        <td class="px-6 py-4 text-sm text-gray-700">${m.descripcion}</td>
+
+                if (metodos.length === 0) {
+                    mostrarTablaVacia();
+                    return;
+                }
+
+                tbody.innerHTML = metodos.map(met => `
+                    <tr class="hover:bg-gray-50 transition duration-150">
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">${met.tipoPago}</td>
                         <td class="px-6 py-4 text-sm">
-                            <span class="px-3 py-1 rounded-full text-xs font-semibold ${m.estado === 'Activo' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}">
-                                ${m.estado}
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold ${met.activo ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                                ${met.activo ? '✓ Activo' : '✕ Inactivo'}
                             </span>
                         </td>
-                        <td class="px-6 py-4 text-sm flex gap-2">
-                            <button onclick="editarMetodo(${m.id})" class="text-yellow-600 hover:text-yellow-800">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button onclick="cambiarEstado(${m.id})" class="text-blue-600 hover:text-blue-800">
-                                <i class="fas fa-toggle-on"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `).join('');
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-
-        function editarMetodo(id) {
-            alert('Editar método de pago #' + id);
-        }
-
-        function cambiarEstado(id) {
-            alert('Cambiar estado del método #' + id);
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const auth = validarAutenticacion();
-            if (!auth) return;
-
-            console.log('💳 Cargando métodos de pago...');
-            cargarMetodos();
-        });
-
-    </script>
-    <script>
-
-        function toggleMenu(button) {
-            const submenu = button.nextElementSibling;
-            const icon = button.querySelector('i:last-child');
-            submenu.classList.toggle('hidden');
-            icon.classList.toggle('fa-chevron-down');
-            icon.classList.toggle('fa-chevron-up');
-        }
-
-        function cerrarSesionConfirm() {
-            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
-                cerrarSesion();
-            }
-        }
-
-        function abrirModalMetodo() {
-            document.getElementById('modalMetodo').classList.remove('hidden');
-        }
-
-        function cerrarModalMetodo() {
-            document.getElementById('modalMetodo').classList.add('hidden');
-            document.getElementById('formMetodo').reset();
-        }
-
-        async function cargarMetodos() {
-            try {
-                // Simular métodos de pago
-                const metodos = [
-                    { id: 1, nombre: 'Efectivo', tipo: 'Efectivo', descripcion: 'Pago al contado', comision: 0, estado: 'activo' },
-                    { id: 2, nombre: 'Visa', tipo: 'Tarjeta Crédito', descripcion: 'Tarjetas de crédito Visa', comision: 2.5, estado: 'activo' },
-                    { id: 3, nombre: 'MasterCard', tipo: 'Tarjeta Crédito', descripcion: 'Tarjetas de crédito MasterCard', comision: 2.5, estado: 'activo' },
-                    { id: 4, nombre: 'Transferencia', tipo: 'Transferencia', descripcion: 'Transferencia bancaria', comision: 1, estado: 'activo' }
-                ];
-
-                const tbody = document.getElementById('tablaMetodos');
-                tbody.innerHTML = metodos.map(met => `
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 text-sm font-medium text-gray-900">${met.nombre}</td>
-                        <td class="px-6 py-4 text-sm text-gray-700">${met.tipo}</td>
-                        <td class="px-6 py-4 text-sm text-gray-700">${met.descripcion}</td>
-                        <td class="px-6 py-4 text-sm font-semibold text-gray-900">
-                            ${met.comision}%
-                        </td>
-                        <td class="px-6 py-4 text-sm">
-                            <span class="px-3 py-1 rounded-full bg-green-100 text-green-800 text-xs font-semibold">✓ Activo</span>
-                        </td>
                         <td class="px-6 py-4 text-sm space-x-2">
-                            <button onclick="editarMetodo(${met.id})" class="text-yellow-600 hover:text-yellow-800">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button onclick="eliminarMetodo(${met.id})" class="text-red-600 hover:text-red-800">
-                                <i class="fas fa-trash"></i>
+                             <!-- Solo botón de activar/desactivar -->
+                            <button onclick="cambiarEstado(${met.idTipoPago}, ${met.activo}, '${met.tipoPago}')" 
+                                class="${met.activo ? 'text-red-500 hover:text-red-700' : 'text-green-500 hover:text-green-700'} p-1 rounded hover:bg-gray-100 transition" 
+                                title="${met.activo ? 'Desactivar' : 'Activar'}">
+                                <i class="fas ${met.activo ? 'fa-toggle-on' : 'fa-toggle-off'} text-xl"></i>
                             </button>
                         </td>
                     </tr>
                 `).join('');
             } catch (error) {
                 console.error('Error cargando métodos:', error);
-                mostrarTablaVacia();
-                mostrarError('Error: ' + error.message);
+                document.getElementById('tablaMetodos').innerHTML = `
+                    <tr><td colspan="3" class="text-center py-4 text-red-500">Error cargando datos: ${error.message}</td></tr>
+                `;
             }
         }
 
@@ -402,12 +327,14 @@
             event.preventDefault();
 
             const nombre = document.getElementById('nombre').value;
-            const tipo = document.getElementById('tipo').value;
-            const descripcion = document.getElementById('descripcion').value;
-            const comision = parseFloat(document.getElementById('comision').value) || 0;
 
-            if (!nombre || !tipo) {
-                mostrarError('Completa todos los campos requeridos');
+            if (!nombre) {
+                mostrarError('Completa el nombre del método');
+                return;
+            }
+
+            if (!currentIdEmpresa) {
+                mostrarError('Error de sesión: No se identificó la empresa.');
                 return;
             }
 
@@ -416,51 +343,115 @@
                 mostrarLoading(boton, 'Guardando...');
 
                 const datosMetodo = {
-                    nombre,
-                    tipo,
-                    descripcion,
-                    comision,
-                    estado: 'activo'
+                    tipoPago: nombre,
+                    activo: true
                 };
 
-                console.log('Guardando método:', datosMetodo);
-                mostrarExito('Método de pago creado exitosamente');
+                // Enviamos idEmpresa como query param para asegurar que se asocie correctamente
+                const response = await fetch(`${API_BASE_URL}/metodos-pago?idEmpresa=${currentIdEmpresa}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(datosMetodo)
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) throw new Error(result.message || 'Error al guardar');
+
+                mostrarExito('Método de pago creado');
                 cerrarModalMetodo();
                 cargarMetodos();
 
             } catch (error) {
                 console.error('Error:', error);
-                mostrarError('Error: ' + error.message);
+                mostrarError(error.message);
+            } finally {
+                const boton = event.target.querySelector('button[type="submit"]');
+                resetLoading(boton, '<i class="fas fa-save"></i> Guardar');
             }
         }
 
-        function editarMetodo(id) {
-            alert('Editar método #' + id + ' (implementar después)');
-        }
+        async function cambiarEstado(id, estadoActual, nombre) {
+            const nuevoEstado = !estadoActual;
+            const accion = nuevoEstado ? "ACTIVAR" : "DESACTIVAR";
 
-        function eliminarMetodo(id) {
-            if (confirm('¿Estás seguro de eliminar este método?')) {
-                mostrarExito('Método eliminado');
-                cargarMetodos();
+            if (!confirm(`¿Estás seguro de ${accion} el método "${nombre}"?`)) {
+                return;
+            }
+
+            try {
+                const datos = {
+                    tipoPago: nombre,
+                    activo: nuevoEstado
+                };
+
+                const response = await fetch(`${API_BASE_URL}/metodos-pago/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(datos)
+                });
+
+                if (response.ok) {
+                    mostrarExito(`Método ${nuevoEstado ? 'activado' : 'desactivado'}`);
+                    cargarMetodos();
+                } else {
+                    const error = await response.json();
+                    mostrarError(`Error: ${error.message}`);
+                }
+
+            } catch (error) {
+                console.error(error);
+                mostrarError("Error al cambiar estado");
             }
         }
 
         function mostrarTablaVacia() {
             document.getElementById('tablaMetodos').innerHTML = `
                 <tr>
-                    <td colspan="6" class="px-6 py-8 text-center">
-                        <i class="fas fa-inbox text-3xl text-gray-400 mb-2"></i>
+                    <td colspan="3" class="px-6 py-8 text-center">
+                        <i class="fas fa-credit-card text-3xl text-gray-400 mb-2"></i>
                         <p class="text-gray-500">No hay métodos de pago registrados</p>
                     </td>
                 </tr>
             `;
         }
 
+        // Helpers de UI
+        function mostrarError(msg) {
+            alert(msg); // O usar un toast si existe
+        }
+        function mostrarExito(msg) {
+            // alert(msg);
+        }
+        function mostrarLoading(btn, text) {
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${text}`;
+        }
+        function resetLoading(btn, html) {
+            btn.disabled = false;
+            btn.innerHTML = html;
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const auth = validarAutenticacion();
             if (!auth) return;
 
-            console.log('💳 Cargando métodos de pago...');
+            // Obtener ID Empresa de forma robusta
+            if (typeof obtenerContexto === 'function') {
+                currentIdEmpresa = obtenerContexto();
+            }
+
+            // Fallback
+            if (!currentIdEmpresa) {
+                const user = JSON.parse(localStorage.getItem('tapstyle_user') || localStorage.getItem('usuario') || '{}');
+                currentIdEmpresa = user.idEmpresa || user.empresaId;
+            }
+
+            console.log('💳 Iniciando módulo de Pagos. Empresa:', currentIdEmpresa);
             cargarMetodos();
         });
 

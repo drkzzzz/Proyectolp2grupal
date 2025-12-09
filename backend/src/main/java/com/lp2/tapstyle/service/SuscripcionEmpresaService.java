@@ -26,6 +26,9 @@ public class SuscripcionEmpresaService {
     @Autowired
     private PlanRepository planRepository;
 
+    @Autowired
+    private com.lp2.tapstyle.repository.FacturaSuscripcionRepository facturaSuscripcionRepository;
+
     public List<SuscripcionEmpresaDTO> listarTodas() {
         return suscripcionRepository.findAll().stream().map(this::convertirADTO).collect(Collectors.toList());
     }
@@ -47,9 +50,25 @@ public class SuscripcionEmpresaService {
         suscripcion.setFechaInicio(LocalDate.now()); // Fecha de hoy
         suscripcion.setFechaVencimiento(LocalDate.now().plusMonths(1)); // Vence en 1 mes
         suscripcion.setPrecioAcordado(plan.getPrecioMensual());
-        suscripcion.setEstado("Activa");
+        suscripcion.setEstado("Pendiente"); // SUPER IMPORTANTE: Nace como pendiente de pago
 
         SuscripcionEmpresa guardada = suscripcionRepository.save(suscripcion);
+
+        // --- NUEVO: Generar la Factura Física para que aparezca en Finanzas ---
+        com.lp2.tapstyle.model.FacturaSuscripcion factura = new com.lp2.tapstyle.model.FacturaSuscripcion();
+        factura.setIdEmpresa(idEmpresa);
+        factura.setSuscripcion(guardada);
+        factura.setNumeroFactura("FAC-" + System.currentTimeMillis()); // Generar ID único simple
+        factura.setPeriodoInicio(guardada.getFechaInicio());
+        factura.setPeriodoFin(guardada.getFechaVencimiento());
+        factura.setMontoSuscripcion(guardada.getPrecioAcordado());
+        factura.setFechaEmision(java.time.LocalDateTime.now());
+        factura.setFechaVencimiento(guardada.getFechaVencimiento());
+        factura.setEstado("Pendiente");
+
+        facturaSuscripcionRepository.save(factura);
+        // ---------------------------------------------------------------------
+
         return convertirADTO(guardada);
     }
 

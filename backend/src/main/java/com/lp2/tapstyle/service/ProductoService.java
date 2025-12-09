@@ -64,7 +64,8 @@ public class ProductoService {
 
         // Buscar unidad de medida
         UnidadMedida unidad = unidadMedidaRepository.findById(dto.getIdUnidadMedida())
-                .orElseThrow(() -> new RuntimeException("Unidad de medida con ID " + dto.getIdUnidadMedida() + " no encontrada"));
+                .orElseThrow(() -> new RuntimeException(
+                        "Unidad de medida con ID " + dto.getIdUnidadMedida() + " no encontrada"));
 
         Producto producto = Producto.builder()
                 .empresa(empresa)
@@ -74,12 +75,14 @@ public class ProductoService {
                 .unidadMedida(unidad)
                 .dimensiones(dto.getDimensiones())
                 .pesoGramos(dto.getPesoGramos())
+                .precio(dto.getPrecio())
                 .build();
 
         // Proveedor (opcional)
         if (dto.getIdProveedor() != null && dto.getIdProveedor() > 0) {
             Proveedor proveedor = proveedorRepository.findById(dto.getIdProveedor())
-                    .orElseThrow(() -> new RuntimeException("Proveedor con ID " + dto.getIdProveedor() + " no encontrado"));
+                    .orElseThrow(
+                            () -> new RuntimeException("Proveedor con ID " + dto.getIdProveedor() + " no encontrado"));
             producto.setProveedor(proveedor);
         }
 
@@ -100,7 +103,8 @@ public class ProductoService {
         // Material (opcional)
         if (dto.getIdMaterial() != null && dto.getIdMaterial() > 0) {
             MaterialProducto material = materialRepository.findById(dto.getIdMaterial())
-                    .orElseThrow(() -> new RuntimeException("Material con ID " + dto.getIdMaterial() + " no encontrado"));
+                    .orElseThrow(
+                            () -> new RuntimeException("Material con ID " + dto.getIdMaterial() + " no encontrado"));
             producto.setMaterial(material);
         }
 
@@ -120,6 +124,7 @@ public class ProductoService {
         producto.setDescripcion(dto.getDescripcion());
         producto.setDimensiones(dto.getDimensiones());
         producto.setPesoGramos(dto.getPesoGramos());
+        producto.setPrecio(dto.getPrecio());
 
         Producto updated = productoRepository.save(producto);
         return convertToDTO(updated);
@@ -135,14 +140,18 @@ public class ProductoService {
                 .idEmpresa(producto.getEmpresa().getIdEmpresa())
                 .nombreProducto(producto.getNombreProducto())
                 .descripcion(producto.getDescripcion())
-                .idCategoria(producto.getCategoria().getIdCategoria())
-                .nombreCategoria(producto.getCategoria().getNombreCategoria())
+                .idCategoria(producto.getCategoria() != null ? producto.getCategoria().getIdCategoria() : null)
+                .nombreCategoria(producto.getCategoria() != null ? producto.getCategoria().getNombreCategoria()
+                        : "Sin Categoría")
                 .idProveedor(producto.getProveedor() != null ? producto.getProveedor().getIdProveedor() : null)
                 .nombreProveedor(producto.getProveedor() != null ? producto.getProveedor().getNombreComercial() : null)
-                .idUnidadMedida(producto.getUnidadMedida().getIdUnidadMedida())
-                .nombreUnidad(producto.getUnidadMedida().getNombreUnidad())
+                .idUnidadMedida(
+                        producto.getUnidadMedida() != null ? producto.getUnidadMedida().getIdUnidadMedida() : null)
+                .nombreUnidad(producto.getUnidadMedida() != null ? producto.getUnidadMedida().getNombreUnidad()
+                        : "Sin Unidad")
                 .dimensiones(producto.getDimensiones())
                 .pesoGramos(producto.getPesoGramos())
+                .precio(producto.getPrecio())
                 .idMarca(producto.getMarca() != null ? producto.getMarca().getIdMarca() : null)
                 .nombreMarca(producto.getMarca() != null ? producto.getMarca().getNombreMarca() : null)
                 .idModelo(producto.getModelo() != null ? producto.getModelo().getIdModelo() : null)

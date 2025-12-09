@@ -13,7 +13,8 @@
     <div class="flex h-screen overflow-hidden">
 
         <!-- SIDEBAR -->
-        <aside id="sidebar" class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
+        <aside id="sidebar"
+            class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
 
             <div class="p-6 border-b border-gray-700">
                 <h1 class="text-3xl font-extrabold text-blue-400 tracking-wider">TapStyle</h1>
@@ -21,7 +22,8 @@
             </div>
 
             <div class="flex flex-col items-center py-6 border-b border-gray-700 px-4">
-                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg" data-empresa-initials>
+                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg"
+                    data-empresa-initials>
                     SV
                 </div>
                 <h2 class="mt-3 text-lg font-semibold text-center" data-empresa-nombre>Tu Empresa</h2>
@@ -248,7 +250,8 @@
                     <!-- Productos -->
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Productos *</label>
-                        <div id="productosSeleccionados" class="space-y-3 max-h-64 overflow-y-auto border border-gray-300 p-3 rounded-lg bg-gray-50">
+                        <div id="productosSeleccionados"
+                            class="space-y-3 max-h-64 overflow-y-auto border border-gray-300 p-3 rounded-lg bg-gray-50">
                             <div id="productosTable">
                                 <p class="text-gray-500 text-sm text-center">Cargando productos...</p>
                             </div>
@@ -258,7 +261,8 @@
                     <!-- Carrito de Venta -->
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Artículos Seleccionados</label>
-                        <div id="carritoProductos" class="space-y-2 max-h-48 overflow-y-auto border border-blue-300 p-3 rounded-lg bg-blue-50">
+                        <div id="carritoProductos"
+                            class="space-y-2 max-h-48 overflow-y-auto border border-blue-300 p-3 rounded-lg bg-blue-50">
                             <p class="text-gray-500 text-sm text-center">Sin productos seleccionados</p>
                         </div>
                     </div>
@@ -309,8 +313,9 @@
     </div>
 
     <!-- SCRIPTS -->
-    <script src="/frontend/config/api-config.js"></script>
-    <script src="/frontend/components/sidebar/sidebar_script.js"></script>
+    <script src="../../../../config/api-config.js"></script>
+    <script src="../../../../components/sidebar/sidebar_script.js"></script>
+    <script src="../scripts/auth.js"></script>
     <script>
 
         let idComprobantEditando = null;
@@ -429,7 +434,7 @@
         async function cargarTiposComprobante() {
             try {
                 console.log('📋 Cargando tipos de comprobante...');
-                
+
                 const response = await fetch(`${API_BASE_URL}/tipos-comprobante`, {
                     headers: { 'Authorization': `Bearer ${obtenerToken()}` }
                 });
@@ -444,7 +449,7 @@
 
                 const resultado = await response.json();
                 console.log('✅ Tipos de comprobante cargados:', resultado);
-                
+
                 const tipos = resultado.data || resultado;
 
                 const select = document.getElementById('tipoComprobante');
@@ -465,7 +470,7 @@
             try {
                 const empresaId = obtenerContexto();
                 console.log('📦 Cargando productos para empresa:', empresaId);
-                
+
                 const response = await fetch(`${API_BASE_URL}/productos/empresa/${empresaId}`, {
                     headers: { 'Authorization': `Bearer ${obtenerToken()}` }
                 });
@@ -480,7 +485,7 @@
 
                 const resultado = await response.json();
                 console.log('✅ Productos cargados:', resultado);
-                
+
                 const productos = resultado.data || resultado;
 
                 const container = document.getElementById('productosTable');
@@ -556,10 +561,10 @@
 
                 // Obtener idUsuario
                 const idUsuarioStored = localStorage.getItem('idUsuario');
-                const idUsuarioFromUser = localStorage.getItem('tapstyle_user') ? 
+                const idUsuarioFromUser = localStorage.getItem('tapstyle_user') ?
                     JSON.parse(localStorage.getItem('tapstyle_user')).idUsuario : null;
                 let idUsuario = idUsuarioStored || idUsuarioFromUser;
-                
+
                 if (!idUsuario) {
                     alert('Error: No se encontró ID de usuario. Por favor, inicia sesión de nuevo.');
                     return;
@@ -609,9 +614,9 @@
 
         function agregarProductoAlCarrito(idProducto, nombreProducto, precioUnitario) {
             const cantidad = parseInt(document.querySelector(`.cantidad-prod-${idProducto}`).value) || 1;
-            
+
             if (!window.carrito) window.carrito = [];
-            
+
             // Verificar si el producto ya está en el carrito
             const indice = window.carrito.findIndex(p => p.idProducto === idProducto);
             if (indice >= 0) {
@@ -624,14 +629,14 @@
                     cantidad
                 });
             }
-            
+
             actualizarVistaCarrito();
             actualizarTotal();
         }
 
         function actualizarVistaCarrito() {
             const container = document.getElementById('carritoProductos');
-            
+
             if (!window.carrito || window.carrito.length === 0) {
                 container.innerHTML = '<p class="text-gray-500 text-sm text-center">Sin productos seleccionados</p>';
                 return;

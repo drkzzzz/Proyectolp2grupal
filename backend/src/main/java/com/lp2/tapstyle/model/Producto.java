@@ -48,6 +48,9 @@ public class Producto implements Serializable {
     @Column
     private Integer pesoGramos;
 
+    @Column(precision = 10, scale = 2)
+    private java.math.BigDecimal precio;
+
     @ManyToOne
     @JoinColumn(name = "id_marca")
     private MarcaProducto marca;

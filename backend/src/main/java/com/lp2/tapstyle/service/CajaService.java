@@ -1,7 +1,9 @@
 package com.lp2.tapstyle.service;
 
 import com.lp2.tapstyle.dto.CajaDTO;
+import com.lp2.tapstyle.model.AperturaCaja;
 import com.lp2.tapstyle.model.Caja;
+import com.lp2.tapstyle.model.CierreCaja;
 import com.lp2.tapstyle.model.Empresa;
 import com.lp2.tapstyle.repository.CajaRepository;
 import com.lp2.tapstyle.repository.EmpresaRepository;
@@ -10,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +25,8 @@ public class CajaService {
 
     private final CajaRepository cajaRepository;
     private final EmpresaRepository empresaRepository;
+    private final com.lp2.tapstyle.repository.AperturaCajaRepository aperturaCajaRepository;
+    private final com.lp2.tapstyle.repository.CierreCajaRepository cierreCajaRepository;
 
     public List<CajaDTO> obtenerTodas() {
         return cajaRepository.findAll().stream()
@@ -68,7 +74,7 @@ public class CajaService {
         return convertToDTO(updated);
     }
 
-    public CajaDTO abrirCaja(Integer id, BigDecimal montoInicial) {
+    public CajaDTO abrirCaja(Integer id, BigDecimal montoInicial, Integer idUsuario) {
         Caja caja = cajaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Caja no encontrada"));
 
@@ -76,6 +82,17 @@ public class CajaService {
             throw new RuntimeException("La caja ya está abierta");
         }
 
+        // Registrar apertura
+        AperturaCaja apertura = AperturaCaja.builder()
+                .caja(caja)
+                .idUsuario(idUsuario != null ? idUsuario : 1) // Default to 1 if null (system/admin)
+                .fechaApertura(LocalDate.now())
+                .horaApertura(LocalTime.now())
+                .montoInicial(montoInicial != null ? montoInicial : BigDecimal.ZERO)
+                .build();
+        aperturaCajaRepository.save(apertura);
+
+        // Actualizar caja
         caja.setEstado("Abierta");
         caja.setMontoInicial(montoInicial != null ? montoInicial : BigDecimal.ZERO);
         caja.setMontoActual(montoInicial != null ? montoInicial : BigDecimal.ZERO);
@@ -86,7 +103,7 @@ public class CajaService {
         return convertToDTO(updated);
     }
 
-    public CajaDTO cerrarCaja(Integer id) {
+    public CajaDTO cerrarCaja(Integer id, BigDecimal montoFinal, String observaciones, Integer idUsuario) {
         Caja caja = cajaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Caja no encontrada"));
 
@@ -94,8 +111,39 @@ public class CajaService {
             throw new RuntimeException("La caja ya está cerrada");
         }
 
+        // Buscar la última apertura
+        AperturaCaja ultimaApertura = aperturaCajaRepository
+                .findTopByCaja_IdCajaOrderByFechaAperturaDescHoraAperturaDesc(id)
+                .orElseThrow(() -> new RuntimeException("No se encontró registro de apertura para esta caja"));
+
+        // Calcular montos
+        // Monto esperado podría ser calculado sumando movimientos, pero por ahora
+        // usamos el montoActual que se supone se actualiza con movimientos
+        BigDecimal montoEsperado = caja.getMontoActual();
+        BigDecimal diferencia = (montoFinal != null ? montoFinal : BigDecimal.ZERO).subtract(montoEsperado);
+
+        // Registrar cierre
+        CierreCaja cierre = CierreCaja.builder()
+                .apertura(ultimaApertura)
+                .caja(caja)
+                .idUsuario(idUsuario != null ? idUsuario : 1)
+                .fechaCierre(LocalDate.now())
+                .horaCierre(LocalTime.now())
+                .montoFinal(montoFinal != null ? montoFinal : BigDecimal.ZERO)
+                .montoEsperado(montoEsperado)
+                .diferencia(diferencia)
+                .observaciones(observaciones)
+                .build();
+        cierreCajaRepository.save(cierre);
+
+        // Actualizar caja
         caja.setEstado("Cerrada");
         caja.setFechaCierre(LocalDateTime.now());
+        // No reseteamos montos a 0 aquí, se quedan como 'último estado' hasta la
+        // próxima apertura?
+        // Normalmente se dejan para historial, en apertura se resetean.
+        // Pero para UI limpia, tal vez resetear? Sigamos la lógica anterior de apertura
+        // que sobreescribe.
 
         Caja updated = cajaRepository.save(caja);
         return convertToDTO(updated);
