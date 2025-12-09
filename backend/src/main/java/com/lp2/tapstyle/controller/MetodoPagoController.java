@@ -18,9 +18,14 @@ public class MetodoPagoController {
     private final MetodoPagoService metodoPagoService;
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<MetodoPagoDTO>>> obtenerTodos() {
+    public ResponseEntity<ApiResponse<List<MetodoPagoDTO>>> obtenerTodos(
+            @RequestParam(required = false) Integer idEmpresa) {
         try {
-            List<MetodoPagoDTO> metodos = metodoPagoService.obtenerTodos();
+            // Si no envían idEmpresa, retornamos vacío para seguridad en multi-tenant
+            if (idEmpresa == null) {
+                return ResponseEntity.ok(ApiResponse.success(List.of(), "Se requiere idEmpresa"));
+            }
+            List<MetodoPagoDTO> metodos = metodoPagoService.obtenerTodos(idEmpresa);
             return ResponseEntity.ok(ApiResponse.success(metodos, "Métodos de pago obtenidos"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ApiResponse.error("Error", "Error: " + e.getMessage()));
@@ -31,16 +36,17 @@ public class MetodoPagoController {
     public ResponseEntity<ApiResponse<MetodoPagoDTO>> obtenerPorId(@PathVariable Integer id) {
         try {
             MetodoPagoDTO metodo = metodoPagoService.obtenerPorId(id);
-            return ResponseEntity.ok(ApiResponse.success(metodo, "Método obtenido"));
+            return ResponseEntity.ok(ApiResponse.success(metodo, "Método de pago encontrado"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ApiResponse.error("NotFound", "Error: " + e.getMessage()));
         }
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<MetodoPagoDTO>> crear(@RequestBody MetodoPagoDTO dto) {
+    public ResponseEntity<ApiResponse<MetodoPagoDTO>> crear(@RequestBody MetodoPagoDTO dto,
+            @RequestParam Integer idEmpresa) {
         try {
-            MetodoPagoDTO creado = metodoPagoService.crear(dto);
+            MetodoPagoDTO creado = metodoPagoService.crear(dto, idEmpresa);
             return ResponseEntity.ok(ApiResponse.success(creado, "Método de pago creado"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ApiResponse.error("CreationError", "Error: " + e.getMessage()));

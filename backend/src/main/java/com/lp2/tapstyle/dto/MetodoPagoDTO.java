@@ -10,6 +10,5 @@ import lombok.*;
 public class MetodoPagoDTO {
     private Integer idTipoPago;
     private String tipoPago;
-    private String descripcion;
     private Boolean activo;
 }

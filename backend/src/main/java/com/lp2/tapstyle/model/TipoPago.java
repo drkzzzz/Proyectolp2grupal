@@ -18,15 +18,16 @@ public class TipoPago {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tipo_pago")
+    @Column(name = "id_tipopago")
     private Integer idTipoPago;
 
-    @Column(name = "tipo_pago", nullable = false, length = 100)
-    private String tipoPago;
+    @Column(name = "id_empresa")
+    private Integer idEmpresa;
 
-    @Column(name = "descripcion", length = 255)
-    private String descripcion;
+    @Column(name = "tipo_pago", nullable = false, length = 100)
+    private String tipoPago; // Nombre del método (Efectivo, Yape, etc.)
 
     @Column(name = "activo", nullable = false)
-    private Boolean activo;
+    @Builder.Default
+    private Boolean activo = true;
 }

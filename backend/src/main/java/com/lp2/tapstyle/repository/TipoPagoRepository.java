@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TipoPagoRepository extends JpaRepository<TipoPago, Integer> {
-
+    java.util.List<TipoPago> findByIdEmpresa(Integer idEmpresa);
 }

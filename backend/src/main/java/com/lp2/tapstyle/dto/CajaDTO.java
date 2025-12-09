@@ -19,4 +19,9 @@ public class CajaDTO {
     private BigDecimal montoActual;
     private LocalDateTime fechaApertura;
     private LocalDateTime fechaCierre;
+
+    // Campos para operaciones de Apertura/Cierre
+    private Integer idUsuario;
+    private BigDecimal montoFinal;
+    private String observaciones;
 }

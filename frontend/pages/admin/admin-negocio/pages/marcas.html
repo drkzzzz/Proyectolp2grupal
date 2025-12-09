@@ -174,7 +174,6 @@
                             <thead class="bg-gray-50 border-b border-gray-200">
                                 <tr>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Nombre</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">País</th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Productos</th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Estado</th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Acciones</th>
@@ -182,7 +181,7 @@
                             </thead>
                             <tbody id="tablaMarcas" class="divide-y divide-gray-200">
                                 <tr>
-                                    <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                                    <td colspan="4" class="px-6 py-4 text-center text-gray-500">
                                         <i class="fas fa-spinner fa-spin mr-2"></i> Cargando marcas...
                                     </td>
                                 </tr>
@@ -210,14 +209,12 @@
 
             <div class="p-6">
                 <form id="formMarca" onsubmit="guardarMarca(event)">
-
                     <!-- Nombre -->
                     <div class="mb-6">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Nombre *</label>
                         <input type="text" id="nombre" required
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                     </div>
-
                     <!-- Botones -->
                     <div class="flex gap-3 justify-end">
                         <button type="button" onclick="cerrarModalMarca()"
@@ -229,11 +226,8 @@
                             <i class="fas fa-save"></i> Guardar
                         </button>
                     </div>
-
                 </form>
             </div>
-
-
         </div>
     </div>
 
@@ -284,7 +278,6 @@
                     tbody.innerHTML = data.data.map(marca => `
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 text-sm font-medium text-gray-900">${marca.nombreMarca}</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">-</td>
                             <td class="px-6 py-4 text-sm text-gray-700">
                                 <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold">0</span>
                             </td>
@@ -403,7 +396,7 @@
         function mostrarTablaVacia() {
             document.getElementById('tablaMarcas').innerHTML = `
                 <tr>
-                    <td colspan="5" class="px-6 py-8 text-center">
+                    <td colspan="4" class="px-6 py-8 text-center">
                         <i class="fas fa-inbox text-3xl text-gray-400 mb-2"></i>
                         <p class="text-gray-500">No hay marcas registradas</p>
                     </td>

@@ -14,8 +14,8 @@ public class MetodoPagoService {
 
     private final TipoPagoRepository tipoPagoRepository;
 
-    public List<MetodoPagoDTO> obtenerTodos() {
-        return tipoPagoRepository.findAll().stream()
+    public List<MetodoPagoDTO> obtenerTodos(Integer idEmpresa) {
+        return tipoPagoRepository.findByIdEmpresa(idEmpresa).stream()
                 .map(this::convertToDTO)
                 .toList();
     }
@@ -26,10 +26,10 @@ public class MetodoPagoService {
         return convertToDTO(tipoPago);
     }
 
-    public MetodoPagoDTO crear(MetodoPagoDTO dto) {
+    public MetodoPagoDTO crear(MetodoPagoDTO dto, Integer idEmpresa) {
         TipoPago tipoPago = TipoPago.builder()
+                .idEmpresa(idEmpresa)
                 .tipoPago(dto.getTipoPago())
-                .descripcion(dto.getDescripcion())
                 .activo(dto.getActivo() != null ? dto.getActivo() : true)
                 .build();
         TipoPago guardado = tipoPagoRepository.save(tipoPago);
@@ -40,7 +40,6 @@ public class MetodoPagoService {
         TipoPago tipoPago = tipoPagoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Método de pago no encontrado"));
         tipoPago.setTipoPago(dto.getTipoPago());
-        tipoPago.setDescripcion(dto.getDescripcion());
         if (dto.getActivo() != null) {
             tipoPago.setActivo(dto.getActivo());
         }
@@ -58,7 +57,6 @@ public class MetodoPagoService {
         return MetodoPagoDTO.builder()
                 .idTipoPago(tipoPago.getIdTipoPago())
                 .tipoPago(tipoPago.getTipoPago())
-                .descripcion(tipoPago.getDescripcion())
                 .activo(tipoPago.getActivo())
                 .build();
     }

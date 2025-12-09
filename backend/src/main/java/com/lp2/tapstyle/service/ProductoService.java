@@ -43,14 +43,29 @@ public class ProductoService {
     }
 
     public ProductoDTO crear(ProductoDTO dto) {
+        // Validación de datos requeridos
+        if (dto.getIdEmpresa() == null) {
+            throw new RuntimeException("El ID de empresa es requerido");
+        }
+        if (dto.getIdCategoria() == null) {
+            throw new RuntimeException("El ID de categoría es requerido");
+        }
+        if (dto.getIdUnidadMedida() == null) {
+            throw new RuntimeException("El ID de unidad de medida es requerido");
+        }
+
+        // Buscar empresa
         Empresa empresa = empresaRepository.findById(dto.getIdEmpresa())
-                .orElseThrow(() -> new RuntimeException("Empresa no encontrada"));
+                .orElseThrow(() -> new RuntimeException("Empresa con ID " + dto.getIdEmpresa() + " no encontrada"));
 
+        // Buscar categoría
         CategoriaProducto categoria = categoriaRepository.findById(dto.getIdCategoria())
-                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+                .orElseThrow(() -> new RuntimeException("Categoría con ID " + dto.getIdCategoria() + " no encontrada"));
 
+        // Buscar unidad de medida
         UnidadMedida unidad = unidadMedidaRepository.findById(dto.getIdUnidadMedida())
-                .orElseThrow(() -> new RuntimeException("Unidad de medida no encontrada"));
+                .orElseThrow(() -> new RuntimeException(
+                        "Unidad de medida con ID " + dto.getIdUnidadMedida() + " no encontrada"));
 
         Producto producto = Producto.builder()
                 .empresa(empresa)
@@ -63,28 +78,42 @@ public class ProductoService {
                 .precio(dto.getPrecio())
                 .build();
 
-        if (dto.getIdProveedor() != null) {
-            Proveedor proveedor = proveedorRepository.findById(dto.getIdProveedor()).orElse(null);
+        // Proveedor (opcional)
+        if (dto.getIdProveedor() != null && dto.getIdProveedor() > 0) {
+            Proveedor proveedor = proveedorRepository.findById(dto.getIdProveedor())
+                    .orElseThrow(
+                            () -> new RuntimeException("Proveedor con ID " + dto.getIdProveedor() + " no encontrado"));
             producto.setProveedor(proveedor);
         }
 
-        if (dto.getIdMarca() != null) {
-            MarcaProducto marca = marcaRepository.findById(dto.getIdMarca()).orElse(null);
+        // Marca (opcional)
+        if (dto.getIdMarca() != null && dto.getIdMarca() > 0) {
+            MarcaProducto marca = marcaRepository.findById(dto.getIdMarca())
+                    .orElseThrow(() -> new RuntimeException("Marca con ID " + dto.getIdMarca() + " no encontrada"));
             producto.setMarca(marca);
         }
 
-        if (dto.getIdModelo() != null) {
-            Modelo modelo = modeloRepository.findById(dto.getIdModelo()).orElse(null);
+        // Modelo (opcional)
+        if (dto.getIdModelo() != null && dto.getIdModelo() > 0) {
+            Modelo modelo = modeloRepository.findById(dto.getIdModelo())
+                    .orElseThrow(() -> new RuntimeException("Modelo con ID " + dto.getIdModelo() + " no encontrado"));
             producto.setModelo(modelo);
         }
 
-        if (dto.getIdMaterial() != null) {
-            MaterialProducto material = materialRepository.findById(dto.getIdMaterial()).orElse(null);
+        // Material (opcional)
+        if (dto.getIdMaterial() != null && dto.getIdMaterial() > 0) {
+            MaterialProducto material = materialRepository.findById(dto.getIdMaterial())
+                    .orElseThrow(
+                            () -> new RuntimeException("Material con ID " + dto.getIdMaterial() + " no encontrado"));
             producto.setMaterial(material);
         }
 
-        Producto saved = productoRepository.save(producto);
-        return convertToDTO(saved);
+        try {
+            Producto saved = productoRepository.save(producto);
+            return convertToDTO(saved);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al guardar el producto: " + e.getMessage());
+        }
     }
 
     public ProductoDTO actualizar(Integer id, ProductoDTO dto) {

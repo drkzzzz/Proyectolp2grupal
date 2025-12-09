@@ -13,7 +13,8 @@
     <div class="flex h-screen overflow-hidden">
 
         <!-- SIDEBAR -->
-        <aside id="sidebar" class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
+        <aside id="sidebar"
+            class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
 
             <div class="p-6 border-b border-gray-700">
                 <h1 class="text-3xl font-extrabold text-blue-400 tracking-wider">TapStyle</h1>
@@ -21,7 +22,8 @@
             </div>
 
             <div class="flex flex-col items-center py-6 border-b border-gray-700 px-4">
-                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg" data-empresa-initials>
+                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg"
+                    data-empresa-initials>
                     SV
                 </div>
                 <h2 class="mt-3 text-lg font-semibold text-center" data-empresa-nombre>Tu Empresa</h2>
@@ -46,13 +48,16 @@
                         <i class="fas fa-chevron-down text-sm"></i>
                     </button>
                     <div class="submenu hidden ml-8 space-y-2 mt-2">
-                        <a href="productos.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="productos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-cube mr-2"></i> Productos
                         </a>
-                        <a href="categorias.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="categorias.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-list mr-2"></i> Categorías
                         </a>
-                        <a href="marcas.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="marcas.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-tag mr-2"></i> Marcas
                         </a>
                     </div>
@@ -68,13 +73,16 @@
                         <i class="fas fa-chevron-down text-sm"></i>
                     </button>
                     <div class="submenu hidden ml-8 space-y-2 mt-2">
-                        <a href="compras.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="compras.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-shopping-cart mr-2"></i> Compras
                         </a>
-                        <a href="ventas.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="ventas.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-cash-register mr-2"></i> Ventas
                         </a>
-                        <a href="stock.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="stock.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-warehouse mr-2"></i> Stock
                         </a>
                     </div>
@@ -90,7 +98,8 @@
                         <i class="fas fa-chevron-up text-sm"></i>
                     </button>
                     <div class="submenu ml-8 space-y-2 mt-2">
-                        <a href="caja.html" class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded transition">
+                        <a href="caja.html"
+                            class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded transition">
                             <i class="fas fa-cash-register mr-2"></i> Caja
                         </a>
                     </div>
@@ -135,8 +144,10 @@
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Nombre</th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Ubicación</th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Estado</th>
-                                    <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">Monto Inicial</th>
-                                    <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">Monto Actual</th>
+                                    <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">Monto Inicial
+                                    </th>
+                                    <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">Monto Actual
+                                    </th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Apertura</th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Acciones</th>
                                 </tr>
@@ -247,17 +258,70 @@
         </div>
     </div>
 
+    <!-- MODAL: Cerrar Caja -->
+    <div id="modalCerrarCaja" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md">
+
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-gray-800">Cerrar Caja</h2>
+                <button onclick="cerrarModalCerrarCaja()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <div class="p-6">
+                <p class="text-gray-700 mb-4"><strong id="nombreCajaCierra">Caja</strong> - Arqueo de Cierre</p>
+                <form id="formCerrarCaja" onsubmit="cerrarCajaConfirmado(event)">
+
+                    <!-- Monto Final -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Monto Final (Real) *</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-2 text-gray-600">$</span>
+                            <input type="number" id="montoFinalCierra" required min="0" step="0.01" placeholder="0.00"
+                                class="w-full pl-7 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Ingresa el dinero físico que hay en caja.</p>
+                    </div>
+
+                    <!-- Observaciones -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Observaciones</label>
+                        <textarea id="observacionesCierre" rows="3"
+                            placeholder="Ej: Faltante justificado, billete roto, etc."
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="flex gap-3 justify-end">
+                        <button type="button" onclick="cerrarModalCerrarCaja()"
+                            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                            Cancelar
+                        </button>
+                        <button type="submit"
+                            class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg flex items-center gap-2">
+                            <i class="fas fa-lock"></i> Cerrar Caja
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
     <!-- SCRIPTS -->
-    <script src="/frontend/config/api-config.js"></script>
-    <script src="/frontend/components/sidebar/sidebar_script.js"></script>
+    <script src="../../../../config/api-config.js"></script>
+    <script src="../../../../components/sidebar/sidebar_script.js"></script>
+    <script src="../scripts/auth.js"></script>
     <script>
 
         let idCajaEditar = null;
         let idCajaAbreModal = null;
+        let idCajaCierraModal = null;
 
-        function obtenerToken() {
-            return localStorage.getItem('tapstyle_token') || localStorage.getItem('token') || localStorage.getItem('authToken');
-        }
+        // NOTA: obtenerToken y obtenerContexto ya vienen de auth.js
+        // Se eliminan las definiciones inline redundantes
 
         function toggleMenu(button) {
             const submenu = button.nextElementSibling;
@@ -294,11 +358,22 @@
 
         async function cargarCajas() {
             try {
-                const contexto = obtenerContexto();
-                if (!contexto) return;
+                // obtenerContexto viene de auth.js y devuelve el objeto completo
+                const ctx = obtenerContexto();
+                if (!ctx || !ctx.idEmpresa) {
+                    console.error("No hay contexto de empresa");
+                    return;
+                }
 
-                const response = await fetch(`${API_BASE_URL}/cajas/empresa/${contexto.idEmpresa}`, {
-                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
+                // obtenerToken viene de auth.js (o se usa localStorage directamente en auth.js, pero aquí lo llamamos si existe o usamos el del storage)
+                // auth.js no exporta 'obtenerToken' explicitamente como función global retornable simple, pero validarAutenticacion retorna el token.
+                // Re-implementamos un simple helper o usamos el del localStorage pq auth.js no tiene 'function obtenerToken' expuesta globalmente simple, 
+                // pero 'validarAutenticacion' devuelve objeto con token.
+                // Mejor leemos directo para asegurar compatibilidad con lo que ya había.
+                const token = localStorage.getItem('tapstyle_token') || localStorage.getItem('token') || localStorage.getItem('authToken');
+
+                const response = await fetch(`${API_BASE_URL}/cajas/empresa/${ctx.idEmpresa}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
                 });
 
                 if (!response.ok) throw new Error('Error al cargar cajas');
@@ -312,6 +387,11 @@
                 }
 
                 const tbody = document.getElementById('tablaCajas');
+                if (cajas.length === 0) {
+                    mostrarTablaCajasVacia();
+                    return;
+                }
+
                 tbody.innerHTML = cajas.map(caja => `
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4 text-sm text-gray-700 font-medium">${caja.nombreCaja}</td>
@@ -325,9 +405,11 @@
                         <td class="px-6 py-4 text-sm text-right text-gray-700 font-semibold">$${parseFloat(caja.montoActual || 0).toFixed(2)}</td>
                         <td class="px-6 py-4 text-sm text-gray-700">${caja.fechaApertura ? new Date(caja.fechaApertura).toLocaleDateString() : '-'}</td>
                         <td class="px-6 py-4 text-sm flex gap-2">
-                            ${caja.estado === 'Cerrada' ? `<button onclick="mostrarModalAbrirCaja(${caja.idCaja}, '${caja.nombreCaja}')" class="text-green-600 hover:text-green-800"><i class="fas fa-unlock"></i></button>` : `<button onclick="cerrarCaja(${caja.idCaja})" class="text-red-600 hover:text-red-800"><i class="fas fa-lock"></i></button>`}
-                            <button onclick="editarCaja(${caja.idCaja})" class="text-blue-600 hover:text-blue-800"><i class="fas fa-edit"></i></button>
-                            <button onclick="eliminarCaja(${caja.idCaja})" class="text-red-600 hover:text-red-800"><i class="fas fa-trash"></i></button>
+                            ${caja.estado === 'Cerrada' ?
+                        `<button onclick="mostrarModalAbrirCaja(${caja.idCaja}, '${caja.nombreCaja}')" class="text-green-600 hover:text-green-800" title="Abrir Caja"><i class="fas fa-unlock"></i></button>` :
+                        `<button onclick="cerrarCaja(${caja.idCaja}, '${caja.nombreCaja}')" class="text-red-600 hover:text-red-800" title="Cerrar Caja"><i class="fas fa-lock"></i></button>`}
+                            <button onclick="editarCaja(${caja.idCaja})" class="text-blue-600 hover:text-blue-800" title="Editar"><i class="fas fa-edit"></i></button>
+                            <button onclick="eliminarCaja(${caja.idCaja})" class="text-red-600 hover:text-red-800" title="Eliminar"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 `).join('');
@@ -339,8 +421,9 @@
 
         async function editarCaja(id) {
             try {
+                const token = localStorage.getItem('tapstyle_token') || localStorage.getItem('token');
                 const response = await fetch(`${API_BASE_URL}/cajas/${id}`, {
-                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
+                    headers: { 'Authorization': `Bearer ${token}` }
                 });
 
                 if (!response.ok) throw new Error('Error al cargar caja');
@@ -363,6 +446,7 @@
 
             const nombre = document.getElementById('nombreCaja').value;
             const ubicacion = document.getElementById('ubicacionCaja').value;
+            const token = localStorage.getItem('tapstyle_token') || localStorage.getItem('token');
 
             if (!nombre || !ubicacion) {
                 alert('Completa todos los campos');
@@ -370,9 +454,9 @@
             }
 
             try {
-                const contexto = obtenerContexto();
+                const ctx = obtenerContexto();
                 const datos = {
-                    idEmpresa: contexto.idEmpresa,
+                    idEmpresa: ctx.idEmpresa,
                     nombreCaja: nombre,
                     ubicacion: ubicacion
                 };
@@ -384,7 +468,7 @@
                     method: method,
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${obtenerToken()}`
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify(datos)
                 });
@@ -406,64 +490,137 @@
             document.getElementById('modalAbrirCaja').classList.remove('hidden');
         }
 
-        async function abrirCaja(event) {
+        function obtenerUsuarioId() {
+            const ctx = obtenerContexto();
+            // auth.js devuelve estructura { usuario: {id_usuario, ...}, ... }
+            return ctx.usuario.id_usuario || ctx.usuario.idUsuario;
+        }
+
+        function abrirCaja(event) {
             event.preventDefault();
 
             const monto = parseFloat(document.getElementById('montoInicialAbre').value);
+            const token = localStorage.getItem('tapstyle_token') || localStorage.getItem('token');
 
-            if (!monto || monto < 0) {
+            if (!monto && monto !== 0) {
                 alert('Ingresa un monto válido');
                 return;
             }
 
             try {
-                const response = await fetch(`${API_BASE_URL}/cajas/${idCajaAbreModal}/abrir`, {
+                const idUsuario = obtenerUsuarioId();
+                if (!idUsuario) {
+                    alert('Error: No se puede identificar al usuario. Inicia sesión nuevamente.');
+                    return;
+                }
+
+                fetch(`${API_BASE_URL}/cajas/${idCajaAbreModal}/abrir`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${obtenerToken()}`
+                        'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify({ montoInicial: monto })
-                });
+                    body: JSON.stringify({
+                        montoInicial: monto,
+                        idUsuario: idUsuario
+                    })
+                })
+                    .then(response => {
+                        if (!response.ok) return response.json().then(err => { throw new Error(err.message || err.mensaje || 'Error al abrir'); });
+                        return response.json();
+                    })
+                    .then(data => {
+                        alert('✅ Caja abierta exitosamente');
+                        cerrarModalAbrirCaja();
+                        cargarCajas();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('❌ Error: ' + error.message);
+                    });
 
-                if (!response.ok) throw new Error('Error al abrir');
-
-                alert('Caja abierta exitosamente');
-                cerrarModalAbrirCaja();
-                cargarCajas();
             } catch (error) {
                 alert('Error: ' + error.message);
             }
         }
 
-        async function cerrarCaja(id) {
-            if (!confirm('¿Cerrar esta caja?')) return;
+        function mostrarModalCerrarCaja(id, nombre) {
+            idCajaCierraModal = id;
+            document.getElementById('nombreCajaCierra').textContent = nombre;
+            document.getElementById('montoFinalCierra').value = '';
+            document.getElementById('observacionesCierre').value = '';
+            document.getElementById('modalCerrarCaja').classList.remove('hidden');
+        }
+
+        function cerrarModalCerrarCaja() {
+            document.getElementById('modalCerrarCaja').classList.add('hidden');
+            idCajaCierraModal = null;
+        }
+
+        function cerrarCajaConfirmado(event) {
+            event.preventDefault();
+
+            const montoFinal = parseFloat(document.getElementById('montoFinalCierra').value);
+            const observaciones = document.getElementById('observacionesCierre').value;
+            const token = localStorage.getItem('tapstyle_token') || localStorage.getItem('token');
+
+            if (!montoFinal && montoFinal !== 0) {
+                alert('Ingresa el monto final');
+                return;
+            }
 
             try {
-                const response = await fetch(`${API_BASE_URL}/cajas/${id}/cerrar`, {
+                const idUsuario = obtenerUsuarioId();
+                if (!idUsuario) {
+                    alert('Error: identifícate nuevamente.');
+                    return;
+                }
+
+                fetch(`${API_BASE_URL}/cajas/${idCajaCierraModal}/cerrar`, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${obtenerToken()}`
-                    }
-                });
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        montoFinal: montoFinal,
+                        observaciones: observaciones,
+                        idUsuario: idUsuario
+                    })
+                })
+                    .then(response => {
+                        if (!response.ok) return response.json().then(err => { throw new Error(err.message || err.mensaje || 'Error al cerrar'); });
+                        return response.json();
+                    })
+                    .then(data => {
+                        alert('✅ Caja cerrada correctamente.');
+                        cerrarModalCerrarCaja();
+                        cargarCajas();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('❌ Error: ' + error.message);
+                    });
 
-                if (!response.ok) throw new Error('Error al cerrar');
-
-                alert('Caja cerrada exitosamente');
-                cargarCajas();
             } catch (error) {
                 alert('Error: ' + error.message);
             }
+        }
+
+        // Función antigua reemplazada por mostrarModalCerrarCaja
+        function cerrarCaja(id, nombre) {
+            mostrarModalCerrarCaja(id, nombre || 'Caja');
         }
 
         async function eliminarCaja(id) {
             if (!confirm('¿Estás seguro de que deseas eliminar esta caja?')) return;
+            const token = localStorage.getItem('tapstyle_token') || localStorage.getItem('token');
 
             try {
                 const response = await fetch(`${API_BASE_URL}/cajas/${id}`, {
                     method: 'DELETE',
                     headers: {
-                        'Authorization': `Bearer ${obtenerToken()}`
+                        'Authorization': `Bearer ${token}`
                     }
                 });
 
@@ -487,12 +644,21 @@
             `;
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const auth = validarAutenticacion();
-            if (!auth) return;
+        // La inicialización de AUTH.JS ya llama a validarAutenticacion y actualizarUIUsuario automáticamente en DOMContentLoaded.
+        // Solo necesitamos llamar a cargarCajas cuando la página esté lista.
 
-            console.log('💰 Cargando cajas...');
-            cargarCajas();
+        document.addEventListener('DOMContentLoaded', () => {
+            // Un pequeño delay o check para asegurar que auth.js terminó (aunque es síncrono su event listener)
+            // auth.js expone validarAutenticacion, podemos usarla para doble check
+            if (typeof validarAutenticacion === 'function') {
+                const auth = validarAutenticacion();
+                if (auth) {
+                    console.log('💰 Iniciando módulo caja...');
+                    cargarCajas();
+                }
+            } else {
+                console.error("Auth.js no cargó correctamente");
+            }
         });
 
     </script>
