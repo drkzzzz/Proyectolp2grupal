@@ -88,4 +88,16 @@ public class InventarioController {
         inventarioService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/limpiar/huerfanos")
+    public ResponseEntity<?> limpiarInventarioHuerfano() {
+        try {
+            int eliminados = inventarioService.limpiarInventarioHuerfano();
+            return ResponseEntity.ok(
+                    new ApiResponse<>(true, "Se eliminaron " + eliminados + " registros huérfanos", eliminados, null));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(
+                    new ApiResponse<>(false, "Error al limpiar inventario: " + e.getMessage(), null, null));
+        }
+    }
 }

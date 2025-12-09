@@ -36,14 +36,14 @@
 
                 <div class="mt-4">
                     <button onclick="toggleMenu(this)"
-                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-gray-700 transition duration-150 text-left">
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-gray-700 transition duration-150 text-left" style="background-color: rgb(55, 65, 81);">
                         <div class="flex items-center">
                             <i class="fas fa-box mr-3 text-lg"></i>
                             <span class="font-medium">Catálogo</span>
                         </div>
                         <i class="fas fa-chevron-up text-sm"></i>
                     </button>
-                    <div class="submenu ml-8 space-y-2 mt-2">
+                    <div class="submenu ml-8 space-y-2 mt-2" style="display: block;">
                         <a href="productos.html"
                             class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 rounded transition">
                             <i class="fas fa-cube mr-2"></i> Productos
@@ -55,6 +55,85 @@
                         <a href="marcas.html"
                             class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-tag mr-2"></i> Marcas
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-tasks mr-3 text-lg"></i>
+                            <span class="font-medium">Operaciones</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="submenu hidden ml-8 space-y-2 mt-2">
+                        <a href="compras.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-shopping-cart mr-2"></i> Compras
+                        </a>
+                        <a href="ventas.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-cash-register mr-2"></i> Ventas
+                        </a>
+                        <a href="stock.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-warehouse mr-2"></i> Stock
+                        </a>
+                        <a href="proveedores.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-truck mr-2"></i> Proveedores
+                        </a>
+                        <a href="metodos_pago.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-credit-card mr-2"></i> Métodos de Pago
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-money-bill-wave mr-3 text-lg"></i>
+                            <span class="font-medium">Finanzas</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="submenu hidden ml-8 space-y-2 mt-2">
+                        <a href="caja.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-cash-register mr-2"></i> Caja
+                        </a>
+                        <a href="finanzas_pagos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-chart-bar mr-2"></i> Finanzas
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-cog mr-3 text-lg"></i>
+                            <span class="font-medium">Administración</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="submenu hidden ml-8 space-y-2 mt-2">
+                        <a href="clientes.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-users mr-2"></i> Clientes
+                        </a>
+                        <a href="empleados.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-user-tie mr-2"></i> Empleados
+                        </a>
+                        <a href="roles_permisos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-shield-alt mr-2"></i> Roles y Permisos
                         </a>
                     </div>
                 </div>

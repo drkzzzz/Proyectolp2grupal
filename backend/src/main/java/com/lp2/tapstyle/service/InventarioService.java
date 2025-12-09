@@ -30,6 +30,8 @@ public class InventarioService {
 
     public List<InventarioDTO> obtenerTodos() {
         return inventarioRepository.findAll().stream()
+                .filter(inventario -> inventario.getVariante() != null &&
+                        inventario.getVariante().getProducto() != null)
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
@@ -42,18 +44,60 @@ public class InventarioService {
 
     public List<InventarioDTO> obtenerPorAlmacen(Integer almacenId) {
         return inventarioRepository.findByAlmacen_IdAlmacen(almacenId).stream()
+                .filter(inventario -> inventario.getVariante() != null &&
+                        inventario.getVariante().getProducto() != null)
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
     public List<InventarioDTO> obtenerPorEmpresa(Integer empresaId) {
-        return inventarioRepository.findByAlmacen_Empresa_IdEmpresa(empresaId).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+        try {
+            // Obtener todos los inventarios de la empresa sin lazy loading inicial
+            List<Inventario> inventarios = inventarioRepository.findByAlmacen_Empresa_IdEmpresa(empresaId);
+
+            // Filtrar y procesar con manejo de excepciones
+            return inventarios.stream()
+                    .filter(inventario -> {
+                        try {
+                            // Validar que variante y producto existan sin lazy loading
+                            if (inventario.getVariante() == null) {
+                                System.err.println(
+                                        "⚠️ Inventario " + inventario.getIdInventario() + " sin variante válida");
+                                return false;
+                            }
+                            if (inventario.getVariante().getProducto() == null) {
+                                System.err.println("⚠️ Variante " + inventario.getVariante().getIdVariante()
+                                        + " sin producto válido");
+                                return false;
+                            }
+                            return true;
+                        } catch (Exception e) {
+                            System.err.println("⚠️ Error validando inventario " + inventario.getIdInventario() + ": "
+                                    + e.getMessage());
+                            return false;
+                        }
+                    })
+                    .map(inventario -> {
+                        try {
+                            return convertToDTO(inventario);
+                        } catch (Exception e) {
+                            System.err.println("⚠️ Error convirtiendo inventario: " + e.getMessage());
+                            return null;
+                        }
+                    })
+                    .filter(dto -> dto != null)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            System.err.println("❌ Error en obtenerPorEmpresa: " + e.getMessage());
+            e.printStackTrace();
+            return List.of();
+        }
     }
 
     public List<InventarioDTO> obtenerProductosBajoStock() {
         return inventarioRepository.findByCantidadStockLessThan(100).stream()
+                .filter(inventario -> inventario.getVariante() != null &&
+                        inventario.getVariante().getProducto() != null)
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
@@ -154,13 +198,36 @@ public class InventarioService {
         inventarioRepository.save(inventario);
     }
 
+    public int limpiarInventarioHuerfano() {
+        System.out.println("🧹 Iniciando limpieza de inventario huérfano...");
+        try {
+            int eliminados = inventarioRepository.deleteHuerfanoInventories();
+            System.out.println("✅ Se eliminaron " + eliminados + " registros de inventario huérfano");
+            return eliminados;
+        } catch (Exception e) {
+            System.err.println("❌ Error al limpiar inventario huérfano: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("Error al limpiar inventario huérfano: " + e.getMessage());
+        }
+    }
+
     private InventarioDTO convertToDTO(Inventario inventario) {
-        Producto producto = inventario.getVariante().getProducto();
+        if (inventario == null || inventario.getVariante() == null) {
+            return null;
+        }
+
+        VarianteProducto variante = inventario.getVariante();
+        Producto producto = variante.getProducto();
+
+        if (producto == null) {
+            return null;
+        }
+
         return InventarioDTO.builder()
                 .idInventario(inventario.getIdInventario())
                 .idProducto(producto.getIdProducto())
                 .nombreProducto(producto.getNombreProducto())
-                .idVariante(inventario.getVariante().getIdVariante())
+                .idVariante(variante.getIdVariante())
                 .idAlmacen(inventario.getAlmacen().getIdAlmacen())
                 .nombreAlmacen(inventario.getAlmacen().getNombreAlmacen())
                 .cantidadStock(inventario.getCantidadStock())
