@@ -20,6 +20,7 @@ public class ProductoDTO {
     private String nombreUnidad;
     private String dimensiones;
     private Integer pesoGramos;
+    private java.math.BigDecimal precio;
     private Integer idMarca;
     private String nombreMarca;
     private Integer idModelo;

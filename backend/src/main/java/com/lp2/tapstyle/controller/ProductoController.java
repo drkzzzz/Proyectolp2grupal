@@ -27,6 +27,7 @@ public class ProductoController {
             List<ProductoDTO> productos = productoService.obtenerPorEmpresa(empresaId);
             return ResponseEntity.ok(ApiResponse.success(productos, "Productos cargados exitosamente"));
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.badRequest()
                     .body(ApiResponse.error("ProductoError", "Error al obtener productos: " + e.getMessage()));
         }

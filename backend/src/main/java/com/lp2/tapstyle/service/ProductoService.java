@@ -60,6 +60,7 @@ public class ProductoService {
                 .unidadMedida(unidad)
                 .dimensiones(dto.getDimensiones())
                 .pesoGramos(dto.getPesoGramos())
+                .precio(dto.getPrecio())
                 .build();
 
         if (dto.getIdProveedor() != null) {
@@ -94,6 +95,7 @@ public class ProductoService {
         producto.setDescripcion(dto.getDescripcion());
         producto.setDimensiones(dto.getDimensiones());
         producto.setPesoGramos(dto.getPesoGramos());
+        producto.setPrecio(dto.getPrecio());
 
         Producto updated = productoRepository.save(producto);
         return convertToDTO(updated);
@@ -109,14 +111,18 @@ public class ProductoService {
                 .idEmpresa(producto.getEmpresa().getIdEmpresa())
                 .nombreProducto(producto.getNombreProducto())
                 .descripcion(producto.getDescripcion())
-                .idCategoria(producto.getCategoria().getIdCategoria())
-                .nombreCategoria(producto.getCategoria().getNombreCategoria())
+                .idCategoria(producto.getCategoria() != null ? producto.getCategoria().getIdCategoria() : null)
+                .nombreCategoria(producto.getCategoria() != null ? producto.getCategoria().getNombreCategoria()
+                        : "Sin Categoría")
                 .idProveedor(producto.getProveedor() != null ? producto.getProveedor().getIdProveedor() : null)
                 .nombreProveedor(producto.getProveedor() != null ? producto.getProveedor().getNombreComercial() : null)
-                .idUnidadMedida(producto.getUnidadMedida().getIdUnidadMedida())
-                .nombreUnidad(producto.getUnidadMedida().getNombreUnidad())
+                .idUnidadMedida(
+                        producto.getUnidadMedida() != null ? producto.getUnidadMedida().getIdUnidadMedida() : null)
+                .nombreUnidad(producto.getUnidadMedida() != null ? producto.getUnidadMedida().getNombreUnidad()
+                        : "Sin Unidad")
                 .dimensiones(producto.getDimensiones())
                 .pesoGramos(producto.getPesoGramos())
+                .precio(producto.getPrecio())
                 .idMarca(producto.getMarca() != null ? producto.getMarca().getIdMarca() : null)
                 .nombreMarca(producto.getMarca() != null ? producto.getMarca().getNombreMarca() : null)
                 .idModelo(producto.getModelo() != null ? producto.getModelo().getIdModelo() : null)
