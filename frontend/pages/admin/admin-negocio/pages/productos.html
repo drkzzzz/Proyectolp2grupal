@@ -547,6 +547,16 @@
                 descripcion: document.getElementById('descripcion').value.trim(),
                 idCategoria: parseInt(idCategoria),
                 idUnidadMedida: parseInt(idUnidadMedida)
+                nombreProducto: document.getElementById('nombreProducto').value,
+                descripcion: document.getElementById('descripcion').value,
+                precio: parseFloat(document.getElementById('precio').value),
+                idCategoria: parseInt(document.getElementById('idCategoria').value),
+                idUnidadMedida: parseInt(document.getElementById('idUnidadMedida').value),
+                idMarca: document.getElementById('idMarca').value ? parseInt(document.getElementById('idMarca').value) : null,
+                idProveedor: document.getElementById('idProveedor').value ? parseInt(document.getElementById('idProveedor').value) : null,
+                pesoGramos: document.getElementById('pesoGramos').value ? parseInt(document.getElementById('pesoGramos').value) : null,
+                dimensiones: document.getElementById('dimensiones').value,
+                idMaterial: document.getElementById('idMaterial').value ? parseInt(document.getElementById('idMaterial').value) : null
             };
 
             // Solo agregar marca si se seleccionó una válida
