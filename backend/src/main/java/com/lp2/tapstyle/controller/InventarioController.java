@@ -2,6 +2,7 @@ package com.lp2.tapstyle.controller;
 
 import com.lp2.tapstyle.dto.AjusteStockRequest;
 import com.lp2.tapstyle.dto.InventarioDTO;
+import com.lp2.tapstyle.dto.ApiResponse;
 import com.lp2.tapstyle.service.InventarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -62,13 +63,23 @@ public class InventarioController {
     }
 
     @PostMapping("/registrar-ajuste")
-    public ResponseEntity<String> registrarAjuste(@RequestBody AjusteStockRequest request) {
+    public ResponseEntity<?> registrarAjuste(@RequestBody AjusteStockRequest request) {
         try {
+            if (request.getIdProducto() == null || request.getCantidad() == null || request.getTipo() == null) {
+                return ResponseEntity.badRequest().body(
+                        new ApiResponse<>(false, "Campos requeridos: idProducto, cantidad, tipo", null, null));
+            }
+
             inventarioService.ajustarStockPorProducto(request.getIdProducto(), request.getCantidad(),
                     request.getTipo());
-            return ResponseEntity.ok("Ajuste guardado exitosamente");
+            return ResponseEntity.ok(
+                    new ApiResponse<>(true, "Ajuste guardado exitosamente", null, null));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(400).body(
+                    new ApiResponse<>(false, e.getMessage(), null, null));
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error al guardar ajuste: " + e.getMessage());
+            return ResponseEntity.status(500).body(
+                    new ApiResponse<>(false, "Error al guardar ajuste: " + e.getMessage(), null, null));
         }
     }
 

@@ -1,8 +1,11 @@
 -- phpMyAdmin SQL Dump
--- Versión 5.2.1
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
 -- Servidor: 127.0.0.1
--- Base de datos: `tapstyle`
--- Tiempo de generación: 06-12-2025
+-- Tiempo de generación: 09-12-2025 a las 06:44:31
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -15,25 +18,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Nota de Corrección: Se eliminaron las tablas duplicadas (ej. `categorias_producto`, `marcas_producto`, etc.) 
--- y se reasignaron todas las referencias (`FOREIGN KEY`) a las tablas principales.
+-- Base de datos: `tapstyle`
 --
-
---
--- Eliminación de tablas duplicadas o redundantes para evitar conflictos
---
-DROP TABLE IF EXISTS `variantes_producto`;
-DROP TABLE IF EXISTS `unidades_medida`;
-DROP TABLE IF EXISTS `tipo_documento`;
-DROP TABLE IF EXISTS `materiales_producto`;
-DROP TABLE IF EXISTS `marcas_producto`;
-DROP TABLE IF EXISTS `categorias_producto`;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `almacenes`
 --
+
 CREATE TABLE `almacenes` (
   `id_almacen` int(11) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -44,15 +37,19 @@ CREATE TABLE `almacenes` (
 --
 -- Volcado de datos para la tabla `almacenes`
 --
+
 INSERT INTO `almacenes` (`id_almacen`, `id_empresa`, `nombre_almacen`, `ubicacion`) VALUES
 (1, 1, 'Almacén Central GE', 'Jr. Warehouse #100'),
-(2, 1, 'Almacén Secundario GE', 'Av. Segunda #200');
+(2, 1, 'Almacén Secundario GE', 'Av. Segunda #200'),
+(10, 200, 'Almacén Principal', NULL),
+(100, 122, 'Almacén Principal SANTIS', 'Sede Central');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `aperturascaja`
 --
+
 CREATE TABLE `aperturascaja` (
   `id_apertura` bigint(20) NOT NULL,
   `id_caja` int(11) NOT NULL,
@@ -62,11 +59,19 @@ CREATE TABLE `aperturascaja` (
   `monto_inicial` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `aperturascaja`
+--
+
+INSERT INTO `aperturascaja` (`id_apertura`, `id_caja`, `id_usuario`, `fecha_apertura`, `hora_apertura`, `monto_inicial`) VALUES
+(1, 101, 535, '2025-12-08', '22:27:33', 2000.00);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `bitacora`
 --
+
 CREATE TABLE `bitacora` (
   `id_bitacora` bigint(20) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
@@ -81,19 +86,33 @@ CREATE TABLE `bitacora` (
 --
 -- Estructura de tabla para la tabla `cajas`
 --
+
 CREATE TABLE `cajas` (
   `id_caja` int(11) NOT NULL,
   `id_empresa` int(11) NOT NULL,
   `nombre_caja` varchar(50) NOT NULL,
   `ubicacion` varchar(255) DEFAULT NULL,
-  `estado` varchar(20) NOT NULL DEFAULT 'Cerrada'
+  `estado` varchar(20) NOT NULL DEFAULT 'Cerrada',
+  `monto_inicial` decimal(10,2) DEFAULT 0.00,
+  `monto_actual` decimal(10,2) DEFAULT 0.00,
+  `fecha_apertura` datetime DEFAULT NULL,
+  `fecha_cierre` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cajas`
+--
+
+INSERT INTO `cajas` (`id_caja`, `id_empresa`, `nombre_caja`, `ubicacion`, `estado`, `monto_inicial`, `monto_actual`, `fecha_apertura`, `fecha_cierre`) VALUES
+(10, 200, 'Caja 1', NULL, 'Cerrada', 0.00, 0.00, NULL, NULL),
+(101, 122, 'Caja secundaria ', 'Local', 'Cerrada', 2000.00, 2000.00, '2025-12-09 03:27:33', '2025-12-09 03:28:01');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `categoriasproducto`
 --
+
 CREATE TABLE `categoriasproducto` (
   `id_categoria` int(11) NOT NULL,
   `nombre_categoria` varchar(50) NOT NULL,
@@ -103,16 +122,23 @@ CREATE TABLE `categoriasproducto` (
 --
 -- Volcado de datos para la tabla `categoriasproducto`
 --
+
 INSERT INTO `categoriasproducto` (`id_categoria`, `nombre_categoria`, `descripcion`) VALUES
 (1, 'Camisetas', 'Camisetas varias'),
 (2, 'Pantalones', 'Pantalones varias'),
-(3, 'Zapatos', 'Zapatos varias');
+(10, 'Ropa Caballeros', 'Ropa para hombres'),
+(11, 'Ropa Damas', 'Ropa para mujeres'),
+(12, 'Accesorios', 'Relojes, billeteras, etc.'),
+(50, 'Zapatillas', 'Calzado deportivo'),
+(51, 'Polos', 'Polos de algodón'),
+(146, 'Polos deportivos', 'Polos deportivos de futbol');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `cierrescaja`
 --
+
 CREATE TABLE `cierrescaja` (
   `id_cierre` bigint(20) NOT NULL,
   `id_apertura` bigint(20) NOT NULL,
@@ -126,11 +152,19 @@ CREATE TABLE `cierrescaja` (
   `observaciones` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `cierrescaja`
+--
+
+INSERT INTO `cierrescaja` (`id_cierre`, `id_apertura`, `id_caja`, `id_usuario`, `fecha_cierre`, `hora_cierre`, `monto_final`, `monto_esperado`, `diferencia`, `observaciones`) VALUES
+(1, 1, 101, 535, '2025-12-08', '22:28:01', 1500.00, 2000.00, -500.00, 'mal dia');
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `clientes`
 --
+
 CREATE TABLE `clientes` (
   `id_cliente` int(11) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
@@ -145,11 +179,20 @@ CREATE TABLE `clientes` (
   `estado` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`id_cliente`, `id_usuario`, `nombre`, `apellido`, `id_tipodocumento`, `numero_documento`, `direccion`, `telefono`, `email`, `fecha_registro`, `estado`) VALUES
+(10, NULL, 'Maria', 'Lopez', 10, '87654321', NULL, NULL, NULL, '2025-12-08 19:36:48', 1),
+(100, NULL, 'Cliente', 'Prueba', 1, '10000001', NULL, NULL, NULL, '2025-12-08 20:32:51', 1);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `comprobantespago`
 --
+
 CREATE TABLE `comprobantespago` (
   `id_comprobante` bigint(20) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -165,11 +208,20 @@ CREATE TABLE `comprobantespago` (
   `motivo_anulacion` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `comprobantespago`
+--
+
+INSERT INTO `comprobantespago` (`id_comprobante`, `id_empresa`, `id_cliente`, `id_usuario`, `id_tipo_comprobante`, `numero_comprobante`, `fecha_emision`, `total`, `igv`, `subtotal`, `estado`, `motivo_anulacion`) VALUES
+(500, 200, 10, 200, 1, 'B001-00001', '2025-12-08 19:36:48', 89.90, 0.00, 0.00, 'Emitido', NULL),
+(1000, 122, 100, 535, 1, 'B001-00122', '2025-12-08 20:32:51', 250.00, 0.00, 0.00, 'Emitido', NULL);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `detallescomprobantepago`
 --
+
 CREATE TABLE `detallescomprobantepago` (
   `id_detalle_comprobante` bigint(20) NOT NULL,
   `id_comprobante` bigint(20) NOT NULL,
@@ -180,11 +232,19 @@ CREATE TABLE `detallescomprobantepago` (
   `subtotal_linea` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `detallescomprobantepago`
+--
+
+INSERT INTO `detallescomprobantepago` (`id_detalle_comprobante`, `id_comprobante`, `id_variante`, `cantidad`, `precio_unitario`, `descuento_aplicado`, `subtotal_linea`) VALUES
+(1000, 500, 1001, 1, 89.90, 0.00, 89.90);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `detallespedidocompra`
 --
+
 CREATE TABLE `detallespedidocompra` (
   `id_detalle_pedido` bigint(20) NOT NULL,
   `id_pedido_compra` bigint(20) NOT NULL,
@@ -195,11 +255,19 @@ CREATE TABLE `detallespedidocompra` (
   `cantidad_recibida` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `detallespedidocompra`
+--
+
+INSERT INTO `detallespedidocompra` (`id_detalle_pedido`, `id_pedido_compra`, `id_variante`, `cantidad_pedida`, `costo_unitario`, `subtotal_linea`, `cantidad_recibida`) VALUES
+(20, 20, 1000, 25, 40.00, 1000.00, 0);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `empresamodulos`
 --
+
 CREATE TABLE `empresamodulos` (
   `id_empresa` int(11) NOT NULL,
   `id_modulo` int(11) NOT NULL,
@@ -213,6 +281,7 @@ CREATE TABLE `empresamodulos` (
 --
 -- Estructura de tabla para la tabla `empresas`
 --
+
 CREATE TABLE `empresas` (
   `id_empresa` int(11) NOT NULL,
   `nombre_tienda` varchar(100) NOT NULL,
@@ -231,19 +300,21 @@ CREATE TABLE `empresas` (
 --
 -- Volcado de datos para la tabla `empresas`
 --
+
 INSERT INTO `empresas` (`id_empresa`, `nombre_tienda`, `ruc_empresa`, `direccion_legal`, `telefono`, `email_contacto`, `fecha_registro`, `estado_aprobacion`, `tasa_comision`, `estado`, `modulos_activos`, `plan_id`) VALUES
 (1, 'TapStyle - Gentle Elegance', '20123456789', 'Jr. Fashion #101, Lima, Perú', '987654321', 'info@tapstyle-ge.com', '2025-12-01 07:02:00', 'Suspendida', 0.15, b'0', NULL, NULL),
 (2, 'TapStyle - Glamour Time', '20987654321', 'Av. Style #202, Lima, Perú', '987654322', 'info@tapstyle-gt.com', '2025-12-01 07:02:00', 'Aprobada', 0.15, b'0', NULL, NULL),
 (3, 'TapStyle - Performance Footwear', '20555666777', 'Calle Deporte #303, Lima, Perú', '987654323', 'info@tapstyle-pf.com', '2025-12-01 07:02:00', 'Aprobada', 0.12, b'0', NULL, NULL),
 (4, 'TapStyle - Street Vibe', '20888999000', 'Av. Urban #404, Lima, Perú', '987654324', 'info@tapstyle-sv.com', '2025-12-01 07:02:00', 'Aprobada', 0.15, b'0', NULL, NULL),
 (5, 'TapStyle - Sistema', '20000000000', 'Lima, Perú', '999000000', 'info@tapstyle.com', '2025-12-01 12:02:12', 'Aprobada', 0.15, b'0', NULL, NULL),
-(122, 'SANTIS', '85789734934', 'jr peru 456', '345678213', 'san@gmail.com', '2025-12-06 04:16:46', 'Pendiente', 0.02, b'1', 'DASHBOARD,CATALOGO', 1);
+(122, 'SANTIS', '85789734934', 'jr peru 456', '345678213', 'san@gmail.com', '2025-12-06 04:16:46', 'Pendiente', 0.01, b'1', 'DASHBOARD,CATALOGO,OPERACIONES,FINANZAS,ADMINISTRACION', 3);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `facturascomision`
 --
+
 CREATE TABLE `facturascomision` (
   `id_factura_comision` bigint(20) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -265,6 +336,7 @@ CREATE TABLE `facturascomision` (
 --
 -- Estructura de tabla para la tabla `facturassuscripcion`
 --
+
 CREATE TABLE `facturassuscripcion` (
   `id_factura_suscripcion` bigint(20) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -280,11 +352,20 @@ CREATE TABLE `facturassuscripcion` (
   `metodo_pago` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `facturassuscripcion`
+--
+
+INSERT INTO `facturassuscripcion` (`id_factura_suscripcion`, `id_empresa`, `id_suscripcion`, `numero_factura`, `periodo_inicio`, `periodo_fin`, `monto_suscripcion`, `fecha_emision`, `fecha_vencimiento`, `estado`, `fecha_pago`, `metodo_pago`) VALUES
+(1, 122, 4, 'FAC-001-TEST', '2025-12-01', '2026-01-01', 199.00, '2025-12-08 22:47:14', '2026-01-05', 'Pendiente', NULL, NULL),
+(2, 122, 8, 'FAC-1765253299045', '2025-12-08', '2026-01-08', 799.00, '2025-12-09 04:08:19', '2026-01-08', 'Pagado', '2025-12-09 04:27:11', 'Transferencia');
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `inventario`
 --
+
 CREATE TABLE `inventario` (
   `id_inventario` int(11) NOT NULL,
   `id_variante` int(11) NOT NULL,
@@ -294,11 +375,25 @@ CREATE TABLE `inventario` (
   `fecha_ultima_actualizacion` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `inventario`
+--
+
+INSERT INTO `inventario` (`id_inventario`, `id_variante`, `id_almacen`, `cantidad_stock`, `stock_minimo`, `fecha_ultima_actualizacion`) VALUES
+(500, 1000, 10, 50, 5, '2025-12-08 19:36:48'),
+(501, 1001, 10, 30, 5, '2025-12-08 19:36:48'),
+(502, 1002, 10, 20, 5, '2025-12-08 19:36:48'),
+(503, 1003, 10, 10, 5, '2025-12-08 19:36:48'),
+(1000, 5000, 100, 20, 5, '2025-12-08 20:32:51'),
+(1001, 5001, 100, 15, 5, '2025-12-08 20:32:51'),
+(1002, 5002, 100, 50, 5, '2025-12-08 20:32:51');
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `marcasproducto`
 --
+
 CREATE TABLE `marcasproducto` (
   `id_marca` int(11) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -308,22 +403,28 @@ CREATE TABLE `marcasproducto` (
 --
 -- Volcado de datos para la tabla `marcasproducto`
 --
+
 INSERT INTO `marcasproducto` (`id_marca`, `id_empresa`, `nombre_marca`) VALUES
-(2, 1, 'Adidas'),
-(1, 1, 'Nike'),
-(3, 1, 'Puma'),
-(5, 2, 'Calvin Klein'),
-(4, 2, 'Tommy Hilfiger'),
-(6, 3, 'Converse'),
-(7, 3, 'Vans'),
-(9, 4, 'Chanel'),
-(8, 4, 'Gucci');
+(426, 1, 'Adidas'),
+(425, 1, 'Nike'),
+(427, 1, 'Puma'),
+(429, 2, 'Calvin Klein'),
+(428, 2, 'Tommy Hilfiger'),
+(430, 3, 'Converse'),
+(431, 3, 'Vans'),
+(433, 4, 'Chanel'),
+(432, 4, 'Gucci'),
+(51, 122, 'Adidas'),
+(50, 122, 'Nike'),
+(52, 122, 'Puma'),
+(424, 122, 'Umbro');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `materialesproducto`
 --
+
 CREATE TABLE `materialesproducto` (
   `id_material` int(11) NOT NULL,
   `nombre_material` varchar(100) NOT NULL
@@ -332,9 +433,11 @@ CREATE TABLE `materialesproducto` (
 --
 -- Volcado de datos para la tabla `materialesproducto`
 --
+
 INSERT INTO `materialesproducto` (`id_material`, `nombre_material`) VALUES
 (1, 'Algodón'),
 (3, 'Cuero'),
+(11, 'Cuero Sintético'),
 (4, 'Denim'),
 (6, 'Lana'),
 (7, 'Nylon'),
@@ -346,6 +449,7 @@ INSERT INTO `materialesproducto` (`id_material`, `nombre_material`) VALUES
 --
 -- Estructura de tabla para la tabla `modelos`
 --
+
 CREATE TABLE `modelos` (
   `id_modelo` int(11) NOT NULL,
   `nombre_modelo` varchar(100) NOT NULL,
@@ -353,11 +457,21 @@ CREATE TABLE `modelos` (
   `imagen_principal` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `modelos`
+--
+
+INSERT INTO `modelos` (`id_modelo`, `nombre_modelo`, `id_marca`, `imagen_principal`) VALUES
+(10, 'Slim Fit 2025', 10, NULL),
+(50, 'Air Max', 50, NULL),
+(51, 'Superstar', 51, NULL);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `modulosistema`
 --
+
 CREATE TABLE `modulosistema` (
   `id_modulo` int(11) NOT NULL,
   `nombre_modulo` varchar(50) NOT NULL,
@@ -370,6 +484,7 @@ CREATE TABLE `modulosistema` (
 --
 -- Volcado de datos para la tabla `modulosistema`
 --
+
 INSERT INTO `modulosistema` (`id_modulo`, `nombre_modulo`, `descripcion`, `icono`, `orden_menu`, `estado`) VALUES
 (1, 'DASHBOARD', 'Panel principal', 'fas fa-chart-pie', 1, 1),
 (2, 'CATALOGO', 'Gestión de productos', 'fas fa-box', 2, 1),
@@ -382,6 +497,7 @@ INSERT INTO `modulosistema` (`id_modulo`, `nombre_modulo`, `descripcion`, `icono
 --
 -- Estructura de tabla para la tabla `movimientoscaja`
 --
+
 CREATE TABLE `movimientoscaja` (
   `id_movimiento_caja` bigint(20) NOT NULL,
   `id_caja` int(11) NOT NULL,
@@ -393,11 +509,19 @@ CREATE TABLE `movimientoscaja` (
   `id_comprobante` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `movimientoscaja`
+--
+
+INSERT INTO `movimientoscaja` (`id_movimiento_caja`, `id_caja`, `id_usuario`, `fecha_movimiento`, `tipo_movimiento`, `monto`, `descripcion`, `id_comprobante`) VALUES
+(100, 10, 200, '2025-12-08 19:36:48', 'INGRESO', 89.90, 'Venta B001-00001', 500);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `movimientosinventario`
 --
+
 CREATE TABLE `movimientosinventario` (
   `id_movimiento_inv` bigint(20) NOT NULL,
   `id_variante` int(11) NOT NULL,
@@ -415,6 +539,7 @@ CREATE TABLE `movimientosinventario` (
 --
 -- Estructura de tabla para la tabla `pagoscomprobante`
 --
+
 CREATE TABLE `pagoscomprobante` (
   `id_pago` bigint(20) NOT NULL,
   `id_comprobante` bigint(20) NOT NULL,
@@ -428,6 +553,7 @@ CREATE TABLE `pagoscomprobante` (
 --
 -- Estructura de tabla para la tabla `pagosempresaatapstyle`
 --
+
 CREATE TABLE `pagosempresaatapstyle` (
   `id_pago` bigint(20) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -441,11 +567,19 @@ CREATE TABLE `pagosempresaatapstyle` (
   `comprobante_pago` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `pagosempresaatapstyle`
+--
+
+INSERT INTO `pagosempresaatapstyle` (`id_pago`, `id_empresa`, `tipo_pago`, `id_factura_suscripcion`, `id_factura_comision`, `monto_pagado`, `fecha_pago`, `metodo_pago`, `referencia_pago`, `comprobante_pago`) VALUES
+(1, 122, 'SUSCRIPCION', 2, NULL, 799.00, '2025-12-09 04:27:11', 'Transferencia', 'PAGO-AUTO-1765254431845', NULL);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `pedidoscompra`
 --
+
 CREATE TABLE `pedidoscompra` (
   `id_pedido_compra` bigint(20) NOT NULL,
   `id_proveedor` int(11) NOT NULL,
@@ -456,11 +590,19 @@ CREATE TABLE `pedidoscompra` (
   `total_pedido` decimal(10,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `pedidoscompra`
+--
+
+INSERT INTO `pedidoscompra` (`id_pedido_compra`, `id_proveedor`, `id_usuario`, `fecha_pedido`, `fecha_entrega_esperada`, `estado_pedido`, `total_pedido`) VALUES
+(20, 10, 200, '2025-12-08 19:36:48', NULL, 'Recibido', 1000.00);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `permisos`
 --
+
 CREATE TABLE `permisos` (
   `id_permiso` int(11) NOT NULL,
   `nombre_permiso` varchar(100) NOT NULL,
@@ -470,6 +612,7 @@ CREATE TABLE `permisos` (
 --
 -- Volcado de datos para la tabla `permisos`
 --
+
 INSERT INTO `permisos` (`id_permiso`, `nombre_permiso`, `descripcion`) VALUES
 (1, 'CREAR_EMPRESA', 'Permiso para crear nuevas empresas'),
 (2, 'EDITAR_EMPRESA', 'Permiso para editar información de empresa'),
@@ -493,6 +636,7 @@ INSERT INTO `permisos` (`id_permiso`, `nombre_permiso`, `descripcion`) VALUES
 --
 -- Estructura de tabla para la tabla `planes`
 --
+
 CREATE TABLE `planes` (
   `id_plan` bigint(20) NOT NULL,
   `nombre_plan` varchar(255) NOT NULL,
@@ -505,6 +649,7 @@ CREATE TABLE `planes` (
 --
 -- Volcado de datos para la tabla `planes`
 --
+
 INSERT INTO `planes` (`id_plan`, `nombre_plan`, `precio_mensual`, `comision_adicional`, `descripcion`, `estado`) VALUES
 (1, 'Básico', 199.00, 0.02, 'Emprendedores', 1),
 (2, 'Premium', 399.00, 0.02, 'Crecimiento', 1),
@@ -515,6 +660,7 @@ INSERT INTO `planes` (`id_plan`, `nombre_plan`, `precio_mensual`, `comision_adic
 --
 -- Estructura de tabla para la tabla `plan_modulos`
 --
+
 CREATE TABLE `plan_modulos` (
   `id_plan` bigint(20) NOT NULL,
   `id_modulo` int(11) NOT NULL,
@@ -524,6 +670,7 @@ CREATE TABLE `plan_modulos` (
 --
 -- Volcado de datos para la tabla `plan_modulos`
 --
+
 INSERT INTO `plan_modulos` (`id_plan`, `id_modulo`, `incluido`) VALUES
 (1, 1, 1),
 (1, 2, 1),
@@ -542,11 +689,13 @@ INSERT INTO `plan_modulos` (`id_plan`, `id_modulo`, `incluido`) VALUES
 --
 -- Estructura de tabla para la tabla `productos`
 --
+
 CREATE TABLE `productos` (
   `id_producto` int(11) NOT NULL,
   `id_empresa` int(11) NOT NULL,
   `nombre_producto` varchar(100) NOT NULL,
   `descripcion` text DEFAULT NULL,
+  `precio` decimal(10,2) NOT NULL DEFAULT 0.00,
   `id_categoria` int(11) NOT NULL,
   `id_proveedor` int(11) DEFAULT NULL,
   `id_unidad_medida` int(11) NOT NULL,
@@ -557,11 +706,27 @@ CREATE TABLE `productos` (
   `id_material` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id_producto`, `id_empresa`, `nombre_producto`, `descripcion`, `precio`, `id_categoria`, `id_proveedor`, `id_unidad_medida`, `dimensiones`, `peso_gramos`, `id_marca`, `id_modelo`, `id_material`) VALUES
+(100, 200, 'Camisa Oxford Azul', 'Camisa formal de algodón', 89.90, 10, 10, 10, NULL, NULL, 10, 10, 10),
+(101, 200, 'Pantalón Chino Beige', 'Pantalón casual', 120.00, 10, 10, 10, NULL, NULL, 10, 10, 10),
+(102, 200, 'Blusa Seda Negra', 'Blusa elegante', 95.50, 11, 10, 10, NULL, NULL, 11, NULL, 10),
+(103, 200, 'Cartera Cuero', 'Cartera de mano', 250.00, 12, 10, 10, NULL, NULL, 12, NULL, 11),
+(500, 122, 'Zapatilla Nike Air Max', 'Zapatilla urbana', 250.00, 50, 50, 50, NULL, NULL, 50, 50, 50),
+(501, 122, 'Polo Adidas Logo', 'Polo deportivo', 80.00, 51, 50, 51, NULL, NULL, 51, NULL, 51),
+(502, 122, 'Puma Suede Classic', 'Zapatilla clásica', 220.00, 50, 50, 50, NULL, NULL, 52, NULL, 50),
+(503, 122, 'Polo nike', 'Polo color rojo ', 0.00, 51, 50, 50, '', NULL, 50, NULL, 1),
+(504, 122, 'Polo deportivo', 'Polo del equipo barcelona, del mejor jugador de la historia Leo Messi', 65.00, 146, 50, 1, '', NULL, 50, NULL, 1);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `proveedores`
 --
+
 CREATE TABLE `proveedores` (
   `id_proveedor` int(11) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -577,14 +742,19 @@ CREATE TABLE `proveedores` (
 --
 -- Volcado de datos para la tabla `proveedores`
 --
+
 INSERT INTO `proveedores` (`id_proveedor`, `id_empresa`, `razon_social`, `nombre_comercial`, `ruc`, `rubro`, `direccion`, `telefono`, `email`) VALUES
-(1, 5, 'Distribuidor Premium SPA', 'Premium', '20123456700', 'Textil', 'Jr. Industrial #500', '987000001', 'proveedor@premium.com');
+(1, 5, 'Distribuidor Premium SPA', 'Premium', '20123456700', 'Textil', 'Jr. Industrial #500', '987000001', 'proveedor@premium.com'),
+(10, 200, 'Importadora Textil SAC', NULL, '20500000002', NULL, NULL, '999888777', NULL),
+(50, 122, 'Distribuidora Deportiva SAC', NULL, '20100000001', NULL, NULL, '987654321', NULL),
+(51, 122, 'JDRAX SPORT SAC', 'JDRAX', '19813981393', 'Ropa deportiva', 'Jr caminos del inca 123', '917844381', 'jdrax@gmail.com');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `proveedor_metodospago`
 --
+
 CREATE TABLE `proveedor_metodospago` (
   `id_proveedor` int(11) NOT NULL,
   `id_tipopago` int(11) NOT NULL,
@@ -596,6 +766,7 @@ CREATE TABLE `proveedor_metodospago` (
 --
 -- Estructura de tabla para la tabla `roles`
 --
+
 CREATE TABLE `roles` (
   `id_rol` int(11) NOT NULL,
   `nombre_rol` varchar(50) NOT NULL,
@@ -606,6 +777,7 @@ CREATE TABLE `roles` (
 --
 -- Volcado de datos para la tabla `roles`
 --
+
 INSERT INTO `roles` (`id_rol`, `nombre_rol`, `estado`, `descripcion`) VALUES
 (1, 'SuperAdmin', 1, 'Administrador del sistema con acceso total'),
 (2, 'Admin', 1, 'Administrador de empresa con control completo'),
@@ -618,6 +790,7 @@ INSERT INTO `roles` (`id_rol`, `nombre_rol`, `estado`, `descripcion`) VALUES
 --
 -- Estructura de tabla para la tabla `rol_permisos`
 --
+
 CREATE TABLE `rol_permisos` (
   `id_rol` int(11) NOT NULL,
   `id_permiso` int(11) NOT NULL
@@ -626,6 +799,7 @@ CREATE TABLE `rol_permisos` (
 --
 -- Volcado de datos para la tabla `rol_permisos`
 --
+
 INSERT INTO `rol_permisos` (`id_rol`, `id_permiso`) VALUES
 (1, 1),
 (1, 2),
@@ -670,6 +844,7 @@ INSERT INTO `rol_permisos` (`id_rol`, `id_permiso`) VALUES
 --
 -- Estructura de tabla para la tabla `suscripcionesempresa`
 --
+
 CREATE TABLE `suscripcionesempresa` (
   `id_suscripcion` bigint(20) NOT NULL,
   `id_empresa` int(11) NOT NULL,
@@ -684,15 +859,17 @@ CREATE TABLE `suscripcionesempresa` (
 --
 -- Volcado de datos para la tabla `suscripcionesempresa`
 --
+
 INSERT INTO `suscripcionesempresa` (`id_suscripcion`, `id_empresa`, `id_plan`, `fecha_inicio`, `fecha_vencimiento`, `precio_acordado`, `estado`, `fecha_creacion`) VALUES
 (4, 122, 1, '2025-12-06', '2026-01-06', 199.00, 'Pagado', '2025-12-06 17:06:30'),
-(6, 122, 1, '2025-12-06', '2026-01-06', 199.00, 'Activa', '2025-12-06 19:35:22');
+(8, 122, 3, '2025-12-08', '2026-01-08', 799.00, 'Pagado', '2025-12-09 04:08:18');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tipodocumento`
 --
+
 CREATE TABLE `tipodocumento` (
   `id_tipodocumento` int(11) NOT NULL,
   `nombre_tipodocumento` varchar(50) NOT NULL
@@ -701,6 +878,7 @@ CREATE TABLE `tipodocumento` (
 --
 -- Volcado de datos para la tabla `tipodocumento`
 --
+
 INSERT INTO `tipodocumento` (`id_tipodocumento`, `nombre_tipodocumento`) VALUES
 (1, 'DNI'),
 (4, 'Licencia'),
@@ -713,17 +891,27 @@ INSERT INTO `tipodocumento` (`id_tipodocumento`, `nombre_tipodocumento`) VALUES
 --
 -- Estructura de tabla para la tabla `tiposcomprobantepago`
 --
+
 CREATE TABLE `tiposcomprobantepago` (
   `id_tipo_comprobante` int(11) NOT NULL,
   `nombre_tipo` varchar(50) NOT NULL,
   `serie_documento` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `tiposcomprobantepago`
+--
+
+INSERT INTO `tiposcomprobantepago` (`id_tipo_comprobante`, `nombre_tipo`, `serie_documento`) VALUES
+(1, 'Boleta', 'B001'),
+(2, 'Factura', 'F001');
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tiposmovimientoinventario`
 --
+
 CREATE TABLE `tiposmovimientoinventario` (
   `id_tipo_movimiento` int(11) NOT NULL,
   `nombre_tipo` varchar(50) NOT NULL,
@@ -733,18 +921,9 @@ CREATE TABLE `tiposmovimientoinventario` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipospago`
---
-CREATE TABLE `tipospago` (
-  `id_tipopago` int(11) NOT NULL,
-  `tipo_pago` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tiposproducto`
 --
+
 CREATE TABLE `tiposproducto` (
   `id_tipo` int(11) NOT NULL,
   `nombre_tipo` varchar(50) NOT NULL
@@ -753,8 +932,32 @@ CREATE TABLE `tiposproducto` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tipo_pago`
+--
+
+CREATE TABLE `tipo_pago` (
+  `id_tipo_pago` int(11) NOT NULL,
+  `tipo_pago` varchar(50) NOT NULL,
+  `activo` tinyint(1) NOT NULL DEFAULT 1,
+  `id_empresa` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_pago`
+--
+
+INSERT INTO `tipo_pago` (`id_tipo_pago`, `tipo_pago`, `activo`, `id_empresa`) VALUES
+(1, 'Efectivo', 1, 122),
+(2, 'Tarjeta', 1, 122),
+(3, 'Yape/Plin', 1, 122),
+(4, 'Transferencia', 1, 122);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `unidadesmedida`
 --
+
 CREATE TABLE `unidadesmedida` (
   `id_unidad_medida` int(11) NOT NULL,
   `nombre_unidad` varchar(50) NOT NULL,
@@ -764,17 +967,21 @@ CREATE TABLE `unidadesmedida` (
 --
 -- Volcado de datos para la tabla `unidadesmedida`
 --
+
 INSERT INTO `unidadesmedida` (`id_unidad_medida`, `nombre_unidad`, `abreviatura`) VALUES
 (1, 'Unidad', 'UND'),
 (2, 'Docena', 'DOC'),
 (3, 'Caja', 'CJA'),
-(4, 'Metro', 'MTR');
+(4, 'Metro', 'MTR'),
+(10, 'Pieza', 'PZA'),
+(50, 'Par', 'PAR');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `usuarios`
 --
+
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `id_empresa` int(11) DEFAULT NULL,
@@ -796,15 +1003,32 @@ CREATE TABLE `usuarios` (
 --
 -- Volcado de datos para la tabla `usuarios`
 --
+
 INSERT INTO `usuarios` (`id_usuario`, `id_empresa`, `id_rol`, `nombres`, `apellidos`, `id_tipodocumento`, `numero_documento`, `celular`, `direccion`, `username`, `email`, `contraseña_hash`, `estado`, `fecha_creacion`, `fecha_ultima_sesion`) VALUES
 (90, 5, 1, 'Santiago', 'Ponce', NULL, NULL, NULL, NULL, 'Santi', 'santi@tapstyle.com', '$2a$10$soeIL/AQhk.hY1Wxj3HP6uYxUpUD8LwUXR9wQFaVckHHHyqGlzjJK', 1, '2025-12-02 08:34:21', NULL),
-(535, 122, 2, 'Santiago', 'Ponce', NULL, NULL, NULL, NULL, 'san', 'san@gmail.com', '$2a$10$xsuOm.PDfXJV4vfjAC5pPuRtCed89EINIOW5JdhacoAOEuGSgHPFK', 1, '2025-12-06 04:16:46', NULL);
+(535, 122, 2, 'Santiago', 'Ponce', NULL, NULL, NULL, NULL, 'san', 'san@gmail.com', '$2a$10$xsuOm.PDfXJV4vfjAC5pPuRtCed89EINIOW5JdhacoAOEuGSgHPFK', 1, '2025-12-06 04:16:46', NULL),
+(774, 1, 1, 'Carlos', 'Admin', 1, '12345678', '987654300', 'Lima, Perú', 'superadmin', 'superadmin@tapstyle.com', '123456', 1, '2025-12-08 19:38:08', NULL),
+(775, 1, 2, 'María', 'García', 1, '87654321', '987654301', 'Lima, Perú', 'admin_ge', 'admin@tapstyle-ge.com', '123456', 1, '2025-12-08 19:38:08', NULL),
+(776, 2, 2, 'Juan', 'López', 1, '87654322', '987654302', 'Lima, Perú', 'admin_gt', 'admin@tapstyle-gt.com', '123456', 1, '2025-12-08 19:38:08', NULL),
+(777, 3, 2, 'Ana', 'Martínez', 1, '87654323', '987654303', 'Lima, Perú', 'admin_pf', 'admin@tapstyle-pf.com', '123456', 1, '2025-12-08 19:38:08', NULL),
+(778, 4, 2, 'Pedro', 'Rodríguez', 1, '87654324', '987654304', 'Lima, Perú', 'admin_sv', 'admin@tapstyle-sv.com', '123456', 1, '2025-12-08 19:38:08', NULL),
+(779, 1, 3, 'Laura', 'Sánchez', 1, '87654325', '987654305', 'Lima, Perú', 'vendedor_ge1', 'vendedor1@tapstyle-ge.com', '123456', 1, '2025-12-08 19:38:08', NULL),
+(780, 1, 3, 'Roberto', 'Fernández', 1, '87654326', '987654306', 'Lima, Perú', 'vendedor_ge2', 'vendedor2@tapstyle-ge.com', '123456', 1, '2025-12-08 19:38:08', NULL),
+(781, 2, 3, 'Sofia', 'Torres', 1, '87654327', '987654307', 'Lima, Perú', 'vendedor_gt1', 'vendedor1@tapstyle-gt.com', '123456', 1, '2025-12-08 19:38:08', NULL),
+(782, 3, 3, 'Miguel', 'Gómez', 1, '87654328', '987654308', 'Lima, Perú', 'vendedor_pf1', 'vendedor1@tapstyle-pf.com', '123456', 1, '2025-12-08 19:38:08', NULL),
+(783, 4, 3, 'Carmen', 'Díaz', 1, '87654329', '987654309', 'Lima, Perú', 'vendedor_sv1', 'vendedor1@tapstyle-sv.com', '123456', 1, '2025-12-08 19:38:08', NULL),
+(784, 1, 4, 'David', 'Ruiz', 1, '87654330', '987654310', 'Lima, Perú', 'empleado_ge1', 'empleado1@tapstyle-ge.com', '123456', 1, '2025-12-08 19:38:08', NULL),
+(785, 2, 4, 'Elena', 'Morales', 1, '87654331', '987654311', 'Lima, Perú', 'empleado_gt1', 'empleado1@tapstyle-gt.com', '123456', 1, '2025-12-08 19:38:08', NULL),
+(786, 1, 5, 'Cliente', 'Uno', 1, '11111111', '987111111', 'Lima, Perú', 'cliente_uno', 'cliente1@email.com', '123456', 1, '2025-12-08 19:38:08', NULL),
+(787, 1, 5, 'Cliente', 'Dos', 1, '22222222', '987222222', 'Lima, Perú', 'cliente_dos', 'cliente2@email.com', '123456', 1, '2025-12-08 19:38:08', NULL),
+(788, 2, 5, 'Cliente', 'Tres', 1, '33333333', '987333333', 'Lima, Perú', 'cliente_tres', 'cliente3@email.com', '123456', 1, '2025-12-08 19:38:08', NULL);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `variantesproducto`
 --
+
 CREATE TABLE `variantesproducto` (
   `id_variante` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
@@ -814,6 +1038,19 @@ CREATE TABLE `variantesproducto` (
   `precio_venta` decimal(10,2) NOT NULL,
   `costo_compra` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `variantesproducto`
+--
+
+INSERT INTO `variantesproducto` (`id_variante`, `id_producto`, `codigo_sku`, `talla`, `color`, `precio_venta`, `costo_compra`) VALUES
+(1000, 100, 'CAM-AZ-S', 'S', 'Azul', 89.90, 40.00),
+(1001, 100, 'CAM-AZ-M', 'M', 'Azul', 89.90, 40.00),
+(1002, 100, 'CAM-AZ-L', 'L', 'Azul', 89.90, 40.00),
+(1003, 103, 'CART-NEG', 'U', 'Negro', 250.00, 120.00),
+(5000, 500, 'NIKE-AM-40', '40', 'Blanco', 250.00, 150.00),
+(5001, 500, 'NIKE-AM-41', '41', 'Blanco', 250.00, 150.00),
+(5002, 501, 'ADI-POL-M', 'M', 'Negro', 80.00, 40.00);
 
 --
 -- Índices para tablas volcadas
@@ -946,7 +1183,7 @@ ALTER TABLE `inventario`
   ADD PRIMARY KEY (`id_inventario`),
   ADD UNIQUE KEY `UQ_Inventario_Variante_Almacen` (`id_variante`,`id_almacen`),
   ADD KEY `FK_Inventario_Almacenes` (`id_almacen`),
-  ADD KEY `FK_Inventario_Variantes` (`id_variante`); -- Corregido: Referencia a variantesproducto
+  ADD KEY `FK_Inventario_Variantes` (`id_variante`);
 
 --
 -- Indices de la tabla `marcasproducto`
@@ -1118,18 +1355,19 @@ ALTER TABLE `tiposmovimientoinventario`
   ADD UNIQUE KEY `nombre_tipo` (`nombre_tipo`);
 
 --
--- Indices de la tabla `tipospago`
---
-ALTER TABLE `tipospago`
-  ADD PRIMARY KEY (`id_tipopago`),
-  ADD UNIQUE KEY `tipo_pago` (`tipo_pago`);
-
---
 -- Indices de la tabla `tiposproducto`
 --
 ALTER TABLE `tiposproducto`
   ADD PRIMARY KEY (`id_tipo`),
   ADD UNIQUE KEY `nombre_tipo` (`nombre_tipo`);
+
+--
+-- Indices de la tabla `tipo_pago`
+--
+ALTER TABLE `tipo_pago`
+  ADD PRIMARY KEY (`id_tipo_pago`),
+  ADD UNIQUE KEY `tipo_pago` (`tipo_pago`),
+  ADD KEY `fk_tipopago_empresa` (`id_empresa`);
 
 --
 -- Indices de la tabla `unidadesmedida`
@@ -1162,119 +1400,231 @@ ALTER TABLE `variantesproducto`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `almacenes`
+--
 ALTER TABLE `almacenes`
-  MODIFY `id_almacen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `id_almacen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
+--
+-- AUTO_INCREMENT de la tabla `aperturascaja`
+--
 ALTER TABLE `aperturascaja`
-  MODIFY `id_apertura` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_apertura` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
+--
+-- AUTO_INCREMENT de la tabla `bitacora`
+--
 ALTER TABLE `bitacora`
   MODIFY `id_bitacora` bigint(20) NOT NULL AUTO_INCREMENT;
 
+--
+-- AUTO_INCREMENT de la tabla `cajas`
+--
 ALTER TABLE `cajas`
-  MODIFY `id_caja` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
+--
+-- AUTO_INCREMENT de la tabla `categoriasproducto`
+--
 ALTER TABLE `categoriasproducto`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
 
+--
+-- AUTO_INCREMENT de la tabla `cierrescaja`
+--
 ALTER TABLE `cierrescaja`
-  MODIFY `id_cierre` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cierre` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
+--
+-- AUTO_INCREMENT de la tabla `clientes`
+--
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
 
+--
+-- AUTO_INCREMENT de la tabla `comprobantespago`
+--
 ALTER TABLE `comprobantespago`
-  MODIFY `id_comprobante` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_comprobante` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1001;
 
+--
+-- AUTO_INCREMENT de la tabla `detallescomprobantepago`
+--
 ALTER TABLE `detallescomprobantepago`
-  MODIFY `id_detalle_comprobante` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detalle_comprobante` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1001;
 
+--
+-- AUTO_INCREMENT de la tabla `detallespedidocompra`
+--
 ALTER TABLE `detallespedidocompra`
-  MODIFY `id_detalle_pedido` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detalle_pedido` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
+--
+-- AUTO_INCREMENT de la tabla `empresas`
+--
 ALTER TABLE `empresas`
   MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
+--
+-- AUTO_INCREMENT de la tabla `facturascomision`
+--
 ALTER TABLE `facturascomision`
   MODIFY `id_factura_comision` bigint(20) NOT NULL AUTO_INCREMENT;
 
+--
+-- AUTO_INCREMENT de la tabla `facturassuscripcion`
+--
 ALTER TABLE `facturassuscripcion`
-  MODIFY `id_factura_suscripcion` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_factura_suscripcion` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
+--
+-- AUTO_INCREMENT de la tabla `inventario`
+--
 ALTER TABLE `inventario`
-  MODIFY `id_inventario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_inventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1003;
 
+--
+-- AUTO_INCREMENT de la tabla `marcasproducto`
+--
 ALTER TABLE `marcasproducto`
-  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=413;
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=587;
 
+--
+-- AUTO_INCREMENT de la tabla `materialesproducto`
+--
 ALTER TABLE `materialesproducto`
-  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=323;
+  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=456;
 
+--
+-- AUTO_INCREMENT de la tabla `modelos`
+--
 ALTER TABLE `modelos`
-  MODIFY `id_modelo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_modelo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
+--
+-- AUTO_INCREMENT de la tabla `modulosistema`
+--
 ALTER TABLE `modulosistema`
   MODIFY `id_modulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
+--
+-- AUTO_INCREMENT de la tabla `movimientoscaja`
+--
 ALTER TABLE `movimientoscaja`
-  MODIFY `id_movimiento_caja` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_movimiento_caja` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
+--
+-- AUTO_INCREMENT de la tabla `movimientosinventario`
+--
 ALTER TABLE `movimientosinventario`
   MODIFY `id_movimiento_inv` bigint(20) NOT NULL AUTO_INCREMENT;
 
+--
+-- AUTO_INCREMENT de la tabla `pagoscomprobante`
+--
 ALTER TABLE `pagoscomprobante`
   MODIFY `id_pago` bigint(20) NOT NULL AUTO_INCREMENT;
 
+--
+-- AUTO_INCREMENT de la tabla `pagosempresaatapstyle`
+--
 ALTER TABLE `pagosempresaatapstyle`
-  MODIFY `id_pago` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pago` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
+--
+-- AUTO_INCREMENT de la tabla `pedidoscompra`
+--
 ALTER TABLE `pedidoscompra`
-  MODIFY `id_pedido_compra` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pedido_compra` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
+--
+-- AUTO_INCREMENT de la tabla `permisos`
+--
 ALTER TABLE `permisos`
-  MODIFY `id_permiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=728;
+  MODIFY `id_permiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1032;
 
+--
+-- AUTO_INCREMENT de la tabla `planes`
+--
 ALTER TABLE `planes`
   MODIFY `id_plan` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=505;
 
+--
+-- AUTO_INCREMENT de la tabla `proveedores`
+--
 ALTER TABLE `proveedores`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
+--
+-- AUTO_INCREMENT de la tabla `roles`
+--
 ALTER TABLE `roles`
-  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
+  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=328;
 
+--
+-- AUTO_INCREMENT de la tabla `suscripcionesempresa`
+--
 ALTER TABLE `suscripcionesempresa`
-  MODIFY `id_suscripcion` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_suscripcion` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
+--
+-- AUTO_INCREMENT de la tabla `tipodocumento`
+--
 ALTER TABLE `tipodocumento`
-  MODIFY `id_tipodocumento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
+  MODIFY `id_tipodocumento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=328;
 
+--
+-- AUTO_INCREMENT de la tabla `tiposcomprobantepago`
+--
 ALTER TABLE `tiposcomprobantepago`
-  MODIFY `id_tipo_comprobante` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tipo_comprobante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
+--
+-- AUTO_INCREMENT de la tabla `tiposmovimientoinventario`
+--
 ALTER TABLE `tiposmovimientoinventario`
   MODIFY `id_tipo_movimiento` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `tipospago`
-  MODIFY `id_tipopago` int(11) NOT NULL AUTO_INCREMENT;
-
+--
+-- AUTO_INCREMENT de la tabla `tiposproducto`
+--
 ALTER TABLE `tiposproducto`
   MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `unidadesmedida`
-  MODIFY `id_unidad_medida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
-
-ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=774;
-
-ALTER TABLE `variantesproducto`
-  MODIFY `id_variante` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tipo_pago`
+--
+ALTER TABLE `tipo_pago`
+  MODIFY `id_tipo_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Restricciones para tablas volcadas (Claves Foráneas corregidas)
+-- AUTO_INCREMENT de la tabla `unidadesmedida`
+--
+ALTER TABLE `unidadesmedida`
+  MODIFY `id_unidad_medida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1059;
+
+--
+-- AUTO_INCREMENT de la tabla `variantesproducto`
+--
+ALTER TABLE `variantesproducto`
+  MODIFY `id_variante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5003;
+
+--
+-- Restricciones para tablas volcadas
 --
 
 --
@@ -1401,7 +1751,7 @@ ALTER TABLE `movimientosinventario`
 --
 ALTER TABLE `pagoscomprobante`
   ADD CONSTRAINT `FK_Pagos_Comprobantes` FOREIGN KEY (`id_comprobante`) REFERENCES `comprobantespago` (`id_comprobante`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_Pagos_TiposPago` FOREIGN KEY (`id_tipopago`) REFERENCES `tipospago` (`id_tipopago`);
+  ADD CONSTRAINT `FK_Pagos_TiposPago` FOREIGN KEY (`id_tipopago`) REFERENCES `tipo_pago` (`id_tipo_pago`);
 
 --
 -- Filtros para la tabla `pagosempresaatapstyle`
@@ -1448,7 +1798,7 @@ ALTER TABLE `proveedores`
 --
 ALTER TABLE `proveedor_metodospago`
   ADD CONSTRAINT `FK_ProvMetodos_Proveedor` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id_proveedor`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_ProvMetodos_TipoPago` FOREIGN KEY (`id_tipopago`) REFERENCES `tipospago` (`id_tipopago`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_ProvMetodos_TipoPago` FOREIGN KEY (`id_tipopago`) REFERENCES `tipo_pago` (`id_tipo_pago`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `rol_permisos`
@@ -1463,6 +1813,12 @@ ALTER TABLE `rol_permisos`
 ALTER TABLE `suscripcionesempresa`
   ADD CONSTRAINT `FK_Suscripciones_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`),
   ADD CONSTRAINT `FK_Suscripciones_Planes` FOREIGN KEY (`id_plan`) REFERENCES `planes` (`id_plan`);
+
+--
+-- Filtros para la tabla `tipo_pago`
+--
+ALTER TABLE `tipo_pago`
+  ADD CONSTRAINT `fk_tipopago_empresa` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`);
 
 --
 -- Filtros para la tabla `usuarios`

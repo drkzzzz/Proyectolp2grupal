@@ -92,7 +92,8 @@ function validarAutenticacion() {
  */
 function obtenerContexto() {
     const usuario = JSON.parse(localStorage.getItem('tapstyle_user'));
-    const idEmpresa = parseInt(localStorage.getItem('idEmpresa'));
+    const idEmpresaStr = localStorage.getItem('idEmpresa');
+    const idEmpresa = idEmpresaStr ? parseInt(idEmpresaStr) : null;
     const empresaNombre = localStorage.getItem('empresaNombre') || 'Tu Empresa';
     const empresaInitials = localStorage.getItem('empresaInitials') || 'TE';
 
