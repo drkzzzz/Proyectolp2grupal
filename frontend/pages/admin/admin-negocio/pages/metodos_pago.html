@@ -273,17 +273,35 @@
         }
 
         async function cargarMetodos() {
-            console.log("Cargando métodos... Empresa ID:", currentIdEmpresa);
+            console.log("Cargando métodos... context raw:", currentIdEmpresa);
 
-            if (!currentIdEmpresa) {
-                mostrarError("No se identificó la empresa. Por favor inicie sesión nuevamente.");
+            let idToSend = currentIdEmpresa;
+
+            // Si es objeto, intentar extraer de nuevo (safety net)
+            if (typeof idToSend === 'object' && idToSend !== null) {
+                idToSend = idToSend.idEmpresa || idToSend.id || idToSend.empresaId;
+            }
+
+            // Asegurar número
+            const idFinal = parseInt(idToSend);
+
+            console.log("ID Final a enviar:", idFinal);
+
+            if (!idFinal || isNaN(idFinal)) {
+                mostrarError("No se identificó una empresa válida (ID: " + idToSend + "). Por favor inicie sesión.");
                 return;
             }
 
             try {
-                const response = await fetch(`${API_BASE_URL}/metodos-pago?idEmpresa=${currentIdEmpresa}`);
+                // Usar idFinal asegurado
+                const url = `${API_BASE_URL}/metodos-pago?idEmpresa=${idFinal}`;
+                console.log("Fetching URL:", url);
+
+                const response = await fetch(url);
 
                 if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error("Server Error Body:", errorText);
                     throw new Error(`Error ${response.status}: ${response.statusText}`);
                 }
 
@@ -442,16 +460,34 @@
 
             // Obtener ID Empresa de forma robusta
             if (typeof obtenerContexto === 'function') {
-                currentIdEmpresa = obtenerContexto();
+                const contexto = obtenerContexto();
+                // Si devuelve un objeto, intentamos sacar el ID
+                if (typeof contexto === 'object' && contexto !== null) {
+                    currentIdEmpresa = contexto.idEmpresa || contexto.id || contexto.empresaId;
+                } else {
+                    currentIdEmpresa = contexto;
+                }
             }
 
-            // Fallback
-            if (!currentIdEmpresa) {
+            // Fallback si sigue nulo o es un objeto inválido
+            if (!currentIdEmpresa || typeof currentIdEmpresa === 'object') {
                 const user = JSON.parse(localStorage.getItem('tapstyle_user') || localStorage.getItem('usuario') || '{}');
-                currentIdEmpresa = user.idEmpresa || user.empresaId;
+                // Intentar extraer el ID si es un objeto anidado o directo
+                if (user.idEmpresa && typeof user.idEmpresa === 'object') {
+                    currentIdEmpresa = user.idEmpresa.idEmpresa || user.idEmpresa.id;
+                } else {
+                    currentIdEmpresa = user.idEmpresa || user.empresaId;
+                }
             }
 
-            console.log('💳 Iniciando módulo de Pagos. Empresa:', currentIdEmpresa);
+            // Asegurar que sea un número/string limpio
+            if (currentIdEmpresa && typeof currentIdEmpresa === 'object') {
+                console.warn("currentIdEmpresa sigue siendo objeto:", currentIdEmpresa);
+                // Último intento desesperado
+                currentIdEmpresa = currentIdEmpresa.idEmpresa || currentIdEmpresa.id;
+            }
+
+            console.log('💳 Iniciando módulo de Pagos. Empresa ID:', currentIdEmpresa);
             cargarMetodos();
         });
 
