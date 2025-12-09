@@ -18,7 +18,7 @@ public class TipoPago {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tipopago")
+    @Column(name = "id_tipo_pago")
     private Integer idTipoPago;
 
     @Column(name = "id_empresa")
