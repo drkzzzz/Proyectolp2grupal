@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -109,13 +110,33 @@ public class InventarioService {
     }
 
     public void ajustarStockPorProducto(Integer idProducto, Integer cantidad, String tipo) {
-        // Busca el primer inventario del producto (generalmente en almacén principal)
-        List<Inventario> inventarios = inventarioRepository.findAll().stream()
-                .filter(inv -> inv.getVariante().getProducto().getIdProducto().equals(idProducto))
-                .collect(Collectors.toList());
+        // Busca los inventarios del producto
+        List<Inventario> inventarios = inventarioRepository.findByProductoId(idProducto);
 
         if (inventarios.isEmpty()) {
-            throw new RuntimeException("No hay inventario para el producto con id: " + idProducto);
+            // Crear automáticamente inventario si no existe
+            Producto producto = productoRepository.findById(idProducto)
+                    .orElseThrow(() -> new RuntimeException("Producto no encontrado con id: " + idProducto));
+
+            // Obtener la primera variante del producto
+            VarianteProducto variante = varianteRepository.findByProducto_IdProducto(idProducto)
+                    .stream().findFirst()
+                    .orElseThrow(() -> new RuntimeException("No hay variantes para el producto: " + idProducto));
+
+            // Obtener el primer almacén disponible
+            Almacen almacen = almacenRepository.findAll()
+                    .stream().findFirst()
+                    .orElseThrow(() -> new RuntimeException("No hay almacenes disponibles"));
+
+            // Crear nuevo inventario
+            Inventario nuevoInventario = new Inventario();
+            nuevoInventario.setVariante(variante);
+            nuevoInventario.setAlmacen(almacen);
+            nuevoInventario.setStockMinimo(5);
+            nuevoInventario.setCantidadStock(0);
+            nuevoInventario.setFechaUltimaActualizacion(LocalDateTime.now());
+
+            inventarios = List.of(inventarioRepository.save(nuevoInventario));
         }
 
         Inventario inventario = inventarios.get(0);
@@ -134,16 +155,17 @@ public class InventarioService {
     }
 
     private InventarioDTO convertToDTO(Inventario inventario) {
+        Producto producto = inventario.getVariante().getProducto();
         return InventarioDTO.builder()
                 .idInventario(inventario.getIdInventario())
-                .idProducto(inventario.getVariante().getProducto().getIdProducto())
-                .nombreProducto(inventario.getVariante().getProducto().getNombreProducto())
+                .idProducto(producto.getIdProducto())
+                .nombreProducto(producto.getNombreProducto())
                 .idVariante(inventario.getVariante().getIdVariante())
                 .idAlmacen(inventario.getAlmacen().getIdAlmacen())
                 .nombreAlmacen(inventario.getAlmacen().getNombreAlmacen())
                 .cantidadStock(inventario.getCantidadStock())
                 .stockMinimo(inventario.getStockMinimo())
-                .precioUnitario(null) // No hay precio directo en Inventario
+                .precioUnitario(producto.getPrecio() != null ? producto.getPrecio() : BigDecimal.ZERO)
                 .fechaUltimaActualizacion(inventario.getFechaUltimaActualizacion() != null
                         ? inventario.getFechaUltimaActualizacion().toString()
                         : null)

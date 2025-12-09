@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "VariantesProducto")
+@Table(name = "variantesproducto")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

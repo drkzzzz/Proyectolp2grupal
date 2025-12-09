@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,8 @@ public class ProductoService {
     private final MarcaProductoRepository marcaRepository;
     private final ModeloRepository modeloRepository;
     private final MaterialProductoRepository materialRepository;
+    private final InventarioRepository inventarioRepository;
+    private final VarianteProductoRepository varianteRepository;
 
     public List<ProductoDTO> obtenerTodos() {
         return productoRepository.findAll().stream()
@@ -31,8 +34,39 @@ public class ProductoService {
     }
 
     public List<ProductoDTO> obtenerPorEmpresa(Integer empresaId) {
-        return productoRepository.findByEmpresa_IdEmpresa(empresaId).stream()
-                .map(this::convertToDTO)
+        try {
+            return productoRepository.findByEmpresa_IdEmpresa(empresaId).stream()
+                    .map(this::convertToDTO)
+                    .filter(dto -> dto.getNombreProducto() != null) // Filtrar DTOs válidos
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            System.out.println("❌ Error en obtenerPorEmpresa: " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    public List<ProductoDTO> obtenerPorEmpresaConStock(Integer empresaId) {
+        List<Producto> productos = productoRepository.findByEmpresa_IdEmpresa(empresaId);
+        return productos.stream()
+                .map(producto -> {
+                    ProductoDTO dto = convertToDTO(producto);
+                    // Calcular stock total: suma de inventario de todas las variantes
+                    try {
+                        Integer stockTotal = varianteRepository.findByProducto_IdProducto(producto.getIdProducto())
+                                .stream()
+                                .mapToInt(variante -> {
+                                    List<Inventario> invs = inventarioRepository
+                                            .findByVariante_IdVariante(variante.getIdVariante());
+                                    return invs.stream().mapToInt(Inventario::getCantidadStock).sum();
+                                })
+                                .sum();
+                        dto.setStock(stockTotal > 0 ? stockTotal : 0);
+                    } catch (Exception e) {
+                        dto.setStock(0);
+                    }
+                    return dto;
+                })
                 .collect(Collectors.toList());
     }
 
@@ -135,29 +169,41 @@ public class ProductoService {
     }
 
     private ProductoDTO convertToDTO(Producto producto) {
-        return ProductoDTO.builder()
-                .idProducto(producto.getIdProducto())
-                .idEmpresa(producto.getEmpresa().getIdEmpresa())
-                .nombreProducto(producto.getNombreProducto())
-                .descripcion(producto.getDescripcion())
-                .idCategoria(producto.getCategoria() != null ? producto.getCategoria().getIdCategoria() : null)
-                .nombreCategoria(producto.getCategoria() != null ? producto.getCategoria().getNombreCategoria()
-                        : "Sin Categoría")
-                .idProveedor(producto.getProveedor() != null ? producto.getProveedor().getIdProveedor() : null)
-                .nombreProveedor(producto.getProveedor() != null ? producto.getProveedor().getNombreComercial() : null)
-                .idUnidadMedida(
-                        producto.getUnidadMedida() != null ? producto.getUnidadMedida().getIdUnidadMedida() : null)
-                .nombreUnidad(producto.getUnidadMedida() != null ? producto.getUnidadMedida().getNombreUnidad()
-                        : "Sin Unidad")
-                .dimensiones(producto.getDimensiones())
-                .pesoGramos(producto.getPesoGramos())
-                .precio(producto.getPrecio())
-                .idMarca(producto.getMarca() != null ? producto.getMarca().getIdMarca() : null)
-                .nombreMarca(producto.getMarca() != null ? producto.getMarca().getNombreMarca() : null)
-                .idModelo(producto.getModelo() != null ? producto.getModelo().getIdModelo() : null)
-                .nombreModelo(producto.getModelo() != null ? producto.getModelo().getNombreModelo() : null)
-                .idMaterial(producto.getMaterial() != null ? producto.getMaterial().getIdMaterial() : null)
-                .nombreMaterial(producto.getMaterial() != null ? producto.getMaterial().getNombreMaterial() : null)
-                .build();
+        try {
+            return ProductoDTO.builder()
+                    .idProducto(producto.getIdProducto())
+                    .idEmpresa(producto.getEmpresa() != null ? producto.getEmpresa().getIdEmpresa() : null)
+                    .nombreProducto(producto.getNombreProducto())
+                    .descripcion(producto.getDescripcion())
+                    .idCategoria(producto.getCategoria() != null ? producto.getCategoria().getIdCategoria() : null)
+                    .nombreCategoria(producto.getCategoria() != null ? producto.getCategoria().getNombreCategoria()
+                            : "Sin Categoría")
+                    .idProveedor(producto.getProveedor() != null ? producto.getProveedor().getIdProveedor() : null)
+                    .nombreProveedor(
+                            producto.getProveedor() != null ? producto.getProveedor().getNombreComercial() : null)
+                    .idUnidadMedida(
+                            producto.getUnidadMedida() != null ? producto.getUnidadMedida().getIdUnidadMedida() : null)
+                    .nombreUnidad(producto.getUnidadMedida() != null ? producto.getUnidadMedida().getNombreUnidad()
+                            : "Sin Unidad")
+                    .dimensiones(producto.getDimensiones())
+                    .pesoGramos(producto.getPesoGramos())
+                    .precio(producto.getPrecio())
+                    .idMarca(producto.getMarca() != null ? producto.getMarca().getIdMarca() : null)
+                    .nombreMarca(producto.getMarca() != null ? producto.getMarca().getNombreMarca() : null)
+                    .idModelo(producto.getModelo() != null ? producto.getModelo().getIdModelo() : null)
+                    .nombreModelo(producto.getModelo() != null ? producto.getModelo().getNombreModelo() : null)
+                    .idMaterial(producto.getMaterial() != null ? producto.getMaterial().getIdMaterial() : null)
+                    .nombreMaterial(producto.getMaterial() != null ? producto.getMaterial().getNombreMaterial() : null)
+                    .build();
+        } catch (Exception e) {
+            System.out.println("⚠️ Error al convertir producto " + producto.getIdProducto() + ": " + e.getMessage());
+            // Retornar DTO con datos básicos si hay error
+            return ProductoDTO.builder()
+                    .idProducto(producto.getIdProducto())
+                    .nombreProducto(producto.getNombreProducto())
+                    .descripcion(producto.getDescripcion())
+                    .precio(producto.getPrecio())
+                    .build();
+        }
     }
 }

@@ -24,9 +24,13 @@ public class ProductoController {
     @GetMapping("/empresa/{empresaId}")
     public ResponseEntity<ApiResponse<List<ProductoDTO>>> obtenerPorEmpresa(@PathVariable Integer empresaId) {
         try {
+            System.out.println("📦 Obteniendo productos para empresa: " + empresaId);
             List<ProductoDTO> productos = productoService.obtenerPorEmpresa(empresaId);
+            System.out.println("✅ Productos encontrados: " + productos.size());
+            productos.forEach(p -> System.out.println("  - " + p.getNombreProducto() + " ($" + p.getPrecio() + ")"));
             return ResponseEntity.ok(ApiResponse.success(productos, "Productos cargados exitosamente"));
         } catch (Exception e) {
+            System.out.println("❌ Error: " + e.getMessage());
             e.printStackTrace();
             return ResponseEntity.badRequest()
                     .body(ApiResponse.error("ProductoError", "Error al obtener productos: " + e.getMessage()));

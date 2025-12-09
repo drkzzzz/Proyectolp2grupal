@@ -319,9 +319,7 @@
 
         async function cargarCompras() {
             try {
-                const response = await fetch(`${API_BASE_URL}/pedidos-compra`, {
-                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
-                });
+                const response = await fetch(`${API_BASE_URL}/pedidos-compra`);
 
                 if (!response.ok) throw new Error('Error al cargar compras');
 
@@ -363,12 +361,11 @@
 
         async function cargarProveedores() {
             try {
-                const empresaId = obtenerContexto();
+                const contexto = obtenerContexto();
+                const empresaId = contexto.idEmpresa;
                 console.log('📋 Cargando proveedores para empresa:', empresaId);
 
-                const response = await fetch(`${API_BASE_URL}/proveedores/empresa/${empresaId}`, {
-                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
-                });
+                const response = await fetch(`${API_BASE_URL}/proveedores/empresa/${empresaId}`);
 
                 console.log('📦 Respuesta proveedores:', response.status, response.statusText);
 
@@ -399,12 +396,11 @@
 
         async function cargarProductos() {
             try {
-                const empresaId = obtenerContexto();
+                const contexto = obtenerContexto();
+                const empresaId = contexto.idEmpresa;
                 console.log('📦 Cargando productos para empresa:', empresaId);
 
-                const response = await fetch(`${API_BASE_URL}/productos/empresa/${empresaId}`, {
-                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
-                });
+                const response = await fetch(`${API_BASE_URL}/productos/empresa/${empresaId}`);
 
                 console.log('📦 Respuesta productos:', response.status);
 
@@ -439,10 +435,10 @@
                             ${productos.map(prod => `
                                 <tr class="border-b hover:bg-gray-100">
                                     <td class="p-2">${prod.nombreProducto}</td>
-                                    <td class="p-2"><input type="number" class="cantidad-prod-${prod.idProducto} w-full px-2 py-1 border rounded text-center" value="1" min="1" data-precio="${prod.precioUnitario || 0}"></td>
-                                    <td class="text-right p-2">$${(prod.precioUnitario || 0).toFixed(2)}</td>
+                                    <td class="p-2"><input type="number" class="cantidad-prod-${prod.idProducto} w-full px-2 py-1 border rounded text-center" value="1" min="1" data-precio="${prod.precio || 0}"></td>
+                                    <td class="text-right p-2">$${(prod.precio || 0).toFixed(2)}</td>
                                     <td class="text-center p-2">
-                                        <button type="button" onclick="agregarProductoAlCarrito(${prod.idProducto}, '${prod.nombreProducto}', ${prod.precioUnitario || 0})" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs">
+                                        <button type="button" onclick="agregarProductoAlCarrito(${prod.idProducto}, '${prod.nombreProducto}', ${prod.precio || 0})" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs">
                                             <i class="fas fa-plus"></i>
                                         </button>
                                     </td>

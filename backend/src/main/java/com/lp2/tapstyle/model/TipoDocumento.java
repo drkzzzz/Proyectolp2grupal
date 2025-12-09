@@ -16,8 +16,9 @@ public class TipoDocumento implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_tipodocumento")
     private Integer idTipoDocumento;
 
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(name = "nombre_tipodocumento", nullable = false, unique = true, length = 50)
     private String nombreTipoDocumento;
 }

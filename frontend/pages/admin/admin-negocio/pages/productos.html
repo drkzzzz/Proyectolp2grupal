@@ -266,17 +266,25 @@
         async function cargarProductos() {
             try {
                 const contexto = obtenerContexto();
+                console.log('📦 Contexto obtenido:', contexto);
+                console.log(`📦 Llamando a: ${API_BASE}/productos/empresa/${contexto.idEmpresa}`);
+                
                 const response = await fetch(`${API_BASE}/productos/empresa/${contexto.idEmpresa}`);
+                
+                console.log('📦 Respuesta status:', response.status);
                 const data = await response.json();
+                console.log('📦 Datos recibidos:', data);
 
                 if (data.success && data.data) {
+                    console.log('✅ Productos cargados:', data.data.length);
                     mostrarProductos(data.data);
                 } else {
+                    console.warn('⚠️ No hay datos en la respuesta');
                     mostrarErrorTabla('No hay productos registrados');
                 }
             } catch (error) {
-                console.error('Error al cargar productos:', error);
-                mostrarErrorTabla('Error al cargar los productos');
+                console.error('❌ Error al cargar productos:', error);
+                mostrarErrorTabla('Error al cargar los productos: ' + error.message);
             }
         }
 
@@ -413,7 +421,7 @@
             const tbody = document.getElementById('tablaProductos');
 
             if (productos.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">No hay productos registrados</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="7" class="px-6 py-4 text-center text-gray-500">No hay productos registrados</td></tr>';
                 return;
             }
 
@@ -425,7 +433,7 @@
                     <td class="px-6 py-4 text-sm text-gray-600">${prod.nombreMarca || 'N/A'}</td>
                     <td class="px-6 py-4 text-sm font-semibold text-gray-900">S/ ${parseFloat(prod.precio || 0).toFixed(2)}</td>
                     <td class="px-6 py-4 text-sm">
-                        <span class="px-3 py-1 rounded-full text-xs font-semibold ${prod.stock > 10 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold ${(prod.stock || 0) > 10 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
                             ${prod.stock || 0}
                         </span>
                     </td>
@@ -443,7 +451,7 @@
 
         function mostrarErrorTabla(mensaje) {
             document.getElementById('tablaProductos').innerHTML = `
-                <tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">${mensaje}</td></tr>
+                <tr><td colspan="7" class="px-6 py-4 text-center text-gray-500">${mensaje}</td></tr>
             `;
         }
 
@@ -543,10 +551,6 @@
             // Construir objeto producto solo con valores válidos
             const producto = {
                 idEmpresa: contexto.idEmpresa,
-                nombreProducto: nombreProducto,
-                descripcion: document.getElementById('descripcion').value.trim(),
-                idCategoria: parseInt(idCategoria),
-                idUnidadMedida: parseInt(idUnidadMedida)
                 nombreProducto: document.getElementById('nombreProducto').value,
                 descripcion: document.getElementById('descripcion').value,
                 precio: parseFloat(document.getElementById('precio').value),
