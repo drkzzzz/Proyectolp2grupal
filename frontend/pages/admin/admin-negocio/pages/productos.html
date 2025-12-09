@@ -247,36 +247,51 @@
 
         async function cargarCategorias() {
             try {
+                console.log('📁 Cargando categorías...');
                 const response = await fetch(`${API_BASE}/categorias`);
                 const data = await response.json();
+                console.log('📁 Respuesta categorías:', data);
 
-                if (data.success && data.data) {
+                if (data.success && data.data && data.data.length > 0) {
                     const select = document.getElementById('idCategoria');
                     select.innerHTML = '<option value="">Seleccionar categoría...</option>';
                     data.data.forEach(cat => {
                         select.innerHTML += `<option value="${cat.idCategoria}">${cat.nombreCategoria}</option>`;
                     });
+                    console.log(`✅ ${data.data.length} categorías cargadas`);
+                } else {
+                    console.warn('⚠️ No hay categorías disponibles');
+                    alert('No hay categorías registradas. Por favor, crea al menos una categoría antes de agregar productos.');
                 }
             } catch (error) {
-                console.error('Error al cargar categorías:', error);
+                console.error('❌ Error al cargar categorías:', error);
+                alert('Error al cargar categorías. Verifica que el backend esté funcionando.');
             }
         }
 
         async function cargarMarcas() {
             try {
                 const contexto = obtenerContexto();
+                console.log('🏷️ Cargando marcas para empresa:', contexto.idEmpresa);
                 const response = await fetch(`${API_BASE}/marcas/empresa/${contexto.idEmpresa}`);
                 const data = await response.json();
+                console.log('🏷️ Respuesta marcas completa:', data);
 
-                if (data.success && data.data) {
+                if (data.success && data.data && data.data.length > 0) {
                     const select = document.getElementById('idMarca');
                     select.innerHTML = '<option value="">Seleccionar marca...</option>';
                     data.data.forEach(marca => {
-                        select.innerHTML += `<option value="${marca.idMarca}">${marca.nombreMarca}</option>`;
+                        console.log(`  📌 Marca cargada: ID=${marca.idMarca}, Nombre=${marca.nombreMarca}, Empresa=${marca.idEmpresa}`);
+                        select.innerHTML += `<option value="${marca.idMarca}">${marca.nombreMarca} (ID: ${marca.idMarca})</option>`;
                     });
+                    console.log(`✅ ${data.data.length} marcas cargadas para empresa ${contexto.idEmpresa}`);
+                } else {
+                    console.warn('⚠️ No hay marcas disponibles para esta empresa');
+                    const select = document.getElementById('idMarca');
+                    select.innerHTML = '<option value="">Sin marcas (crea una en Catálogo/Marcas)</option>';
                 }
             } catch (error) {
-                console.error('Error al cargar marcas:', error);
+                console.error('❌ Error al cargar marcas:', error);
             }
         }
 
@@ -300,10 +315,10 @@
         async function cargarProveedores() {
             try {
                 const contexto = obtenerContexto();
-                console.log('Cargando proveedores para empresa:', contexto.idEmpresa);
+                console.log('🚚 Cargando proveedores para empresa:', contexto.idEmpresa);
                 const response = await fetch(`${API_BASE}/proveedores/empresa/${contexto.idEmpresa}`);
                 const data = await response.json();
-                console.log('Respuesta proveedores:', data);
+                console.log('🚚 Respuesta proveedores:', data);
 
                 let proveedores = [];
                 
@@ -320,29 +335,38 @@
                     proveedores.forEach(prov => {
                         select.innerHTML += `<option value="${prov.idProveedor}">${prov.nombreComercial || prov.razonSocial}</option>`;
                     });
-                    console.log('Proveedores cargados:', proveedores.length);
+                    console.log(`✅ ${proveedores.length} proveedores cargados`);
                 } else {
-                    console.warn('No hay proveedores:', data);
+                    console.warn('⚠️ No hay proveedores disponibles para esta empresa');
+                    const select = document.getElementById('idProveedor');
+                    select.innerHTML = '<option value="">Sin proveedores (crea uno en Operaciones/Proveedores)</option>';
                 }
             } catch (error) {
-                console.error('Error al cargar proveedores:', error);
+                console.error('❌ Error al cargar proveedores:', error);
             }
         }
 
         async function cargarUnidadesMedida() {
             try {
+                console.log('📏 Cargando unidades de medida...');
                 const response = await fetch(`${API_BASE}/unidades-medida`);
                 const data = await response.json();
+                console.log('📏 Respuesta unidades:', data);
 
-                if (data.success && data.data) {
+                if (data.success && data.data && data.data.length > 0) {
                     const select = document.getElementById('idUnidadMedida');
                     select.innerHTML = '<option value="">Seleccionar unidad...</option>';
                     data.data.forEach(unidad => {
                         select.innerHTML += `<option value="${unidad.idUnidadMedida}">${unidad.nombreUnidad} (${unidad.abreviatura})</option>`;
                     });
+                    console.log(`✅ ${data.data.length} unidades de medida cargadas`);
+                } else {
+                    console.warn('⚠️ No hay unidades de medida disponibles');
+                    alert('No hay unidades de medida registradas. Por favor, contacta al administrador.');
                 }
             } catch (error) {
-                console.error('Error al cargar unidades de medida:', error);
+                console.error('❌ Error al cargar unidades de medida:', error);
+                alert('Error al cargar unidades de medida. Verifica que el backend esté funcionando.');
             }
         }
 
@@ -437,18 +461,96 @@
             e.preventDefault();
 
             const contexto = obtenerContexto();
+            
+            // Validaciones
+            const nombreProducto = document.getElementById('nombreProducto').value.trim();
+            const idCategoria = document.getElementById('idCategoria').value;
+            const idUnidadMedida = document.getElementById('idUnidadMedida').value;
+            
+            console.log('🔍 Validando datos:', {
+                nombreProducto,
+                idCategoria,
+                idUnidadMedida,
+                idEmpresa: contexto.idEmpresa
+            });
+            
+            if (!nombreProducto) {
+                alert('El nombre del producto es obligatorio');
+                return;
+            }
+            
+            if (!idCategoria || idCategoria === '') {
+                alert('Debes seleccionar una categoría válida');
+                console.error('❌ idCategoria inválido:', idCategoria);
+                return;
+            }
+            
+            if (!idUnidadMedida || idUnidadMedida === '') {
+                alert('Debes seleccionar una unidad de medida válida');
+                console.error('❌ idUnidadMedida inválido:', idUnidadMedida);
+                return;
+            }
+            
+            if (!contexto.idEmpresa) {
+                alert('Error: No se puede identificar la empresa. Por favor, vuelve a iniciar sesión.');
+                console.error('❌ idEmpresa no encontrado');
+                return;
+            }
+            
+            // Obtener valores de los selects
+            const valorMarca = document.getElementById('idMarca').value;
+            const valorProveedor = document.getElementById('idProveedor').value;
+            const valorMaterial = document.getElementById('idMaterial').value;
+            const valorPeso = document.getElementById('pesoGramos').value;
+            
+            // Construir objeto producto solo con valores válidos
             const producto = {
                 idEmpresa: contexto.idEmpresa,
-                nombreProducto: document.getElementById('nombreProducto').value,
-                descripcion: document.getElementById('descripcion').value,
-                idCategoria: parseInt(document.getElementById('idCategoria').value),
-                idUnidadMedida: parseInt(document.getElementById('idUnidadMedida').value),
-                idMarca: document.getElementById('idMarca').value ? parseInt(document.getElementById('idMarca').value) : null,
-                idProveedor: document.getElementById('idProveedor').value ? parseInt(document.getElementById('idProveedor').value) : null,
-                pesoGramos: document.getElementById('pesoGramos').value ? parseInt(document.getElementById('pesoGramos').value) : null,
-                dimensiones: document.getElementById('dimensiones').value,
-                idMaterial: document.getElementById('idMaterial').value ? parseInt(document.getElementById('idMaterial').value) : null
+                nombreProducto: nombreProducto,
+                descripcion: document.getElementById('descripcion').value.trim(),
+                idCategoria: parseInt(idCategoria),
+                idUnidadMedida: parseInt(idUnidadMedida)
             };
+            
+            // Solo agregar marca si se seleccionó una válida
+            if (valorMarca && valorMarca !== '' && valorMarca !== 'null') {
+                const marcaId = parseInt(valorMarca);
+                if (!isNaN(marcaId) && marcaId > 0) {
+                    producto.idMarca = marcaId;
+                }
+            }
+            
+            // Solo agregar proveedor si se seleccionó uno válido
+            if (valorProveedor && valorProveedor !== '' && valorProveedor !== 'null') {
+                const proveedorId = parseInt(valorProveedor);
+                if (!isNaN(proveedorId) && proveedorId > 0) {
+                    producto.idProveedor = proveedorId;
+                }
+            }
+            
+            // Solo agregar material si se seleccionó uno válido
+            if (valorMaterial && valorMaterial !== '' && valorMaterial !== 'null') {
+                const materialId = parseInt(valorMaterial);
+                if (!isNaN(materialId) && materialId > 0) {
+                    producto.idMaterial = materialId;
+                }
+            }
+            
+            // Solo agregar peso si tiene valor
+            if (valorPeso && valorPeso !== '' && valorPeso !== '0') {
+                const peso = parseInt(valorPeso);
+                if (!isNaN(peso) && peso > 0) {
+                    producto.pesoGramos = peso;
+                }
+            }
+            
+            // Solo agregar dimensiones si tiene texto
+            const dimensiones = document.getElementById('dimensiones').value.trim();
+            if (dimensiones) {
+                producto.dimensiones = dimensiones;
+            }
+            
+            console.log('📦 Enviando producto:', producto);
 
             try {
                 let url = `${API_BASE}/productos`;
@@ -459,24 +561,55 @@
                     metodo = 'PUT';
                 }
 
+                console.log(`📡 ${metodo} ${url}`);
+                console.log('📦 Body:', JSON.stringify(producto, null, 2));
+
                 const response = await fetch(url, {
                     method: metodo,
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(producto)
                 });
 
+                if (!response.ok) {
+                    const data = await response.json();
+                    console.error(`❌ Error (${response.status}):`, data);
+                    
+                    // Extraer mensaje de error detallado
+                    let errorMsg = 'Error desconocido';
+                    if (data.error) {
+                        errorMsg = data.error;
+                    } else if (data.mensaje) {
+                        errorMsg = data.mensaje;
+                    } else if (data.message) {
+                        errorMsg = data.message;
+                    }
+                    
+                    // Mostrar error detallado
+                    console.error('📋 Detalles del error:', {
+                        status: response.status,
+                        errorMsg: errorMsg,
+                        dataCompleta: data,
+                        productoEnviado: producto
+                    });
+                    
+                    alert(`❌ Error al guardar producto:\n\n${errorMsg}\n\nRevisa la consola (F12) para más detalles.`);
+                    return;
+                }
+
                 const data = await response.json();
+                console.log(`✅ Respuesta (${response.status}):`, data);
 
                 if (data.success) {
-                    alert(idProductoEditar ? 'Producto actualizado correctamente' : 'Producto creado correctamente');
+                    alert('✅ ' + (idProductoEditar ? 'Producto actualizado correctamente' : 'Producto creado correctamente'));
                     cerrarModalProducto();
                     await cargarProductos();
                 } else {
-                    alert('Error: ' + data.message);
+                    alert('❌ Error: ' + (data.mensaje || data.message || 'Error desconocido'));
+                    console.error('❌ Error en respuesta:', data);
                 }
             } catch (error) {
-                alert('Error al guardar el producto');
-                console.error(error);
+                alert('❌ Error al guardar el producto: ' + error.message);
+                console.error('❌ Error:', error);
             }
         };
 

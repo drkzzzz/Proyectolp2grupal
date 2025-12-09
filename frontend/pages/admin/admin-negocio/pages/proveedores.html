@@ -152,11 +152,11 @@
                         <table class="w-full">
                             <thead class="bg-gray-50 border-b border-gray-200">
                                 <tr>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Nombre</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Razón Social</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">RUC</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Rubro</th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Contacto</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Teléfono</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Compras</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Estado</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Dirección</th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Acciones</th>
                                 </tr>
                             </thead>
@@ -191,49 +191,70 @@
             <div class="p-6">
                 <form id="formProveedor" onsubmit="guardarProveedor(event)">
 
-                    <!-- Nombre -->
+                    <!-- Razón Social -->
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre *</label>
-                        <input type="text" id="nombre" required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Razón Social *</label>
+                        <input type="text" id="razonSocial" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Ej: Distribuidora ABC S.A.C.">
                     </div>
 
-                    <!-- Contacto -->
+                    <!-- Nombre Comercial -->
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Persona de Contacto *</label>
-                        <input type="text" id="contacto" required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre Comercial *</label>
+                        <input type="text" id="nombreComercial" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Ej: ABC Distribuidora">
+                    </div>
+
+                    <!-- RUC -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">RUC</label>
+                        <input type="text" id="ruc" maxlength="11"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Ej: 20123456789">
+                    </div>
+
+                    <!-- Rubro -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Rubro</label>
+                        <input type="text" id="rubro"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Ej: Textiles, Calzado, Accesorios">
                     </div>
 
                     <!-- Teléfono -->
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Teléfono *</label>
-                        <input type="tel" id="telefono" required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Teléfono</label>
+                        <input type="tel" id="telefono"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Ej: 999888777">
                     </div>
 
                     <!-- Email -->
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
                         <input type="email" id="email"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Ej: ventas@proveedor.com">
                     </div>
 
                     <!-- Dirección -->
                     <div class="mb-6">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Dirección</label>
-                        <textarea id="direccion"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 h-16"></textarea>
+                        <textarea id="direccion" rows="2"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Ej: Av. Los Comerciantes 123, Lima"></textarea>
                     </div>
 
                     <!-- Botones -->
                     <div class="flex gap-3 justify-end">
                         <button type="button" onclick="cerrarModalProveedor()"
-                            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition duration-150">
                             Cancelar
                         </button>
                         <button type="submit"
-                            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center gap-2">
+                            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center gap-2 transition duration-150">
                             <i class="fas fa-save"></i> Guardar
                         </button>
                     </div>
@@ -245,16 +266,18 @@
     </div>
 
     <!-- SCRIPTS -->
-    <script src="/frontend/config/api-config.js"></script>
-    <script src="/frontend/components/sidebar/sidebar_script.js"></script>
+    <!-- Configuración de API -->
+    <script src="../../../config/api-config.js"></script>
+    
+    <!-- Scripts de autenticación y gestión -->
+    <script src="../scripts/auth.js"></script>
+    <script src="../scripts/api.js"></script>
+    
+    <!-- Script específico de proveedores -->
+    <script src="../scripts/proveedores.js"></script>
+    
+    <!-- Script de sidebar (funciones de menú) -->
     <script>
-
-        let idProveedorEditando = null;
-
-        function obtenerToken() {
-            return localStorage.getItem('tapstyle_token') || localStorage.getItem('token') || localStorage.getItem('authToken');
-        }
-
         function toggleMenu(button) {
             const submenu = button.nextElementSibling;
             const icon = button.querySelector('i:last-child');
@@ -268,312 +291,6 @@
                 cerrarSesion();
             }
         }
-
-        function abrirModalProveedor() {
-            idProveedorEditando = null;
-            document.getElementById('modalProveedor').classList.remove('hidden');
-            document.getElementById('formProveedor').reset();
-        }
-
-        function cerrarModalProveedor() {
-            document.getElementById('modalProveedor').classList.add('hidden');
-            document.getElementById('formProveedor').reset();
-            idProveedorEditando = null;
-        }
-
-        async function cargarProveedores() {
-            try {
-                const contexto = obtenerContexto();
-                const response = await fetch(`${API_BASE_URL}/proveedores/empresa/${contexto.idEmpresa}`, {
-                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
-                });
-
-                if (!response.ok) throw new Error('Error al cargar proveedores');
-
-                const resultado = await response.json();
-                const proveedores = resultado.data || resultado;
-
-                if (!Array.isArray(proveedores)) {
-                    mostrarTablaVacia();
-                    return;
-                }
-
-                const tbody = document.getElementById('tablaProveedores');
-                tbody.innerHTML = proveedores.map(prov => `
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 text-sm font-medium text-gray-900">${prov.nombreComercial || prov.razonSocial}</td>
-                        <td class="px-6 py-4 text-sm text-gray-700">${prov.ruc || '-'}</td>
-                        <td class="px-6 py-4 text-sm text-gray-700">${prov.email || '-'}</td>
-                        <td class="px-6 py-4 text-sm text-gray-700">${prov.telefono || '-'}</td>
-                        <td class="px-6 py-4 text-sm text-gray-700">${prov.rubro || '-'}</td>
-                        <td class="px-6 py-4 text-sm flex gap-2">
-                            <button onclick="editarProveedor(${prov.idProveedor})" class="text-yellow-600 hover:text-yellow-800">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button onclick="eliminarProveedor(${prov.idProveedor})" class="text-red-600 hover:text-red-800">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `).join('');
-            } catch (error) {
-                console.error('Error:', error);
-                mostrarTablaVacia();
-            }
-        }
-
-        async function guardarProveedor(event) {
-            event.preventDefault();
-
-            const razonSocial = document.getElementById('razonSocial').value;
-            const nombreComercial = document.getElementById('nombreComercial').value;
-            const ruc = document.getElementById('ruc').value;
-            const email = document.getElementById('email').value;
-            const telefono = document.getElementById('telefono').value;
-            const rubro = document.getElementById('rubro').value;
-            const direccion = document.getElementById('direccion').value;
-
-            if (!razonSocial || !nombreComercial) {
-                alert('Completa campos obligatorios');
-                return;
-            }
-
-            try {
-                const contexto = obtenerContexto();
-                const datos = {
-                    idEmpresa: contexto.idEmpresa,
-                    razonSocial,
-                    nombreComercial,
-                    ruc,
-                    email,
-                    telefono,
-                    rubro,
-                    direccion
-                };
-
-                const url = idProveedorEditando ? `${API_BASE_URL}/proveedores/${idProveedorEditando}` : `${API_BASE_URL}/proveedores`;
-                const method = idProveedorEditando ? 'PUT' : 'POST';
-
-                const response = await fetch(url, {
-                    method: method,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${obtenerToken()}`
-                    },
-                    body: JSON.stringify(datos)
-                });
-
-                if (!response.ok) throw new Error('Error al guardar proveedor');
-
-                alert(idProveedorEditando ? 'Proveedor actualizado' : 'Proveedor creado');
-                cerrarModalProveedor();
-                cargarProveedores();
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Error: ' + error.message);
-            }
-        }
-
-        async function editarProveedor(id) {
-            try {
-                const response = await fetch(`${API_BASE_URL}/proveedores/${id}`, {
-                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
-                });
-
-                if (!response.ok) throw new Error('Error al cargar proveedor');
-
-                const resultado = await response.json();
-                const prov = resultado.data || resultado;
-
-                idProveedorEditando = id;
-                document.getElementById('razonSocial').value = prov.razonSocial;
-                document.getElementById('nombreComercial').value = prov.nombreComercial;
-                document.getElementById('ruc').value = prov.ruc || '';
-                document.getElementById('email').value = prov.email || '';
-                document.getElementById('telefono').value = prov.telefono || '';
-                document.getElementById('rubro').value = prov.rubro || '';
-                document.getElementById('direccion').value = prov.direccion || '';
-                document.getElementById('modalProveedor').classList.remove('hidden');
-            } catch (error) {
-                alert('Error: ' + error.message);
-            }
-        }
-
-        function eliminarProveedor(id) {
-            if (confirm('¿Estás seguro?')) {
-                fetch(`${API_BASE_URL}/proveedores/${id}`, {
-                    method: 'DELETE',
-                    headers: { 'Authorization': `Bearer ${obtenerToken()}` }
-                })
-                    .then(res => {
-                        if (!res.ok) throw new Error('Error');
-                        alert('Proveedor eliminado');
-                        cargarProveedores();
-                    })
-                    .catch(error => alert('Error: ' + error.message));
-            }
-        }
-
-        function mostrarTablaVacia() {
-            document.getElementById('tablaProveedores').innerHTML = `
-                <tr>
-                    <td colspan="6" class="px-6 py-8 text-center">
-                        <i class="fas fa-inbox text-3xl text-gray-400 mb-2"></i>
-                        <p class="text-gray-500">No hay proveedores registrados</p>
-                    </td>
-                </tr>
-            `;
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const auth = validarAutenticacion();
-            if (!auth) return;
-
-            console.log('🚚 Cargando proveedores...');
-            cargarProveedores();
-        });
-
-    </script>
-    <script>
-
-        function toggleMenu(button) {
-            const submenu = button.nextElementSibling;
-            const icon = button.querySelector('i:last-child');
-            submenu.classList.toggle('hidden');
-            icon.classList.toggle('fa-chevron-down');
-            icon.classList.toggle('fa-chevron-up');
-        }
-
-        function cerrarSesionConfirm() {
-            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
-                cerrarSesion();
-            }
-        }
-
-        function abrirModalProveedor() {
-            document.getElementById('modalProveedor').classList.remove('hidden');
-        }
-
-        function cerrarModalProveedor() {
-            document.getElementById('modalProveedor').classList.add('hidden');
-            document.getElementById('formProveedor').reset();
-        }
-
-        async function cargarProveedores() {
-            try {
-                const proveedores = await getRequest('/api/proveedores');
-                console.log('Proveedores cargados:', proveedores);
-
-                if (!Array.isArray(proveedores)) {
-                    mostrarTablaVacia();
-                    return;
-                }
-
-                const tbody = document.getElementById('tablaProveedores');
-                tbody.innerHTML = proveedores.map(prov => `
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 text-sm font-medium text-gray-900">${prov.nombre}</td>
-                        <td class="px-6 py-4 text-sm text-gray-700">${prov.contacto}</td>
-                        <td class="px-6 py-4 text-sm text-gray-700">${prov.telefono}</td>
-                        <td class="px-6 py-4 text-sm text-gray-700">
-                            <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold">
-                                ${prov.compras || 0}
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 text-sm">
-                            <span class="px-3 py-1 rounded-full ${prov.estado === 'activo' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'} text-xs font-semibold">
-                                ${prov.estado === 'activo' ? '✓ Activo' : '✗ Inactivo'}
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 text-sm space-x-2">
-                            <button onclick="editarProveedor(${prov.id})" class="text-yellow-600 hover:text-yellow-800">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button onclick="eliminarProveedor(${prov.id})" class="text-red-600 hover:text-red-800">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `).join('');
-            } catch (error) {
-                console.error('Error cargando proveedores:', error);
-                mostrarTablaVacia();
-                mostrarError('Error: ' + error.message);
-            }
-        }
-
-        async function guardarProveedor(event) {
-            event.preventDefault();
-
-            const nombre = document.getElementById('nombre').value;
-            const contacto = document.getElementById('contacto').value;
-            const telefono = document.getElementById('telefono').value;
-            const email = document.getElementById('email').value;
-            const direccion = document.getElementById('direccion').value;
-
-            if (!nombre || !contacto || !telefono) {
-                mostrarError('Completa todos los campos requeridos');
-                return;
-            }
-
-            try {
-                const boton = event.target.querySelector('button[type="submit"]');
-                mostrarLoading(boton, 'Guardando...');
-
-                const datosProveedor = {
-                    nombre,
-                    contacto,
-                    telefono,
-                    email,
-                    direccion,
-                    estado: 'activo'
-                };
-
-                await postRequest('/api/proveedores', datosProveedor);
-                mostrarExito('Proveedor registrado exitosamente');
-                cerrarModalProveedor();
-                cargarProveedores();
-
-            } catch (error) {
-                console.error('Error:', error);
-                mostrarError('Error: ' + error.message);
-            }
-        }
-
-        function editarProveedor(id) {
-            alert('Editar proveedor #' + id + ' (implementar después)');
-        }
-
-        function eliminarProveedor(id) {
-            if (confirm('¿Estás seguro de eliminar este proveedor?')) {
-                deleteRequest('/api/proveedores', id)
-                    .then(() => {
-                        mostrarExito('Proveedor eliminado');
-                        cargarProveedores();
-                    })
-                    .catch(error => mostrarError('Error: ' + error.message));
-            }
-        }
-
-        function mostrarTablaVacia() {
-            document.getElementById('tablaProveedores').innerHTML = `
-                <tr>
-                    <td colspan="6" class="px-6 py-8 text-center">
-                        <i class="fas fa-inbox text-3xl text-gray-400 mb-2"></i>
-                        <p class="text-gray-500">No hay proveedores registrados</p>
-                    </td>
-                </tr>
-            `;
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const auth = validarAutenticacion();
-            if (!auth) return;
-
-            console.log('🚚 Cargando proveedores...');
-            cargarProveedores();
-        });
-
     </script>
 
 </body>
