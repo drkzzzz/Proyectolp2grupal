@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pedidos - TapStyle</title>
+    <link rel="stylesheet" href="../../../tienda-negocio/styles/tienda-styles.css">
+    <style>
+        .pedidos-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .pedido-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+
+        .pedido-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .pedido-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .pedido-numero {
+            font-size: 18px;
+            font-weight: 700;
+            color: #4f46e5;
+        }
+
+        .pedido-fecha {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .pedido-estado {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .estado-Pendiente {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .estado-Procesando {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .estado-Completado {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .estado-Cancelado {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .pedido-items {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .pedido-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+
+        .pedido-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .pedido-item-info {
+            flex: 1;
+        }
+
+        .pedido-item-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+        }
+
+        .pedido-item-info p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .pedido-item-precio {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .pedido-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 2px solid #e5e7eb;
+        }
+
+        .pedido-total {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4f46e5;
+        }
+
+        .pedidos-vacio {
+            text-align: center;
+            padding: 60px 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="tienda-navbar">
+        <div class="navbar-container">
+            <div class="logo-section">
+                <button onclick="window.location.href='tienda.html'" class="btn-back">← Volver a la Tienda</button>
+                <h1 class="tienda-nombre">Mis Pedidos</h1>
+            </div>
+            <div class="nav-right">
+                <button onclick="window.location.href='carrito.html'" class="btn-carrito">
+                    🛒 Carrito <span id="cartCount" class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor Principal -->
+    <div class="pedidos-container">
+        <h2>📦 Mi Historial de Pedidos</h2>
+
+        <div id="pedidosVacio" class="pedidos-vacio" style="display: none;">
+            <h3>No tienes pedidos aún</h3>
+            <p>Tus compras aparecerán aquí</p>
+            <button class="btn-checkout" onclick="window.location.href='tienda.html'">
+                Ir a la Tienda
+            </button>
+        </div>
+
+        <div id="pedidosLista">
+            <!-- Se llenará dinámicamente -->
+        </div>
+    </div>
+
+    <script src="../../../scripts/carrito-module.js"></script>
+    <script src="../../../scripts/mis-pedidos.js"></script>
+</body>
+</html>
