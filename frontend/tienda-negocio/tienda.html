@@ -18,14 +18,14 @@
                     <input type="text" id="searchProductos" class="search-bar" placeholder="Buscar productos...">
                 </div>
                 <div class="nav-right">
-                    <button id="btnCarrito" class="btn-carrito">
-                        🛒 Carrito <span id="cartCount">0</span>
+                    <button id="btnCarrito" class="btn-carrito" onclick="window.location.href='carrito.html'">
+                        🛒 Carrito <span id="cartCount" class="cart-count">0</span>
                     </button>
                     <div class="user-menu">
                         <button id="btnUsuario" class="btn-usuario">👤 Usuario</button>
                         <div id="userDropdown" class="user-dropdown" style="display: none;">
                             <a href="#" id="btnMiPerfil">Mi Perfil</a>
-                            <a href="#" id="btnMisCompras">Mis Compras</a>
+                            <a href="mis-pedidos.html" id="btnMisCompras">Mis Pedidos</a>
                             <hr>
                             <a href="#" id="btnCerrarSesion">Cerrar Sesión</a>
                         </div>
@@ -166,11 +166,21 @@
         </div>
     </div>
 
+    <!-- Footer se carga dinámicamente -->
+    <div id="footer-container"></div>
+
     <!-- Scripts -->
     <script src="config/tienda-config.js"></script>
     <script src="scripts/tienda-utils.js"></script>
+    <script src="../scripts/carrito-module.js"></script>
     <script src="scripts/productos-tienda.js"></script>
-    <script src="scripts/carrito-tienda.js"></script>
     <script src="scripts/auth-tienda.js"></script>
+    <script src="../components/footer/footer.js"></script>
+    <script>
+        // Inicializar carrito al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            CarritoModule.init();
+        });
+    </script>
 </body>
 </html>

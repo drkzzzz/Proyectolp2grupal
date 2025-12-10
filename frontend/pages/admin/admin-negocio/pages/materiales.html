@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materiales - Admin Negocio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar"
+            class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
+
+            <div class="p-6 border-b border-gray-700">
+                <h1 class="text-3xl font-extrabold text-blue-400 tracking-wider">TapStyle</h1>
+                <p class="text-xs text-gray-400 mt-1">ADMIN NEGOCIO</p>
+            </div>
+
+            <div class="flex flex-col items-center py-6 border-b border-gray-700 px-4">
+                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg"
+                    data-empresa-initials>SV</div>
+                <h2 class="mt-3 text-lg font-semibold text-center" data-empresa-nombre>Tu Empresa</h2>
+                <p class="text-sm text-gray-400 mt-1" data-usuario-nombre>Usuario</p>
+            </div>
+
+            <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+
+                <a href="../dashboard_admin_negocio.html"
+                    class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150">
+                    <i class="fas fa-chart-line mr-3 text-lg"></i>
+                    <span class="font-medium">Dashboard</span>
+                </a>
+
+                <div class="mt-4">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-box mr-3 text-lg"></i>
+                            <span class="font-medium">Catálogo</span>
+                        </div>
+                        <i class="fas fa-chevron-up text-sm"></i>
+                    </button>
+                    <div class="submenu ml-8 space-y-2 mt-2">
+                        <a href="productos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-cube mr-2"></i> Productos
+                        </a>
+                        <a href="categorias.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-list mr-2"></i> Categorías
+                        </a>
+                        <a href="marcas.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-tag mr-2"></i> Marcas
+                        </a>
+                        <a href="materiales.html"
+                            class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded transition">
+                            <i class="fas fa-hammer mr-2"></i> Materiales
+                        </a>
+                        <a href="unidades_medida.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-ruler mr-2"></i> Unidades
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-tasks mr-3 text-lg"></i>
+                            <span class="font-medium">Operaciones</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="submenu hidden ml-8 space-y-2 mt-2">
+                        <a href="compras.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-shopping-cart mr-2"></i> Compras
+                        </a>
+                        <a href="ventas.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-cash-register mr-2"></i> Ventas
+                        </a>
+                    </div>
+                </div>
+
+            </nav>
+
+            <div class="p-4 border-t border-gray-700">
+                <button onclick="cerrarSesionConfirm()"
+                    class="w-full flex items-center justify-center px-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg transition">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+
+            <!-- CABECERA -->
+            <header class="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-gray-800">Materiales de Producto</h1>
+                <button onclick="abrirModalMaterial()"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2">
+                    <i class="fas fa-plus"></i> Nuevo Material
+                </button>
+            </header>
+
+            <!-- CONTENIDO -->
+            <main class="flex-1 overflow-y-auto p-8">
+
+                <!-- TABLA DE MATERIALES -->
+                <div class="bg-white rounded-xl shadow overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50 border-b border-gray-200">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Nombre</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaMateriales" class="divide-y divide-gray-200">
+                                <tr>
+                                    <td colspan="2" class="px-6 py-4 text-center text-gray-500">
+                                        <i class="fas fa-spinner fa-spin mr-2"></i> Cargando materiales...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <!-- MODAL: Nuevo Material -->
+    <div id="modalMaterial" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md max-h-screen overflow-y-auto">
+
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-gray-800">Nuevo Material</h2>
+                <button onclick="cerrarModalMaterial()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <div class="p-6">
+                <form id="formMaterial" onsubmit="guardarMaterial(event)">
+
+                    <!-- Nombre -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre *</label>
+                        <input type="text" id="nombre" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="flex gap-3 justify-end">
+                        <button type="button" onclick="cerrarModalMaterial()"
+                            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                            Cancelar
+                        </button>
+                        <button type="submit"
+                            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center gap-2">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="../scripts/auth.js"></script>
+    <script src="../scripts/api.js"></script>
+    <script>
+        const API_BASE = 'http://localhost:8083/api';
+        let idMaterialEditar = null;
+
+        function toggleMenu(button) {
+            const submenu = button.nextElementSibling;
+            const icon = button.querySelector('i:last-child');
+            submenu.classList.toggle('hidden');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+
+        function abrirModalMaterial() {
+            if (!idMaterialEditar) {
+                document.getElementById('formMaterial').reset();
+                document.querySelector('#modalMaterial h2').textContent = 'Nuevo Material';
+            }
+            document.getElementById('modalMaterial').classList.remove('hidden');
+        }
+
+        function cerrarModalMaterial() {
+            document.getElementById('modalMaterial').classList.add('hidden');
+            document.getElementById('formMaterial').reset();
+            idMaterialEditar = null;
+        }
+
+        async function cargarMateriales() {
+            try {
+                const contexto = obtenerContexto();
+                const response = await fetch(`${API_BASE}/materiales/empresa/${contexto.idEmpresa}`);
+                const data = await response.json();
+
+                if (data.success && data.data) {
+                    const tbody = document.getElementById('tablaMateriales');
+                    tbody.innerHTML = data.data.map(mat => `
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">${mat.nombreMaterial}</td>
+                            <td class="px-6 py-4 text-sm space-x-2">
+                                <button onclick="editarMaterial(${mat.idMaterial})" class="text-yellow-600 hover:text-yellow-800">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button onclick="eliminarMaterial(${mat.idMaterial})" class="text-red-600 hover:text-red-800">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `).join('');
+                } else {
+                    mostrarTablaVacia();
+                }
+            } catch (error) {
+                console.error('Error cargando materiales:', error);
+                mostrarTablaVacia();
+                mostrarError('Error al cargar materiales');
+            }
+        }
+
+        async function guardarMaterial(event) {
+            event.preventDefault();
+
+            const nombre = document.getElementById('nombre').value;
+            const contexto = obtenerContexto();
+
+            if (!nombre) {
+                mostrarError('El nombre es requerido');
+                return;
+            }
+
+            try {
+                const boton = event.target.querySelector('button[type="submit"]');
+                boton.disabled = true;
+                boton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Guardando...';
+
+                const datosMaterial = {
+                    idEmpresa: contexto.idEmpresa,
+                    nombreMaterial: nombre
+                };
+
+                const url = idMaterialEditar
+                    ? `${API_BASE}/materiales/${idMaterialEditar}`
+                    : `${API_BASE}/materiales`;
+
+                const metodo = idMaterialEditar ? 'PUT' : 'POST';
+
+                const response = await fetch(url, {
+                    method: metodo,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(datosMaterial)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    mostrarExito(idMaterialEditar ? 'Material actualizado' : 'Material creado exitosamente');
+                    cerrarModalMaterial();
+                    cargarMateriales();
+                } else {
+                    mostrarError(data.error || 'Error al guardar');
+                }
+
+                boton.disabled = false;
+                boton.innerHTML = '<i class="fas fa-save mr-2"></i>Guardar';
+            } catch (error) {
+                console.error('Error:', error);
+                mostrarError('Error: ' + error.message);
+            }
+        }
+
+        async function editarMaterial(id) {
+            try {
+                const response = await fetch(`${API_BASE}/materiales/${id}`);
+                const data = await response.json();
+
+                if (data.success && data.data) {
+                    idMaterialEditar = id;
+                    document.querySelector('#modalMaterial h2').textContent = 'Editar Material';
+                    document.getElementById('nombre').value = data.data.nombreMaterial;
+                    abrirModalMaterial();
+                } else {
+                    mostrarError('Material no encontrado');
+                }
+            } catch (error) {
+                mostrarError('Error al cargar material');
+            }
+        }
+
+        async function eliminarMaterial(id) {
+            if (confirm('¿Estás seguro de eliminar este material?')) {
+                try {
+                    const response = await fetch(`${API_BASE}/materiales/${id}`, {
+                        method: 'DELETE'
+                    });
+
+                    const data = await response.json();
+                    if (data.success) {
+                        mostrarExito('Material eliminado');
+                        cargarMateriales();
+                    } else {
+                        mostrarError('Error al eliminar');
+                    }
+                } catch (error) {
+                    mostrarError('Error: ' + error.message);
+                }
+            }
+        }
+
+        function mostrarTablaVacia() {
+            document.getElementById('tablaMateriales').innerHTML = `
+                <tr>
+                    <td colspan="2" class="px-6 py-8 text-center">
+                        <i class="fas fa-inbox text-3xl text-gray-400 mb-2"></i>
+                        <p class="text-gray-500">No hay materiales registrados</p>
+                    </td>
+                </tr>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const auth = validarAutenticacion();
+            if (!auth) return;
+
+            console.log('🔨 Cargando materiales...');
+            cargarMateriales();
+        });
+
+    </script>
+
+</body>
+
+</html>

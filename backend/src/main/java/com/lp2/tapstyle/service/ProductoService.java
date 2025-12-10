@@ -26,6 +26,7 @@ public class ProductoService {
     private final MaterialProductoRepository materialRepository;
     private final InventarioRepository inventarioRepository;
     private final VarianteProductoRepository varianteRepository;
+    private final AlmacenRepository almacenRepository;
 
     public List<ProductoDTO> obtenerTodos() {
         return productoRepository.findAll().stream()
@@ -144,9 +145,77 @@ public class ProductoService {
 
         try {
             Producto saved = productoRepository.save(producto);
+
+            // ✅ CREAR VARIANTE POR DEFECTO AUTOMÁTICAMENTE
+            crearVarianteYInventarioPorDefecto(saved, empresa, dto.getPrecio());
+
             return convertToDTO(saved);
         } catch (Exception e) {
             throw new RuntimeException("Error al guardar el producto: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Crea una variante por defecto y su registro de inventario
+     * Se ejecuta automáticamente cuando se crea un nuevo producto
+     */
+    private void crearVarianteYInventarioPorDefecto(Producto producto, Empresa empresa, java.math.BigDecimal precio) {
+        try {
+            // Generar SKU por defecto
+            String skuPorDefecto = String.format("SKU-%d-%d",
+                    empresa.getIdEmpresa(),
+                    producto.getIdProducto());
+
+            // Crear variante por defecto
+            VarianteProducto variante = VarianteProducto.builder()
+                    .producto(producto)
+                    .codigoSku(skuPorDefecto)
+                    .talla("U") // Talla Única
+                    .color("Estándar")
+                    .precioVenta(precio != null ? precio : java.math.BigDecimal.ZERO)
+                    .build();
+
+            VarianteProducto varianteSaved = varianteRepository.save(variante);
+            System.out.println("✅ Variante por defecto creada: " + varianteSaved.getIdVariante());
+
+            // Obtener almacén principal de la empresa (ID 1 por defecto, o el primero
+            // disponible)
+            List<Almacen> almacenes = almacenRepository.findByEmpresa_IdEmpresa(empresa.getIdEmpresa());
+
+            if (almacenes == null || almacenes.isEmpty()) {
+                // Si no hay almacenes, intentar obtener el almacén 1 (principal)
+                almacenes = almacenRepository.findByEmpresa_IdEmpresa(1); // Fallback
+            }
+
+            Almacen almacen = null;
+            if (almacenes != null && !almacenes.isEmpty()) {
+                almacen = almacenes.get(0); // Usar el primer almacén
+            } else {
+                // Si aún no hay almacén, crear uno por defecto
+                almacen = Almacen.builder()
+                        .empresa(empresa)
+                        .nombreAlmacen("Almacén Principal")
+                        .build();
+                almacen = almacenRepository.save(almacen);
+                System.out.println("⚠️ Se creó almacén por defecto: " + almacen.getIdAlmacen());
+            }
+
+            // Crear inventario con stock inicial en 0
+            Inventario inventario = Inventario.builder()
+                    .variante(varianteSaved)
+                    .almacen(almacen)
+                    .cantidadStock(0) // Stock inicial en 0
+                    .stockMinimo(5) // Stock mínimo por defecto
+                    .build();
+
+            Inventario inventarioSaved = inventarioRepository.save(inventario);
+            System.out.println("✅ Inventario creado para variante " + varianteSaved.getIdVariante()
+                    + " en almacén " + almacen.getIdAlmacen());
+
+        } catch (Exception e) {
+            // Log pero no fallar - el producto ya se creó correctamente
+            System.out.println("⚠️ Advertencia al crear variante/inventario por defecto: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
