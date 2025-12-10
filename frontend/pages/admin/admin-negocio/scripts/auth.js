@@ -108,25 +108,54 @@ function obtenerContexto() {
 }
 
 /**
+ * Obtener la ruta correcta a login basado en la ubicación actual
+ */
+function obtenerRutaLogin() {
+    // Si estamos en /admin-negocio/pages/* necesitamos ../../
+    // Si estamos en /admin-negocio/* necesitamos ../
+    const pathActual = window.location.pathname;
+    
+    // Si el path contiene "/pages/" estamos en un submodulo
+    if (pathActual.includes('/pages/')) {
+        return '../../login.html';
+    }
+    // Si no, estamos en el dashboard del admin-negocio
+    return '../login.html';
+}
+
+/**
  * Redirigir a login (con mensaje opcional)
  */
 function redirigirALogin(mensaje = 'Tu sesión ha expirado. Por favor inicia sesión nuevamente.') {
     alert(mensaje);
-    window.location.href = '../../admin/login.html';
+    window.location.href = obtenerRutaLogin();
 }
 
 /**
  * Cerrar sesión
  */
 function cerrarSesion() {
+    // Limpiar todos los datos de sesión
     localStorage.removeItem('tapstyle_user');
     localStorage.removeItem('tapstyle_token');
     localStorage.removeItem('tapstyle_role');
     localStorage.removeItem('idEmpresa');
     localStorage.removeItem('empresaNombre');
     localStorage.removeItem('empresaInitials');
+    localStorage.removeItem('idUsuario');
+    localStorage.removeItem('user_permissions');
+    localStorage.removeItem('tapstyle_empresa');
 
-    window.location.href = '../../admin/login.html';
+    window.location.href = obtenerRutaLogin();
+}
+
+/**
+ * Cerrar sesión con confirmación
+ */
+function cerrarSesionConfirm() {
+    if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+        cerrarSesion();
+    }
 }
 
 /**

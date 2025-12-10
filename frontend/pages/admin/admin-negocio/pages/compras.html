@@ -293,13 +293,7 @@
             icon.classList.toggle('fa-chevron-up');
         }
 
-        function cerrarSesionConfirm() {
-            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
-                cerrarSesion();
-            }
-        }
-
-        function abrirModalCompra() {
+        function abrirModalNuevaCompra() {
             idPedidoEditando = null;
             document.getElementById('modalCompra').classList.remove('hidden');
             cargarProveedores();
@@ -332,7 +326,7 @@
                         <td class="px-6 py-4 text-sm font-medium text-gray-900">#${compra.idPedidoCompra}</td>
                         <td class="px-6 py-4 text-sm text-gray-700">${compra.nombreProveedor || 'N/A'}</td>
                         <td class="px-6 py-4 text-sm text-gray-700">${new Date(compra.fechaPedido).toLocaleDateString()}</td>
-                        <td class="px-6 py-4 text-sm text-gray-900 font-semibold">$${(compra.totalPedido || 0).toFixed(2)}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900 font-semibold">S/. ${(compra.totalPedido || 0).toFixed(2)}</td>
                         <td class="px-6 py-4 text-sm">
                             <span class="px-3 py-1 rounded-full text-xs font-semibold ${getEstadoBadge(compra.estadoPedido)}">
                                 ${compra.estadoPedido}

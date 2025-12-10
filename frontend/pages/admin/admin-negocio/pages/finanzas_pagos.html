@@ -165,22 +165,22 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                     <div class="bg-white p-6 rounded-xl shadow border-l-4 border-green-500">
                         <p class="text-sm font-medium text-gray-500 uppercase">Ingresos Este Mes</p>
-                        <p class="text-3xl font-bold text-gray-900 mt-2" id="ingresosMes">$0</p>
+                        <p class="text-3xl font-bold text-gray-900 mt-2" id="ingresosMes">S/. 0</p>
                         <p class="text-xs text-green-600 mt-2">↑ 12% vs mes anterior</p>
                     </div>
                     <div class="bg-white p-6 rounded-xl shadow border-l-4 border-red-500">
                         <p class="text-sm font-medium text-gray-500 uppercase">Gastos Este Mes</p>
-                        <p class="text-3xl font-bold text-gray-900 mt-2" id="gastosMes">$0</p>
+                        <p class="text-3xl font-bold text-gray-900 mt-2" id="gastosMes">S/. 0</p>
                         <p class="text-xs text-red-600 mt-2">↓ 5% vs mes anterior</p>
                     </div>
                     <div class="bg-white p-6 rounded-xl shadow border-l-4 border-blue-500">
                         <p class="text-sm font-medium text-gray-500 uppercase">Por Cobrar</p>
-                        <p class="text-3xl font-bold text-gray-900 mt-2" id="porCobrar">$0</p>
+                        <p class="text-3xl font-bold text-gray-900 mt-2" id="porCobrar">S/. 0</p>
                         <p class="text-xs text-gray-600 mt-2">De clientes</p>
                     </div>
                     <div class="bg-white p-6 rounded-xl shadow border-l-4 border-yellow-500">
                         <p class="text-sm font-medium text-gray-500 uppercase">Por Pagar</p>
-                        <p class="text-3xl font-bold text-gray-900 mt-2" id="porPagar">$0</p>
+                        <p class="text-3xl font-bold text-gray-900 mt-2" id="porPagar">S/. 0</p>
                         <p class="text-xs text-gray-600 mt-2">A proveedores</p>
                     </div>
                 </div>
@@ -266,12 +266,6 @@
             icon.classList.toggle('fa-chevron-up');
         }
 
-        function cerrarSesionConfirm() {
-            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
-                cerrarSesion();
-            }
-        }
-
         function mostrarTab(tab) {
             // Ocultar todos los tabs
             document.getElementById('contenidoCobrar').classList.add('hidden');
@@ -302,10 +296,10 @@
                 const reporte = await finanzasAPI.obtenerReporte();
                 console.log('Reporte financiero:', reporte);
 
-                document.getElementById('ingresosMes').textContent = `$${reporte.ingresosMes || 0}`;
-                document.getElementById('gastosMes').textContent = `$${reporte.gastosMes || 0}`;
-                document.getElementById('porCobrar').textContent = `$${reporte.totalPorCobrar || 0}`;
-                document.getElementById('porPagar').textContent = `$${reporte.totalPorPagar || 0}`;
+                document.getElementById('ingresosMes').textContent = `S/. ${reporte.ingresosMes || 0}`;
+                document.getElementById('gastosMes').textContent = `S/. ${reporte.gastosMes || 0}`;
+                document.getElementById('porCobrar').textContent = `S/. ${reporte.totalPorCobrar || 0}`;
+                document.getElementById('porPagar').textContent = `S/. ${reporte.totalPorPagar || 0}`;
             } catch (error) {
                 console.error('Error cargando finanzas:', error);
             }
@@ -328,7 +322,7 @@
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 text-sm font-medium text-gray-900">${cuenta.nombreCliente}</td>
                             <td class="px-6 py-4 text-sm text-gray-700">#${cuenta.numeroFactura}</td>
-                            <td class="px-6 py-4 text-sm text-gray-900 font-semibold">$${cuenta.monto}</td>
+                            <td class="px-6 py-4 text-sm text-gray-900 font-semibold">S/. ${cuenta.monto}</td>
                             <td class="px-6 py-4 text-sm text-gray-700">${new Date(cuenta.fechaVencimiento).toLocaleDateString()}</td>
                             <td class="px-6 py-4 text-sm">
                                 <span class="px-3 py-1 rounded-full text-xs font-semibold ${vencido ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}">
@@ -366,7 +360,7 @@
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 text-sm font-medium text-gray-900">${cuenta.nombreProveedor}</td>
                             <td class="px-6 py-4 text-sm text-gray-700">#${cuenta.numeroFactura}</td>
-                            <td class="px-6 py-4 text-sm text-gray-900 font-semibold">$${cuenta.monto}</td>
+                            <td class="px-6 py-4 text-sm text-gray-900 font-semibold">S/. ${cuenta.monto}</td>
                             <td class="px-6 py-4 text-sm text-gray-700">${new Date(cuenta.fechaVencimiento).toLocaleDateString()}</td>
                             <td class="px-6 py-4 text-sm">
                                 <span class="px-3 py-1 rounded-full text-xs font-semibold ${vencido ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}">

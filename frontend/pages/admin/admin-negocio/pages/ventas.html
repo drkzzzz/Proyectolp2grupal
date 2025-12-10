@@ -321,12 +321,6 @@
             icon.classList.toggle('fa-chevron-up');
         }
 
-        function cerrarSesionConfirm() {
-            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
-                cerrarSesion();
-            }
-        }
-
         function abrirModalVenta() {
             idComprobantEditando = null;
             document.getElementById('modalVenta').classList.remove('hidden');
@@ -413,7 +407,7 @@
                         <td class="px-6 py-4 text-sm font-medium text-gray-900">#${venta.idComprobante}</td>
                         <td class="px-6 py-4 text-sm text-gray-700">${venta.nombreCliente || 'Cliente General'}</td>
                         <td class="px-6 py-4 text-sm text-gray-700">${new Date(venta.fechaEmision).toLocaleDateString()}</td>
-                        <td class="px-6 py-4 text-sm text-gray-900 font-semibold">$${(venta.total || 0).toFixed(2)}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900 font-semibold">S/. ${(venta.total || 0).toFixed(2)}</td>
                         <td class="px-6 py-4 text-sm">
                             <span class="px-3 py-1 rounded-full text-xs font-semibold ${getEstadoBadge(venta.estado)}">
                                 ${venta.estado}
