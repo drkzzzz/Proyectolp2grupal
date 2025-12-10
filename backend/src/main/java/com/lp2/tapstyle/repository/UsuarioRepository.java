@@ -19,4 +19,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     boolean existsByEmail(String email);
 
     List<Usuario> findByEmpresaAndRolIdRol(Empresa empresa, Integer idRol);
+
+    List<Usuario> findByEmpresa_IdEmpresa(Integer idEmpresa);
 }

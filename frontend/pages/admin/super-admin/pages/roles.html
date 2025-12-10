@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Roles - TapStyle SuperAdmin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="flex bg-gray-50">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-gray-800 text-white p-4 flex flex-col fixed h-full z-20">
+
+        <div class="text-center mb-6 pb-4 border-b border-gray-700">
+            <a href="../dashboard_superadmin.html" class="text-xl font-black text-red-500 tracking-widest">TAPSTYLE</a>
+            <p class="text-xs text-gray-400 mt-1">SUPER ADMIN</p>
+        </div>
+
+        <div class="mb-6 text-center">
+            <div
+                class="w-12 h-12 bg-red-600 text-white rounded-full mx-auto flex items-center justify-center text-lg font-bold mb-2 shadow-lg">
+                SA
+            </div>
+            <p class="font-semibold text-sm">Super Administrador</p>
+            <p class="text-xs text-gray-400">Control Total</p>
+        </div>
+
+        <nav class="flex-grow space-y-1">
+            <a href="../dashboard_superadmin.html"
+                class="flex items-center p-2.5 rounded-lg text-gray-300 hover:bg-gray-700 transition text-sm">
+                <i class="fas fa-chart-line mr-2 text-xs"></i>
+                <span>Dashboard Global</span>
+            </a>
+
+            <!-- Gestión de Empresas (Desplegable) -->
+            <div>
+                <button onclick="toggleSubmenu(this)"
+                    class="w-full flex items-center justify-between p-2.5 rounded-lg text-gray-300 hover:bg-gray-700 transition text-sm">
+                    <div class="flex items-center">
+                        <i class="fas fa-building mr-2 text-xs"></i>
+                        <span>Gestión de Empresas</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                <div class="submenu ml-6 space-y-1 mt-1">
+                    <a href="gestion_empresas.html"
+                        class="flex items-center p-2 text-xs text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <i class="fas fa-building mr-2"></i> Empresas
+                    </a>
+                    <a href="roles.html" class="flex items-center p-2 text-xs bg-red-600 text-white rounded transition">
+                        <i class="fas fa-user-shield mr-2"></i> Roles
+                    </a>
+                    <a href="permisos.html"
+                        class="flex items-center p-2 text-xs text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <i class="fas fa-key mr-2"></i> Permisos
+                    </a>
+                </div>
+            </div>
+
+            <a href="gestion_modulos_empresa.html"
+                class="flex items-center p-2.5 rounded-lg text-gray-300 hover:bg-gray-700 transition text-sm">
+                <i class="fas fa-puzzle-piece mr-2 text-xs"></i>
+                <span>Módulos por Empresa</span>
+            </a>
+            <a href="comisiones_pagos.html"
+                class="flex items-center p-2.5 rounded-lg text-gray-300 hover:bg-gray-700 transition text-sm">
+                <i class="fas fa-dollar-sign mr-2 text-xs"></i>
+                <span>Comisiones y Pagos</span>
+            </a>
+            <a href="reportes_globales.html"
+                class="flex items-center p-2.5 rounded-lg text-gray-300 hover:bg-gray-700 transition text-sm">
+                <i class="fas fa-chart-bar mr-2 text-xs"></i>
+                <span>Reportes Globales</span>
+            </a>
+        </nav>
+
+        <div class="mt-auto pt-4 border-t border-gray-700">
+            <a href="../../login.html"
+                class="flex items-center p-2.5 rounded-lg text-red-400 hover:bg-gray-700 transition text-sm">
+                <i class="fas fa-sign-out-alt mr-2 text-xs"></i>
+                <span class="font-medium">Cerrar Sesión</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="flex-1 ml-64 p-8">
+
+        <!-- CABECERA -->
+        <header class="flex justify-between items-center bg-white p-6 rounded-xl shadow-lg mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">Gestión de Roles</h1>
+                <p class="text-gray-500 text-sm mt-1">Administra los roles del sistema y sus permisos</p>
+            </div>
+            <button onclick="abrirModalRol()"
+                class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition">
+                <i class="fas fa-plus"></i>
+                Nuevo Rol
+            </button>
+        </header>
+
+        <!-- TABLA DE ROLES -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50 border-b border-gray-200">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">#</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Nombre</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Descripción</th>
+                            <th class="px-6 py-4 text-center text-sm font-semibold text-gray-700">Permisos</th>
+                            <th class="px-6 py-4 text-center text-sm font-semibold text-gray-700">Estado</th>
+                            <th class="px-6 py-4 text-center text-sm font-semibold text-gray-700">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaRoles" class="divide-y divide-gray-200">
+                        <tr>
+                            <td colspan="6" class="px-6 py-8 text-center text-gray-500">
+                                <i class="fas fa-spinner fa-spin mr-2"></i> Cargando roles...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MODAL: Crear/Editar Rol -->
+    <div id="modalRol" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md">
+
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 id="tituloModal" class="text-2xl font-bold text-gray-800">Nuevo Rol</h2>
+                <button onclick="cerrarModalRol()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <div class="p-6">
+                <form id="formRol" onsubmit="guardarRol(event)">
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre del Rol *</label>
+                        <input type="text" id="nombreRol" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
+                            placeholder="Ej: Admin, Vendedor">
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Descripción</label>
+                        <textarea id="descripcionRol" rows="3"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
+                            placeholder="Descripción del rol..."></textarea>
+                    </div>
+
+                    <div class="flex gap-3 justify-end">
+                        <button type="button" onclick="cerrarModalRol()"
+                            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                            Cancelar
+                        </button>
+                        <button type="submit"
+                            class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg flex items-center gap-2">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL: Asignar Permisos -->
+    <div id="modalPermisos" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-screen overflow-y-auto">
+
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center sticky top-0 bg-white">
+                <h2 class="text-2xl font-bold text-gray-800">Asignar Permisos</h2>
+                <button onclick="cerrarModalPermisos()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <div class="p-6">
+                <p class="text-gray-600 mb-4">Selecciona los permisos para el rol: <span id="nombreRolPermisos"
+                        class="font-bold text-red-600"></span></p>
+
+                <div id="listaPermisos"
+                    class="space-y-2 max-h-96 overflow-y-auto border border-gray-200 rounded-lg p-4">
+                    <p class="text-gray-500 text-center py-8">
+                        <i class="fas fa-spinner fa-spin mr-2"></i> Cargando permisos...
+                    </p>
+                </div>
+
+                <div class="flex gap-3 justify-end mt-6">
+                    <button type="button" onclick="cerrarModalPermisos()"
+                        class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                        Cancelar
+                    </button>
+                    <button onclick="guardarPermisos()"
+                        class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg flex items-center gap-2">
+                        <i class="fas fa-save"></i> Guardar Permisos
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="../../../../config/api-config.js"></script>
+    <script>
+        // Función para toggle del submenu
+        function toggleSubmenu(button) {
+            const submenu = button.nextElementSibling;
+            const icon = button.querySelector('i.fa-chevron-down, i.fa-chevron-up');
+
+            if (submenu.classList.contains('hidden')) {
+                submenu.classList.remove('hidden');
+                if (icon) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            } else {
+                submenu.classList.add('hidden');
+                if (icon) {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            }
+        }
+
+        let idRolEditando = null;
+        let idRolPermisos = null;
+        let todosLosPermisos = [];
+
+        // Cargar roles al iniciar
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarRoles();
+        });
+
+        async function cargarRoles() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/roles`);
+                const resultado = await response.json();
+                const roles = resultado.data || resultado || [];
+
+                const tbody = document.getElementById('tablaRoles');
+
+                if (!Array.isArray(roles) || roles.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="px-6 py-8 text-center text-gray-500">
+                                <i class="fas fa-inbox text-3xl mb-2"></i>
+                                <p>No hay roles registrados</p>
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                tbody.innerHTML = roles.map(rol => `
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">${rol.idRol}</td>
+                        <td class="px-6 py-4 text-sm font-semibold text-gray-900">${rol.nombreRol}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">${rol.descripcion || '-'}</td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold">
+                                ${rol.permisos ? rol.permisos.length : 0} permisos
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold ${rol.estado
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-red-100 text-red-800'
+                    }">
+                                ${rol.estado ? 'Activo' : 'Inactivo'}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <div class="flex gap-2 justify-center">
+                                <button onclick="abrirAsignarPermisos(${rol.idRol}, '${rol.nombreRol}')" 
+                                    class="text-blue-600 hover:text-blue-800" title="Asignar permisos">
+                                    <i class="fas fa-key"></i>
+                                </button>
+                                <button onclick="editarRol(${rol.idRol})" 
+                                    class="text-yellow-600 hover:text-yellow-800" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button onclick="toggleEstadoRol(${rol.idRol}, ${rol.estado})" 
+                                    class="${rol.estado ? 'text-red-600 hover:text-red-800' : 'text-green-600 hover:text-green-800'}" 
+                                    title="${rol.estado ? 'Desactivar' : 'Activar'}">
+                                    <i class="fas fa-${rol.estado ? 'ban' : 'check-circle'}"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error cargando roles:', error);
+                mostrarError('Error al cargar roles: ' + error.message);
+            }
+        }
+
+        function abrirModalRol(rol = null) {
+            idRolEditando = rol ? rol.idRol : null;
+            document.getElementById('tituloModal').textContent = rol ? 'Editar Rol' : 'Nuevo Rol';
+            document.getElementById('nombreRol').value = rol ? rol.nombreRol : '';
+            document.getElementById('descripcionRol').value = rol ? (rol.descripcion || '') : '';
+            document.getElementById('modalRol').classList.remove('hidden');
+        }
+
+        function cerrarModalRol() {
+            document.getElementById('modalRol').classList.add('hidden');
+            document.getElementById('formRol').reset();
+            idRolEditando = null;
+        }
+
+        async function guardarRol(event) {
+            event.preventDefault();
+
+            const datos = {
+                nombreRol: document.getElementById('nombreRol').value.trim(),
+                descripcion: document.getElementById('descripcionRol').value.trim()
+            };
+
+            try {
+                const url = idRolEditando
+                    ? `${API_BASE_URL}/roles/${idRolEditando}`
+                    : `${API_BASE_URL}/roles`;
+
+                const method = idRolEditando ? 'PUT' : 'POST';
+
+                const response = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(datos)
+                });
+
+                const resultado = await response.json();
+
+                if (resultado.success) {
+                    mostrarExito(idRolEditando ? 'Rol actualizado exitosamente' : 'Rol creado exitosamente');
+                    cerrarModalRol();
+                    cargarRoles();
+                } else {
+                    throw new Error(resultado.message || 'Error al guardar rol');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                mostrarError('Error: ' + error.message);
+            }
+        }
+
+        async function editarRol(id) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/roles/${id}`);
+                const resultado = await response.json();
+                const rol = resultado.data || resultado;
+                abrirModalRol(rol);
+            } catch (error) {
+                mostrarError('Error al cargar rol: ' + error.message);
+            }
+        }
+
+        async function toggleEstadoRol(id, estadoActual) {
+            const accion = estadoActual ? 'desactivar' : 'activar';
+            if (!confirm(`¿Estás seguro de ${accion} este rol?`)) return;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/roles/${id}/toggle-estado`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const resultado = await response.json();
+
+                if (resultado.success) {
+                    mostrarExito(`Rol ${accion === 'desactivar' ? 'desactivado' : 'activado'} exitosamente`);
+                    cargarRoles();
+                } else {
+                    throw new Error(resultado.message);
+                }
+            } catch (error) {
+                mostrarError('Error: ' + error.message);
+            }
+        }
+
+        async function abrirAsignarPermisos(idRol, nombreRol) {
+            idRolPermisos = idRol;
+            document.getElementById('nombreRolPermisos').textContent = nombreRol;
+            document.getElementById('modalPermisos').classList.remove('hidden');
+
+            await cargarPermisosDisponibles();
+            await cargarPermisosAsignados(idRol);
+        }
+
+        function cerrarModalPermisos() {
+            document.getElementById('modalPermisos').classList.add('hidden');
+            idRolPermisos = null;
+        }
+
+        async function cargarPermisosDisponibles() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/permisos`);
+                const resultado = await response.json();
+                todosLosPermisos = resultado.data || resultado || [];
+            } catch (error) {
+                console.error('Error cargando permisos:', error);
+            }
+        }
+
+        async function cargarPermisosAsignados(idRol) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/roles/${idRol}/permisos`);
+                const resultado = await response.json();
+                const permisosAsignados = resultado.data || resultado || [];
+
+                const idsAsignados = permisosAsignados.map(p => p.idPermiso);
+
+                const lista = document.getElementById('listaPermisos');
+                lista.innerHTML = todosLosPermisos.map(permiso => `
+                    <label class="flex items-center p-3 hover:bg-gray-50 rounded-lg cursor-pointer transition">
+                        <input type="checkbox" value="${permiso.idPermiso}" 
+                            ${idsAsignados.includes(permiso.idPermiso) ? 'checked' : ''}
+                            class="mr-3 w-4 h-4 text-red-600 rounded focus:ring-red-500">
+                        <div class="flex-1">
+                            <p class="font-semibold text-gray-800">${permiso.nombrePermiso}</p>
+                            <p class="text-xs text-gray-500">${permiso.descripcion || ''}</p>
+                        </div>
+                    </label>
+                `).join('');
+            } catch (error) {
+                console.error('Error cargando permisos asignados:', error);
+            }
+        }
+
+        async function guardarPermisos() {
+            const checkboxes = document.querySelectorAll('#listaPermisos input[type="checkbox"]:checked');
+            const idsSeleccionados = Array.from(checkboxes).map(cb => parseInt(cb.value));
+
+            const permisosSeleccionados = todosLosPermisos.filter(p => idsSeleccionados.includes(p.idPermiso));
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/roles/${idRolPermisos}/permisos`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(permisosSeleccionados)
+                });
+
+                const resultado = await response.json();
+
+                if (resultado.success) {
+                    mostrarExito('Permisos asignados exitosamente');
+                    cerrarModalPermisos();
+                    cargarRoles();
+                } else {
+                    throw new Error(resultado.message);
+                }
+            } catch (error) {
+                mostrarError('Error al asignar permisos: ' + error.message);
+            }
+        }
+
+        function mostrarExito(mensaje) {
+            alert('✓ ' + mensaje);
+        }
+
+        function mostrarError(mensaje) {
+            alert('✗ ' + mensaje);
+        }
+    </script>
+
+</body>
+
+</html>

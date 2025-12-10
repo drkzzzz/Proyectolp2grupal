@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TapStyle - Gestión de Usuarios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Configuración y Utils -->
+    <script src="../../../../config/api-config.js"></script>
+    <script src="../../../../utils/permissions.js"></script>
+    <script src="../scripts/api.js"></script>
+</head>
+
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- SIDEBAR RESTAURADO (Diseño Original Exacto) -->
+        <aside
+            class="w-64 bg-[#1e293b] text-white flex-shrink-0 flex flex-col transition-all duration-300 hidden md:flex">
+            <!-- Logo -->
+            <div class="h-16 flex items-center justify-center border-b border-gray-700 bg-[#0f172a]">
+                <h1 class="text-2xl font-bold text-blue-500 tracking-wider">TapStyle</h1>
+            </div>
+
+            <!-- User Profile -->
+            <div class="p-6 border-b border-gray-700 bg-[#1e293b] text-center">
+                <div
+                    class="w-16 h-16 rounded-full bg-blue-600 mx-auto flex items-center justify-center text-xl font-bold mb-3 shadow-md border-2 border-blue-400">
+                    <span id="user-initials">US</span>
+                </div>
+                <h3 class="font-semibold text-lg" id="user-name">Usuario</h3>
+                <p class="text-xs text-gray-400 uppercase tracking-wide" id="user-role">Rol</p>
+            </div>
+
+            <!-- Navegación -->
+            <nav class="flex-1 overflow-y-auto py-4 space-y-1 px-3">
+                <a href="../dashboard_admin_negocio.html"
+                    class="flex items-center px-4 py-3 text-gray-300 hover:bg-blue-600 hover:text-white rounded-lg transition-colors group">
+                    <i class="fas fa-home w-6 group-hover:text-white text-gray-400 transition-colors"></i>
+                    <span class="font-medium">Dashboard</span>
+                </a>
+
+                <!-- Catálogo -->
+                <div class="group">
+                    <button
+                        class="w-full flex items-center justify-between px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-lg transition-colors submenu-toggle">
+                        <div class="flex items-center">
+                            <i class="fas fa-box-open w-6 text-gray-400"></i>
+                            <span class="font-medium">Catálogo</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform transform"></i>
+                    </button>
+                    <div class="hidden pl-10 space-y-1 mt-1">
+                        <a href="productos.html" class="block py-2 text-sm text-gray-400 hover:text-white">Productos</a>
+                        <a href="categorias.html"
+                            class="block py-2 text-sm text-gray-400 hover:text-white">Categorías</a>
+                        <a href="marcas.html" class="block py-2 text-sm text-gray-400 hover:text-white">Marcas</a>
+                    </div>
+                </div>
+
+                <!-- Operaciones -->
+                <div class="group">
+                    <button
+                        class="w-full flex items-center justify-between px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-lg transition-colors submenu-toggle">
+                        <div class="flex items-center">
+                            <i class="fas fa-tasks w-6 text-gray-400"></i>
+                            <span class="font-medium">Operaciones</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform transform"></i>
+                    </button>
+                    <div class="hidden pl-10 space-y-1 mt-1">
+                        <a href="compras.html" class="block py-2 text-sm text-gray-400 hover:text-white">Compras</a>
+                        <a href="ventas.html" class="block py-2 text-sm text-gray-400 hover:text-white">Ventas</a>
+                        <a href="stock.html" class="block py-2 text-sm text-gray-400 hover:text-white">Stock</a>
+                        <a href="proveedores.html"
+                            class="block py-2 text-sm text-gray-400 hover:text-white">Proveedores</a>
+                        <a href="metodos_pago.html" class="block py-2 text-sm text-gray-400 hover:text-white">Métodos de
+                            Pago</a>
+                    </div>
+                </div>
+
+                <!-- Finanzas -->
+                <div class="group">
+                    <button
+                        class="w-full flex items-center justify-between px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-lg transition-colors submenu-toggle">
+                        <div class="flex items-center">
+                            <i class="fas fa-wallet w-6 text-gray-400"></i>
+                            <span class="font-medium">Finanzas</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform transform"></i>
+                    </button>
+                    <div class="hidden pl-10 space-y-1 mt-1">
+                        <a href="caja.html" class="block py-2 text-sm text-gray-400 hover:text-white">Caja</a>
+                        <a href="finanzas_pagos.html"
+                            class="block py-2 text-sm text-gray-400 hover:text-white">Reportes</a>
+                    </div>
+                </div>
+
+                <!-- Administración (Activo) -->
+                <div class="group">
+                    <button
+                        class="w-full flex items-center justify-between px-4 py-3 bg-gray-700 text-white rounded-lg transition-colors submenu-toggle">
+                        <div class="flex items-center">
+                            <i class="fas fa-cog w-6 text-blue-400"></i>
+                            <span class="font-medium">Administración</span>
+                        </div>
+                        <i class="fas fa-chevron-up text-xs transition-transform transform rotate-180"></i>
+                    </button>
+                    <div class="pl-10 space-y-1 mt-1 block">
+                        <a href="clientes.html" class="block py-2 text-sm text-gray-400 hover:text-white">Clientes</a>
+                        <a href="#"
+                            class="block py-2 text-sm text-white font-bold bg-blue-600/20 rounded-md -ml-2 pl-4 border-l-2 border-blue-500">Usuarios</a>
+                        <a href="roles_permisos.html" class="block py-2 text-sm text-gray-400 hover:text-white">Roles y
+                            Permisos</a>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Cerrar Sesión -->
+            <div class="p-4 border-t border-gray-700">
+                <button onclick="logout()"
+                    class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50">
+            <!-- Header simple blanco -->
+            <header class="bg-white shadow-sm sticky top-0 z-10">
+                <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                    <h1 class="text-2xl font-bold text-gray-900">Gestión de Usuarios</h1>
+                    <!-- No user info here (ya está en sidebar) -->
+                </div>
+            </header>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+                <!-- Toolbar -->
+                <div class="bg-white p-4 rounded-lg shadow-sm mb-6 flex justify-between items-center">
+                    <div class="relative w-64">
+                        <input type="text" id="searchInput"
+                            class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+                            placeholder="Buscar usuarios...">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <button onclick="abrirModalCrear()" data-permiso="VER_USUARIOS"
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg flex items-center transition-colors">
+                        <i class="fas fa-plus mr-2"></i> Nuevo Usuario
+                    </button>
+                </div>
+
+                <!-- Tabla Estándar -->
+                <div class="bg-white shadow rounded-lg overflow-hidden">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                    Usuario</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                    Rol</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                    Contacto</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                    Estado</th>
+                                <th
+                                    class="px-6 py-3 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">
+                                    Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaUsuarios" class="bg-white divide-y divide-gray-200">
+                            <!-- Datos -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Estándar -->
+    <div id="modalUsuario" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+            <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4" id="modalTitulo">Nuevo Usuario</h3>
+
+                    <div class="space-y-4">
+                        <input type="hidden" id="usuarioId">
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Nombres</label>
+                                <input type="text" id="nombreUsuario"
+                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Apellidos</label>
+                                <input type="text" id="apellidoUsuario"
+                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Username</label>
+                                <input type="text" id="usernameUsuario"
+                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" id="emailUsuario"
+                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Rol</label>
+                            <select id="rolUsuario"
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                                <option value="">Cargando...</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Contraseña</label>
+                            <input type="password" id="passwordUsuario"
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                            <p class="text-xs text-gray-500 mt-1 hidden" id="passwordHint">Dejar vacío para mantener
+                                contraseña actual.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" onclick="guardarUsuario()"
+                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                        Guardar
+                    </button>
+                    <button type="button" onclick="cerrarModal()"
+                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logic -->
+    <script>
+        const API_URL = window.API_CONFIG ? window.API_CONFIG.BASE_URL : 'http://localhost:8083/api';
+
+        function getAuthHeaders() {
+            const token = localStorage.getItem('tapstyle_token');
+            return {
+                'Content-Type': 'application/json',
+                'Authorization': token ? `Bearer ${token.replace('jwt-', '')}` : ''
+            };
+        }
+
+        let usuarios = [];
+        let roles = [];
+        let currentEmpresaId = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Cargar info usuario
+            const userData = JSON.parse(localStorage.getItem('tapstyle_user') || '{}');
+            const roleData = localStorage.getItem('tapstyle_role') || 'Usuario';
+
+            if (userData.nombres) {
+                document.getElementById('user-name').textContent = `${userData.nombres}`;
+                document.getElementById('user-role').textContent = roleData;
+
+                const initials = (userData.nombres.charAt(0) + (userData.apellidos ? userData.apellidos.charAt(0) : '')).toUpperCase();
+                document.getElementById('user-initials').textContent = initials;
+
+                // Obtener ID Empresa para filtrar
+                currentEmpresaId = userData.idEmpresa;
+            }
+
+            // Sidebar Toggle Logic
+            document.querySelectorAll('.submenu-toggle').forEach(button => {
+                button.addEventListener('click', () => {
+                    const submenu = button.nextElementSibling;
+                    const icon = button.querySelector('.fa-chevron-down, .fa-chevron-up');
+
+                    submenu.classList.toggle('hidden');
+                    // Logica basica de iconos (rotar)
+                    if (!submenu.classList.contains('hidden')) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                        // icon.classList.add('rotate-180'); // si usas transforms
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                        // icon.classList.remove('rotate-180');
+                    }
+                });
+            });
+
+            await cargarRoles();
+            await cargarUsuarios();
+        });
+
+        async function cargarRoles() {
+            try {
+                const response = await fetch(`${API_URL}/roles`, { headers: getAuthHeaders() });
+                if (response.ok) {
+                    const data = await response.json();
+                    roles = data.data || data;
+                    const select = document.getElementById('rolUsuario');
+                    select.innerHTML = '<option value="">Seleccione un rol</option>';
+                    roles.forEach(rol => {
+                        if (rol.estado) select.innerHTML += `<option value="${rol.idRol}">${rol.nombreRol}</option>`;
+                    });
+                }
+            } catch (error) { console.error(error); }
+        }
+
+        async function cargarUsuarios() {
+            try {
+                // FILTRADO POR EMPRESA
+                let url = `${API_URL}/usuarios`;
+                if (currentEmpresaId) {
+                    url += `?idEmpresa=${currentEmpresaId}`;
+                }
+
+                const response = await fetch(url, { headers: getAuthHeaders() });
+                if (response.ok) {
+                    const data = await response.json();
+                    usuarios = data.data || data;
+                    renderizarUsuarios(usuarios);
+                }
+            } catch (error) {
+                console.error(error);
+                document.getElementById('tablaUsuarios').innerHTML = `<tr><td colspan="5" class="text-center p-4 text-red-500">Error cargando usuarios</td></tr>`;
+            }
+        }
+
+        function renderizarUsuarios(data) {
+            const tbody = document.getElementById('tablaUsuarios');
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center p-4 text-gray-500">No se encontraron usuarios en esta empresa.</td></tr>`;
+                return;
+            }
+
+            data.forEach(u => {
+                const rolNombre = u.idRol ? (roles.find(r => r.idRol === u.idRol)?.nombreRol || 'Rol ' + u.idRol) : 'Sin Rol';
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600 text-xs">
+                                    ${u.nombres.charAt(0)}
+                                </div>
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium text-gray-900">${u.nombres} ${u.apellidos || ''}</div>
+                                    <div class="text-xs text-gray-500">@${u.username}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                ${rolNombre}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <div>${u.email}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                             <button onclick="toggleEstado(${u.idUsuario})" class="focus:outline-none">
+                                <i class="fas fa-toggle-${u.estado ? 'on text-green-500' : 'off text-gray-400'} text-2xl"></i>
+                            </button>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <button onclick="editarUsuario(${u.idUsuario})" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i></button>
+                            <!-- <button onclick="eliminarUsuario(${u.idUsuario})" class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button> -->
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function abrirModalCrear() {
+            document.getElementById('modalTitulo').textContent = 'Nuevo Usuario';
+            document.getElementById('usuarioId').value = '';
+            document.getElementById('nombreUsuario').value = '';
+            document.getElementById('apellidoUsuario').value = '';
+            document.getElementById('usernameUsuario').value = '';
+            document.getElementById('emailUsuario').value = '';
+            document.getElementById('rolUsuario').value = '';
+            document.getElementById('passwordUsuario').value = '';
+
+            document.getElementById('usernameUsuario').disabled = false;
+            document.getElementById('passwordHint').classList.add('hidden');
+
+            document.getElementById('modalUsuario').classList.remove('hidden');
+        }
+
+        function editarUsuario(id) {
+            const usuario = usuarios.find(u => u.idUsuario === id);
+            if (!usuario) return;
+
+            document.getElementById('modalTitulo').textContent = 'Editar Usuario';
+            document.getElementById('usuarioId').value = usuario.idUsuario;
+            document.getElementById('nombreUsuario').value = usuario.nombres;
+            document.getElementById('apellidoUsuario').value = usuario.apellidos;
+            document.getElementById('usernameUsuario').value = usuario.username;
+            document.getElementById('emailUsuario').value = usuario.email;
+            document.getElementById('rolUsuario').value = usuario.idRol;
+            document.getElementById('passwordUsuario').value = '';
+
+            document.getElementById('passwordHint').classList.remove('hidden');
+            document.getElementById('modalUsuario').classList.remove('hidden');
+        }
+
+        async function guardarUsuario() {
+            const id = document.getElementById('usuarioId').value;
+            const usuario = {
+                nombres: document.getElementById('nombreUsuario').value,
+                apellidos: document.getElementById('apellidoUsuario').value,
+                username: document.getElementById('usernameUsuario').value,
+                email: document.getElementById('emailUsuario').value,
+                idRol: parseInt(document.getElementById('rolUsuario').value),
+                password: document.getElementById('passwordUsuario').value,
+                idEmpresa: currentEmpresaId,
+                estado: true
+            };
+
+            // Backend requiere estos, aunque sean dummy
+            usuario.numeroDocumento = "00000000";
+            usuario.celular = "000000000";
+            usuario.direccion = "-";
+
+            if (!usuario.nombres || !usuario.username || !usuario.idRol) {
+                alert("Complete datos requeridos");
+                return;
+            }
+
+            const method = id ? 'PUT' : 'POST';
+            const url = id ? `${API_URL}/usuarios/${id}` : `${API_URL}/usuarios`;
+
+            if (id && !usuario.password) delete usuario.password;
+
+            try {
+                const response = await fetch(url, {
+                    method: method,
+                    headers: getAuthHeaders(),
+                    body: JSON.stringify(usuario)
+                });
+
+                if (response.ok) {
+                    document.getElementById('modalUsuario').classList.add('hidden');
+                    cargarUsuarios(); // Recargar lista filtrada
+                } else {
+                    const err = await response.json();
+                    alert("Error: " + (err.message || "Error al guardar"));
+                }
+            } catch (error) { console.error(error); }
+        }
+
+        async function toggleEstado(id) {
+            try {
+                const response = await fetch(`${API_URL}/usuarios/${id}/toggle-estado`, {
+                    method: 'PUT',
+                    headers: getAuthHeaders()
+                });
+                if (response.ok) cargarUsuarios();
+            } catch (error) { console.error(error); }
+        }
+
+        function cerrarModal() {
+            document.getElementById('modalUsuario').classList.add('hidden');
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = '../../login.html';
+        }
+    </script>
+</body>
+
+</html>
