@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Tienda - TapStyle</title>
+    <link rel="stylesheet" href="styles/tienda-styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Navbar -->
+        <nav class="tienda-navbar">
+            <div class="navbar-container">
+                <div class="logo-section">
+                    <h1 class="tienda-nombre" id="tiendaNombre">Mi Tienda</h1>
+                </div>
+                <div class="nav-center">
+                    <input type="text" id="searchProductos" class="search-bar" placeholder="Buscar productos...">
+                </div>
+                <div class="nav-right">
+                    <button id="btnCarrito" class="btn-carrito">
+                        🛒 Carrito <span id="cartCount">0</span>
+                    </button>
+                    <div class="user-menu">
+                        <button id="btnUsuario" class="btn-usuario">👤 Usuario</button>
+                        <div id="userDropdown" class="user-dropdown" style="display: none;">
+                            <a href="#" id="btnMiPerfil">Mi Perfil</a>
+                            <a href="#" id="btnMisCompras">Mis Compras</a>
+                            <hr>
+                            <a href="#" id="btnCerrarSesion">Cerrar Sesión</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Contenedor Principal -->
+        <div class="tienda-container">
+            
+            <!-- Sidebar de Filtros -->
+            <aside class="tienda-sidebar">
+                <div class="filtros-section">
+                    <h3>Filtros</h3>
+                    
+                    <div class="filtro-grupo">
+                        <label class="filtro-titulo">Categoría</label>
+                        <div id="categoriasFiltro"></div>
+                    </div>
+
+                    <div class="filtro-grupo">
+                        <label class="filtro-titulo">Rango de Precio</label>
+                        <input type="range" id="precioMin" min="0" max="10000" value="0">
+                        <input type="range" id="precioMax" min="0" max="10000" value="10000">
+                        <div class="precio-display">
+                            $<span id="precioMinDisplay">0</span> - $<span id="precioMaxDisplay">10000</span>
+                        </div>
+                    </div>
+
+                    <div class="filtro-grupo">
+                        <label class="filtro-titulo">Disponibilidad</label>
+                        <label><input type="checkbox" class="filtro-disponible" checked> En Stock</label>
+                    </div>
+
+                    <button id="btnLimpiarFiltros" class="btn-limpiar-filtros">Limpiar Filtros</button>
+                </div>
+            </aside>
+
+            <!-- Sección de Productos -->
+            <main class="tienda-main">
+                
+                <!-- Vista Previa de Tienda -->
+                <section class="tienda-header">
+                    <div class="tienda-info" id="tiendaInfo"></div>
+                </section>
+
+                <!-- Opciones de Ordenamiento -->
+                <div class="productos-controls">
+                    <label>Ordenar por:</label>
+                    <select id="ordenamiento">
+                        <option value="relevancia">Relevancia</option>
+                        <option value="precio-asc">Precio: Menor a Mayor</option>
+                        <option value="precio-desc">Precio: Mayor a Menor</option>
+                        <option value="nuevos">Más Nuevos</option>
+                    </select>
+                    <span id="productosCount" class="productos-count">Mostrando 0 productos</span>
+                </div>
+
+                <!-- Grid de Productos -->
+                <div id="productosGrid" class="productos-grid">
+                    <!-- Los productos se cargan aquí dinámicamente -->
+                </div>
+
+                <!-- Sin Resultados -->
+                <div id="sinResultados" class="sin-resultados" style="display: none;">
+                    <p>No se encontraron productos que coincidan con tus filtros.</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal Producto Detalle -->
+    <div id="modalProducto" class="modal" style="display: none;">
+        <div class="modal-content producto-detalle">
+            <span class="close">&times;</span>
+            <div class="detalle-container">
+                <div class="detalle-imagen">
+                    <img id="detalleImagen" src="" alt="Producto">
+                </div>
+                <div class="detalle-info">
+                    <h2 id="detalleTitulo"></h2>
+                    <div class="detalle-rating">
+                        <span id="detalleRating">⭐ 4.5/5</span>
+                        <span id="detalleResenas">(120 reseñas)</span>
+                    </div>
+                    <div class="detalle-precio">
+                        <span class="precio-actual" id="detallePrecio">$0</span>
+                        <span class="precio-original" id="detallePrecioOriginal" style="display: none;">$0</span>
+                    </div>
+                    <p id="detalleDescripcion"></p>
+                    <div class="detalle-stock" id="detalleStock"></div>
+                    
+                    <div class="detalle-opciones">
+                        <div class="cantidad-selector">
+                            <button class="btn-cantidad" id="btnMenos">-</button>
+                            <input type="number" id="cantidadInput" value="1" min="1">
+                            <button class="btn-cantidad" id="btnMas">+</button>
+                        </div>
+                        <button id="btnAgregarCarrito" class="btn-agregar-carrito">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Carrito -->
+    <div id="modalCarrito" class="modal" style="display: none;">
+        <div class="modal-content carrito-modal">
+            <span class="close">&times;</span>
+            <h2>🛒 Mi Carrito</h2>
+            <div id="carritoItems" class="carrito-items">
+                <!-- Items del carrito se cargan aquí -->
+            </div>
+            <div class="carrito-resumen">
+                <div class="resumen-fila">
+                    <span>Subtotal:</span>
+                    <span id="subtotalCarrito">$0</span>
+                </div>
+                <div class="resumen-fila">
+                    <span>Envío:</span>
+                    <span id="envioCarrito">$0</span>
+                </div>
+                <div class="resumen-fila total">
+                    <span>Total:</span>
+                    <span id="totalCarrito">$0</span>
+                </div>
+            </div>
+            <button id="btnProcederPago" class="btn-proceder-pago">Proceder al Pago</button>
+        </div>
+    </div>
+
+    <!-- Modal Login/Registro -->
+    <div id="modalAuth" class="modal" style="display: none;">
+        <div class="modal-content auth-modal">
+            <span class="close">&times;</span>
+            <div id="authContainer"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config/tienda-config.js"></script>
+    <script src="scripts/tienda-utils.js"></script>
+    <script src="scripts/productos-tienda.js"></script>
+    <script src="scripts/carrito-tienda.js"></script>
+    <script src="scripts/auth-tienda.js"></script>
+</body>
+</html>
