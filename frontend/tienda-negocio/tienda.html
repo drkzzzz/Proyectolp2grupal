@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Tienda - TapStyle</title>
     <link rel="stylesheet" href="styles/tienda-styles.css">
+    <link rel="stylesheet" href="styles/carrito.css">
 </head>
 <body>
     <div id="app">
@@ -170,16 +171,46 @@
     <div id="footer-container"></div>
 
     <!-- Scripts -->
+    <script src="../../config/api-config.js"></script>
     <script src="config/tienda-config.js"></script>
     <script src="scripts/tienda-utils.js"></script>
-    <script src="../scripts/carrito-module.js"></script>
+    <script src="scripts/carrito-compra.js"></script>
+    <script src="scripts/carrito-integracion.js"></script>
     <script src="scripts/productos-tienda.js"></script>
-    <script src="scripts/auth-tienda.js"></script>
-    <script src="../components/footer/footer.js"></script>
+    <script src="scripts/auth-tienda-v2.js"></script>
+    <script src="../../components/footer/footer.js"></script>
     <script>
-        // Inicializar carrito al cargar la página
+        // Inicializar al cargar la página
         document.addEventListener('DOMContentLoaded', () => {
-            CarritoModule.init();
+            console.log('✅ Tienda cargada');
+            
+            // Botones del carrito
+            const btnCarrito = document.getElementById('btnCarrito');
+            if (btnCarrito) {
+                btnCarrito.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (carritoCompra) {
+                        carritoCompra.mostrarModalCarrito();
+                    }
+                });
+            }
+
+            // Botón proceder pago
+            const btnProcederPago = document.getElementById('btnProcederPago');
+            if (btnProcederPago) {
+                btnProcederPago.addEventListener('click', () => {
+                    if (carritoCompra) {
+                        carritoCompra.procederPago();
+                    }
+                });
+            }
+
+            // Cerrar modales
+            document.querySelectorAll('.close').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.target.closest('.modal').style.display = 'none';
+                });
+            });
         });
     </script>
 </body>

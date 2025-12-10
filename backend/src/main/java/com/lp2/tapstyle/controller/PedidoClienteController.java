@@ -28,6 +28,18 @@ public class PedidoClienteController {
         }
     }
 
+    @PostMapping("/checkout-carrito")
+    public ResponseEntity<ApiResponse<PedidoClienteDTO>> crearPedidoCarrito(
+            @RequestBody CheckoutCarritoRequest request) {
+        try {
+            PedidoClienteDTO pedido = pedidoService.crearPedidoDesdeCarritoFrontend(request);
+            return ResponseEntity.ok(ApiResponse.success(pedido, "Pedido creado exitosamente"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(ApiResponse.error("Error", e.getMessage()));
+        }
+    }
+
     @GetMapping("/usuario/{idUsuario}")
     public ResponseEntity<ApiResponse<List<PedidoClienteDTO>>> obtenerPedidosUsuario(
             @PathVariable Integer idUsuario) {

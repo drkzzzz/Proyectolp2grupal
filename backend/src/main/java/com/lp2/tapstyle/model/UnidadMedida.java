@@ -19,10 +19,6 @@ public class UnidadMedida implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUnidadMedida;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "id_empresa", nullable = false)
-    private Empresa empresa;
-
     @NotBlank(message = "El nombre de la unidad es requerido")
     @Column(nullable = false, length = 50)
     private String nombreUnidad;

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda - TapStyle</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <style>
+        .tienda-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header-tienda {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .header-tienda h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+        
+        .toolbar input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        
+        .toolbar button {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        
+        .toolbar button:hover {
+            background: #764ba2;
+        }
+        
+        #productosGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .producto-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .producto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .producto-imagen {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+        
+        .producto-imagen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .producto-info {
+            padding: 15px;
+        }
+        
+        .producto-info h4 {
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+        
+        .descripcion {
+            color: #666;
+            font-size: 0.9em;
+            margin: 10px 0;
+            height: 40px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .detalle-variante {
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .detalle-variante small {
+            color: #666;
+            display: block;
+        }
+        
+        .precio {
+            font-size: 1.8em;
+            color: #667eea;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #764ba2;
+        }
+        
+        .btn-carrito {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        
+        .btn-carrito:hover {
+            background: #ee5a52;
+        }
+        
+        .carrito-badge {
+            display: inline-block;
+            background: #fff;
+            color: #ff6b6b;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="tienda-container">
+        <!-- Header -->
+        <div class="header-tienda">
+            <h1>🏪 Tienda de Productos</h1>
+            <p>Encuentra lo que buscas</p>
+        </div>
+        
+        <!-- Botón carrito flotante -->
+        <button class="btn-carrito" onclick="irAlCarrito()">
+            🛒 Carrito <span class="carrito-badge" id="cartCount">0</span>
+        </button>
+        
+        <!-- Barra de búsqueda -->
+        <div class="toolbar">
+            <input type="text" id="searchInput" placeholder="Buscar productos...">
+            <button onclick="buscarProductos()">Buscar</button>
+        </div>
+        
+        <!-- Grid de productos -->
+        <div id="productosGrid"></div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="config-api.js"></script>
+    <script src="scripts/productos-tienda-simple.js"></script>
+    <script src="scripts/carrito-simple.js"></script>
+    
+    <!-- Funciones auxiliares -->
+    <script>
+        // Actualizar contador del carrito
+        setInterval(() => {
+            const count = localStorage.getItem('carrito_simple') 
+                ? JSON.parse(localStorage.getItem('carrito_simple')).length 
+                : 0;
+            const badge = document.getElementById('cartCount');
+            if (badge) badge.textContent = count;
+        }, 500);
+        
+        // Ir al carrito
+        function irAlCarrito() {
+            window.location.href = 'carrito.html';
+        }
+        
+        // Buscar productos
+        function buscarProductos() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.producto-card');
+            
+            cards.forEach(card => {
+                const nombre = card.querySelector('h4').textContent.toLowerCase();
+                const desc = card.querySelector('.descripcion').textContent.toLowerCase();
+                const visible = nombre.includes(search) || desc.includes(search);
+                card.style.display = visible ? '' : 'none';
+            });
+        }
+        
+        // Buscar con Enter
+        document.getElementById('searchInput')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') buscarProductos();
+        });
+    </script>
+</body>
+</html>

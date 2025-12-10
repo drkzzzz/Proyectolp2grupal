@@ -19,10 +19,6 @@ public class MaterialProducto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMaterial;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "id_empresa", nullable = false)
-    private Empresa empresa;
-
     @NotBlank(message = "El nombre del material es requerido")
     @Column(nullable = false, length = 100)
     private String nombreMaterial;

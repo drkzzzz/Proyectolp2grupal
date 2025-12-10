@@ -8,6 +8,5 @@ import lombok.*;
 @Builder
 public class MaterialProductoDTO {
     private Integer idMaterial;
-    private Integer idEmpresa;
     private String nombreMaterial;
 }

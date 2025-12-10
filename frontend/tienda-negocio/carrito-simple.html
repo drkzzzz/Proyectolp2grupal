@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - TapStyle</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <style>
+        .carrito-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        
+        .contenido {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+        }
+        
+        .tabla-carrito {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .tabla-carrito thead {
+            background: #f5f5f5;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .tabla-carrito th {
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .tabla-carrito td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tabla-carrito img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+        
+        .tabla-carrito input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            text-align: center;
+        }
+        
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+        
+        .btn-danger {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #ee5a52;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #764ba2;
+        }
+        
+        .btn-secondary {
+            background: #ddd;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #ccc;
+        }
+        
+        #carritoVacio {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        #carritoVacio h2 {
+            color: #999;
+            margin-bottom: 20px;
+        }
+        
+        #carritoVacio a {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .resumen {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+        }
+        
+        .resumen h3 {
+            margin: 0 0 20px 0;
+            color: #333;
+            text-align: center;
+        }
+        
+        .resumen-fila {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+        
+        .resumen-fila.total {
+            border-top: 2px solid #ddd;
+            padding-top: 12px;
+            font-weight: bold;
+            font-size: 1.3em;
+            color: #667eea;
+        }
+        
+        .resumen button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+        
+        .acciones {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .acciones button {
+            flex: 1;
+            padding: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            .contenido {
+                grid-template-columns: 1fr;
+            }
+            
+            .resumen {
+                position: relative;
+            }
+            
+            .tabla-carrito {
+                font-size: 0.9em;
+            }
+            
+            .tabla-carrito td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="carrito-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🛒 Mi Carrito de Compras</h1>
+        </div>
+        
+        <!-- Contenido -->
+        <div class="contenido">
+            <!-- Tabla de carrito -->
+            <div>
+                <!-- Carrito vacío -->
+                <div id="carritoVacio" style="display:none;">
+                    <h2>🏜️ Tu carrito está vacío</h2>
+                    <p>¡Agrega productos para empezar a comprar!</p>
+                    <a href="tienda-simple.html">← Volver a la tienda</a>
+                </div>
+                
+                <!-- Tabla con items -->
+                <table class="tabla-carrito" id="tablaCarrito" style="display:none;">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="carritoItems"></tbody>
+                </table>
+                
+                <!-- Acciones -->
+                <div class="acciones" id="acciones" style="display:none; margin-top:20px;">
+                    <button class="btn btn-secondary" id="btnVaciarCarrito">🗑️ Vaciar Carrito</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='tienda-simple.html'">← Continuar Comprando</button>
+                </div>
+            </div>
+            
+            <!-- Resumen lateral -->
+            <div class="resumen" id="resumen" style="display:none;">
+                <h3>📋 Resumen</h3>
+                
+                <div class="resumen-fila">
+                    <span>Subtotal:</span>
+                    <span id="resumenSubtotal">S/. 0.00</span>
+                </div>
+                
+                <div class="resumen-fila">
+                    <span>IGV (18%):</span>
+                    <span id="resumenIgv">S/. 0.00</span>
+                </div>
+                
+                <div class="resumen-fila total">
+                    <span>TOTAL:</span>
+                    <span id="resumenTotal">S/. 0.00</span>
+                </div>
+                
+                <button class="btn btn-primary" id="btnProcederPago">
+                    💳 Proceder al Pago
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="config-api.js"></script>
+    <script src="scripts/carrito-simple.js"></script>
+    
+    <script>
+        // Mostrar/ocultar elementos según carrito
+        function mostrarElementos() {
+            const vacio = !carrito || carrito.carrito.length === 0;
+            const tablaCarrito = document.getElementById('tablaCarrito');
+            const carritoVacio = document.getElementById('carritoVacio');
+            const resumen = document.getElementById('resumen');
+            const acciones = document.getElementById('acciones');
+            
+            if (vacio) {
+                tablaCarrito.style.display = 'none';
+                carritoVacio.style.display = 'block';
+                resumen.style.display = 'none';
+                acciones.style.display = 'none';
+            } else {
+                tablaCarrito.style.display = 'table';
+                carritoVacio.style.display = 'none';
+                resumen.style.display = 'block';
+                acciones.style.display = 'flex';
+            }
+        }
+        
+        // Observer para actualizaciones del carrito
+        setInterval(() => {
+            if (carrito) {
+                mostrarElementos();
+            }
+        }, 500);
+    </script>
+</body>
+</html>

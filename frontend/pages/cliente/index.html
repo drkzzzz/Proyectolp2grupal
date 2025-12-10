@@ -24,7 +24,16 @@
                         </svg>
                         <span class="absolute top-1 right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">3</span>
                     </a>
-                    <a href="login.html" class="hidden md:inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150">
+                    <!-- Botón de acceso/perfil -->
+                    <div id="user-menu-container" class="hidden md:flex items-center space-x-2">
+                        <button id="user-menu-btn" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150">
+                            Perfil
+                        </button>
+                        <button id="logout-btn" class="text-gray-600 hover:text-red-600 font-medium text-sm transition duration-150">
+                            Salir
+                        </button>
+                    </div>
+                    <a id="login-btn" href="login.html" class="hidden md:inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150">
                         Acceder
                     </a>
                 </div>
@@ -130,24 +139,65 @@
     <div id="footer-container"></div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-vistaclientillo
     <script src="../../scripts/tiendas-publicas.js"></script>
     <script src="../../components/footer/footer.js"></script>
     <script src="../js/producto.js"></script>
     <script src="../js/app.js"></script>
 
 <script>
-        // Debug: Verificar que los scripts se carguen
-        console.log('✅ Todos los scripts cargados');
-        console.log('📍 Ruta actual:', window.location.pathname);
-        
-        // Test manual en consola: window.TiendasPublicas
-        setTimeout(() => {
-            if (typeof TiendasPublicas !== 'undefined') {
-                console.log('✅ TiendasPublicas disponible en consola');
-            }
-        }, 2000);
-    </script>
+    // Verificar si el usuario está logueado
+    function verificarSesion() {
+        const sesionUsuario = localStorage.getItem('tapstyle_user'); // ← Usar la misma clave que login.js
+        const loginBtn = document.getElementById('login-btn');
+        const userMenuContainer = document.getElementById('user-menu-container');
+        const userMenuBtn = document.getElementById('user-menu-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        if (sesionUsuario) {
+            // Usuario está logueado
+            const usuario = JSON.parse(sesionUsuario);
+            loginBtn.classList.add('hidden');
+            userMenuContainer.classList.remove('hidden');
+            
+            // Actualizar nombre en el botón
+            const nombreCompleto = `${usuario.nombres || ''} ${usuario.apellidos || ''}`.trim() 
+                                   || usuario.username 
+                                   || 'Usuario';
+            userMenuBtn.textContent = `👤 ${nombreCompleto}`;
+            
+            // Eventos
+            userMenuBtn.addEventListener('click', () => {
+                window.location.href = '../../perfil_cliente.html';
+            });
+            
+            logoutBtn.addEventListener('click', () => {
+                localStorage.removeItem('tapstyle_user');
+                localStorage.removeItem('tapstyle_token');
+                localStorage.removeItem('tapstyle_role');
+                localStorage.removeItem('usuario_id');
+                window.location.href = 'login.html';
+            });
+        } else {
+            // Usuario no logueado
+            loginBtn.classList.remove('hidden');
+            userMenuContainer.classList.add('hidden');
+        }
+    }
+
+    // Verificar sesión al cargar la página
+    document.addEventListener('DOMContentLoaded', verificarSesion);
+
+    // Debug: Verificar que los scripts se carguen
+    console.log('✅ Todos los scripts cargados');
+    console.log('📍 Ruta actual:', window.location.pathname);
+    
+    // Test manual en consola: window.TiendasPublicas
+    setTimeout(() => {
+        if (typeof TiendasPublicas !== 'undefined') {
+            console.log('✅ TiendasPublicas disponible en consola');
+        }
+    }, 2000);
+</script>
 
 </body>
 </html>
