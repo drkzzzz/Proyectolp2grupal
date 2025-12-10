@@ -150,7 +150,7 @@ const productosManager = {
     },
 
     // Mostrar modal con detalle del producto
-    mostrarDetalle(id) {
+    async mostrarDetalle(id) {
         const producto = this.productos.find(p => p.id == id);
         if (!producto) return;
 
@@ -170,12 +170,30 @@ const productosManager = {
 
         // Guardar producto actual para agregar al carrito
         window.productoActual = producto;
+        
+        // Obtener variantes del producto
+        await this.cargarVariantesProducto(id);
 
         // Reset cantidad
         document.getElementById('cantidadInput').value = 1;
 
         // Mostrar modal
         document.getElementById('modalProducto').style.display = 'block';
+    },
+
+    // Cargar variantes de un producto
+    async cargarVariantesProducto(idProducto) {
+        try {
+            const response = await fetch(`http://localhost:8080/api/productos/${idProducto}`);
+            const data = await response.json();
+            
+            if (data.success && data.data && data.data.variantes && data.data.variantes.length > 0) {
+                // Guardar la primera variante disponible
+                window.varianteSeleccionada = data.data.variantes[0];
+            }
+        } catch (error) {
+            console.error('Error al cargar variantes:', error);
+        }
     },
 
     // Cargar categorías para filtros
@@ -298,6 +316,53 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('precioMaxDisplay').textContent = 10000;
             productosManager.productosFiltrados = [...productosManager.productos];
             productosManager.renderizarProductos();
+        });
+    }
+
+    // Botón agregar al carrito
+    const btnAgregarCarrito = document.getElementById('btnAgregarCarrito');
+    if (btnAgregarCarrito) {
+        btnAgregarCarrito.addEventListener('click', async () => {
+            if (!window.varianteSeleccionada || !window.varianteSeleccionada.idVariante) {
+                alert('No hay variante disponible para este producto');
+                return;
+            }
+
+            const cantidad = parseInt(document.getElementById('cantidadInput').value) || 1;
+            
+            const exito = await CarritoModule.agregarProducto(
+                window.varianteSeleccionada.idVariante,
+                cantidad
+            );
+
+            if (exito) {
+                document.getElementById('modalProducto').style.display = 'none';
+            }
+        });
+    }
+
+    // Botones de cantidad en modal
+    const btnMas = document.getElementById('btnMas');
+    const btnMenos = document.getElementById('btnMenos');
+    const cantidadInput = document.getElementById('cantidadInput');
+
+    if (btnMas) {
+        btnMas.addEventListener('click', () => {
+            cantidadInput.value = Math.max(1, parseInt(cantidadInput.value) + 1);
+        });
+    }
+
+    if (btnMenos) {
+        btnMenos.addEventListener('click', () => {
+            cantidadInput.value = Math.max(1, parseInt(cantidadInput.value) - 1);
+        });
+    }
+
+    // Cerrar modal de producto
+    const closeModalProducto = document.querySelector('#modalProducto .close');
+    if (closeModalProducto) {
+        closeModalProducto.addEventListener('click', () => {
+            document.getElementById('modalProducto').style.display = 'none';
         });
     }
 });

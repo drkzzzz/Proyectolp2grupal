@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Carrito - TapStyle</title>
+    <link rel="stylesheet" href="styles/tienda-styles.css">
+    <style>
+        .carrito-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .carrito-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .carrito-vacio {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .carrito-vacio img {
+            width: 200px;
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+
+        .carrito-items {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .carrito-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto auto auto;
+            gap: 20px;
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            align-items: center;
+        }
+
+        .carrito-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-imagen {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .item-info h3 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .item-info p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .item-cantidad {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-cantidad {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+
+        .btn-cantidad:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+        }
+
+        .cantidad-input {
+            width: 60px;
+            text-align: center;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 6px;
+            font-size: 14px;
+        }
+
+        .item-precio {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .item-subtotal {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4f46e5;
+        }
+
+        .btn-eliminar {
+            background: #fee;
+            color: #dc2626;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-eliminar:hover {
+            background: #fca;
+        }
+
+        .carrito-resumen {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+        }
+
+        .resumen-linea {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .resumen-linea.total {
+            border-top: 2px solid #e5e7eb;
+            padding-top: 15px;
+            margin-top: 15px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #4f46e5;
+        }
+
+        .carrito-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 30px;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 16px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-checkout:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-vaciar {
+            background: white;
+            color: #dc2626;
+            border: 1px solid #dc2626;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-vaciar:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        .stock-warning {
+            color: #f59e0b;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .carrito-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .carrito-item {
+                grid-template-columns: 80px 1fr;
+                gap: 15px;
+            }
+
+            .item-precio,
+            .item-subtotal,
+            .btn-eliminar {
+                grid-column: span 2;
+                text-align: right;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="tienda-navbar">
+        <div class="navbar-container">
+            <div class="logo-section">
+                <button onclick="window.location.href='tienda.html'" class="btn-back">← Volver</button>
+                <h1 class="tienda-nombre">Mi Carrito</h1>
+            </div>
+            <div class="nav-right">
+                <div class="user-menu">
+                    <button id="btnUsuario" class="btn-usuario">👤 Usuario</button>
+                    <div id="userDropdown" class="user-dropdown" style="display: none;">
+                        <a href="#" id="btnMiPerfil">Mi Perfil</a>
+                        <a href="#" id="btnMisCompras">Mis Compras</a>
+                        <hr>
+                        <a href="#" id="btnCerrarSesion">Cerrar Sesión</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor Principal -->
+    <div class="carrito-container">
+        <div class="carrito-header">
+            <h2>🛒 Mi Carrito de Compras</h2>
+            <button class="btn-vaciar" id="btnVaciarCarrito" style="display: none;">
+                🗑️ Vaciar Carrito
+            </button>
+        </div>
+
+        <!-- Carrito Vacío -->
+        <div id="carritoVacio" class="carrito-vacio" style="display: none;">
+            <h2>Tu carrito está vacío</h2>
+            <p>Agrega productos desde la tienda</p>
+            <button class="btn-checkout" onclick="window.location.href='tienda.html'">
+                Ir a la Tienda
+            </button>
+        </div>
+
+        <!-- Layout del Carrito -->
+        <div id="carritoLayout" class="carrito-layout" style="display: none;">
+            <!-- Items del Carrito -->
+            <div>
+                <div class="carrito-items" id="carritoItems">
+                    <!-- Se llenará dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Resumen del Pedido -->
+            <div>
+                <div class="carrito-resumen">
+                    <h3>Resumen del Pedido</h3>
+                    <div class="resumen-linea">
+                        <span>Subtotal:</span>
+                        <span id="resumenSubtotal">S/. 0.00</span>
+                    </div>
+                    <div class="resumen-linea">
+                        <span>IGV (18%):</span>
+                        <span id="resumenIgv">S/. 0.00</span>
+                    </div>
+                    <div class="resumen-linea total">
+                        <span>Total:</span>
+                        <span id="resumenTotal">S/. 0.00</span>
+                    </div>
+                    <button class="btn-checkout" id="btnProcederPago">
+                        Proceder al Pago →
+                    </button>
+                    <p style="text-align: center; margin-top: 15px; color: #6b7280; font-size: 14px;">
+                        <span id="totalItems">0</span> producto(s) en el carrito
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/carrito-module.js"></script>
+    <script src="scripts/carrito-tienda.js"></script>
+</body>
+</html>
