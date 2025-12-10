@@ -13,7 +13,8 @@
     <div class="flex h-screen overflow-hidden">
 
         <!-- SIDEBAR -->
-        <aside id="sidebar" class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
+        <aside id="sidebar"
+            class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
 
             <div class="p-6 border-b border-gray-700">
                 <h1 class="text-3xl font-extrabold text-blue-400 tracking-wider">TapStyle</h1>
@@ -21,20 +22,23 @@
             </div>
 
             <div class="flex flex-col items-center py-6 border-b border-gray-700 px-4">
-                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg" data-empresa-initials>SV</div>
+                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg"
+                    data-empresa-initials>SV</div>
                 <h2 class="mt-3 text-lg font-semibold text-center" data-empresa-nombre>Tu Empresa</h2>
                 <p class="text-sm text-gray-400 mt-1" data-usuario-nombre>Usuario</p>
             </div>
 
             <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
 
-                <a href="../dashboard_admin_negocio.html" class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150">
+                <a href="../dashboard_admin_negocio.html"
+                    class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150">
                     <i class="fas fa-chart-line mr-3 text-lg"></i>
                     <span class="font-medium">Dashboard</span>
                 </a>
 
                 <div class="mt-4">
-                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
                         <div class="flex items-center">
                             <i class="fas fa-box mr-3 text-lg"></i>
                             <span class="font-medium">Catálogo</span>
@@ -42,20 +46,24 @@
                         <i class="fas fa-chevron-down text-sm"></i>
                     </button>
                     <div class="submenu hidden ml-8 space-y-2 mt-2">
-                        <a href="productos.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="productos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-cube mr-2"></i> Productos
                         </a>
-                        <a href="categorias.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="categorias.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-list mr-2"></i> Categorías
                         </a>
-                        <a href="marcas.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="marcas.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-tag mr-2"></i> Marcas
                         </a>
                     </div>
                 </div>
 
                 <div class="mt-2">
-                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
                         <div class="flex items-center">
                             <i class="fas fa-tasks mr-3 text-lg"></i>
                             <span class="font-medium">Operaciones</span>
@@ -63,26 +71,32 @@
                         <i class="fas fa-chevron-down text-sm"></i>
                     </button>
                     <div class="submenu hidden ml-8 space-y-2 mt-2">
-                        <a href="compras.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="compras.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-shopping-cart mr-2"></i> Compras
                         </a>
-                        <a href="ventas.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="ventas.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-cash-register mr-2"></i> Ventas
                         </a>
-                        <a href="stock.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="stock.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-warehouse mr-2"></i> Stock
                         </a>
-                        <a href="proveedores.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="proveedores.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-truck mr-2"></i> Proveedores
                         </a>
-                        <a href="metodos_pago.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="metodos_pago.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-credit-card mr-2"></i> Métodos de Pago
                         </a>
                     </div>
                 </div>
 
                 <div class="mt-2">
-                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
                         <div class="flex items-center">
                             <i class="fas fa-money-bill-wave mr-3 text-lg"></i>
                             <span class="font-medium">Finanzas</span>
@@ -90,17 +104,20 @@
                         <i class="fas fa-chevron-down text-sm"></i>
                     </button>
                     <div class="submenu hidden ml-8 space-y-2 mt-2">
-                        <a href="caja.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="caja.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-cash-register mr-2"></i> Caja
                         </a>
-                        <a href="finanzas_pagos.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="finanzas_pagos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-chart-bar mr-2"></i> Finanzas
                         </a>
                     </div>
                 </div>
 
                 <div class="mt-2">
-                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-gray-700 transition duration-150 text-left">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-gray-700 transition duration-150 text-left">
                         <div class="flex items-center">
                             <i class="fas fa-cog mr-3 text-lg"></i>
                             <span class="font-medium">Administración</span>
@@ -108,13 +125,12 @@
                         <i class="fas fa-chevron-up text-sm"></i>
                     </button>
                     <div class="submenu ml-8 space-y-2 mt-2">
-                        <a href="clientes.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="clientes.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-users mr-2"></i> Clientes
                         </a>
-                        <a href="empleados.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
-                            <i class="fas fa-user-tie mr-2"></i> Empleados
-                        </a>
-                        <a href="roles_permisos.html" class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded transition">
+                        <a href="roles_permisos.html"
+                            class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded transition">
                             <i class="fas fa-shield-alt mr-2"></i> Roles y Permisos
                         </a>
                     </div>
@@ -123,7 +139,8 @@
             </nav>
 
             <div class="p-4 border-t border-gray-700">
-                <button onclick="cerrarSesionConfirm()" class="w-full flex items-center justify-center px-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg transition">
+                <button onclick="cerrarSesionConfirm()"
+                    class="w-full flex items-center justify-center px-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg transition">
                     <i class="fas fa-sign-out-alt mr-2"></i>
                     <span>Cerrar Sesión</span>
                 </button>
@@ -213,31 +230,31 @@
                         <label class="block text-sm font-medium text-gray-700 mb-3">Permisos</label>
                         <div class="space-y-2">
                             <label class="flex items-center">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600" value="ver_dashboard"> 
+                                <input type="checkbox" class="w-4 h-4 text-blue-600" value="ver_dashboard">
                                 <span class="ml-2 text-sm text-gray-700">Ver Dashboard</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600" value="gestionar_productos"> 
+                                <input type="checkbox" class="w-4 h-4 text-blue-600" value="gestionar_productos">
                                 <span class="ml-2 text-sm text-gray-700">Gestionar Productos</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600" value="gestionar_compras"> 
+                                <input type="checkbox" class="w-4 h-4 text-blue-600" value="gestionar_compras">
                                 <span class="ml-2 text-sm text-gray-700">Gestionar Compras</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600" value="gestionar_ventas"> 
+                                <input type="checkbox" class="w-4 h-4 text-blue-600" value="gestionar_ventas">
                                 <span class="ml-2 text-sm text-gray-700">Gestionar Ventas</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600" value="gestionar_stock"> 
+                                <input type="checkbox" class="w-4 h-4 text-blue-600" value="gestionar_stock">
                                 <span class="ml-2 text-sm text-gray-700">Gestionar Stock</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600" value="ver_finanzas"> 
+                                <input type="checkbox" class="w-4 h-4 text-blue-600" value="ver_finanzas">
                                 <span class="ml-2 text-sm text-gray-700">Ver Finanzas</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600" value="gestionar_usuarios"> 
+                                <input type="checkbox" class="w-4 h-4 text-blue-600" value="gestionar_usuarios">
                                 <span class="ml-2 text-sm text-gray-700">Gestionar Usuarios</span>
                             </label>
                         </div>

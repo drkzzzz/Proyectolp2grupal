@@ -10,4 +10,12 @@ import java.util.Optional;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     Optional<Cliente> findByUsuario_IdUsuario(Integer usuarioId);
+
+    List<Cliente> findByEmpresa_IdEmpresa(Integer idEmpresa);
+
+    List<Cliente> findByEmpresa_IdEmpresaAndEstado(Integer idEmpresa, Boolean estado);
+
+    Optional<Cliente> findByEmailAndEmpresa_IdEmpresa(String email, Integer idEmpresa);
+
+    boolean existsByEmailAndEmpresa_IdEmpresa(String email, Integer idEmpresa);
 }

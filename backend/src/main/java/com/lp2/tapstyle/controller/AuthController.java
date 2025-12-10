@@ -69,12 +69,21 @@ public class AuthController {
             else if (rolId == 5)
                 tipo = "cliente";
 
+            // NUEVO: Obtener permisos del usuario
+            java.util.Set<String> permisos = new java.util.HashSet<>();
+            if (usuario.getRol() != null && usuario.getRol().getPermisos() != null) {
+                usuario.getRol().getPermisos().forEach(permiso -> {
+                    permisos.add(permiso.getNombrePermiso());
+                });
+            }
+
             // Crear respuesta
             AuthResponse authResponse = AuthResponse.builder()
                     .token("jwt-" + usuario.getIdUsuario())
                     .tipo(tipo)
                     .usuario(usuarioDTO)
                     .empresa(empresaDTO)
+                    .permisos(permisos) // NUEVO: Incluir permisos
                     .mensaje("Bienvenido " + usuario.getNombres())
                     .build();
 

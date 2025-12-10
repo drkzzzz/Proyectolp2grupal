@@ -25,4 +25,10 @@ public class Permiso implements Serializable {
 
     @Column(length = 255)
     private String descripcion;
+
+    // Relación Many-to-Many con Roles (inversa)
+    @ManyToMany(mappedBy = "permisos", fetch = FetchType.LAZY)
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    @Builder.Default
+    private java.util.Set<Rol> roles = new java.util.HashSet<>();
 }

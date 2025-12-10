@@ -13,7 +13,8 @@
     <div class="flex h-screen overflow-hidden">
 
         <!-- SIDEBAR -->
-        <aside id="sidebar" class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
+        <aside id="sidebar"
+            class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
 
             <div class="p-6 border-b border-gray-700">
                 <h1 class="text-3xl font-extrabold text-blue-400 tracking-wider">TapStyle</h1>
@@ -21,20 +22,23 @@
             </div>
 
             <div class="flex flex-col items-center py-6 border-b border-gray-700 px-4">
-                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg" data-empresa-initials>SV</div>
+                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg"
+                    data-empresa-initials>SV</div>
                 <h2 class="mt-3 text-lg font-semibold text-center" data-empresa-nombre>Tu Empresa</h2>
                 <p class="text-sm text-gray-400 mt-1" data-usuario-nombre>Usuario</p>
             </div>
 
             <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
 
-                <a href="../dashboard_admin_negocio.html" class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150">
+                <a href="../dashboard_admin_negocio.html"
+                    class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150">
                     <i class="fas fa-chart-line mr-3 text-lg"></i>
                     <span class="font-medium">Dashboard</span>
                 </a>
 
                 <div class="mt-4">
-                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
                         <div class="flex items-center">
                             <i class="fas fa-box mr-3 text-lg"></i>
                             <span class="font-medium">Catálogo</span>
@@ -42,20 +46,24 @@
                         <i class="fas fa-chevron-down text-sm"></i>
                     </button>
                     <div class="submenu hidden ml-8 space-y-2 mt-2">
-                        <a href="productos.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="productos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-cube mr-2"></i> Productos
                         </a>
-                        <a href="categorias.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="categorias.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-list mr-2"></i> Categorías
                         </a>
-                        <a href="marcas.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="marcas.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-tag mr-2"></i> Marcas
                         </a>
                     </div>
                 </div>
 
                 <div class="mt-2">
-                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
                         <div class="flex items-center">
                             <i class="fas fa-tasks mr-3 text-lg"></i>
                             <span class="font-medium">Operaciones</span>
@@ -63,26 +71,32 @@
                         <i class="fas fa-chevron-down text-sm"></i>
                     </button>
                     <div class="submenu hidden ml-8 space-y-2 mt-2">
-                        <a href="compras.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="compras.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-shopping-cart mr-2"></i> Compras
                         </a>
-                        <a href="ventas.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="ventas.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-cash-register mr-2"></i> Ventas
                         </a>
-                        <a href="stock.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="stock.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-warehouse mr-2"></i> Stock
                         </a>
-                        <a href="proveedores.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="proveedores.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-truck mr-2"></i> Proveedores
                         </a>
-                        <a href="metodos_pago.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="metodos_pago.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-credit-card mr-2"></i> Métodos de Pago
                         </a>
                     </div>
                 </div>
 
                 <div class="mt-2">
-                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
                         <div class="flex items-center">
                             <i class="fas fa-money-bill-wave mr-3 text-lg"></i>
                             <span class="font-medium">Finanzas</span>
@@ -90,17 +104,20 @@
                         <i class="fas fa-chevron-down text-sm"></i>
                     </button>
                     <div class="submenu hidden ml-8 space-y-2 mt-2">
-                        <a href="caja.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="caja.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-cash-register mr-2"></i> Caja
                         </a>
-                        <a href="finanzas_pagos.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="finanzas_pagos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-chart-bar mr-2"></i> Finanzas
                         </a>
                     </div>
                 </div>
 
                 <div class="mt-2">
-                    <button onclick="toggleMenu(this)" class="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-gray-700 transition duration-150 text-left">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-gray-700 transition duration-150 text-left">
                         <div class="flex items-center">
                             <i class="fas fa-cog mr-3 text-lg"></i>
                             <span class="font-medium">Administración</span>
@@ -108,13 +125,12 @@
                         <i class="fas fa-chevron-up text-sm"></i>
                     </button>
                     <div class="submenu ml-8 space-y-2 mt-2">
-                        <a href="clientes.html" class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded transition">
+                        <a href="clientes.html"
+                            class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded transition">
                             <i class="fas fa-users mr-2"></i> Clientes
                         </a>
-                        <a href="empleados.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
-                            <i class="fas fa-user-tie mr-2"></i> Empleados
-                        </a>
-                        <a href="roles_permisos.html" class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <a href="roles_permisos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-shield-alt mr-2"></i> Roles y Permisos
                         </a>
                     </div>
@@ -123,7 +139,8 @@
             </nav>
 
             <div class="p-4 border-t border-gray-700">
-                <button onclick="cerrarSesionConfirm()" class="w-full flex items-center justify-center px-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg transition">
+                <button onclick="cerrarSesionConfirm()"
+                    class="w-full flex items-center justify-center px-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg transition">
                     <i class="fas fa-sign-out-alt mr-2"></i>
                     <span>Cerrar Sesión</span>
                 </button>
@@ -135,9 +152,15 @@
         <div class="flex-1 flex flex-col overflow-hidden">
 
             <!-- CABECERA -->
-            <header class="bg-white border-b border-gray-200 px-8 py-4">
-                <h1 class="text-3xl font-bold text-gray-800">Gestión de Clientes</h1>
-                <p class="text-sm text-gray-600 mt-1">Clientes con historial de compras</p>
+            <header class="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Gestión de Clientes</h1>
+                    <p class="text-sm text-gray-600 mt-1">Clientes con historial de compras</p>
+                </div>
+                <button onclick="abrirModalCliente()"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2">
+                    <i class="fas fa-plus"></i> Nuevo Cliente
+                </button>
             </header>
 
             <!-- CONTENIDO -->
@@ -152,9 +175,9 @@
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Nombre</th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Email</th>
                                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Teléfono</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Compras Totales</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Monto Total</th>
-                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Deuda</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Documento</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Estado</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="tablaClientes" class="divide-y divide-gray-200">
@@ -174,10 +197,95 @@
 
     </div>
 
+    <!-- MODAL: Nuevo/Editar Cliente -->
+    <div id="modalCliente" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md max-h-screen overflow-y-auto">
+
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 id="tituloModal" class="text-2xl font-bold text-gray-800">Nuevo Cliente</h2>
+                <button onclick="cerrarModalCliente()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <div class="p-6">
+                <form id="formCliente" onsubmit="guardarCliente(event)">
+                    <input type="hidden" id="idCliente">
+
+                    <!-- Nombre -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre *</label>
+                        <input type="text" id="nombre" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Apellido -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Apellido *</label>
+                        <input type="text" id="apellido" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Tipo Documento -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipo Documento *</label>
+                        <select id="tipoDocumento" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Selecciona un tipo</option>
+                            <!-- Se llenarán desde la API -->
+                        </select>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                        <input type="email" id="email" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Número Documento (Opcional) -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Número Documento</label>
+                        <input type="text" id="numeroDocumento"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Teléfono (Opcional) -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Teléfono</label>
+                        <input type="tel" id="telefono"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="flex gap-3 justify-end">
+                        <button type="button" onclick="cerrarModalCliente()"
+                            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                            Cancelar
+                        </button>
+                        <button type="submit"
+                            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center gap-2">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
     <!-- SCRIPTS -->
     <script src="../scripts/auth.js"></script>
     <script src="../scripts/api.js"></script>
     <script>
+
+        let tiposDocumento = [];
+        let clienteEditando = null;
+
+        // ============================================
+        // FUNCIONES SIDEBAR
+        // ============================================
 
         function toggleMenu(button) {
             const submenu = button.nextElementSibling;
@@ -193,12 +301,56 @@
             }
         }
 
+        // ============================================
+        // MODALES
+        // ============================================
+
+        function abrirModalCliente(cliente = null) {
+            clienteEditando = cliente;
+
+            if (cliente) {
+                // Modo edición
+                document.getElementById('tituloModal').textContent = 'Editar Cliente';
+                document.getElementById('idCliente').value = cliente.idCliente;
+                document.getElementById('nombre').value = cliente.nombre;
+                document.getElementById('apellido').value = cliente.apellido;
+                document.getElementById('tipoDocumento').value = cliente.idTipoDocumento || '';
+                document.getElementById('email').value = cliente.email || '';
+                document.getElementById('numeroDocumento').value = cliente.numeroDocumento || '';
+                document.getElementById('telefono').value = cliente.telefono || '';
+            } else {
+                // Modo crear
+                document.getElementById('tituloModal').textContent = 'Nuevo Cliente';
+                document.getElementById('formCliente').reset();
+                document.getElementById('idCliente').value = '';
+            }
+
+            document.getElementById('modalCliente').classList.remove('hidden');
+        }
+
+        function cerrarModalCliente() {
+            document.getElementById('modalCliente').classList.add('hidden');
+            document.getElementById('formCliente').reset();
+            clienteEditando = null;
+        }
+
+        // ============================================
+        // CRUD CLIENTES
+        // ============================================
+
         async function cargarClientes() {
             try {
-                const clientes = await clientesAPI.listar();
-                console.log('Clientes cargados:', clientes);
+                const contexto = obtenerContexto();
+                const response = await getRequest('clientes', { idEmpresa: contexto.idEmpresa });
 
-                if (!Array.isArray(clientes)) {
+                console.log('Respuesta completa:', response);
+
+                // Extraer el array de clientes desde response.data
+                const clientes = response.data || response || [];
+
+                console.log('Clientes extraídos:', clientes);
+
+                if (!Array.isArray(clientes) || clientes.length === 0) {
                     mostrarTablaVacia();
                     return;
                 }
@@ -206,26 +358,130 @@
                 const tbody = document.getElementById('tablaClientes');
                 tbody.innerHTML = clientes.map(cli => `
                     <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 text-sm font-medium text-gray-900">${cli.nombre}</td>
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">${cli.nombre} ${cli.apellido}</td>
                         <td class="px-6 py-4 text-sm text-gray-700">${cli.email || '-'}</td>
                         <td class="px-6 py-4 text-sm text-gray-700">${cli.telefono || '-'}</td>
-                        <td class="px-6 py-4 text-sm text-gray-700">
-                            <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold">
-                                ${cli.comprasTotales || 0}
+                        <td class="px-6 py-4 text-sm text-gray-700">${cli.numeroDocumento || '-'}</td>
+                        <td class="px-6 py-4 text-sm">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold ${cli.estado ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                                ${cli.estado ? '✓ Activo' : '✗ Inactivo'}
                             </span>
                         </td>
-                        <td class="px-6 py-4 text-sm font-semibold text-green-700">
-                            S/. ${(cli.montoTotal || 0).toFixed(2)}
-                        </td>
-                        <td class="px-6 py-4 text-sm">
-                            ${cli.deuda > 0 ? `<span class="px-3 py-1 rounded-full bg-red-100 text-red-800 text-xs font-semibold">S/. ${cli.deuda.toFixed(2)}</span>` : '<span class="text-gray-500">Sin deuda</span>'}
+                        <td class="px-6 py-4 text-sm space-x-2">
+                            <button onclick='editarCliente(${JSON.stringify(cli)})' class="text-yellow-600 hover:text-yellow-800">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button onclick="toggleEstadoCliente(${cli.idCliente}, ${cli.estado})" 
+                                class="${cli.estado ? 'text-red-600 hover:text-red-800' : 'text-green-600 hover:text-green-800'}">
+                                <i class="fas fa-${cli.estado ? 'ban' : 'check-circle'}"></i>
+                            </button>
                         </td>
                     </tr>
                 `).join('');
             } catch (error) {
                 console.error('Error cargando clientes:', error);
                 mostrarTablaVacia();
-                mostrarError('Error: ' + error.message);
+                mostrarError('Error al cargar clientes: ' + error.message);
+            }
+        }
+
+        async function cargarTiposDocumento() {
+            // Tipos de documento comunes en Perú
+            tiposDocumento = [
+                { id: 1, nombre: 'DNI' },
+                { id: 2, nombre: 'RUC' },
+                { id: 3, nombre: 'Pasaporte' },
+                { id: 4, nombre: 'Carnet de Extranjería' }
+            ];
+
+            const select = document.getElementById('tipoDocumento');
+            select.innerHTML = '<option value="">Selecciona un tipo</option>' +
+                tiposDocumento.map(tipo =>
+                    `<option value="${tipo.id}">${tipo.nombre}</option>`
+                ).join('');
+        }
+
+        async function guardarCliente(event) {
+            event.preventDefault();
+
+            const contexto = obtenerContexto();
+            const idCliente = document.getElementById('idCliente').value;
+            const nombre = document.getElementById('nombre').value.trim();
+            const apellido = document.getElementById('apellido').value.trim();
+            const tipoDocumentoId = document.getElementById('tipoDocumento').value;
+            const email = document.getElementById('email').value.trim();
+            const numeroDocumento = document.getElementById('numeroDocumento').value.trim();
+            const telefono = document.getElementById('telefono').value.trim();
+
+            if (!nombre || !apellido || !email) {
+                mostrarError('Completa todos los campos requeridos');
+                return;
+            }
+
+            try {
+                const boton = event.target.querySelector('button[type="submit"]');
+                mostrarLoading(boton, 'Guardando...');
+
+                const datosCliente = {
+                    idEmpresa: contexto.idEmpresa,
+                    nombre,
+                    apellido,
+                    idTipoDocumento: tipoDocumentoId ? parseInt(tipoDocumentoId) : null,
+                    email,
+                    numeroDocumento: numeroDocumento || null,
+                    telefono: telefono || null
+                };
+
+                if (idCliente) {
+                    // Actualizar
+                    await putRequest('clientes', idCliente, datosCliente);
+                    mostrarExito('Cliente actualizado exitosamente');
+                } else {
+                    // Crear
+                    await postRequest('clientes', datosCliente);
+                    mostrarExito('Cliente registrado exitosamente');
+                }
+
+                cerrarModalCliente();
+                cargarClientes();
+
+            } catch (error) {
+                console.error('Error:', error);
+                mostrarError(error.message || 'Error al guardar cliente');
+            } finally {
+                const boton = event.target.querySelector('button[type="submit"]');
+                ocultarLoading(boton);
+            }
+        }
+
+        function editarCliente(cliente) {
+            abrirModalCliente(cliente);
+        }
+
+        async function toggleEstadoCliente(id, estadoActual) {
+            const accion = estadoActual ? 'desactivar' : 'activar';
+            if (confirm(`¿Estás seguro de ${accion} este cliente?`)) {
+                try {
+                    // Usar fetch directamente porque putRequest agrega el body a la URL
+                    const response = await fetch(`${API_BASE_URL}/clientes/${id}/toggle-estado`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        mostrarExito(`Cliente ${accion === 'desactivar' ? 'desactivado' : 'activado'} exitosamente`);
+                        cargarClientes();
+                    } else {
+                        throw new Error(data.message || 'Error al cambiar estado');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    mostrarError('Error: ' + error.message);
+                }
             }
         }
 
@@ -240,11 +496,16 @@
             `;
         }
 
+        // ============================================
+        // INICIALIZACIÓN
+        // ============================================
+
         document.addEventListener('DOMContentLoaded', () => {
             const auth = validarAutenticacion();
             if (!auth) return;
 
             console.log('👥 Cargando clientes...');
+            cargarTiposDocumento();
             cargarClientes();
         });
 

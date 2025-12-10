@@ -21,6 +21,10 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCliente;
 
+    @ManyToOne
+    @JoinColumn(name = "id_empresa", nullable = false)
+    private Empresa empresa;
+
     @OneToOne
     @JoinColumn(name = "id_usuario", unique = true)
     private Usuario usuario;

@@ -1,5 +1,6 @@
 package com.lp2.tapstyle.controller;
 
+import com.lp2.tapstyle.dto.ApiResponse;
 import com.lp2.tapstyle.dto.UsuarioDTO;
 import com.lp2.tapstyle.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,10 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @GetMapping
-    public ResponseEntity<List<UsuarioDTO>> obtenerTodos() {
+    public ResponseEntity<List<UsuarioDTO>> obtenerTodos(@RequestParam(required = false) Integer idEmpresa) {
+        if (idEmpresa != null) {
+            return ResponseEntity.ok(usuarioService.obtenerPorEmpresa(idEmpresa));
+        }
         return ResponseEntity.ok(usuarioService.obtenerTodos());
     }
 
@@ -39,6 +43,12 @@ public class UsuarioController {
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioDTO> actualizar(@PathVariable Integer id, @RequestBody UsuarioDTO dto) {
         return ResponseEntity.ok(usuarioService.actualizar(id, dto));
+    }
+
+    @PutMapping("/{id}/toggle-estado")
+    public ResponseEntity<ApiResponse<Void>> toggleEstado(@PathVariable Integer id) {
+        usuarioService.toggleEstado(id);
+        return ResponseEntity.ok(ApiResponse.success(null, "Estado del usuario actualizado exitosamente"));
     }
 
     @DeleteMapping("/{id}")

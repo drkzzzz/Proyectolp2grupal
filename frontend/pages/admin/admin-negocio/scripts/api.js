@@ -21,7 +21,7 @@ const API_BASE_URL = 'http://localhost:8083/api';
  */
 function obtenerHeaders(extras = {}) {
     const token = localStorage.getItem('tapstyle_token');
-    
+
     return {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
@@ -72,7 +72,7 @@ async function getRequest(endpoint, parametros = {}) {
     try {
         // Construir URL con parámetros
         const url = new URL(`${API_BASE_URL}/${endpoint}`);
-        
+
         // Agregar parámetros
         Object.keys(parametros).forEach(key => {
             url.searchParams.append(key, parametros[key]);
@@ -87,7 +87,7 @@ async function getRequest(endpoint, parametros = {}) {
 
         await manejarError(response, endpoint);
         const data = await response.json();
-        
+
         console.log(`✅ GET ${endpoint} exitoso:`, data);
         return data;
 
@@ -134,7 +134,7 @@ async function postRequest(endpoint, datos = {}) {
 
         await manejarError(response, endpoint);
         const data = await response.json();
-        
+
         console.log(`✅ POST ${endpoint} exitoso:`, data);
         return data;
 
@@ -159,7 +159,7 @@ async function postRequestSinContexto(endpoint, datos = {}) {
 
         await manejarError(response, endpoint);
         const data = await response.json();
-        
+
         console.log(`✅ POST ${endpoint} exitoso:`, data);
         return data;
 
@@ -196,7 +196,7 @@ async function putRequest(endpoint, id, datos = {}) {
 
         await manejarError(response, endpoint);
         const data = await response.json();
-        
+
         console.log(`✅ PUT ${endpoint}/${id} exitoso:`, data);
         return data;
 
@@ -223,7 +223,7 @@ async function deleteRequest(endpoint, id) {
         });
 
         await manejarError(response, endpoint);
-        
+
         // Algunos DELETE no retornan JSON
         if (response.status === 204) {
             console.log(`✅ DELETE ${endpoint}/${id} exitoso (sin contenido)`);
@@ -287,17 +287,6 @@ const inventarioAPI = {
 };
 
 /**
- * EMPLEADOS
- */
-const empleadosAPI = {
-    listar: () => getRequest('usuarios', { idEmpresa: obtenerContextoAutomatico().idEmpresa, rol: 'empleado' }),
-    obtener: (id) => getRequestPorId('usuarios', id),
-    crear: (datos) => postRequest('usuarios', datos),
-    actualizar: (id, datos) => putRequest('usuarios', id, datos),
-    eliminar: (id) => deleteRequest('usuarios', id)
-};
-
-/**
  * CLIENTES
  */
 const clientesAPI = {
@@ -352,7 +341,7 @@ function mostrarExito(mensaje = 'Operación exitosa') {
     notificacion.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg';
     notificacion.textContent = mensaje;
     document.body.appendChild(notificacion);
-    
+
     setTimeout(() => notificacion.remove(), 3000);
 }
 
@@ -364,7 +353,7 @@ function mostrarError(mensaje = 'Ocurrió un error') {
     notificacion.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg';
     notificacion.textContent = mensaje;
     document.body.appendChild(notificacion);
-    
+
     setTimeout(() => notificacion.remove(), 4000);
 }
 
@@ -381,7 +370,6 @@ if (typeof module !== 'undefined' && module.exports) {
         comprasAPI,
         ventasAPI,
         inventarioAPI,
-        empleadosAPI,
         clientesAPI,
         cajaAPI,
         finanzasAPI,

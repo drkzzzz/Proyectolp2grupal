@@ -80,7 +80,7 @@
                     console.log('✅ Login exitoso:', authData);
                     console.log('📋 OBJETO EMPRESA COMPLETO:', authData.empresa);
                     console.log('🔍 CAMPOS DE EMPRESA:', Object.keys(authData.empresa));
-                    
+
                     // Imprimir cada campo para debug
                     if (authData.empresa) {
                         for (let key in authData.empresa) {
@@ -92,7 +92,17 @@
                     localStorage.setItem('tapstyle_token', authData.token);
                     localStorage.setItem('tapstyle_user', JSON.stringify(authData.usuario));
                     localStorage.setItem('tapstyle_role', authData.tipo);
-                    
+
+                    // NUEVO: Guardar permisos del usuario
+                    let permisosArray = [];
+                    if (authData.permisos) {
+                        permisosArray = Array.isArray(authData.permisos)
+                            ? authData.permisos
+                            : Array.from(authData.permisos);
+                        localStorage.setItem('user_permissions', JSON.stringify(permisosArray));
+                        console.log('🔐 Permisos guardados:', permisosArray);
+                    }
+
                     // Guardar ID del usuario
                     if (authData.usuario && authData.usuario.idUsuario) {
                         localStorage.setItem('idUsuario', String(authData.usuario.idUsuario));
@@ -102,12 +112,12 @@
                         localStorage.setItem('tapstyle_empresa', JSON.stringify(authData.empresa));
                         // Guardar datos de empresa para módulos operativos
                         localStorage.setItem('idEmpresa', String(authData.empresa.idEmpresa));
-                        
+
                         // El backend devuelve nombreTienda (camelCase)
                         const nombreEmpresa = authData.empresa.nombreTienda || 'Tu Empresa';
                         console.log('✅ Nombre de empresa seleccionado:', nombreEmpresa);
                         localStorage.setItem('empresaNombre', String(nombreEmpresa));
-                        
+
                         // Generar siglas del nombre
                         const palabras = nombreEmpresa.split(' ');
                         const siglas = palabras.map(p => p[0].toUpperCase()).join('').substring(0, 2);
@@ -119,7 +129,8 @@
                             rol: authData.tipo,
                             empresa: localStorage.getItem('empresaNombre'),
                             idEmpresa: authData.empresa.idEmpresa,
-                            siglas: siglas
+                            siglas: siglas,
+                            permisos: permisosArray.length + ' permisos'
                         });
                     }
 
@@ -134,7 +145,9 @@
                             redirectUrl = 'admin-negocio/dashboard_admin_negocio.html';
                             break;
                         default:
-                            throw new Error('Rol de usuario no autorizado para este panel');
+                            // Roles operativos (Vendedor, Cajero, etc) van al dashboard de negocio
+                            redirectUrl = 'admin-negocio/dashboard_admin_negocio.html';
+                            break;
                     }
 
                     console.log('🔄 Redirigiendo a:', redirectUrl);

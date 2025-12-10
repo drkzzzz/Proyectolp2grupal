@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Permisos - TapStyle SuperAdmin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="flex bg-gray-50">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-gray-800 text-white p-4 flex flex-col fixed h-full z-20">
+
+        <div class="text-center mb-6 pb-4 border-b border-gray-700">
+            <a href="../dashboard_superadmin.html" class="text-xl font-black text-red-500 tracking-widest">TAPSTYLE</a>
+            <p class="text-xs text-gray-400 mt-1">SUPER ADMIN</p>
+        </div>
+
+        <div class="mb-6 text-center">
+            <div
+                class="w-12 h-12 bg-red-600 text-white rounded-full mx-auto flex items-center justify-center text-lg font-bold mb-2 shadow-lg">
+                SA
+            </div>
+            <p class="font-semibold text-sm">Super Administrador</p>
+            <p class="text-xs text-gray-400">Control Total</p>
+        </div>
+
+        <nav class="flex-grow space-y-1">
+            <a href="../dashboard_superadmin.html"
+                class="flex items-center p-2.5 rounded-lg text-gray-300 hover:bg-gray-700 transition text-sm">
+                <i class="fas fa-chart-line mr-2 text-xs"></i>
+                <span>Dashboard Global</span>
+            </a>
+
+            <!-- Gestión de Empresas (Desplegable) -->
+            <div>
+                <button onclick="toggleSubmenu(this)"
+                    class="w-full flex items-center justify-between p-2.5 rounded-lg text-gray-300 hover:bg-gray-700 transition text-sm">
+                    <div class="flex items-center">
+                        <i class="fas fa-building mr-2 text-xs"></i>
+                        <span>Gestión de Empresas</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                <div class="submenu ml-6 space-y-1 mt-1">
+                    <a href="gestion_empresas.html"
+                        class="flex items-center p-2 text-xs text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <i class="fas fa-building mr-2"></i> Empresas
+                    </a>
+                    <a href="roles.html"
+                        class="flex items-center p-2 text-xs text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                        <i class="fas fa-user-shield mr-2"></i> Roles
+                    </a>
+                    <a href="permisos.html"
+                        class="flex items-center p-2 text-xs bg-red-600 text-white rounded transition">
+                        <i class="fas fa-key mr-2"></i> Permisos
+                    </a>
+                </div>
+            </div>
+
+            <a href="gestion_modulos_empresa.html"
+                class="flex items-center p-2.5 rounded-lg text-gray-300 hover:bg-gray-700 transition text-sm">
+                <i class="fas fa-puzzle-piece mr-2 text-xs"></i>
+                <span>Módulos por Empresa</span>
+            </a>
+            <a href="comisiones_pagos.html"
+                class="flex items-center p-2.5 rounded-lg text-gray-300 hover:bg-gray-700 transition text-sm">
+                <i class="fas fa-dollar-sign mr-2 text-xs"></i>
+                <span>Comisiones y Pagos</span>
+            </a>
+            <a href="reportes_globales.html"
+                class="flex items-center p-2.5 rounded-lg text-gray-300 hover:bg-gray-700 transition text-sm">
+                <i class="fas fa-chart-bar mr-2 text-xs"></i>
+                <span>Reportes Globales</span>
+            </a>
+        </nav>
+
+        <div class="mt-auto pt-4 border-t border-gray-700">
+            <a href="../../login.html"
+                class="flex items-center p-2.5 rounded-lg text-red-400 hover:bg-gray-700 transition text-sm">
+                <i class="fas fa-sign-out-alt mr-2 text-xs"></i>
+                <span class="font-medium">Cerrar Sesión</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="flex-1 ml-64 p-8">
+
+        <!-- CABECERA -->
+        <header class="flex justify-between items-center bg-white p-6 rounded-xl shadow-lg mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">Catálogo de Permisos</h1>
+                <p class="text-gray-500 text-sm mt-1">Permisos disponibles en el sistema</p>
+            </div>
+            <button onclick="abrirModalPermiso()"
+                class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition">
+                <i class="fas fa-plus"></i>
+                Nuevo Permiso
+            </button>
+        </header>
+
+        <!-- GRID DE PERMISOS -->
+        <div id="gridPermisos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="col-span-full text-center py-12 text-gray-500">
+                <i class="fas fa-spinner fa-spin text-3xl mb-3"></i>
+                <p>Cargando permisos...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MODAL: Crear/Editar Permiso -->
+    <div id="modalPermiso" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md">
+
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 id="tituloModal" class="text-2xl font-bold text-gray-800">Nuevo Permiso</h2>
+                <button onclick="cerrarModalPermiso()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <div class="p-6">
+                <form id="formPermiso" onsubmit="guardarPermiso(event)">
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre del Permiso *</label>
+                        <input type="text" id="nombrePermiso" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
+                            placeholder="Ej: GESTIONAR_USUARIOS">
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Descripción</label>
+                        <textarea id="descripcionPermiso" rows="3"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
+                            placeholder="Descripción del permiso..."></textarea>
+                    </div>
+
+                    <div class="flex gap-3 justify-end">
+                        <button type="button" onclick="cerrarModalPermiso()"
+                            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                            Cancelar
+                        </button>
+                        <button type="submit"
+                            class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg flex items-center gap-2">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="../../../../config/api-config.js"></script>
+    <script>
+        // Función para toggle del submenu
+        function toggleSubmenu(button) {
+            const submenu = button.nextElementSibling;
+            const icon = button.querySelector('i.fa-chevron-down, i.fa-chevron-up');
+
+            if (submenu.classList.contains('hidden')) {
+                submenu.classList.remove('hidden');
+                if (icon) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            } else {
+                submenu.classList.add('hidden');
+                if (icon) {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            }
+        }
+
+        let idPermisoEditando = null;
+
+        // Cargar permisos al iniciar
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarPermisos();
+        });
+
+        async function cargarPermisos() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/permisos`);
+                const resultado = await response.json();
+                const permisos = resultado.data || resultado || [];
+
+                const grid = document.getElementById('gridPermisos');
+
+                if (!Array.isArray(permisos) || permisos.length === 0) {
+                    grid.innerHTML = `
+                        <div class="col-span-full text-center py-12 text-gray-500">
+                            <i class="fas fa-inbox text-5xl mb-3"></i>
+                            <p>No hay permisos registrados</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                grid.innerHTML = permisos.map(permiso => `
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 border-l-4 border-red-500">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex-1">
+                                <h3 class="font-bold text-gray-800 text-lg mb-1">${permiso.nombrePermiso}</h3>
+                                <p class="text-sm text-gray-600">${permiso.descripcion || 'Sin descripción'}</p>
+                            </div>
+                            <div class="flex gap-2 ml-2">
+                                <button onclick="editarPermiso(${permiso.idPermiso})" 
+                                    class="text-yellow-600 hover:text-yellow-800 p-2" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button onclick="eliminarPermiso(${permiso.idPermiso})" 
+                                    class="text-red-600 hover:text-red-800 p-2" title="Eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-gray-100">
+                            <p class="text-xs text-gray-500">
+                                <i class="fas fa-hashtag mr-1"></i> ID: ${permiso.idPermiso}
+                            </p>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error cargando permisos:', error);
+                mostrarError('Error al cargar permisos: ' + error.message);
+            }
+        }
+
+        function abrirModalPermiso(permiso = null) {
+            idPermisoEditando = permiso ? permiso.idPermiso : null;
+            document.getElementById('tituloModal').textContent = permiso ? 'Editar Permiso' : 'Nuevo Permiso';
+            document.getElementById('nombrePermiso').value = permiso ? permiso.nombrePermiso : '';
+            document.getElementById('descripcionPermiso').value = permiso ? (permiso.descripcion || '') : '';
+            document.getElementById('modalPermiso').classList.remove('hidden');
+        }
+
+        function cerrarModalPermiso() {
+            document.getElementById('modalPermiso').classList.add('hidden');
+            document.getElementById('formPermiso').reset();
+            idPermisoEditando = null;
+        }
+
+        async function guardarPermiso(event) {
+            event.preventDefault();
+
+            const datos = {
+                nombrePermiso: document.getElementById('nombrePermiso').value.trim().toUpperCase(),
+                descripcion: document.getElementById('descripcionPermiso').value.trim()
+            };
+
+            try {
+                const url = idPermisoEditando
+                    ? `${API_BASE_URL}/permisos/${idPermisoEditando}`
+                    : `${API_BASE_URL}/permisos`;
+
+                const method = idPermisoEditando ? 'PUT' : 'POST';
+
+                const response = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(datos)
+                });
+
+                const resultado = await response.json();
+
+                if (resultado.success) {
+                    mostrarExito(idPermisoEditando ? 'Permiso actualizado exitosamente' : 'Permiso creado exitosamente');
+                    cerrarModalPermiso();
+                    cargarPermisos();
+                } else {
+                    throw new Error(resultado.message || 'Error al guardar permiso');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                mostrarError('Error: ' + error.message);
+            }
+        }
+
+        async function editarPermiso(id) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/permisos/${id}`);
+                const resultado = await response.json();
+                const permiso = resultado.data || resultado;
+                abrirModalPermiso(permiso);
+            } catch (error) {
+                mostrarError('Error al cargar permiso: ' + error.message);
+            }
+        }
+
+        async function eliminarPermiso(id) {
+            if (!confirm('¿Estás seguro de eliminar este permiso? Esta acción no se puede deshacer.')) return;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/permisos/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const resultado = await response.json();
+
+                if (resultado.success) {
+                    mostrarExito('Permiso eliminado exitosamente');
+                    cargarPermisos();
+                } else {
+                    throw new Error(resultado.message);
+                }
+            } catch (error) {
+                mostrarError('Error: ' + error.message);
+            }
+        }
+
+        function mostrarExito(mensaje) {
+            alert('✓ ' + mensaje);
+        }
+
+        function mostrarError(mensaje) {
+            alert('✗ ' + mensaje);
+        }
+    </script>
+
+</body>
+
+</html>

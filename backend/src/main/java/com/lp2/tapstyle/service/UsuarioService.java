@@ -20,9 +20,17 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final RolRepository rolRepository;
+    private final com.lp2.tapstyle.repository.EmpresaRepository empresaRepository; // Inyectado
+    private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 
     public List<UsuarioDTO> obtenerTodos() {
         return usuarioRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<UsuarioDTO> obtenerPorEmpresa(Integer idEmpresa) {
+        return usuarioRepository.findByEmpresa_IdEmpresa(idEmpresa).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
@@ -43,11 +51,23 @@ public class UsuarioService {
         }
 
         Usuario usuario = convertToEntity(dto);
-        usuario.setContraseñaHash(dto.getUsername());
+        // Encriptar contraseña (por defecto usa el password enviado o el username si es
+        // null)
+        String rawPassword = (dto.getPassword() != null && !dto.getPassword().isEmpty())
+                ? dto.getPassword()
+                : dto.getUsername();
+        usuario.setContraseñaHash(passwordEncoder.encode(rawPassword));
 
         Rol rol = rolRepository.findById(dto.getIdRol())
                 .orElseThrow(() -> new RuntimeException("Rol no encontrado con id: " + dto.getIdRol()));
         usuario.setRol(rol);
+
+        // Asignar Empresa
+        if (dto.getIdEmpresa() != null) {
+            com.lp2.tapstyle.model.Empresa empresa = empresaRepository.findById(dto.getIdEmpresa())
+                    .orElseThrow(() -> new RuntimeException("Empresa no encontrada con id: " + dto.getIdEmpresa()));
+            usuario.setEmpresa(empresa);
+        }
 
         Usuario saved = usuarioRepository.save(usuario);
         return convertToDTO(saved);
@@ -63,14 +83,28 @@ public class UsuarioService {
         usuario.setCelular(dto.getCelular());
         usuario.setDireccion(dto.getDireccion());
         usuario.setEmail(dto.getEmail());
-        usuario.setEstado(dto.getEstado());
+        // usuario.setEstado(dto.getEstado()); // El estado se maneja con toggle
+
+        // Actualizar rol si viene
+        if (dto.getIdRol() != null) {
+            Rol rol = rolRepository.findById(dto.getIdRol())
+                    .orElseThrow(() -> new RuntimeException("Rol no encontrado con id: " + dto.getIdRol()));
+            usuario.setRol(rol);
+        }
 
         if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
-            usuario.setContraseñaHash(dto.getPassword());
+            usuario.setContraseñaHash(passwordEncoder.encode(dto.getPassword()));
         }
 
         Usuario updated = usuarioRepository.save(usuario);
         return convertToDTO(updated);
+    }
+
+    public void toggleEstado(Integer id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
+        usuario.setEstado(!usuario.getEstado());
+        usuarioRepository.save(usuario);
     }
 
     public void eliminar(Integer id) {
@@ -115,7 +149,7 @@ public class UsuarioService {
                 .direccion(dto.getDireccion())
                 .username(dto.getUsername())
                 .email(dto.getEmail())
-                .estado(dto.getEstado())
+                .estado(dto.getEstado() != null ? dto.getEstado() : true)
                 .build();
     }
 }

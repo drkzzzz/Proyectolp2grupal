@@ -56,11 +56,12 @@ function validarAutenticacion() {
     }
 
     // Validación 2: Existe rol correcto (acepta admin_negocio o admin)
-    if (rol !== 'admin_negocio' && rol !== 'admin') {
-        console.warn(`❌ Rol incorrecto: ${rol}. Se requiere: admin_negocio o admin`);
-        redirigirALogin('Tu rol no está autorizado para acceder a este panel.');
-        return null;
-    }
+    // Validación 2: Existe rol correcto (acepta admin_negocio o admin)
+    // if (rol !== 'admin_negocio' && rol !== 'admin') {
+    //    console.warn(`❌ Rol incorrecto: ${rol}. Se requiere: admin_negocio o admin`);
+    //    redirigirALogin('Tu rol no está autorizado para acceder a este panel.');
+    //    return null;
+    // }
 
     // Validación 3: Existe empresa asignada
     if (!idEmpresa || idEmpresa === 0 || isNaN(idEmpresa)) {
@@ -124,7 +125,7 @@ function cerrarSesion() {
     localStorage.removeItem('idEmpresa');
     localStorage.removeItem('empresaNombre');
     localStorage.removeItem('empresaInitials');
-    
+
     window.location.href = '../../admin/login.html';
 }
 
@@ -147,7 +148,7 @@ function tienePermiso(permiso) {
  */
 document.addEventListener('DOMContentLoaded', () => {
     const auth = validarAutenticacion();
-    
+
     if (!auth) {
         // validarAutenticacion ya redirige a login si falla
         return;
