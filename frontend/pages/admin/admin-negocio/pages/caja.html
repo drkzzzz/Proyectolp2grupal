@@ -85,6 +85,14 @@
                             class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-warehouse mr-2"></i> Stock
                         </a>
+                        <a href="proveedores.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-truck mr-2"></i> Proveedores
+                        </a>
+                        <a href="metodos_pago.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-credit-card mr-2"></i> Métodos de Pago
+                        </a>
                     </div>
                 </div>
 
@@ -101,6 +109,31 @@
                         <a href="caja.html"
                             class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded transition">
                             <i class="fas fa-cash-register mr-2"></i> Caja
+                        </a>
+                        <a href="finanzas_pagos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-chart-bar mr-2"></i> Finanzas
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-cog mr-3 text-lg"></i>
+                            <span class="font-medium">Administración</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="submenu hidden ml-8 space-y-2 mt-2">
+                        <a href="clientes.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-users mr-2"></i> Clientes
+                        </a>
+                        <a href="roles_permisos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-shield-alt mr-2"></i> Roles y Permisos
                         </a>
                     </div>
                 </div>
@@ -331,12 +364,6 @@
             icon.classList.toggle('fa-chevron-up');
         }
 
-        function cerrarSesionConfirm() {
-            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
-                cerrarSesion();
-            }
-        }
-
         function abrirModalNuevaCaja() {
             idCajaEditar = null;
             document.getElementById('tituloCaja').textContent = 'Nueva Caja';
@@ -401,8 +428,8 @@
                                 ${caja.estado}
                             </span>
                         </td>
-                        <td class="px-6 py-4 text-sm text-right text-gray-700">$${parseFloat(caja.montoInicial || 0).toFixed(2)}</td>
-                        <td class="px-6 py-4 text-sm text-right text-gray-700 font-semibold">$${parseFloat(caja.montoActual || 0).toFixed(2)}</td>
+                        <td class="px-6 py-4 text-sm text-right text-gray-700">S/. ${parseFloat(caja.montoInicial || 0).toFixed(2)}</td>
+                        <td class="px-6 py-4 text-sm text-right text-gray-700 font-semibold">S/. ${parseFloat(caja.montoActual || 0).toFixed(2)}</td>
                         <td class="px-6 py-4 text-sm text-gray-700">${caja.fechaApertura ? new Date(caja.fechaApertura).toLocaleDateString() : '-'}</td>
                         <td class="px-6 py-4 text-sm flex gap-2">
                             ${caja.estado === 'Cerrada' ?

@@ -12,6 +12,7 @@
     <script src="../../../../config/api-config.js"></script>
     <script src="../../../../utils/permissions.js"></script>
     <script src="../scripts/api.js"></script>
+    <script src="../scripts/auth.js"></script>
 </head>
 
 <body class="bg-gray-50 font-sans">
@@ -121,7 +122,7 @@
 
             <!-- Cerrar Sesión -->
             <div class="p-4 border-t border-gray-700">
-                <button onclick="logout()"
+                <button onclick="cerrarSesionConfirm()"
                     class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center">
                     <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
                 </button>
@@ -489,11 +490,6 @@
 
         function cerrarModal() {
             document.getElementById('modalUsuario').classList.add('hidden');
-        }
-
-        function logout() {
-            localStorage.clear();
-            window.location.href = '../../login.html';
         }
     </script>
 </body>

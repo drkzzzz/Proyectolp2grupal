@@ -195,7 +195,7 @@
                         <div class="flex justify-between items-start">
                             <div>
                                 <p class="text-sm font-medium text-gray-500 uppercase">Ventas del Mes</p>
-                                <p class="text-3xl font-bold text-gray-900 mt-2" id="ventasDelMes">$0</p>
+                                <p class="text-3xl font-bold text-gray-900 mt-2" id="ventasDelMes">S/. 0</p>
                             </div>
                             <div class="p-3 bg-blue-100 rounded-full text-blue-600">
                                 <i class="fas fa-shopping-cart text-xl"></i>
@@ -237,7 +237,7 @@
                         <div class="flex justify-between items-start">
                             <div>
                                 <p class="text-sm font-medium text-gray-500 uppercase">Caja Disponible</p>
-                                <p class="text-3xl font-bold text-gray-900 mt-2" id="cajaDisponible">$0</p>
+                                <p class="text-3xl font-bold text-gray-900 mt-2" id="cajaDisponible">S/. 0</p>
                             </div>
                             <div class="p-3 bg-green-100 rounded-full text-green-600">
                                 <i class="fas fa-wallet text-xl"></i>
@@ -294,12 +294,6 @@
             icon.classList.toggle('fa-chevron-up');
         }
 
-        function cerrarSesionConfirm() {
-            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
-                cerrarSesion();
-            }
-        }
-
         // ============================================
         // IR A MI TIENDA
         // ============================================
@@ -316,8 +310,8 @@
             // Guardar tiendaId en sessionStorage para que tienda-negocio lo pueda usar
             sessionStorage.setItem('tiendaId', tiendaId);
             
-            // Redirigir a la tienda con parámetro de URL
-            window.location.href = `../../../tienda-negocio/tienda.html?tiendaId=${tiendaId}`;
+            // Abrir tienda en una nueva ventana
+            window.open(`../../../tienda-negocio/tienda.html?tiendaId=${tiendaId}`, '_blank');
         }
 
         // ============================================
@@ -398,7 +392,7 @@
          * Formatear número como moneda
          */
         function formatearMoneda(valor) {
-            if (!valor) return '$0.00';
+            if (!valor) return 'S/. 0.00';
             return new Intl.NumberFormat('es-PE', {
                 style: 'currency',
                 currency: 'PEN'
@@ -407,10 +401,10 @@
 
         // Datos placeholder mientras integramos con backend
         function cargarDatosPlaceholder() {
-            document.getElementById('ventasDelMes').textContent = '$12,450';
+            document.getElementById('ventasDelMes').textContent = 'S/. 12,450';
             document.getElementById('comprasPendientes').textContent = '3';
             document.getElementById('stockBajo').textContent = '5';
-            document.getElementById('cajaDisponible').textContent = '$8,920';
+            document.getElementById('cajaDisponible').textContent = 'S/. 8,920';
 
             document.getElementById('ultimasVentas').innerHTML = `
                 <div class="flex justify-between items-center py-2 border-b pb-2">
@@ -418,21 +412,21 @@
                         <p class="font-medium text-gray-800">Pedido #001</p>
                         <p class="text-sm text-gray-500">Cliente: Juan Pérez</p>
                     </div>
-                    <span class="text-green-600 font-semibold">$450</span>
+                    <span class="text-green-600 font-semibold">S/. 450</span>
                 </div>
                 <div class="flex justify-between items-center py-2 border-b pb-2">
                     <div>
                         <p class="font-medium text-gray-800">Pedido #002</p>
                         <p class="text-sm text-gray-500">Cliente: María García</p>
                     </div>
-                    <span class="text-green-600 font-semibold">$320</span>
+                    <span class="text-green-600 font-semibold">S/. 320</span>
                 </div>
                 <div class="flex justify-between items-center py-2">
                     <div>
                         <p class="font-medium text-gray-800">Pedido #003</p>
                         <p class="text-sm text-gray-500">Cliente: Carlos López</p>
                     </div>
-                    <span class="text-green-600 font-semibold">$280</span>
+                    <span class="text-green-600 font-semibold">S/. 280</span>
                 </div>
             `;
 
