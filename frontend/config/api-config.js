@@ -1,6 +1,7 @@
 // api-config.js - Configuración de la API
 window.API_CONFIG = {
-    BASE_URL: 'http://localhost:8083/api'
+    // Usar IP 127.0.0.1:8081 según estándar del equipo
+    BASE_URL: 'http://127.0.0.1:8081/api'
 };
 
 // Para compatibilidad con código existente

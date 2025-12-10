@@ -27,12 +27,7 @@
                         </svg>
                     </button>
                     
-                    <a href="favoritos_cliente.html" class="text-gray-500 hover:text-indigo-600 relative p-2 rounded-full hover:bg-indigo-50 transition duration-150">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
-                        <span class="favoritos-count absolute top-1 right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-pink-500 rounded-full">0</span>
-                    </a>
+                        <!-- Favoritos eliminado -->
                     
                     <a href="carrito.html" class="text-gray-500 hover:text-indigo-600 relative p-2 rounded-full hover:bg-indigo-50 transition duration-150">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -53,10 +48,8 @@
                         <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                             <a href="perfil_cliente.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Mi Perfil</a>
                             <a href="pedidos_cliente.html" class="block px-4 py-2 text-sm text-indigo-600 bg-indigo-50 font-medium">Mis Pedidos</a>
-                            <a href="favoritos_cliente.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Mis Favoritos</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Configuración</a>
-                            <div class="border-t border-gray-100 my-1"></div>
-                            <a href="login.html" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50">Cerrar Sesión</a>
+                                <div class="border-t border-gray-100 my-1"></div>
+                                <a href="#" onclick="logoutUser()" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50">Cerrar Sesión</a>
                         </div>
                     </div>
                 </div>
@@ -154,5 +147,6 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="../js/cliente.js"></script>
+        <script src="../../../scripts/logout.js"></script>
 </body>
 </html>

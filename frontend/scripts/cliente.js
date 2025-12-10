@@ -26,12 +26,7 @@ $(document).ready(function () {
             <div class="relative overflow-hidden rounded-t-xl">
                 <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
                 
-                <button class="absolute top-2 right-2 p-2 bg-white bg-opacity-80 rounded-full hover:bg-red-500 hover:text-white transition duration-150" 
-                        onclick="event.preventDefault(); alert('Funcionalidad \\'Favoritos\\' pendiente.');">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
-                </button>
+                <!-- Favoritos eliminado -->
             </div>
             <div class="p-4">
                 <h3 class="text-lg font-semibold text-gray-900 truncate">${product.name}</h3>
@@ -87,7 +82,6 @@ $(document).ready(function () {
     // CONFIGURACIÓN Y VARIABLES GLOBALES
     // ===========================================
     const CART_KEY = "tapstyle_cart";
-    const FAVORITOS_KEY = "tapstyle_favoritos";
     const PEDIDOS_KEY = "tapstyle_pedidos";
 
     // 1. Apuntamos al contenedor de productos en 'index_cliente.html'
@@ -138,149 +132,12 @@ $(document).ready(function () {
         }, 1800);
     }
 
-    // ===========================================
-    // FUNCIONALIDAD DE FAVORITOS
-    // ===========================================
-    
-    function getFavoritos() {
-        try {
-            return JSON.parse(localStorage.getItem(FAVORITOS_KEY) || "[]");
-        } catch {
-            return [];
-        }
-    }
-
-    function saveFavoritos(favoritos) {
-        localStorage.setItem(FAVORITOS_KEY, JSON.stringify(favoritos));
-        updateFavoritosCount();
-        // Si estamos en la página de favoritos, actualizar la lista
-        if (window.location.pathname.includes('favoritos_cliente.html')) {
-            loadFavoritos();
-        }
-    }
-
-    function toggleFavorito(product) {
-        const favoritos = getFavoritos();
-        const existingIndex = favoritos.findIndex(fav => fav.id === product.id);
-        
-        if (existingIndex > -1) {
-            // Remover de favoritos
-            favoritos.splice(existingIndex, 1);
-            saveFavoritos(favoritos);
-            showToast("Producto removido de favoritos", 'info');
-            return false;
-        } else {
-            // Agregar a favoritos
-            favoritos.push({
-                id: product.id,
-                name: product.name,
-                price: product.price,
-                image: product.image,
-                store: product.store,
-                description: product.description,
-                sizes: product.sizes,
-                type: product.type,
-                addedAt: new Date().toISOString()
-            });
-            saveFavoritos(favoritos);
-            showToast("Producto añadido a favoritos");
-            return true;
-        }
-    }
-
-    function isFavorito(productId) {
-        const favoritos = getFavoritos();
-        return favoritos.some(fav => fav.id === productId);
-    }
-
+    // Favoritos eliminado. Proveer stubs para evitar errores.
     function updateFavoritosCount() {
-        const favoritos = getFavoritos();
-        const count = favoritos.length;
-        $('.favoritos-count').text(count);
+        try { $('.favoritos-count').text(''); } catch(e){}
     }
-
-    function createFavoritoCard(product) {
-        const urlParams = new URLSearchParams();
-        urlParams.set('id', product.id);
-        urlParams.set('name', product.name);
-        urlParams.set('price', product.price);
-        urlParams.set('image', product.image.replace('400x500', '600x600'));
-        urlParams.set('store', product.store);
-        urlParams.set('desc', product.description);
-        urlParams.set('sizes', product.sizes.join(','));
-
-        const detailUrl = `producto.html?${urlParams.toString()}`;
-
-        return `
-        <div class="block bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 group">
-            <div class="relative overflow-hidden rounded-t-xl">
-                <a href="${detailUrl}">
-                    <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
-                </a>
-                
-                <button class="favorito-btn absolute top-2 right-2 p-2 bg-red-500 bg-opacity-20 text-red-500 rounded-full hover:bg-red-500 hover:text-white transition duration-150" 
-                        data-product-id="${product.id}">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
-                </button>
-            </div>
-            <div class="p-4">
-                <a href="${detailUrl}">
-                    <h3 class="text-lg font-semibold text-gray-900 truncate">${product.name}</h3>
-                    <p class="text-sm text-indigo-600 font-bold mt-1">S/ ${product.price.toFixed(2)}</p>
-                    <p class="text-xs text-gray-500 mt-1">Por: ${product.store}</p>
-                </a>
-                
-                <div class="flex items-center mt-2">
-                    <div class="flex text-yellow-400">
-                        ★★★★☆ 
-                    </div>
-                    <span class="text-xs text-gray-500 ml-1">(${(Math.floor(Math.random() * 100) + 20)})</span>
-                </div>
-            </div>
-        </div>
-        `;
-    }
-
-    function loadFavoritos() {
-        if (!$favoritosGrid.length) return;
-
-        const favoritos = getFavoritos();
-        $favoritosGrid.empty();
-
-        if (favoritos.length === 0) {
-            $favoritosGrid.html(`
-                <div class="col-span-full text-center py-12">
-                    <div class="text-4xl mb-4">❤️</div>
-                    <p class="text-gray-500 text-lg">No tienes productos en favoritos</p>
-                    <p class="text-gray-400 text-sm mt-2">Agrega productos a favoritos para verlos aquí</p>
-                    <a href="index_cliente.html" class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150">
-                        Explorar productos
-                    </a>
-                </div>
-            `);
-            return;
-        }
-
-        favoritos.forEach(product => {
-            const cardHtml = createFavoritoCard(product);
-            $favoritosGrid.append(cardHtml);
-        });
-
-        // Agregar event listeners para los botones de favoritos
-        $favoritosGrid.find('.favorito-btn').on('click', function(e) {
-            e.preventDefault();
-            const productId = $(this).data('product-id');
-            const product = favoritos.find(p => p.id === productId);
-            
-            if (product) {
-                toggleFavorito(product);
-                // Recargar la lista de favoritos
-                loadFavoritos();
-            }
-        });
-    }
+    function toggleFavorito(product){ showToast('Funcionalidad de favoritos eliminada', 'info'); return false; }
+    function isFavorito(){ return false; }
 
     // ===========================================
     // FUNCIONALIDAD DE PEDIDOS
@@ -538,26 +395,7 @@ $(document).ready(function () {
             $recomendadosGrid.append($card);
         });
 
-        // Agregar event listeners para los botones de favoritos
-        $('.favorito-btn').on('click', function(e) {
-            e.preventDefault();
-            const productId = $(this).data('product-id');
-            const product = window.PRODUCTS_DATA.find(p => p.id === productId);
-            
-            if (product) {
-                const esFavorito = toggleFavorito(product);
-                const $btn = $(this);
-                const $svg = $btn.find('svg');
-                
-                if (esFavorito) {
-                    $btn.removeClass('bg-white bg-opacity-80 text-gray-400').addClass('bg-red-500 bg-opacity-20 text-red-500');
-                    $svg.attr('fill', 'currentColor');
-                } else {
-                    $btn.removeClass('bg-red-500 bg-opacity-20 text-red-500').addClass('bg-white bg-opacity-80 text-gray-400');
-                    $svg.attr('fill', 'none');
-                }
-            }
-        });
+        // Favoritos: comportamiento eliminado (no-op)
     }
 
     // ===========================================
@@ -567,12 +405,10 @@ $(document).ready(function () {
     function init() {
         updateCartCount();
         updateFavoritosCount();
-        
+
         // Cargar contenido específico según la página
         if (window.location.pathname.includes('index_cliente.html') || window.location.pathname === '/') {
             loadRecommendedProducts();
-        } else if (window.location.pathname.includes('favoritos_cliente.html')) {
-            loadFavoritos();
         } else if (window.location.pathname.includes('pedidos_cliente.html')) {
             loadPedidos();
         }
