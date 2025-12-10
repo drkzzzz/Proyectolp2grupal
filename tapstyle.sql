@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-12-2025 a las 06:44:31
+-- Tiempo de generación: 10-12-2025 a las 10:08:43
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -167,6 +167,7 @@ INSERT INTO `cierrescaja` (`id_cierre`, `id_apertura`, `id_caja`, `id_usuario`, 
 
 CREATE TABLE `clientes` (
   `id_cliente` int(11) NOT NULL,
+  `id_empresa` int(11) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
   `nombre` varchar(100) NOT NULL,
   `apellido` varchar(100) NOT NULL,
@@ -183,9 +184,9 @@ CREATE TABLE `clientes` (
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id_cliente`, `id_usuario`, `nombre`, `apellido`, `id_tipodocumento`, `numero_documento`, `direccion`, `telefono`, `email`, `fecha_registro`, `estado`) VALUES
-(10, NULL, 'Maria', 'Lopez', 10, '87654321', NULL, NULL, NULL, '2025-12-08 19:36:48', 1),
-(100, NULL, 'Cliente', 'Prueba', 1, '10000001', NULL, NULL, NULL, '2025-12-08 20:32:51', 1);
+INSERT INTO `clientes` (`id_cliente`, `id_empresa`, `id_usuario`, `nombre`, `apellido`, `id_tipodocumento`, `numero_documento`, `direccion`, `telefono`, `email`, `fecha_registro`, `estado`) VALUES
+(100, 122, NULL, 'Cliente', 'Prueba', 1, '10000001', NULL, NULL, NULL, '2025-12-08 20:32:51', 1),
+(219, 122, NULL, 'Jose Santiago', 'Ponce Riveros', 1, '72129871', NULL, '918341898', 'ponc@gmail.com', '2025-12-09 20:30:49', 1);
 
 -- --------------------------------------------------------
 
@@ -214,7 +215,7 @@ CREATE TABLE `comprobantespago` (
 
 INSERT INTO `comprobantespago` (`id_comprobante`, `id_empresa`, `id_cliente`, `id_usuario`, `id_tipo_comprobante`, `numero_comprobante`, `fecha_emision`, `total`, `igv`, `subtotal`, `estado`, `motivo_anulacion`) VALUES
 (500, 200, 10, 200, 1, 'B001-00001', '2025-12-08 19:36:48', 89.90, 0.00, 0.00, 'Emitido', NULL),
-(1000, 122, 100, 535, 1, 'B001-00122', '2025-12-08 20:32:51', 250.00, 0.00, 0.00, 'Emitido', NULL);
+(1001, 122, 219, 535, 1, 'B001-000001', '2025-12-10 08:18:21', 265.50, 40.50, 225.00, 'Emitido', NULL);
 
 -- --------------------------------------------------------
 
@@ -307,7 +308,10 @@ INSERT INTO `empresas` (`id_empresa`, `nombre_tienda`, `ruc_empresa`, `direccion
 (3, 'TapStyle - Performance Footwear', '20555666777', 'Calle Deporte #303, Lima, Perú', '987654323', 'info@tapstyle-pf.com', '2025-12-01 07:02:00', 'Aprobada', 0.12, b'0', NULL, NULL),
 (4, 'TapStyle - Street Vibe', '20888999000', 'Av. Urban #404, Lima, Perú', '987654324', 'info@tapstyle-sv.com', '2025-12-01 07:02:00', 'Aprobada', 0.15, b'0', NULL, NULL),
 (5, 'TapStyle - Sistema', '20000000000', 'Lima, Perú', '999000000', 'info@tapstyle.com', '2025-12-01 12:02:12', 'Aprobada', 0.15, b'0', NULL, NULL),
-(122, 'SANTIS', '85789734934', 'jr peru 456', '345678213', 'san@gmail.com', '2025-12-06 04:16:46', 'Pendiente', 0.01, b'1', 'DASHBOARD,CATALOGO,OPERACIONES,FINANZAS,ADMINISTRACION', 3);
+(122, 'SANTIS', '85789734934', 'jr peru 456', '345678213', 'san@gmail.com', '2025-12-06 04:16:46', 'Pendiente', 0.01, b'1', 'DASHBOARD,CATALOGO,OPERACIONES,FINANZAS,ADMINISTRACION', 3),
+(123, 'Tarapato.SAC', '74863864364', 'Jr pierola 165', '888222555', 'tap@gmail.com', '2025-12-09 19:46:56', 'Pendiente', 0.15, b'1', 'DASHBOARD,CATALOGO,OPERACIONES,FINANZAS,ADMINISTRACION', NULL),
+(124, 'Ayachi.SAC', '26637262672', 'Jr juan varga 145', '999823567', 'ayachisac@gmail.com', '2025-12-10 05:27:34', 'Pendiente', 0.02, b'0', 'DASHBOARD,CATALOGO', 1),
+(125, 'Ubuntu S.A.C', '74864363464', 'jr ubu189', '764327654', 'ubu@gmail.com', '2025-12-10 05:31:30', 'Pendiente', 0.02, b'1', 'DASHBOARD,CATALOGO', 1);
 
 -- --------------------------------------------------------
 
@@ -383,7 +387,21 @@ INSERT INTO `inventario` (`id_inventario`, `id_variante`, `id_almacen`, `cantida
 (500, 1000, 10, 50, 5, '2025-12-08 19:36:48'),
 (501, 1001, 10, 30, 5, '2025-12-08 19:36:48'),
 (502, 1002, 10, 20, 5, '2025-12-08 19:36:48'),
-(503, 1003, 10, 10, 5, '2025-12-08 19:36:48');
+(503, 1003, 10, 10, 5, '2025-12-08 19:36:48'),
+(1000, 5000, 100, 20, 5, '2025-12-08 20:32:51'),
+(1001, 5001, 100, 15, 5, '2025-12-08 20:32:51'),
+(1003, 6000, 100, 50, 5, '2025-12-09 14:42:50'),
+(1004, 6001, 100, 100, 10, '2025-12-09 14:42:50'),
+(1005, 6002, 100, 30, 2, '2025-12-09 14:42:50'),
+(1006, 7000, 1, 15, 2, '2025-12-09 14:42:50'),
+(1007, 7001, 1, 25, 5, '2025-12-09 14:42:50'),
+(1008, 7002, 1, 80, 10, '2025-12-09 14:42:50'),
+(1019, 30001, 100, 30, 5, '2025-12-09 19:25:58'),
+(1020, 30002, 100, 100, 5, '2025-12-09 19:25:58'),
+(1021, 30003, 100, 50, 5, '2025-12-09 19:25:58'),
+(1022, 30004, 100, 110, 5, '2025-12-10 05:42:36'),
+(1023, 30005, 100, 40, 5, '2025-12-10 05:43:36'),
+(1024, 30006, 100, 60, 5, '2025-12-09 19:25:58');
 
 -- --------------------------------------------------------
 
@@ -414,7 +432,8 @@ INSERT INTO `marcasproducto` (`id_marca`, `id_empresa`, `nombre_marca`) VALUES
 (51, 122, 'Adidas'),
 (50, 122, 'Nike'),
 (52, 122, 'Puma'),
-(424, 122, 'Umbro');
+(424, 122, 'Umbro'),
+(723, 125, 'Puma');
 
 -- --------------------------------------------------------
 
@@ -424,6 +443,7 @@ INSERT INTO `marcasproducto` (`id_marca`, `id_empresa`, `nombre_marca`) VALUES
 
 CREATE TABLE `materialesproducto` (
   `id_material` int(11) NOT NULL,
+  `id_empresa` int(11) NOT NULL DEFAULT 122,
   `nombre_material` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -431,15 +451,15 @@ CREATE TABLE `materialesproducto` (
 -- Volcado de datos para la tabla `materialesproducto`
 --
 
-INSERT INTO `materialesproducto` (`id_material`, `nombre_material`) VALUES
-(1, 'Algodón'),
-(3, 'Cuero'),
-(11, 'Cuero Sintético'),
-(4, 'Denim'),
-(6, 'Lana'),
-(7, 'Nylon'),
-(2, 'Poliéster'),
-(5, 'Spandex');
+INSERT INTO `materialesproducto` (`id_material`, `id_empresa`, `nombre_material`) VALUES
+(1, 122, 'Algodón'),
+(2, 122, 'Poliéster'),
+(3, 122, 'Cuero'),
+(4, 122, 'Denim'),
+(5, 122, 'Spandex'),
+(6, 122, 'Lana'),
+(7, 122, 'Nylon'),
+(11, 122, 'Cuero Sintético');
 
 -- --------------------------------------------------------
 
@@ -592,7 +612,8 @@ CREATE TABLE `pedidoscompra` (
 --
 
 INSERT INTO `pedidoscompra` (`id_pedido_compra`, `id_proveedor`, `id_usuario`, `fecha_pedido`, `fecha_entrega_esperada`, `estado_pedido`, `total_pedido`) VALUES
-(20, 10, 200, '2025-12-08 19:36:48', NULL, 'Recibido', 1000.00);
+(20, 10, 200, '2025-12-08 19:36:48', NULL, 'Recibido', 1000.00),
+(21, 51, 535, '2025-12-10 08:17:28', '2025-12-20', 'PENDIENTE', 350.00);
 
 -- --------------------------------------------------------
 
@@ -611,22 +632,21 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`id_permiso`, `nombre_permiso`, `descripcion`) VALUES
-(1, 'CREAR_EMPRESA', 'Permiso para crear nuevas empresas'),
-(2, 'EDITAR_EMPRESA', 'Permiso para editar información de empresa'),
-(3, 'ELIMINAR_EMPRESA', 'Permiso para eliminar empresas'),
-(4, 'GESTIONAR_USUARIOS', 'Permiso para gestionar usuarios'),
-(5, 'GESTIONAR_ROLES', 'Permiso para gestionar roles y permisos'),
-(6, 'VER_REPORTES', 'Permiso para ver reportes'),
-(7, 'GENERAR_REPORTES', 'Permiso para generar reportes'),
-(8, 'GESTIONAR_PRODUCTOS', 'Permiso para CRUD de productos'),
-(9, 'GESTIONAR_INVENTARIO', 'Permiso para gestionar inventario'),
-(10, 'GESTIONAR_PROVEEDORES', 'Permiso para CRUD de proveedores'),
-(11, 'GESTIONAR_CLIENTES', 'Permiso para CRUD de clientes'),
-(12, 'VER_VENTAS', 'Permiso para ver registro de ventas'),
-(13, 'REALIZAR_VENTAS', 'Permiso para procesar ventas'),
-(14, 'GESTIONAR_CAJA', 'Permiso para gestionar caja'),
-(15, 'APROBAR_PAGOS', 'Permiso para aprobar pagos'),
-(16, 'VER_FINANZAS', 'Permiso para ver información financiera');
+(1193, 'VER_DASHBOARD', 'Acceso al dashboard principal'),
+(1194, 'VER_PRODUCTOS', 'Ver y gestionar productos'),
+(1195, 'VER_CATEGORIAS', 'Ver y gestionar categorías de productos'),
+(1196, 'VER_MARCAS', 'Ver y gestionar marcas'),
+(1197, 'VER_COMPRAS', 'Ver y gestionar compras'),
+(1198, 'VER_VENTAS', 'Ver y gestionar ventas'),
+(1199, 'VER_STOCK', 'Ver y gestionar inventario/stock'),
+(1200, 'VER_PROVEEDORES', 'Ver y gestionar proveedores'),
+(1201, 'VER_METODOS_PAGO', 'Ver y gestionar métodos de pago'),
+(1202, 'VER_CAJA', 'Acceso al módulo de caja'),
+(1203, 'VER_FINANZAS', 'Ver finanzas y pagos'),
+(1204, 'VER_CLIENTES', 'Ver y gestionar clientes'),
+(1205, 'VER_ROLES', 'Ver y gestionar roles (SuperAdmin)'),
+(1206, 'VER_PERMISOS', 'Ver y gestionar permisos (SuperAdmin)'),
+(1207, 'VER_USUARIOS', 'Ver y gestionar usuarios');
 
 -- --------------------------------------------------------
 
@@ -715,8 +735,21 @@ INSERT INTO `productos` (`id_producto`, `id_empresa`, `nombre_producto`, `descri
 (500, 122, 'Zapatilla Nike Air Max', 'Zapatilla urbana', 250.00, 50, 50, 50, NULL, NULL, 50, 50, 50),
 (502, 122, 'Puma Suede Classic', 'Zapatilla clásica', 220.00, 50, 50, 50, NULL, NULL, 52, NULL, 50),
 (503, 122, 'Polo nike', 'Polo color rojo ', 0.00, 51, 50, 50, '', NULL, 50, NULL, 1),
-(504, 122, 'Polo deportivo', 'Polo del equipo mas mrd de europa el kakalona', 65.00, 146, 50, 1, '', NULL, 50, NULL, 1);
-
+(504, 122, 'Polo deportivo', 'Polo del equipo barcelona, del mejor jugador de la historia Leo Messi', 65.00, 146, 50, 1, '', NULL, 50, NULL, 1),
+(600, 122, 'Casaca Cortaviento Pro', 'Casaca ligera para correr, impermeable', 120.00, 146, NULL, 1, NULL, NULL, 50, NULL, NULL),
+(601, 122, 'Medias Compresión Elite', 'Pack de medias para futbol', 25.00, 146, NULL, 50, NULL, NULL, 50, NULL, NULL),
+(602, 122, 'Gorra DryFit', 'Gorra ventilada unisex', 45.00, 12, NULL, 1, NULL, NULL, 50, NULL, NULL),
+(700, 1, 'Saco de Lino Italiano', 'Saco formal de verano', 350.00, 10, NULL, 1, NULL, NULL, 429, NULL, NULL),
+(701, 1, 'Oxford Clásicos', 'Zapatos de cuero genuino', 280.00, 12, NULL, 50, NULL, NULL, 429, NULL, NULL),
+(702, 1, 'Corbata Slim', 'Corbata estilo moderno', 60.00, 12, NULL, 1, NULL, NULL, 429, NULL, NULL),
+(3001, 122, 'Air Zoom Pegasus', 'Running Pro', 350.00, 50, 300, 50, NULL, NULL, 50, NULL, NULL),
+(3002, 122, 'Camiseta Selección', 'Oficial 2025', 199.00, 51, 302, 1, NULL, NULL, 51, NULL, NULL),
+(3003, 122, 'Short Dry Fit', 'Entrenamiento', 60.00, 146, 302, 1, NULL, NULL, 51, NULL, NULL),
+(3004, 122, 'Medias Altas Pro', 'Compresión', 25.00, 146, 302, 50, NULL, NULL, 51, NULL, NULL),
+(3005, 122, 'Gorra Visera Curva', 'Urbana', 50.00, 146, 300, 1, NULL, NULL, 50, NULL, NULL),
+(3006, 122, 'Balón Oficial Nº5', 'Cuero sintético', 120.00, 146, 302, 1, NULL, NULL, 51, NULL, NULL),
+(3007, 122, 'Guantes Predator', 'Agarre extremo', 180.00, 146, 302, 50, NULL, NULL, 51, NULL, NULL),
+(3008, 125, 'Polo nike', 'polo umbro', 90.00, 146, 304, 1, '', NULL, 723, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -744,7 +777,16 @@ INSERT INTO `proveedores` (`id_proveedor`, `id_empresa`, `razon_social`, `nombre
 (1, 5, 'Distribuidor Premium SPA', 'Premium', '20123456700', 'Textil', 'Jr. Industrial #500', '987000001', 'proveedor@premium.com'),
 (10, 200, 'Importadora Textil SAC', NULL, '20500000002', NULL, NULL, '999888777', NULL),
 (50, 122, 'Distribuidora Deportiva SAC', NULL, '20100000001', NULL, NULL, '987654321', NULL),
-(51, 122, 'JDRAX SPORT SAC', 'JDRAX', '19813981393', 'Ropa deportiva', 'Jr caminos del inca 123', '917844381', 'jdrax@gmail.com');
+(51, 122, 'JDRAX SPORT SAC', 'JDRAX', '19813981393', 'Ropa deportiva', 'Jr caminos del inca 123', '917844381', 'jdrax@gmail.com'),
+(200, 1, 'Textiles Finos del Perú SAC', NULL, '20100020001', NULL, NULL, '999000111', 'ventas@textilesfinos.com'),
+(201, 1, 'Cueros Arequipa SRL', NULL, '20100020002', NULL, NULL, '999000222', 'contacto@cuerosarequipa.com'),
+(202, 1, 'Importadora Elegancia Global', NULL, '20100020003', NULL, NULL, '999000333', 'import@elegancia.com'),
+(203, 1, 'Sastrería Industrial Lima', NULL, '20100020004', NULL, NULL, '999000444', 'taller@sastreria.com'),
+(300, 122, 'Nike Perú Distribución', NULL, '20500030001', NULL, NULL, '988000333', 'ventas@nikeperu.com'),
+(301, 122, 'Manufacturas Sport Global', NULL, '20500030002', NULL, NULL, '988000444', 'factory@sportglobal.com'),
+(302, 122, 'Adidas Importadora', NULL, '20500030003', NULL, NULL, '988000555', 'b2b@adidas.pe'),
+(303, 122, 'Accesorios Deportivos Pro', NULL, '20500030004', NULL, NULL, '988000666', 'accesorios@pro.com'),
+(304, 125, 'Nike SAC', 'nique', '37224874384', 'zapatillas', 'jr pinos 156', '876534767', 'nike@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -780,7 +822,8 @@ INSERT INTO `roles` (`id_rol`, `nombre_rol`, `estado`, `descripcion`) VALUES
 (2, 'Admin', 1, 'Administrador de empresa con control completo'),
 (3, 'Vendedor', 1, 'Personal de ventas con acceso a inventario'),
 (4, 'Empleado', 1, 'Empleado general con permisos limitados'),
-(5, 'Cliente', 1, 'Cliente registrado de la tienda');
+(5, 'Cliente', 0, 'Cliente registrado de la tienda'),
+(379, 'Jalador', 0, 'Jala la gente de la calle xd');
 
 -- --------------------------------------------------------
 
@@ -798,43 +841,28 @@ CREATE TABLE `rol_permisos` (
 --
 
 INSERT INTO `rol_permisos` (`id_rol`, `id_permiso`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 5),
-(1, 6),
-(1, 7),
-(1, 8),
-(1, 9),
-(1, 10),
-(1, 11),
-(1, 12),
-(1, 13),
-(1, 14),
-(1, 15),
-(1, 16),
-(2, 2),
-(2, 4),
-(2, 5),
-(2, 6),
-(2, 7),
-(2, 8),
-(2, 9),
-(2, 10),
-(2, 11),
-(2, 12),
-(2, 13),
-(2, 14),
-(2, 15),
-(2, 16),
-(3, 8),
-(3, 9),
-(3, 12),
-(3, 13),
-(3, 14),
-(4, 9),
-(4, 12);
+(2, 1193),
+(2, 1194),
+(2, 1195),
+(2, 1196),
+(2, 1197),
+(2, 1198),
+(2, 1199),
+(2, 1200),
+(2, 1201),
+(2, 1202),
+(2, 1203),
+(2, 1204),
+(2, 1205),
+(2, 1206),
+(2, 1207),
+(3, 1193),
+(3, 1194),
+(3, 1198),
+(4, 1193),
+(4, 1195),
+(4, 1197),
+(4, 1204);
 
 -- --------------------------------------------------------
 
@@ -947,7 +975,9 @@ INSERT INTO `tipo_pago` (`id_tipo_pago`, `tipo_pago`, `activo`, `id_empresa`) VA
 (1, 'Efectivo', 1, 122),
 (2, 'Tarjeta', 1, 122),
 (3, 'Yape/Plin', 1, 122),
-(4, 'Transferencia', 1, 122);
+(4, 'Transferencia', 1, 122),
+(5, 'Trueque ', 0, 122),
+(6, 'yape', 1, 125);
 
 -- --------------------------------------------------------
 
@@ -957,6 +987,7 @@ INSERT INTO `tipo_pago` (`id_tipo_pago`, `tipo_pago`, `activo`, `id_empresa`) VA
 
 CREATE TABLE `unidadesmedida` (
   `id_unidad_medida` int(11) NOT NULL,
+  `id_empresa` int(11) NOT NULL DEFAULT 122,
   `nombre_unidad` varchar(50) NOT NULL,
   `abreviatura` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -965,13 +996,12 @@ CREATE TABLE `unidadesmedida` (
 -- Volcado de datos para la tabla `unidadesmedida`
 --
 
-INSERT INTO `unidadesmedida` (`id_unidad_medida`, `nombre_unidad`, `abreviatura`) VALUES
-(1, 'Unidad', 'UND'),
-(2, 'Docena', 'DOC'),
-(3, 'Caja', 'CJA'),
-(4, 'Metro', 'MTR'),
-(10, 'Pieza', 'PZA'),
-(50, 'Par', 'PAR');
+INSERT INTO `unidadesmedida` (`id_unidad_medida`, `id_empresa`, `nombre_unidad`, `abreviatura`) VALUES
+(1, 122, 'Unidad', 'UND'),
+(2, 122, 'Docena', 'DOC'),
+(4, 122, 'Metro', 'MTR'),
+(10, 122, 'Pieza', 'PZA'),
+(50, 122, 'Par', 'PAR');
 
 -- --------------------------------------------------------
 
@@ -1018,7 +1048,11 @@ INSERT INTO `usuarios` (`id_usuario`, `id_empresa`, `id_rol`, `nombres`, `apelli
 (785, 2, 4, 'Elena', 'Morales', 1, '87654331', '987654311', 'Lima, Perú', 'empleado_gt1', 'empleado1@tapstyle-gt.com', '123456', 1, '2025-12-08 19:38:08', NULL),
 (786, 1, 5, 'Cliente', 'Uno', 1, '11111111', '987111111', 'Lima, Perú', 'cliente_uno', 'cliente1@email.com', '123456', 1, '2025-12-08 19:38:08', NULL),
 (787, 1, 5, 'Cliente', 'Dos', 1, '22222222', '987222222', 'Lima, Perú', 'cliente_dos', 'cliente2@email.com', '123456', 1, '2025-12-08 19:38:08', NULL),
-(788, 2, 5, 'Cliente', 'Tres', 1, '33333333', '987333333', 'Lima, Perú', 'cliente_tres', 'cliente3@email.com', '123456', 1, '2025-12-08 19:38:08', NULL);
+(788, 2, 5, 'Cliente', 'Tres', 1, '33333333', '987333333', 'Lima, Perú', 'cliente_tres', 'cliente3@email.com', '123456', 1, '2025-12-08 19:38:08', NULL),
+(1147, 123, 2, 'shego', 'carlos', NULL, NULL, NULL, NULL, 'shego', 'shego@gmail.com', '$2a$10$aCHifVfDwONT4jK6mgt6IOotxOxS/HmPiwDDluiZa0DTLynXv8wJW', 1, '2025-12-09 19:46:56', NULL),
+(1286, 122, 4, 'Paolo', 'Hurtado', NULL, '00000000', '000000000', '-', 'paolin', 'paolin@gmail.com', '$2a$10$JGGU/tFvx7LJOtR.4q8g0uAWM56v.3Cp3NpmK5oQojxIdd8GgDQx6', 1, '2025-12-10 04:07:50', NULL),
+(1302, 124, 2, 'Ayachi', 'Kevin', NULL, NULL, NULL, NULL, 'ayachitosex', 'ayachitosex@gmail.com', '$2a$10$fbsseRKTrXs4GSHAgayKTOZ/gU/4hw2c7qiwh6y6vDiNUPfYZHeSy', 0, '2025-12-10 05:27:35', NULL),
+(1303, 125, 2, 'ubuntu', 'sanchez', NULL, NULL, NULL, NULL, 'ubuntu', 'ubuntu@gmail.com', '$2a$10$RyDrx8bKWTD1nQZiAKKis.NShktt2VE/UE/q1I3BD63AaMTPi4wc6', 1, '2025-12-10 05:31:31', NULL);
 
 -- --------------------------------------------------------
 
@@ -1047,7 +1081,18 @@ INSERT INTO `variantesproducto` (`id_variante`, `id_producto`, `codigo_sku`, `ta
 (1003, 103, 'CART-NEG', 'U', 'Negro', 250.00, 120.00),
 (5000, 500, 'NIKE-AM-40', '40', 'Blanco', 250.00, 150.00),
 (5001, 500, 'NIKE-AM-41', '41', 'Blanco', 250.00, 150.00),
-(5002, 501, 'ADI-POL-M', 'M', 'Negro', 80.00, 40.00);
+(6000, 600, 'SAN-CAS-NG-M', 'M', 'Negro', 120.00, 60.00),
+(6001, 601, 'SAN-MED-BL-U', 'U', 'Blanco', 25.00, 10.00),
+(6002, 602, 'SAN-GOR-AZ-U', 'U', 'Azul', 45.00, 20.00),
+(7000, 700, 'GE-SAC-BG-L', 'L', 'Beige', 350.00, 150.00),
+(7001, 701, 'GE-ZAP-CF-42', '42', 'Café', 280.00, 120.00),
+(7002, 702, 'GE-COR-RJ-U', 'U', 'Rojo', 60.00, 15.00),
+(30001, 3001, 'SAN-PEG-BL-40', '40', 'Blanco', 350.00, NULL),
+(30002, 3002, 'SAN-SEL-RJ-L', 'L', 'Rojo', 199.00, NULL),
+(30003, 3003, 'SAN-SHO-NG-M', 'M', 'Negro', 60.00, NULL),
+(30004, 3004, 'SAN-MED-PRO-U', 'U', 'Blanco', 25.00, NULL),
+(30005, 3005, 'SAN-GOR-URB-U', 'U', 'Azul', 50.00, NULL),
+(30006, 3006, 'SAN-BAL-MC-5', '5', 'Multicolor', 120.00, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -1195,7 +1240,8 @@ ALTER TABLE `marcasproducto`
 --
 ALTER TABLE `materialesproducto`
   ADD PRIMARY KEY (`id_material`),
-  ADD UNIQUE KEY `nombre_material` (`nombre_material`);
+  ADD UNIQUE KEY `nombre_material` (`nombre_material`),
+  ADD KEY `fk_material_empresa` (`id_empresa`);
 
 --
 -- Indices de la tabla `modelos`
@@ -1371,7 +1417,8 @@ ALTER TABLE `tipo_pago`
 --
 ALTER TABLE `unidadesmedida`
   ADD PRIMARY KEY (`id_unidad_medida`),
-  ADD UNIQUE KEY `nombre_unidad` (`nombre_unidad`);
+  ADD UNIQUE KEY `nombre_unidad` (`nombre_unidad`),
+  ADD KEY `fk_unidad_empresa` (`id_empresa`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -1402,7 +1449,7 @@ ALTER TABLE `variantesproducto`
 -- AUTO_INCREMENT de la tabla `almacenes`
 --
 ALTER TABLE `almacenes`
-  MODIFY `id_almacen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id_almacen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
 
 --
 -- AUTO_INCREMENT de la tabla `aperturascaja`
@@ -1426,7 +1473,7 @@ ALTER TABLE `cajas`
 -- AUTO_INCREMENT de la tabla `categoriasproducto`
 --
 ALTER TABLE `categoriasproducto`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=259;
 
 --
 -- AUTO_INCREMENT de la tabla `cierrescaja`
@@ -1438,13 +1485,13 @@ ALTER TABLE `cierrescaja`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=220;
 
 --
 -- AUTO_INCREMENT de la tabla `comprobantespago`
 --
 ALTER TABLE `comprobantespago`
-  MODIFY `id_comprobante` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1001;
+  MODIFY `id_comprobante` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1002;
 
 --
 -- AUTO_INCREMENT de la tabla `detallescomprobantepago`
@@ -1462,7 +1509,7 @@ ALTER TABLE `detallespedidocompra`
 -- AUTO_INCREMENT de la tabla `empresas`
 --
 ALTER TABLE `empresas`
-  MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT de la tabla `facturascomision`
@@ -1480,19 +1527,19 @@ ALTER TABLE `facturassuscripcion`
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
-  MODIFY `id_inventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1003;
+  MODIFY `id_inventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1041;
 
 --
 -- AUTO_INCREMENT de la tabla `marcasproducto`
 --
 ALTER TABLE `marcasproducto`
-  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=587;
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=760;
 
 --
 -- AUTO_INCREMENT de la tabla `materialesproducto`
 --
 ALTER TABLE `materialesproducto`
-  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=456;
+  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=590;
 
 --
 -- AUTO_INCREMENT de la tabla `modelos`
@@ -1534,13 +1581,13 @@ ALTER TABLE `pagosempresaatapstyle`
 -- AUTO_INCREMENT de la tabla `pedidoscompra`
 --
 ALTER TABLE `pedidoscompra`
-  MODIFY `id_pedido_compra` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_pedido_compra` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id_permiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1032;
+  MODIFY `id_permiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1352;
 
 --
 -- AUTO_INCREMENT de la tabla `planes`
@@ -1552,19 +1599,19 @@ ALTER TABLE `planes`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=505;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3021;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=305;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=328;
+  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=425;
 
 --
 -- AUTO_INCREMENT de la tabla `suscripcionesempresa`
@@ -1576,7 +1623,7 @@ ALTER TABLE `suscripcionesempresa`
 -- AUTO_INCREMENT de la tabla `tipodocumento`
 --
 ALTER TABLE `tipodocumento`
-  MODIFY `id_tipodocumento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=328;
+  MODIFY `id_tipodocumento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=424;
 
 --
 -- AUTO_INCREMENT de la tabla `tiposcomprobantepago`
@@ -1600,25 +1647,25 @@ ALTER TABLE `tiposproducto`
 -- AUTO_INCREMENT de la tabla `tipo_pago`
 --
 ALTER TABLE `tipo_pago`
-  MODIFY `id_tipo_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_tipo_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `unidadesmedida`
 --
 ALTER TABLE `unidadesmedida`
-  MODIFY `id_unidad_medida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
+  MODIFY `id_unidad_medida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=341;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1059;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1364;
 
 --
 -- AUTO_INCREMENT de la tabla `variantesproducto`
 --
 ALTER TABLE `variantesproducto`
-  MODIFY `id_variante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5003;
+  MODIFY `id_variante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30019;
 
 --
 -- Restricciones para tablas volcadas
@@ -1721,6 +1768,12 @@ ALTER TABLE `marcasproducto`
   ADD CONSTRAINT `FK_Marcas_Empresas` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`);
 
 --
+-- Filtros para la tabla `materialesproducto`
+--
+ALTER TABLE `materialesproducto`
+  ADD CONSTRAINT `fk_material_empresa` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`);
+
+--
 -- Filtros para la tabla `modelos`
 --
 ALTER TABLE `modelos`
@@ -1816,6 +1869,12 @@ ALTER TABLE `suscripcionesempresa`
 --
 ALTER TABLE `tipo_pago`
   ADD CONSTRAINT `fk_tipopago_empresa` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`);
+
+--
+-- Filtros para la tabla `unidadesmedida`
+--
+ALTER TABLE `unidadesmedida`
+  ADD CONSTRAINT `fk_unidad_empresa` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_empresa`);
 
 --
 -- Filtros para la tabla `usuarios`
