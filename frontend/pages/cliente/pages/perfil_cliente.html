@@ -28,8 +28,6 @@
                         </svg>
                     </button>
                     
-                    <!-- Favoritos eliminado -->
-                    
                     <a href="carrito.html" class="text-gray-500 hover:text-indigo-600 relative p-2 rounded-full hover:bg-indigo-50 transition duration-150">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -65,7 +63,6 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Información del perfil -->
                 <div class="lg:col-span-2">
                     <div class="bg-white rounded-xl shadow-lg p-6">
                         <h2 class="text-xl font-semibold text-gray-900 mb-6">Información Personal</h2>
@@ -107,10 +104,7 @@
                     </div>
                 </div>
 
-                <!-- Estadísticas y acciones rápidas -->
                 <div class="space-y-6">
-                    <!-- Se eliminó la sección 'Mi Cuenta' según solicitud -->
-
                     <div class="bg-white rounded-xl shadow-lg p-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4">Acciones Rápidas</h3>
                         <div class="space-y-3">
@@ -122,7 +116,6 @@
                                 </div>
                                 <span class="text-gray-700">Ver mis pedidos</span>
                             </a>
-                            <!-- Favoritos eliminado de acciones rápidas -->
                             <button id="open-password-modal" class="w-full text-left flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition duration-150">
                                 <div class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -138,7 +131,6 @@
         </div>
     </main>
 
-    <!-- Password Change Modal -->
     <div id="password-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-40">
         <div class="bg-white rounded-lg w-full max-w-md p-6">
             <h3 class="text-lg font-semibold mb-4">Cambiar contraseña</h3>
@@ -164,55 +156,10 @@
         </div>
     </div>
 
-    <footer class="bg-gray-800 text-white mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div>
-                    <h4 class="font-bold text-lg mb-4 text-indigo-400">TapStyle</h4>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="#" class="hover:text-white transition duration-150">Acerca de Nosotros</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-150">Trabaja con Nosotros</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-150">Términos y Condiciones</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-lg mb-4 text-indigo-400">Ayuda</h4>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="#" class="hover:text-white transition duration-150">FAQ</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-150">Política de Envíos</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-150">Devoluciones</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-lg mb-4 text-indigo-400">Tiendas</h4>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="#" class="hover:text-white transition duration-150">Regístrate como Vendedor</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-150">Panel de Administración</a></li>
-                    </ul>
-                </div>
-                <div class="col-span-2 md:col-span-1">
-                    <h4 class="font-bold text-lg mb-4 text-indigo-400">Síguenos</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition duration-150">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2v-2c0-2.04 1.25-3.16 3.06-3.16.88 0 1.76.13 2.05.2v2.33h-1.35c-1.06 0-1.28.52-1.28 1.26V15h2.5l-.4 3H14v6.8c4.56-.93 8-4.96 8-9.8V12z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition duration-150">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M7.8 2h8.4C17.61 2 20 4.39 20 7.8v8.4c0 3.41-2.39 5.8-5.8 5.8H7.8C4.39 22 2 19.61 2 16.2V7.8C2 4.39 4.39 2 7.8 2zm-.22 4a.8.8 0 100 1.6.8.8 0 000-1.6zm8.82 4.4a5 5 0 11-10 0 5 5 0 0110 0zm-8 0a3 3 0 106 0 3 3 0 00-6 0z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-8 pt-6 border-t border-gray-700 text-center">
-                <p class="text-sm text-gray-400">&copy; 2025 TapStyle S.A. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-container"></div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../../../components/footer/footer.js"></script>
     <script src="../js/cliente.js"></script>
     <script src="../../../scripts/perfil_cliente.js"></script>
     <script src="../../../scripts/logout.js"></script>
