@@ -33,6 +33,21 @@ public class MaterialController {
     }
 
     /**
+     * GET /api/materiales/empresa/{empresaId}
+     * Obtener materiales de una empresa específica
+     */
+    @GetMapping("/empresa/{empresaId}")
+    public ResponseEntity<ApiResponse<List<MaterialProductoDTO>>> obtenerPorEmpresa(@PathVariable Integer empresaId) {
+        try {
+            List<MaterialProductoDTO> materiales = materialService.obtenerPorEmpresa(empresaId);
+            return ResponseEntity.ok(ApiResponse.success(materiales, "Materiales de empresa cargados"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(ApiResponse.error("EmpresaError", "Error: " + e.getMessage()));
+        }
+    }
+
+    /**
      * GET /api/materiales/{id}
      * Obtener un material específico
      */

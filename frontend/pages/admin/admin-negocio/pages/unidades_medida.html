@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidades de Medida - Admin Negocio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar"
+            class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-shrink-0 shadow-2xl flex flex-col overflow-y-auto">
+
+            <div class="p-6 border-b border-gray-700">
+                <h1 class="text-3xl font-extrabold text-blue-400 tracking-wider">TapStyle</h1>
+                <p class="text-xs text-gray-400 mt-1">ADMIN NEGOCIO</p>
+            </div>
+
+            <div class="flex flex-col items-center py-6 border-b border-gray-700 px-4">
+                <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold shadow-lg"
+                    data-empresa-initials>SV</div>
+                <h2 class="mt-3 text-lg font-semibold text-center" data-empresa-nombre>Tu Empresa</h2>
+                <p class="text-sm text-gray-400 mt-1" data-usuario-nombre>Usuario</p>
+            </div>
+
+            <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+
+                <a href="../dashboard_admin_negocio.html"
+                    class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150">
+                    <i class="fas fa-chart-line mr-3 text-lg"></i>
+                    <span class="font-medium">Dashboard</span>
+                </a>
+
+                <div class="mt-4">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-box mr-3 text-lg"></i>
+                            <span class="font-medium">Catálogo</span>
+                        </div>
+                        <i class="fas fa-chevron-up text-sm"></i>
+                    </button>
+                    <div class="submenu ml-8 space-y-2 mt-2">
+                        <a href="productos.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-cube mr-2"></i> Productos
+                        </a>
+                        <a href="categorias.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-list mr-2"></i> Categorías
+                        </a>
+                        <a href="marcas.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-tag mr-2"></i> Marcas
+                        </a>
+                        <a href="materiales.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-hammer mr-2"></i> Materiales
+                        </a>
+                        <a href="unidades_medida.html"
+                            class="flex items-center px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded transition">
+                            <i class="fas fa-ruler mr-2"></i> Unidades
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <button onclick="toggleMenu(this)"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-150 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-tasks mr-3 text-lg"></i>
+                            <span class="font-medium">Operaciones</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div class="submenu hidden ml-8 space-y-2 mt-2">
+                        <a href="compras.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-shopping-cart mr-2"></i> Compras
+                        </a>
+                        <a href="ventas.html"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-cash-register mr-2"></i> Ventas
+                        </a>
+                    </div>
+                </div>
+
+            </nav>
+
+            <div class="p-4 border-t border-gray-700">
+                <button onclick="cerrarSesionConfirm()"
+                    class="w-full flex items-center justify-center px-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg transition">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+
+            <!-- CABECERA -->
+            <header class="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-gray-800">Unidades de Medida</h1>
+                <button onclick="abrirModalUnidad()"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2">
+                    <i class="fas fa-plus"></i> Nueva Unidad
+                </button>
+            </header>
+
+            <!-- CONTENIDO -->
+            <main class="flex-1 overflow-y-auto p-8">
+
+                <!-- TABLA DE UNIDADES -->
+                <div class="bg-white rounded-xl shadow overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50 border-b border-gray-200">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Nombre</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Abreviatura</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaUnidades" class="divide-y divide-gray-200">
+                                <tr>
+                                    <td colspan="3" class="px-6 py-4 text-center text-gray-500">
+                                        <i class="fas fa-spinner fa-spin mr-2"></i> Cargando unidades...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <!-- MODAL: Nueva Unidad -->
+    <div id="modalUnidad" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md max-h-screen overflow-y-auto">
+
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-gray-800">Nueva Unidad</h2>
+                <button onclick="cerrarModalUnidad()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <div class="p-6">
+                <form id="formUnidad" onsubmit="guardarUnidad(event)">
+
+                    <!-- Nombre -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre *</label>
+                        <input type="text" id="nombre" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Abreviatura -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Abreviatura *</label>
+                        <input type="text" id="abreviatura" required maxlength="10"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="flex gap-3 justify-end">
+                        <button type="button" onclick="cerrarModalUnidad()"
+                            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                            Cancelar
+                        </button>
+                        <button type="submit"
+                            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center gap-2">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="../scripts/auth.js"></script>
+    <script src="../scripts/api.js"></script>
+    <script>
+        const API_BASE = 'http://localhost:8083/api';
+        let idUnidadEditar = null;
+
+        function toggleMenu(button) {
+            const submenu = button.nextElementSibling;
+            const icon = button.querySelector('i:last-child');
+            submenu.classList.toggle('hidden');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+
+        function abrirModalUnidad() {
+            if (!idUnidadEditar) {
+                document.getElementById('formUnidad').reset();
+                document.querySelector('#modalUnidad h2').textContent = 'Nueva Unidad';
+            }
+            document.getElementById('modalUnidad').classList.remove('hidden');
+        }
+
+        function cerrarModalUnidad() {
+            document.getElementById('modalUnidad').classList.add('hidden');
+            document.getElementById('formUnidad').reset();
+            idUnidadEditar = null;
+        }
+
+        async function cargarUnidades() {
+            try {
+                const contexto = obtenerContexto();
+                const response = await fetch(`${API_BASE}/unidades-medida/empresa/${contexto.idEmpresa}`);
+                const data = await response.json();
+
+                if (data.success && data.data) {
+                    const tbody = document.getElementById('tablaUnidades');
+                    tbody.innerHTML = data.data.map(unidad => `
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">${unidad.nombreUnidad}</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">
+                                <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full font-semibold">${unidad.abreviatura}</span>
+                            </td>
+                            <td class="px-6 py-4 text-sm space-x-2">
+                                <button onclick="editarUnidad(${unidad.idUnidadMedida})" class="text-yellow-600 hover:text-yellow-800">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button onclick="eliminarUnidad(${unidad.idUnidadMedida})" class="text-red-600 hover:text-red-800">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `).join('');
+                } else {
+                    mostrarTablaVacia();
+                }
+            } catch (error) {
+                console.error('Error cargando unidades:', error);
+                mostrarTablaVacia();
+                mostrarError('Error al cargar unidades');
+            }
+        }
+
+        async function guardarUnidad(event) {
+            event.preventDefault();
+
+            const nombre = document.getElementById('nombre').value;
+            const abreviatura = document.getElementById('abreviatura').value;
+            const contexto = obtenerContexto();
+
+            if (!nombre || !abreviatura) {
+                mostrarError('Nombre y abreviatura son requeridos');
+                return;
+            }
+
+            try {
+                const boton = event.target.querySelector('button[type="submit"]');
+                boton.disabled = true;
+                boton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Guardando...';
+
+                const datosUnidad = {
+                    idEmpresa: contexto.idEmpresa,
+                    nombreUnidad: nombre,
+                    abreviatura: abreviatura.toUpperCase()
+                };
+
+                const url = idUnidadEditar
+                    ? `${API_BASE}/unidades-medida/${idUnidadEditar}`
+                    : `${API_BASE}/unidades-medida`;
+
+                const metodo = idUnidadEditar ? 'PUT' : 'POST';
+
+                const response = await fetch(url, {
+                    method: metodo,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(datosUnidad)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    mostrarExito(idUnidadEditar ? 'Unidad actualizada' : 'Unidad creada exitosamente');
+                    cerrarModalUnidad();
+                    cargarUnidades();
+                } else {
+                    mostrarError(data.error || 'Error al guardar');
+                }
+
+                boton.disabled = false;
+                boton.innerHTML = '<i class="fas fa-save mr-2"></i>Guardar';
+            } catch (error) {
+                console.error('Error:', error);
+                mostrarError('Error: ' + error.message);
+            }
+        }
+
+        async function editarUnidad(id) {
+            try {
+                const response = await fetch(`${API_BASE}/unidades-medida/${id}`);
+                const data = await response.json();
+
+                if (data.success && data.data) {
+                    idUnidadEditar = id;
+                    document.querySelector('#modalUnidad h2').textContent = 'Editar Unidad';
+                    document.getElementById('nombre').value = data.data.nombreUnidad;
+                    document.getElementById('abreviatura').value = data.data.abreviatura || '';
+                    document.getElementById('descripcion').value = data.data.descripcion || '';
+                    abrirModalUnidad();
+                } else {
+                    mostrarError('Unidad no encontrada');
+                }
+            } catch (error) {
+                mostrarError('Error al cargar unidad');
+            }
+        }
+
+        async function eliminarUnidad(id) {
+            if (confirm('¿Estás seguro de eliminar esta unidad de medida?')) {
+                try {
+                    const response = await fetch(`${API_BASE}/unidades-medida/${id}`, {
+                        method: 'DELETE'
+                    });
+
+                    const data = await response.json();
+                    if (data.success) {
+                        mostrarExito('Unidad eliminada');
+                        cargarUnidades();
+                    } else {
+                        mostrarError('Error al eliminar');
+                    }
+                } catch (error) {
+                    mostrarError('Error: ' + error.message);
+                }
+            }
+        }
+
+        function mostrarTablaVacia() {
+            document.getElementById('tablaUnidades').innerHTML = `
+                <tr>
+                    <td colspan="3" class="px-6 py-8 text-center">
+                        <i class="fas fa-inbox text-3xl text-gray-400 mb-2"></i>
+                        <p class="text-gray-500">No hay unidades de medida registradas</p>
+                    </td>
+                </tr>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const auth = validarAutenticacion();
+            if (!auth) return;
+
+            console.log('📏 Cargando unidades...');
+            cargarUnidades();
+        });
+
+    </script>
+
+</body>
+
+</html>

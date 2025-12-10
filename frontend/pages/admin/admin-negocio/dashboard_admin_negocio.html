@@ -61,9 +61,17 @@
                             class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition duration-150">
                             <i class="fas fa-list mr-2"></i> Categorías
                         </a>
-                        <a href="pages/marcas.html"
-                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition duration-150">
+                        <a href="pages/marcas.html" data-permiso="VER_MARCAS"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
                             <i class="fas fa-tag mr-2"></i> Marcas
+                        </a>
+                        <a href="pages/materiales.html" data-permiso="VER_MATERIALES"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-hammer mr-2"></i> Materiales
+                        </a>
+                        <a href="pages/unidades_medida.html" data-permiso="VER_UNIDADES"
+                            class="flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition">
+                            <i class="fas fa-ruler mr-2"></i> Unidades
                         </a>
                     </div>
                 </div>
@@ -301,15 +309,15 @@
             event.preventDefault();
             const contexto = obtenerContexto();
             const tiendaId = contexto.idEmpresa;
-            
+
             if (!tiendaId) {
                 alert('Error: No se encontró la tienda');
                 return;
             }
-            
+
             // Guardar tiendaId en sessionStorage para que tienda-negocio lo pueda usar
             sessionStorage.setItem('tiendaId', tiendaId);
-            
+
             // Abrir tienda en una nueva ventana
             window.open(`../../../tienda-negocio/tienda.html?tiendaId=${tiendaId}`, '_blank');
         }
