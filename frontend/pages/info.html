@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Información - TapStyle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body class="min-h-screen flex flex-col bg-gray-50">
+    
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="cliente/index.html" class="text-2xl font-extrabold text-indigo-600 tracking-wider">TapStyle</a>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="cliente/index.html" class="text-gray-600 hover:text-indigo-600 transition duration-150 font-medium">Inicio</a>
+                    <a href="cliente/index.html#tiendas" class="text-gray-600 hover:text-indigo-600 transition duration-150 font-medium">Tiendas</a>
+                </nav>
+
+                <div class="flex items-center space-x-4">
+                    <a href="cliente/login.html" class="hidden md:inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150">
+                        Acceder
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="flex-grow">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            
+            <!-- Acerca de Nosotros -->
+            <section id="acerca-de-nosotros" class="info-section mb-16 hidden">
+                <h1 class="text-4xl font-bold text-gray-900 mb-6">Acerca de Nosotros</h1>
+                <div class="prose prose-lg max-w-none">
+                    <p class="text-gray-700 mb-4">
+                        <strong>TapStyle</strong> es una plataforma de suscripciones manejada desde Tarapoto, Perú, que permite a tiendas de ropa y accesorios tener su propia tienda virtual. Desde 2024, ayudamos a emprendedores y negocios de moda a digitalizar sus ventas, brindándoles todas las herramientas necesarias para vender en línea de manera fácil y profesional.
+                    </p>
+                    <p class="text-gray-700 mb-4">
+                        Creemos en el poder de la tecnología para impulsar negocios. Por eso, desarrollamos una plataforma completa con gestión de inventario, pagos seguros, sistema de envíos y todo lo que una tienda necesita para crecer en el mundo digital.
+                    </p>
+                    <div class="bg-indigo-50 border-l-4 border-indigo-600 p-6 my-8">
+                        <h3 class="text-xl font-bold text-indigo-900 mb-2">Nuestra Visión</h3>
+                        <p class="text-gray-700">
+                            Ser la plataforma líder en el Perú para digitalización de tiendas de moda, empoderando a cientos de negocios con tecnología de punta y herramientas que les permitan competir en el mercado digital.
+                        </p>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Nuestros Valores</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Innovación:</strong> Constantemente mejoramos nuestra plataforma con tecnología de punta</li>
+                        <li><strong>Confianza:</strong> Garantizamos transacciones seguras y protección al comprador</li>
+                        <li><strong>Diversidad:</strong> Celebramos la variedad de estilos y culturas</li>
+                        <li><strong>Excelencia:</strong> Buscamos la calidad en cada aspecto de nuestro servicio</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Trabaja con Nosotros -->
+            <section id="trabaja-con-nosotros" class="info-section mb-16 hidden">
+                <h1 class="text-4xl font-bold text-gray-900 mb-6">Trabaja con Nosotros</h1>
+                <div class="prose prose-lg max-w-none">
+                    <p class="text-gray-700 mb-6">
+                        ¿Te apasiona la tecnología y el emprendimiento? En TapStyle estamos siempre en búsqueda de talento excepcional que quiera unirse a nuestro equipo en Tarapoto y ayudar a revolucionar el comercio de moda en el Perú.
+                    </p>
+                    
+                    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg p-8 my-8">
+                        <h3 class="text-2xl font-bold mb-4">¿Por qué TapStyle?</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="mr-3">✨</span>
+                                <span>Ambiente de trabajo innovador y colaborativo</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3">🚀</span>
+                                <span>Oportunidades de crecimiento profesional</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3">💡</span>
+                                <span>Proyectos desafiantes con impacto real</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3">🎯</span>
+                                <span>Beneficios competitivos y flexibilidad laboral</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Posiciones Disponibles</h3>
+                    <p class="text-gray-700 mb-4">
+                        Actualmente estamos buscando profesionales en las siguientes áreas:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 mb-8">
+                        <li>Desarrolladores Full Stack (Java Spring Boot, React/Vue)</li>
+                        <li>Especialistas en Onboarding de Clientes (Tiendas)</li>
+                        <li>Soporte Técnico y Atención a Vendedores</li>
+                        <li>Marketing Digital y Growth Hacking</li>
+                        <li>Diseño UX/UI para plataformas SaaS</li>
+                        <li>Gestión de Producto (Product Manager)</li>
+                    </ul>
+
+                    <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">¿Interesado? ¡Contáctanos!</h3>
+                        <p class="text-gray-700 mb-4">
+                            Envíanos tu CV y carta de presentación a través de WhatsApp y cuéntanos por qué quieres ser parte de TapStyle.
+                        </p>
+                        <a href="https://wa.me/51918341898?text=Hola,%20estoy%20interesado%20en%20trabajar%20con%20TapStyle" 
+                           target="_blank"
+                           class="inline-flex items-center justify-center px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition duration-150 shadow-lg">
+                            <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                            </svg>
+                            Solicitar por WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Términos y Condiciones -->
+            <section id="terminos-y-condiciones" class="info-section mb-16 hidden">
+                <h1 class="text-4xl font-bold text-gray-900 mb-6">Términos y Condiciones</h1>
+                <div class="prose prose-lg max-w-none text-gray-700">
+                    <p class="text-sm text-gray-500 mb-6">Última actualización: Diciembre 2025</p>
+                    
+                    <h3 class="text-2xl font-bold text-gray-900 mt-6 mb-4">1. Aceptación de los Términos</h3>
+                    <p>
+                        Al acceder y utilizar la plataforma TapStyle, usted acepta estar sujeto a estos Términos y Condiciones, todas las leyes y regulaciones aplicables, y acepta que es responsable del cumplimiento de las leyes locales aplicables.
+                    </p>
+
+                    <h3 class="text-2xl font-bold text-gray-900 mt-6 mb-4">2. Uso de la Plataforma</h3>
+                    <p>Se le otorga permiso para usar TapStyle para:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>Crear y gestionar su tienda virtual (vendedores suscritos)</li>
+                        <li>Navegar y comprar productos de tiendas registradas (compradores)</li>
+                        <li>Publicar y administrar productos si tiene una suscripción activa</li>
+                        <li>Utilizar las herramientas de gestión de inventario y ventas</li>
+                        <li>Comunicarse con compradores y el equipo de soporte</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-bold text-gray-900 mt-6 mb-4">3. Cuentas de Usuario</h3>
+                    <p>
+                        Para utilizar ciertas funciones de TapStyle, debe registrarse y mantener una cuenta activa. Usted es responsable de mantener la confidencialidad de su contraseña y de todas las actividades que ocurran bajo su cuenta.
+                    </p>
+
+                    <h3 class="text-2xl font-bold text-gray-900 mt-6 mb-4">4. Transacciones y Pagos</h3>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>Las suscripciones y productos están expresados en soles peruanos (S/.)</li>
+                        <li>Los pagos se procesan a través de pasarelas seguras</li>
+                        <li>Cada tienda es responsable del envío de sus productos</li>
+                        <li>TapStyle facilita la plataforma y herramientas de gestión</li>
+                        <li>Los vendedores reciben sus pagos según el plan de suscripción contratado</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-bold text-gray-900 mt-6 mb-4">5. Ventas Finales</h3>
+                    <p>
+                        Todas las ventas en TapStyle son finales. No manejamos devoluciones ni reembolsos. Recomendamos revisar cuidadosamente las descripciones, imágenes, tallas y especificaciones de los productos antes de realizar tu compra. Para consultas, contacta al vendedor antes de comprar.
+                    </p>
+
+                    <h3 class="text-2xl font-bold text-gray-900 mt-6 mb-4">6. Propiedad Intelectual</h3>
+                    <p>
+                        Todo el contenido de TapStyle, incluyendo textos, gráficos, logos, iconos, imágenes y software, es propiedad de TapStyle S.A. o sus proveedores de contenido y está protegido por leyes de propiedad intelectual.
+                    </p>
+
+                    <h3 class="text-2xl font-bold text-gray-900 mt-6 mb-4">7. Limitación de Responsabilidad</h3>
+                    <p>
+                        TapStyle no será responsable por daños indirectos, incidentales, especiales o consecuentes que resulten del uso o la imposibilidad de usar nuestros servicios.
+                    </p>
+
+                    <h3 class="text-2xl font-bold text-gray-900 mt-6 mb-4">8. Modificaciones</h3>
+                    <p>
+                        Nos reservamos el derecho de modificar estos términos en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación en el sitio web.
+                    </p>
+
+                    <div class="bg-gray-100 border-l-4 border-indigo-600 p-6 mt-8">
+                        <p class="font-semibold">Contacto Legal:</p>
+                        <p>Para consultas sobre estos términos, contáctenos en: legal@tapstyle.com</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Política de Privacidad -->
+            <section id="politica-de-privacidad" class="info-section mb-16 hidden">
+                <h1 class="text-4xl font-bold text-gray-900 mb-6">Política de Privacidad</h1>
+                <div class="prose prose-lg max-w-none text-gray-700">
+                    <p class="text-sm text-gray-500 mb-6">Última actualización: Diciembre 2025</p>
+                    
+                    <p class="mb-4">
+                        En TapStyle, respetamos su privacidad y estamos comprometidos con la protección de sus datos personales. Esta política explica cómo recopilamos, usamos y protegemos su información.
+                    </p>
+
+                    <h3 class="text-2xl font-bold text-gray-900 mt-6 mb-4">Información que Recopilamos</h3>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>Datos de registro: nombre, email, teléfono</li>
+                        <li>Información de pago (procesada de forma segura)</li>
+                        <li>Historial de compras y navegación</li>
+                        <li>Dirección de envío y facturación</li>
+                        <li>Cookies y datos de uso del sitio</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-bold text-gray-900 mt-6 mb-4">Cómo Usamos su Información</h3>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>Procesar sus pedidos y pagos</li>
+                        <li>Enviar confirmaciones y actualizaciones</li>
+                        <li>Mejorar nuestros servicios</li>
+                        <li>Personalizar su experiencia de compra</li>
+                        <li>Enviar ofertas y promociones (con su consentimiento)</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-bold text-gray-900 mt-6 mb-4">Protección de Datos</h3>
+                    <p>
+                        Implementamos medidas de seguridad técnicas y organizativas para proteger sus datos contra acceso no autorizado, pérdida o alteración.
+                    </p>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section id="faq" class="info-section mb-16 hidden">
+                <h1 class="text-4xl font-bold text-gray-900 mb-6">Preguntas Frecuentes</h1>
+                <div class="space-y-6">
+                    
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">¿Cómo puedo hacer un pedido?</h3>
+                        <p class="text-gray-700">
+                            Navega por nuestras tiendas, selecciona los productos que desees, agrégalos al carrito y procede al checkout. Necesitarás crear una cuenta o iniciar sesión para completar la compra.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">¿Qué métodos de pago aceptan?</h3>
+                        <p class="text-gray-700">
+                            Aceptamos tarjetas de crédito/débito (Visa, Mastercard), transferencias bancarias, y pagos mediante billeteras digitales. Los métodos disponibles pueden variar según la tienda.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">¿Cuánto tarda el envío?</h3>
+                        <p class="text-gray-700">
+                            Los tiempos de envío varían según la ubicación y el vendedor. Generalmente, los envíos dentro de Lima tardan 2-4 días hábiles, mientras que envíos a provincia pueden tardar 5-7 días hábiles.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">¿Puedo devolver un producto?</h3>
+                        <p class="text-gray-700">
+                            Por el momento, TapStyle no maneja devoluciones. Te recomendamos verificar cuidadosamente las descripciones, tallas y especificaciones antes de realizar tu compra. Para consultas sobre productos, contacta directamente al vendedor antes de comprar.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">¿Cómo puedo abrir mi tienda en TapStyle?</h3>
+                        <p class="text-gray-700">
+                            Contáctanos por WhatsApp al <a href="https://wa.me/51918341898" class="text-indigo-600 hover:underline font-semibold">918 341 898</a> para conocer nuestros planes de suscripción. Te guiaremos en todo el proceso de apertura de tu tienda virtual, desde la configuración hasta tu primera venta.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">¿Es seguro comprar en TapStyle?</h3>
+                        <p class="text-gray-700">
+                            Absolutamente. Usamos encriptación SSL, verificamos a nuestros vendedores, y ofrecemos protección al comprador. Tus datos de pago están seguros con nuestras pasarelas certificadas.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">¿Cómo puedo contactar al servicio de atención al cliente?</h3>
+                        <p class="text-gray-700">
+                            Puedes contactarnos por WhatsApp al <a href="https://wa.me/51918341898" class="text-indigo-600 hover:underline font-semibold">918 341 898</a>, por email a soporte@tapstyle.com, o a través del chat en vivo disponible en nuestra página.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Política de Envíos -->
+            <section id="politica-de-envios" class="info-section mb-16 hidden">
+                <h1 class="text-4xl font-bold text-gray-900 mb-6">Política de Envíos</h1>
+                <div class="prose prose-lg max-w-none text-gray-700">
+                    
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Tiempos de Envío</h3>
+                    <div class="bg-indigo-50 rounded-lg p-6 mb-6">
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="text-indigo-600 font-bold mr-3">📍</span>
+                                <span><strong>Tarapoto ciudad:</strong> 1-2 días hábiles</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-indigo-600 font-bold mr-3">🚚</span>
+                                <span><strong>Región San Martín:</strong> 3-5 días hábiles</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-indigo-600 font-bold mr-3">⚡</span>
+                                <span><strong>Otras regiones del Perú:</strong> 5-8 días hábiles</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-gray-900 mt-6 mb-4">Costos de Envío</h3>
+                    <p class="mb-4">Los costos de envío varían según:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>Ubicación de entrega</li>
+                        <li>Peso y dimensiones del paquete</li>
+                        <li>Tipo de envío seleccionado</li>
+                        <li>Promociones vigentes del vendedor</li>
+                    </ul>
+                    <p class="mt-4 bg-green-50 border-l-4 border-green-500 p-4">
+                        <strong>¡Envío gratis!</strong> En compras mayores a S/. 100 dentro de Tarapoto ciudad.
+                    </p>
+
+                    <h3 class="text-2xl font-bold text-gray-900 mt-6 mb-4">Seguimiento de Pedido</h3>
+                    <p>
+                        Una vez que tu pedido sea despachado por la tienda, recibirás un código de seguimiento por email y SMS. Podrás rastrear tu paquete directamente en la página web de la empresa de courier que realice el envío.
+                    </p>
+
+                    <h3 class="text-2xl font-bold text-gray-900 mt-6 mb-4">Empresas de Courier</h3>
+                    <p>Nuestras tiendas asociadas trabajan con las siguientes empresas certificadas:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>Olva Courier</li>
+                        <li>Shalom</li>
+                        <li>Cruz del Sur Cargo</li>
+                        <li>Courier propio de cada tienda</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-bold text-gray-900 mt-6 mb-4">Problemas con el Envío</h3>
+                    <p>
+                        Si tu pedido no llega en el tiempo estimado o hay algún problema con la entrega, contacta primero a la tienda vendedora. Si necesitas ayuda adicional, escríbenos al <a href="https://wa.me/51918341898" class="text-indigo-600 hover:underline font-semibold">918 341 898</a> y mediaremos para resolver la situación.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Métodos de Pago -->
+            <section id="metodos-de-pago" class="info-section mb-16 hidden">
+                <h1 class="text-4xl font-bold text-gray-900 mb-6">Métodos de Pago</h1>
+                <div class="prose prose-lg max-w-none text-gray-700">
+                    <p class="mb-8">En TapStyle ofrecemos diversas opciones de pago para que elijas la que más te convenga.</p>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-white border-2 border-indigo-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <span class="text-3xl mr-3">💳</span>
+                                <h3 class="text-xl font-bold text-gray-900">Tarjetas</h3>
+                            </div>
+                            <ul class="space-y-2">
+                                <li>✓ Visa</li>
+                                <li>✓ Mastercard</li>
+                                <li>✓ American Express</li>
+                                <li>✓ Diners Club</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-2 border-green-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <span class="text-3xl mr-3">📱</span>
+                                <h3 class="text-xl font-bold text-gray-900">Billeteras Digitales</h3>
+                            </div>
+                            <ul class="space-y-2">
+                                <li>✓ Yape</li>
+                                <li>✓ Plin</li>
+                                <li>✓ PayPal</li>
+                                <li>✓ Mercado Pago</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-2 border-blue-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <span class="text-3xl mr-3">🏦</span>
+                                <h3 class="text-xl font-bold text-gray-900">Transferencias</h3>
+                            </div>
+                            <ul class="space-y-2">
+                                <li>✓ Transferencia bancaria</li>
+                                <li>✓ Depósito en cuenta</li>
+                                <li>✓ Pago en agentes</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-2 border-purple-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <span class="text-3xl mr-3">💰</span>
+                                <h3 class="text-xl font-bold text-gray-900">Contra Entrega</h3>
+                            </div>
+                            <ul class="space-y-2">
+                                <li>✓ Efectivo</li>
+                                <li>✓ POS (tarjeta)</li>
+                                <li class="text-sm text-gray-500">(Solo Lima Metropolitana)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-6">
+                        <p class="font-semibold text-green-900 mb-2">🔒 Pagos 100% Seguros</p>
+                        <p>Todas las transacciones están protegidas con encriptación SSL de 256 bits y cumplen con estándares PCI DSS. El pago se realiza al momento de la compra.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer se cargará dinámicamente -->
+    <div id="footer-container"></div>
+
+    <!-- Script de navegación por secciones -->
+    <script>
+        // Obtener sección de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const seccion = urlParams.get('seccion') || 'acerca-de-nosotros';
+
+        // Mapeo de secciones a títulos
+        const titulos = {
+            'acerca-de-nosotros': 'Acerca de Nosotros - TapStyle',
+            'trabaja-con-nosotros': 'Trabaja con Nosotros - TapStyle',
+            'terminos-y-condiciones': 'Términos y Condiciones - TapStyle',
+            'politica-de-privacidad': 'Política de Privacidad - TapStyle',
+            'faq': 'Preguntas Frecuentes - TapStyle',
+            'politica-de-envios': 'Política de Envíos - TapStyle',
+            'metodos-de-pago': 'Métodos de Pago - TapStyle'
+        };
+
+        // Cambiar título de la página
+        document.getElementById('pageTitle').textContent = titulos[seccion] || 'Información - TapStyle';
+
+        // Ocultar todas las secciones
+        document.querySelectorAll('.info-section').forEach(section => {
+            section.classList.add('hidden');
+        });
+
+        // Mostrar la sección seleccionada
+        const seccionElemento = document.getElementById(seccion);
+        if (seccionElemento) {
+            seccionElemento.classList.remove('hidden');
+        } else {
+            // Si no existe, mostrar "Acerca de Nosotros" por defecto
+            document.getElementById('acerca-de-nosotros').classList.remove('hidden');
+        }
+
+        // Scroll suave al inicio
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    </script>
+
+    <!-- Cargar footer dinámicamente -->
+    <script src="../components/footer/footer.js"></script>
+</body>
+</html>
