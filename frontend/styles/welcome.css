@@ -1,0 +1,42 @@
+/* welcome.css - estilos del mensaje de bienvenida */
+.welcome-toast {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(59,130,246,0.95); /* indigo-600 */
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 20px rgba(2,6,23,0.2);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 320px;
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.3s ease;
+}
+
+.welcome-toast.hidden {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.welcome-toast .close-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.9);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.welcome-toast .message {
+  flex: 1 1 auto;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  .welcome-toast { right: 0.5rem; left: 0.5rem; top: 0.75rem; max-width: calc(100% - 1rem); }
+}
