@@ -68,6 +68,15 @@
                     </div>
                 </div>
 
+                <!-- MI TIENDA (NUEVO) -->
+                <div class="mt-4">
+                    <a href="#" onclick="irAMiTienda(event)"
+                        class="w-full flex items-center px-4 py-3 rounded-lg hover:bg-green-600 transition duration-150 bg-green-700 text-white">
+                        <i class="fas fa-store mr-3 text-lg"></i>
+                        <span class="font-medium">🛍️ Ir a Mi Tienda</span>
+                    </a>
+                </div>
+
                 <!-- OPERACIONES (Expandible) -->
                 <div class="mt-2">
                     <button onclick="toggleMenu(this)"
@@ -289,6 +298,26 @@
             if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
                 cerrarSesion();
             }
+        }
+
+        // ============================================
+        // IR A MI TIENDA
+        // ============================================
+        async function irAMiTienda(event) {
+            event.preventDefault();
+            const contexto = obtenerContexto();
+            const tiendaId = contexto.idEmpresa;
+            
+            if (!tiendaId) {
+                alert('Error: No se encontró la tienda');
+                return;
+            }
+            
+            // Guardar tiendaId en sessionStorage para que tienda-negocio lo pueda usar
+            sessionStorage.setItem('tiendaId', tiendaId);
+            
+            // Redirigir a la tienda con parámetro de URL
+            window.location.href = `../../../tienda-negocio/tienda.html?tiendaId=${tiendaId}`;
         }
 
         // ============================================
