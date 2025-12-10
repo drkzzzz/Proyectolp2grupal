@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda - TapStyle</title>
+    <link rel="stylesheet" href="styles/tienda-publica.css">
+</head>
+<body>
+
+    <!-- Header Principal -->
+    <header class="tienda-header">
+        <div class="header-content">
+            <h1 id="tiendaNombre">Cargando Tienda...</h1>
+            <div id="tiendaInfo"></div>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal -->
+    <div class="tienda-container">
+        
+        <!-- Sidebar Filtros -->
+        <aside class="tienda-sidebar">
+            <h3>🔍 Filtros</h3>
+            
+            <div class="filtro-grupo">
+                <label class="filtro-titulo">Buscar</label>
+                <input type="text" id="searchProductos" placeholder="Buscar productos...">
+            </div>
+
+            <div class="filtro-grupo">
+                <label class="filtro-titulo">Ordenar por</label>
+                <select id="ordenamiento">
+                    <option value="relevancia">Relevancia</option>
+                    <option value="precio-asc">Precio: Menor a Mayor</option>
+                    <option value="precio-desc">Precio: Mayor a Menor</option>
+                    <option value="nombre">Nombre: A-Z</option>
+                </select>
+            </div>
+
+            <button class="btn-limpiar-filtros">Limpiar Filtros</button>
+        </aside>
+
+        <!-- Sección Principal -->
+        <main>
+            <!-- Controles de Productos -->
+            <div class="productos-controles">
+                <span class="productos-count" id="productosCount">Cargando productos...</span>
+            </div>
+
+            <!-- Grid de Productos -->
+            <div id="productosGrid" class="productos-grid">
+                <div style="grid-column: 1/-1; text-align: center; padding: 2rem;">
+                    <p>⏳ Cargando productos...</p>
+                </div>
+            </div>
+
+            <!-- Sin Resultados -->
+            <div id="sinResultados" class="sin-resultados" style="display: none;">
+                <p>❌ No se encontraron productos que coincidan con tus filtros.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config-api.js"></script>
+    <script src="scripts/productos-publicos.js"></script>
+
+</body>
+</html>

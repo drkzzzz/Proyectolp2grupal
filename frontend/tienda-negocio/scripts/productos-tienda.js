@@ -70,6 +70,9 @@ class ProductosTienda {
         this.mostrarLoading();
 
         try {
+            // Obtener nombre de tienda
+            await this.obtenerNombreTienda();
+            
             // Cargar productos REALES del backend
             const productos = await this.obtenerProductosBackend();
             this.productosCargados = productos; // Guardar productos obtenidos
@@ -85,13 +88,54 @@ class ProductosTienda {
         }
     }
     
+    async obtenerNombreTienda() {
+        console.log(`📡 Obteniendo nombre de tienda ${this.idTienda}...`);
+        
+        try {
+            const response = await fetch(`${this.API_BASE_URL}/empresas/${this.idTienda}`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('tapstyle_token') || ''}`
+                }
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                
+                console.log('📦 Respuesta empresas:', data);
+                
+                // Extraer tienda - puede venir en data.data o directamente
+                let tienda = data.data || data;
+                if (Array.isArray(tienda)) {
+                    tienda = tienda[0];
+                }
+                
+                const nombreTienda = tienda?.nombreTienda || tienda?.nombre_tienda || tienda?.nombre || `Tienda ${this.idTienda}`;
+                
+                // Actualizar el título de la página
+                document.title = `${nombreTienda} - TapStyle`;
+                
+                // Actualizar heading si existe
+                const heading = document.querySelector('h1');
+                if (heading) {
+                    heading.textContent = nombreTienda;
+                }
+                
+                console.log(`✅ Nombre de tienda: ${nombreTienda}`);
+            }
+        } catch (error) {
+            console.warn('⚠️ No se pudo obtener nombre de tienda:', error.message);
+        }
+    }
+    
     async obtenerProductosBackend() {
         console.log(`📡 Conectando a backend para productos de tienda ${this.idTienda}...`);
         
         // PRUEBA TODOS LOS ENDPOINTS POSIBLES
         const endpoints = [
-            // Endpoint específico para productos de empresa
-            `${this.API_BASE_URL}/empresas/${this.idTienda}/productos`,
+            // Endpoint específico para productos de empresa - CORRECTO
+            `${this.API_BASE_URL}/productos/empresa/${this.idTienda}`,
             
             // Endpoint con parámetro
             `${this.API_BASE_URL}/productos?empresaId=${this.idTienda}`,
@@ -101,8 +145,8 @@ class ProductosTienda {
             `${this.API_BASE_URL}/productos`,
             
             // Endpoint público
-            `${this.API_BASE_URL}/public/tiendas/${this.idTienda}/productos`,
-            `http://localhost:8083/public/empresas/${this.idTienda}/productos`
+            `${this.API_BASE_URL}/public/productos/empresa/${this.idTienda}`,
+            `http://localhost:8083/public/productos/empresa/${this.idTienda}`
         ];
         
         let productos = [];
@@ -124,20 +168,31 @@ class ProductosTienda {
                 if (response.ok) {
                     const data = await response.json();
                     
-                    // Si es un array, procesarlo
-                    if (Array.isArray(data)) {
-                        productos = data;
+                    console.log('📦 Estructura de respuesta:', data);
+                    
+                    // Manejar ApiResponse wrapper
+                    let productosData = [];
+                    
+                    if (data.data && Array.isArray(data.data)) {
+                        // Respuesta de ApiResponse<List<ProductoDTO>>
+                        productosData = data.data;
+                    } else if (Array.isArray(data)) {
+                        // Array directo
+                        productosData = data;
+                    } else if (data.productos && Array.isArray(data.productos)) {
+                        // Propiedad productos
+                        productosData = data.productos;
+                    }
+                    
+                    if (productosData.length > 0) {
+                        productos = productosData;
                         
                         // Si es endpoint general, filtrar por empresa
-                        if (endpoint.includes('/productos') && !endpoint.includes('empresaId') && !endpoint.includes('idEmpresa')) {
-                            productos = productos.filter(p => p.id_empresa === this.idTienda);
+                        if (endpoint.includes('/productos') && !endpoint.includes('empresa/')) {
+                            productos = productos.filter(p => p.id_empresa === this.idTienda || p.empresaId === this.idTienda);
                         }
                         
                         console.log(`✅ ${productos.length} productos obtenidos de ${endpoint}`);
-                        break;
-                    } else if (data.productos) {
-                        productos = data.productos;
-                        console.log(`✅ ${productos.length} productos obtenidos (propiedad .productos)`);
                         break;
                     }
                 }
@@ -322,38 +377,44 @@ class ProductosTienda {
     crearTarjetaProducto(producto) {
         const card = document.createElement('div');
         card.className = 'producto-card';
-        card.dataset.id = producto.id_producto;
+        card.dataset.id = producto.idProducto || producto.id_producto;
+        
+        // Mapear nombres camelCase del backend a snake_case
+        const nombreProducto = producto.nombreProducto || producto.nombre_producto || 'Producto sin nombre';
+        const categoria = producto.nombreCategoria || producto.categoria || 'Sin categoría';
+        const marca = producto.nombreMarca || producto.marca || '';
+        const stock = producto.stock || 0;
+        const descripcion = producto.descripcion || 'Sin descripción';
         
         // Precio formateado
-        const precio = producto.precio_venta || producto.precio || 0;
+        const precio = producto.precio || 0;
         const precioFormateado = new Intl.NumberFormat('es-PE', {
             style: 'currency',
             currency: 'PEN'
         }).format(precio);
         
         // Stock
-        const stock = producto.stock || 0;
         const stockTexto = stock > 0 
             ? `<span class="stock-disponible">✅ ${stock} disponibles</span>`
             : `<span class="stock-agotado">❌ Agotado</span>`;
         
         // Imagen
         const imagen = producto.imagen || 
-            `https://placehold.co/300x300/6B7280/ffffff?text=${encodeURIComponent(producto.nombre_producto.substring(0, 15))}`;
+            `https://placehold.co/300x300/6B7280/ffffff?text=${encodeURIComponent(nombreProducto.substring(0, 15))}`;
         
         card.innerHTML = `
             <div class="producto-imagen">
-                <img src="${imagen}" alt="${producto.nombre_producto}" 
+                <img src="${imagen}" alt="${nombreProducto}" 
                      onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/666666?text=Imagen'">
                 ${stock === 0 ? '<div class="badge-agotado">Agotado</div>' : ''}
             </div>
             <div class="producto-info">
-                <h3 class="producto-nombre">${producto.nombre_producto}</h3>
-                <p class="producto-descripcion">${producto.descripcion || 'Sin descripción'}</p>
+                <h3 class="producto-nombre">${nombreProducto}</h3>
+                <p class="producto-descripcion">${descripcion}</p>
                 
                 <div class="producto-meta">
-                    ${producto.categoria ? `<span class="producto-categoria">${producto.categoria}</span>` : ''}
-                    ${producto.marca ? `<span class="producto-marca">${producto.marca}</span>` : ''}
+                    <span class="producto-categoria">📁 ${categoria}</span>
+                    ${marca ? `<span class="producto-marca">🏷️ ${marca}</span>` : ''}
                 </div>
                 
                 <div class="producto-precio-stock">
@@ -362,10 +423,10 @@ class ProductosTienda {
                 </div>
                 
                 <div class="producto-acciones">
-                    <button class="btn-detalle" onclick="productosTienda.verDetalle(${producto.id_producto})">
+                    <button class="btn-detalle" onclick="productosTienda.verDetalle(${producto.idProducto || producto.id_producto})">
                         👁️ Ver Detalles
                     </button>
-                    <button class="btn-carrito" onclick="productosTienda.agregarAlCarrito(${producto.id_producto})" 
+                    <button class="btn-carrito" onclick="productosTienda.agregarAlCarrito(${producto.idProducto || producto.id_producto})" 
                             ${stock === 0 ? 'disabled' : ''}>
                         🛒 Agregar
                     </button>
@@ -517,24 +578,120 @@ class ProductosTienda {
     }
     
     configurarFiltros() {
+        console.log('🔧 Configurando filtros...');
+        
+        // Generar categorías únicas
+        this.generarFiltrosCategorias();
+        
         // Configurar búsqueda
         if (this.elementos.busqueda) {
             this.elementos.busqueda.addEventListener('input', (e) => {
-                this.filtrarPorBusqueda(e.target.value);
+                this.aplicarFiltros();
             });
         }
         
         // Configurar ordenamiento
         if (this.elementos.ordenamiento) {
             this.elementos.ordenamiento.addEventListener('change', (e) => {
-                console.log('Ordenar por:', e.target.value);
+                this.aplicarFiltros();
             });
         }
+        
+        // Configurar filtros de categoría
+        document.addEventListener('change', (e) => {
+            if (e.target.classList.contains('filtro-categoria')) {
+                this.aplicarFiltros();
+            }
+        });
+    }
+    
+    generarFiltrosCategorias() {
+        // Obtener categorías únicas
+        const categorias = [...new Set(this.productosCargados.map(p => p.nombreCategoria || p.categoria || 'Sin categoría'))];
+        
+        console.log('📋 Categorías encontradas:', categorias);
+        
+        const contenedor = document.getElementById('categoriasFiltro');
+        if (!contenedor) return;
+        
+        contenedor.innerHTML = '';
+        
+        categorias.forEach(categoria => {
+            const label = document.createElement('label');
+            label.className = 'filtro-opcion';
+            label.innerHTML = `
+                <input type="checkbox" class="filtro-categoria" value="${categoria}" checked>
+                <span>${categoria}</span>
+            `;
+            contenedor.appendChild(label);
+        });
+    }
+    
+    aplicarFiltros() {
+        let productos = [...this.productosCargados];
+        
+        // Filtro de búsqueda
+        const termino = this.elementos.busqueda?.value?.toLowerCase() || '';
+        if (termino) {
+            productos = productos.filter(p => {
+                const nombre = (p.nombreProducto || p.nombre_producto || '').toLowerCase();
+                const desc = (p.descripcion || '').toLowerCase();
+                const marca = (p.nombreMarca || p.marca || '').toLowerCase();
+                return nombre.includes(termino) || desc.includes(termino) || marca.includes(termino);
+            });
+        }
+        
+        // Filtro de categorías
+        const categoriasSeleccionadas = Array.from(document.querySelectorAll('.filtro-categoria:checked'))
+            .map(cb => cb.value);
+        
+        if (categoriasSeleccionadas.length > 0) {
+            productos = productos.filter(p => {
+                const cat = p.nombreCategoria || p.categoria || 'Sin categoría';
+                return categoriasSeleccionadas.includes(cat);
+            });
+        }
+        
+        // Ordenamiento
+        const orden = this.elementos.ordenamiento?.value || 'relevancia';
+        productos = this.ordenarProductos(productos, orden);
+        
+        // Mostrar resultados
+        if (productos.length === 0) {
+            this.mostrarSinProductos();
+        } else {
+            this.mostrarProductos(productos);
+        }
+    }
+    
+    ordenarProductos(productos, orden) {
+        const copia = [...productos];
+        
+        switch(orden) {
+            case 'precio-asc':
+                copia.sort((a, b) => (a.precio || 0) - (b.precio || 0));
+                break;
+            case 'precio-desc':
+                copia.sort((a, b) => (b.precio || 0) - (a.precio || 0));
+                break;
+            case 'nombre':
+                copia.sort((a, b) => {
+                    const nameA = a.nombreProducto || a.nombre_producto || '';
+                    const nameB = b.nombreProducto || b.nombre_producto || '';
+                    return nameA.localeCompare(nameB);
+                });
+                break;
+            default:
+                // Mantener orden original
+                break;
+        }
+        
+        return copia;
     }
     
     filtrarPorBusqueda(termino) {
         console.log('Buscando:', termino);
-        // Implementar filtrado real
+        this.aplicarFiltros();
     }
 }
 

@@ -19,15 +19,16 @@ public class ProductoController {
 
     /**
      * GET /api/productos/empresa/{empresaId}
-     * Obtener todos los productos de una empresa
+     * Obtener todos los productos de una empresa CON STOCK REAL
      */
     @GetMapping("/empresa/{empresaId}")
     public ResponseEntity<ApiResponse<List<ProductoDTO>>> obtenerPorEmpresa(@PathVariable Integer empresaId) {
         try {
             System.out.println("📦 Obteniendo productos para empresa: " + empresaId);
-            List<ProductoDTO> productos = productoService.obtenerPorEmpresa(empresaId);
+            List<ProductoDTO> productos = productoService.obtenerPorEmpresaConStock(empresaId);
             System.out.println("✅ Productos encontrados: " + productos.size());
-            productos.forEach(p -> System.out.println("  - " + p.getNombreProducto() + " ($" + p.getPrecio() + ")"));
+            productos.forEach(p -> System.out
+                    .println("  - " + p.getNombreProducto() + " ($" + p.getPrecio() + ") Stock: " + p.getStock()));
             return ResponseEntity.ok(ApiResponse.success(productos, "Productos cargados exitosamente"));
         } catch (Exception e) {
             System.out.println("❌ Error: " + e.getMessage());

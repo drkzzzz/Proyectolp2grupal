@@ -1,0 +1,331 @@
+/* ============================================
+   Estilos para Tienda Pública
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+.tienda-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tienda-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.tienda-header p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Contenedor Principal */
+.tienda-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 2rem;
+}
+
+/* Sidebar Filtros */
+.tienda-sidebar {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    position: sticky;
+    top: 1rem;
+}
+
+.tienda-sidebar h3 {
+    color: #667eea;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.filtro-grupo {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.filtro-grupo:last-child {
+    border-bottom: none;
+}
+
+.filtro-titulo {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.filtro-grupo input[type="text"],
+.filtro-grupo select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.filtro-grupo label {
+    display: flex;
+    align-items: center;
+    padding: 0.4rem 0;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.filtro-grupo input[type="checkbox"] {
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.btn-limpiar-filtros {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.btn-limpiar-filtros:hover {
+    background-color: #c0392b;
+}
+
+/* Grid de Productos */
+.productos-controles {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 1rem;
+}
+
+.productos-controles label {
+    font-weight: 600;
+}
+
+.productos-controles select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.productos-count {
+    color: #667eea;
+    font-weight: 600;
+}
+
+#productosGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Tarjeta de Producto */
+.producto-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.producto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.producto-imagen {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+.producto-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.producto-card:hover .producto-imagen img {
+    transform: scale(1.05);
+}
+
+.badge-agotado {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #e74c3c;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.producto-info {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.producto-titulo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.producto-categoria,
+.producto-marca {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    margin-right: 0.5rem;
+}
+
+.producto-categoria {
+    color: #666;
+}
+
+.producto-marca {
+    color: #667eea;
+    font-weight: 600;
+    background-color: #e8eaf6;
+}
+
+.producto-descripcion {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 0.5rem;
+    flex-grow: 1;
+}
+
+.producto-precio {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 0.5rem;
+}
+
+.producto-stock {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.stock-disponible {
+    color: #27ae60;
+}
+
+.stock-agotado {
+    color: #e74c3c;
+}
+
+.btn-agregar-carrito {
+    padding: 0.8rem;
+    background-color: #667eea;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    font-size: 0.95rem;
+}
+
+.btn-agregar-carrito:hover:not(:disabled) {
+    background-color: #764ba2;
+}
+
+.btn-agregar-carrito:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+}
+
+/* Sin Resultados */
+.sin-resultados {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #999;
+}
+
+.sin-resultados p {
+    font-size: 1.2rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .tienda-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .tienda-sidebar {
+        position: static;
+    }
+    
+    #productosGrid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .tienda-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .productos-controles {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    #productosGrid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+    
+    .producto-imagen {
+        height: 200px;
+    }
+}
